@@ -1,0 +1,419 @@
+/**
+ * @author Patrick Pollet
+ * @version $Id: style1.css 481 2009-02-20 10:48:22Z ppollet $
+ * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
+ * @package c2ipf
+ */
+
+/**
+* zones de ajouts PP pour simplifier l'HTML
+*/
+
+body {
+	background-color: white;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: black;
+}
+	
+
+img {
+  border :none; !important
+}
+
+
+/**
+* les tables de base 
+
+
+table {
+	border:none;
+	padding :0px;
+	margin :auto; !important;
+}
+	
+td, th{
+	
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+    vertical-align : top;
+}
+
+*/
+
+th.bg {
+	background-image: url("images/bgcontextm.gif") ;
+	background-repeat:repeat-x ;	
+    vertical-align : top;
+}	
+
+
+	
+.gauche {
+   text-align : left;
+}
+
+.droite {
+   text-align : right;
+}
+
+.centre {
+   text-align : center;
+}
+
+
+.barree {
+   text-decoration:line-through ;
+}
+
+
+tr.paire {
+	background-color: #E8E8E8;
+}
+
+tr.impaire {
+	background-color: #DFDFDF;
+}
+
+
+
+
+/*icones */
+
+.mailto {
+	background: url("images/mail_icon.gif") no-repeat scroll 0px 1px;
+    padding:1px 0px 1px 16px;	
+}
+
+
+/*centre l'icone dans la cellule tableau */
+td.icone_action {
+
+	padding:1px 0px 1px 25px; 
+}
+
+
+
+/*marcha  en V2
+mais pas en V1.5 ??? */
+
+.icone_dupliquer:hover  {
+	background: url('images/i_dupliquer.gif') no-repeat;
+	padding:1px 0px 1px 20px; 
+}
+
+.icone_consulter:hover  {
+	background: url('images/i_consulter_a.gif') no-repeat;
+}
+
+.icone_modifier:hover  {
+	background: url('images/i_crayon_a.gif') no-repeat;
+}
+
+.icone_supprimer:hover  {
+	background: url('images/i_corbeille_a.gif') no-repeat;
+}
+.icone_dupliquer:hover  {
+	background: url('images/i_dupliquer_a.gif') no-repeat;
+}
+
+
+
+/**
+* elements de menu de niveau 2 
+*/
+
+ul.menu_niveau2  {
+	
+	list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+	}
+li.menu_niveau2_item {
+	display :inline;
+	}
+
+/**
+* tables de type fiche 
+
+
+table.fiche{
+border:1px solid #6495ed;
+border-collapse:collapse;
+width:90%;
+margin:auto;
+background-color :#E9E9E9;
+}
+	
+.fiche th{
+border:1px  dotted #6495ed;
+padding:5px;
+width:25%;
+text-align:right;
+vertical-align : top;
+
+}
+
+.fiche td {
+border:1px solid #6495ed;
+padding:5px;
+text-align:left;
+vertical-align : top;
+
+
+}
+*/
+
+/**
+* ancienne feuille de style valider au fur et a mesure
+et remonter aus dessus 
+*/
+
+
+
+A:link {
+	color: #333399;
+	TEXT-DECORATION: none;
+}
+A:visited {
+	color: #333399;
+	TEXT-DECORATION: none;
+}
+A:hover {
+	color: #000000;
+	TEXT-DECORATION: underline;
+}
+
+
+.titre {
+	FONT-SIZE: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000000;
+	font-weight: bold;
+}
+
+.titre2 {
+	FONT-SIZE: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000000;
+	font-weight: bold;
+}
+
+
+
+.commentaire1 {
+	FONT-SIZE: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #666666;
+	font-style: italic;
+}
+.commentaire2 {
+	FONT-SIZE: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #666666;
+	font-style: italic;
+}
+
+.commentaire3 {
+	FONT-SIZE: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #666666;
+	font-style: italic;
+}
+
+.commentaire4 {
+	FONT-SIZE: 16px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #666666;
+	font-style: italic;
+}
+
+.taille1 {
+	FONT-SIZE: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+}
+
+.taille2 {
+	FONT-SIZE: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+}
+
+.taille3 {
+	FONT-SIZE: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+}
+
+.taille4 {
+	FONT-SIZE: 16px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+}
+
+.vert {
+        color: #00FF00;
+}
+
+.rouge {
+        color: #FF0000;
+}
+
+.orange {
+       color: #FF960C; 
+
+}
+
+.rouge1 {
+	FONT-SIZE: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #FF0000;
+}
+
+.rouge2 {
+	FONT-SIZE: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #FF0000;
+}
+
+.rouge3 {
+	FONT-SIZE: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #FF0000;
+}
+
+.rouge4 {
+	FONT-SIZE: 16px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #FF0000;
+}
+
+.bordeau1 {
+	FONT-SIZE: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #990000;
+}
+
+.bordeau2 {
+	FONT-SIZE: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #990000;
+}
+
+.bordeau3 {
+	FONT-SIZE: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #990000;
+}
+
+.bordeau4 {
+	FONT-SIZE: 16px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #990000;
+}
+
+.texte_blanc1 {
+	FONT-SIZE: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #ffffff;
+}
+
+.texte_blanc2 {
+	FONT-SIZE: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #ffffff;
+}
+
+.texte_blanc3 {
+	FONT-SIZE: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #ffffff;
+}
+
+.texte_blanc4 {
+	FONT-SIZE: 16px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #ffffff;
+}
+
+.titre_blanc1 {
+	FONT-SIZE: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #ffffff;
+}
+
+.titre_blanc2 {
+	FONT-SIZE: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #ffffff;
+}
+
+.titre_blanc3 {
+	FONT-SIZE: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #ffffff;
+}
+
+.titre_blanc4 {
+	FONT-SIZE: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #ffffff;
+}
+
+.saisie {
+	BORDER: #000000 1pt solid; 
+	BACKGROUND-COLOR: #EAE3D8;
+	COLOR: #000000; 
+	FONT-FAMILY: verdana, Helvetica, sans-serif; 
+	FONT-WEIGHT: normal; 
+	FONT-SIZE: 10px; 
+}
+
+.saisie_bouton {
+	BORDER: #000000 1pt solid; 
+	BACKGROUND-COLOR: #FFCC00;
+	COLOR: #000000; 
+	FONT-FAMILY: verdana, Helvetica, sans-serif; 
+	FONT-WEIGHT: normal; 
+	FONT-SIZE: 10px; 
+}
+
+
+
+
+.titre_tab {
+	FONT-SIZE: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000066;
+}
+
+.lien1 {
+	FONT-SIZE: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lien2 {
+	FONT-SIZE: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lien3 {
+	FONT-SIZE: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lien4 {
+	FONT-SIZE: 16px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.acces {
+	FONT-SIZE: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #ffffff;
+}
+

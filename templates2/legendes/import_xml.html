@@ -1,0 +1,44 @@
+
+<table width="100%" cellpadding="5" cellspacing="1">
+	<tr>
+		<td align="right">Format d'import/export XML sp&eacute;cifique
+<br>&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+<br>&lt;!-- Format d'import de questions en XML pour la plate-forme de certification et positionnement C2i --&gt;
+<br>&lt;!-- tout ce qui n'est pas facultatif est obligatoire ! --&gt;
+<br>&lt;questions&gt;
+<br>&lt;!-- chaque question a la structure suivante --&gt;
+<br>&lt;question&gt;
+<br>&lt;auteur&gt;Auteur 1&lt;/auteur&gt; <br>&lt;!-- facultatif --&gt;
+<br>&lt;auteur_mail&gt;adresse m&eacute;l de l'auteur&lt;/auteur_mail&gt; <br>&lt;!-- facultatif --&gt;
+<br>&lt;etablissement&gt;Nom de l'tablissement&lt;/etablissement&gt; <br>&lt;!-- facultatif --&gt;
+<br>&lt;date_creation&gt;date de cr&eacute;ation au format unix timestamp&lt;/date_creation&gt; <br>&lt;!-- facultatif --&gt;
+<br>&lt;date_modification&gt;date de modification au format unix timestamp&lt;/date_modification&gt; <br>&lt;!-- facultatif --&gt;
+
+<br>&lt;famille&gt;une_famille&lt;/famille&gt; <br>&lt;!-- famille propos&eacute;e facultatif --&gt;
+<br>&lt;domaine&gt;B1&lt;/domaine&gt;
+<br>&lt;alinea&gt;2&lt;/alinea&gt;
+<br>&lt;titre&gt;Texte de la question &lt;/titre&gt;
+<br>&lt;reponses&gt;
+<br>&lt;reponse&gt;Texte de la r&eacute;ponse 1&lt;/reponse&gt;
+<br>&lt;bonne&gt;OUI&lt;/bonne&gt; <br>&lt;!-- est-ce la bonne r&eacute;ponse ? (OUI ou NON) --&gt;
+<br>&lt;reponse&gt;Texte de la r&eacute;ponse 2&lt;/reponse&gt;
+<br>&lt;bonne&gt;OUI&lt;/bonne&gt;
+<br>&lt;reponse&gt;Texte de la r&eacute;ponse 3&lt;/reponse&gt;
+<br>&lt;bonne&gt;OUI&lt;/bonne&gt;
+<br>&lt;reponse&gt;Texte de la r&eacute;ponse 4&lt;/reponse&gt;
+<br>&lt;bonne&gt;NON&lt;/bonne&gt;
+<br>&lt;reponse&gt;Texte de la r&eacute;ponse 5&lt;/reponse&gt;
+<br>&lt;bonne&gt;NON&lt;/bonne&gt;
+<br>&lt;/reponses&gt;
+<br>&lt;documents&gt;  &lt;!-- facultatif --&gt;
+<br>&lt;document&gt;nom du fichier avec extension (sans chemin) &lt;/document&gt;
+<br>&lt;image_base64&gt;contenu du fichier encodé en base 64 &lt;/image_base64&gt;
+<br>&lt;/documents&gt;
+
+<br>&lt;/question&gt;
+<br>&lt;!-- autres questions avec la m&eacute;me structure --&gt;
+
+<br>&lt;/questions&gt;
+		</td>
+	</tr>
+</table>

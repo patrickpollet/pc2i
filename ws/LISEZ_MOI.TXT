@@ -1,0 +1,17 @@
+avant de pouvoir utiliser le web service il FAUT editer
+et executer le script mkclasses.sh pour generer les classes qui vont bien.
+
+PHP5 est requis ce serveur, avec lextension php_soap (apt get install php_soap sous
+Debian).
+
+La verification des droits n'est pas implantee.
+Il suffit de donner un compte connu (personnel, pas etudiant) avec le bon MDP (pas CAS ni LDAP !) 
+Voir les programmes de demo dans clients
+
+Il faut aussi mettre à jour la BD avec le fichier webservice.sql a copier-coller 
+dans l'onglet SQL de phpMyAdmin !
+
+
+
+PP
+

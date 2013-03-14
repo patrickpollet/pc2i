@@ -1,0 +1,26 @@
+type;NomExamen;Date de début;Heure de début;Date de fin;Heure de fin;durée;mot de passe;tirage;ordre aff questions;ordre aff reponses;auteur;auteur mail
+positionnement;positionnement g1;01/01/11;10:00:00;01/01/11;11:00:00;30;passe1166;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g2;02/01/11;10:00:00;02/01/11;11:00:00;30;passe4369;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g3;03/01/11;10:00:00;03/01/11;11:00:00;30;passe4234;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g4;04/01/11;10:00:00;04/01/11;11:00:00;30;passe3499;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g5;05/01/11;10:00:00;05/01/11;11:00:00;30;passe8099;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g6;06/01/11;10:00:00;06/01/11;11:00:00;30;passe3907;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g7;07/01/11;10:00:00;07/01/11;11:00:00;30;passe5398;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g8;08/01/11;10:00:00;08/01/11;11:00:00;30;passe9305;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g9;09/01/11;10:00:00;09/01/11;11:00:00;30;passe5327;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g10;10/01/11;10:00:00;10/01/11;11:00:00;30;passe1969;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g11;11/01/11;10:00:00;11/01/11;11:00:00;30;passe6140;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g12;12/01/11;10:00:00;12/01/11;11:00:00;30;passe6174;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g13;13/01/11;10:00:00;13/01/11;11:00:00;30;passe9624;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g14;14/01/11;10:00:00;14/01/11;11:00:00;30;passe9764;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g15;15/01/11;10:00:00;15/01/11;11:00:00;30;passe3116;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g16;16/01/11;10:00:00;16/01/11;11:00:00;30;passe8446;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g17;17/01/11;10:00:00;17/01/11;11:00:00;30;passe2156;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g18;18/01/11;10:00:00;18/01/11;11:00:00;30;passe1364;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g19;19/01/11;10:00:00;19/01/11;11:00:00;30;passe5594;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g20;20/01/11;10:00:00;20/01/11;11:00:00;30;passe7188;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g21;21/01/11;10:00:00;21/01/11;11:00:00;30;passe2830;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g22;22/01/11;10:00:00;22/01/11;11:00:00;30;passe9203;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g23;23/01/11;10:00:00;23/01/11;11:00:00;30;passe4842;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g24;24/01/11;10:00:00;24/01/11;11:00:00;30;passe7855;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr
+positionnement;positionnement g25;25/01/11;10:00:00;25/01/11;11:00:00;30;passe3501;aléatoire;aléatoire;aléatoire;Yann Morere;yann.morere@univ-metz.fr

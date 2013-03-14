@@ -1,0 +1,12 @@
+avant d'utiliser les "clients de demo" en PHP vous DEVEZ
+editer le fichier mkclasses.sh et donner l'URL exact
+du web service 
+http://votreplateforme.fr/ws/wsdl.php
+puis lancer ce script pour generer les classes nécessaires :
+
+1) avec php5 tapez sh ./mkclasses.sh
+
+2) avec php4 tapez sh ./mkclasses.sh nusoap
+
+PP
+

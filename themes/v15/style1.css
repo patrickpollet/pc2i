@@ -1,0 +1,1139 @@
+/**
+ * @author Patrick Pollet
+ * @version $Id: style1.css 1206 2011-02-26 12:03:43Z ppollet $
+ * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
+ * @package c2ipf
+ */
+
+/**
+* zones de ajouts PP pour simplifier l'HTML
+*/
+
+body {
+	background-color: white;
+	font-size: 11px;
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: black;
+}
+
+
+img  {
+  padding:0;	
+  margin : 0;
+  vertical-align: top;
+  border:none;
+  }
+ 
+ 
+
+a {
+	text-decoration: none;
+}  
+
+a:hover {
+	text-decoration: underline;
+}  
+
+
+
+#logo {
+	margin: 0 auto;
+	padding :0;
+	text-align: center;
+	}
+	
+	
+#accueil{
+	margin: 0 auto;
+	width :800px;
+	background-image: url("images/ordi_complet.gif") ;
+	background-repeat:no-repeat ;
+	padding-left : 130px;
+	}
+	
+#forme_login{
+	margin: 0 auto;
+	width :770px;
+	height :324px; 
+	background-image: url("images/visu_complete.gif") ;
+	background-repeat:no-repeat ;
+	
+	}
+	
+#arc770{
+	margin: 0 auto;
+	width :770px;
+	height: 20px;
+	background-image: url("images/arc770.gif") ;
+	background-repeat:no-repeat ;
+	
+	}
+	
+#arc386{
+	margin: 0 auto;
+	width :386px;
+	height: 20px;
+	background-image: url("images/arc770.gif") ;
+	background-repeat:no-repeat ;
+	
+	}				
+
+
+#footer {
+	width :780px;
+	margin: 0 auto;
+	padding-top : 6px;
+	text-align: center;
+	background-image: url("images/bgbas.gif") ;
+	background-repeat:no-repeat ;
+	position: relative;
+	bottom: 0;
+    height:26px;   /* Height of the footer */
+	}
+	
+#minifooter {
+	width : 380px;
+	margin: auto;
+	padding-top :8px;
+	text-align: center;
+	background-image: url("images/bgbas.gif") ;
+	background-repeat:no-repeat ;
+	position: relative;
+	bottom: 0;
+    height:20px;   /* Height of the footer */
+	}	
+	
+#titre {
+	display:block;
+	height :35px;
+	background-image: url("images/ordi00.gif") ;
+	background-repeat:no-repeat;
+	padding :0px 40px;
+	/*font-size: 12px;*/
+	/**/
+	color: #000000;
+	font-weight: bold;	
+	}
+	
+#etiquette {
+	background-image: url("images/ii_config.gif") ;
+	background-repeat:no-repeat;
+	padding :0px 0px 0px 30px;
+	text-align: left;
+	}	
+	
+#retour ,#quitter {
+	float :right;
+	}
+
+
+	
+/**
+* div renseigné par ajax 
+*/	
+#apercu {
+	padding : 20px 20px;
+	background-color: #FFFFC0;
+	border-width: 1px;
+	border-style:solid;
+	border-color:black;
+	/*display:none;*/
+}		
+
+
+#liste {
+	width : 100%;
+	border-width: 1px;
+	border-style:solid;
+	border-color:#C0C0C0;
+	border-collapse: collapse;
+
+	}
+	
+#liste td , .listing td{
+	border-width: 1px;
+	border-style:solid;
+	border-color:#C0C0C0;
+	}
+		
+#multi_pagination_haut,#multi_pagination_bas {
+	/*width :80%;*/
+	/*margin:0  auto; */
+	text-align :center;
+	}	
+
+#infos {
+	float : right;
+	color: #666666;
+	font-style: normal;
+	}
+
+#contenu_popup {
+	height:auto;
+	/*width:800px;*/
+	width : 95%;
+	margin: 0 auto;
+	}
+	
+#contenu_principale {
+	width:95%;
+	margin: 0 auto;
+	}
+
+#contenu_minipopup {
+	height:auto;
+	/*width:400px;*/
+	width : 95%;
+	margin: 0 auto;
+	}
+
+
+
+/**
+* remplacemnt de tous les cellpadding=0 cellspacing=0 
+*/
+
+table {
+	padding :0px;
+	vertical-align:top;
+	
+	border-spacing: 3px;
+	border-collapse: collapse;
+	border-width : 0px;
+	
+
+/* decommenter pour tests presence tables excessives 	
+	border-width: 1px;
+	border-style:solid;
+	border-color:black;
+*/
+	
+}
+
+table.sansbordure {
+	padding :3px;
+	border:none;
+	}
+	
+
+table.fiche {
+	border: 1px solid #000000;
+	padding :4px;
+	margin: 0px 5%;
+	width : 95%;
+}
+
+table.listing {
+	border: 1px solid #000000;
+	padding :0px;
+	margin: 0px;
+}	
+	
+
+
+
+
+/**
+* styles des fiches (examen, etudiant ...)
+*/
+
+tr {
+		vertical-align:top;
+	}
+
+td, th {
+    vertical-align : top;
+    text-align:left;
+    /* important pour les images construites par petit bout */
+    padding : 0px; 
+
+}
+
+
+
+td.erreur{
+	background-color:#FFFFCC;
+	padding : 20px 20px;
+	text-align:center;
+}	
+	
+	
+
+.information td,  span.information, div.information {
+	padding : 20px 20px;
+	text-align:center;
+	background-color: #FFFFC0;
+	border-width: 1px;
+	border-style:solid;
+	border-color:black;
+}
+
+.information_gauche{
+	padding : 2px 2px;
+	text-align:left;
+	background-color: #FFFFC0;
+	border-width: 1px;
+	border-style:solid;
+	border-color:black;
+	}
+
+th.bg ,th.bg_stats  {
+	/*background-image: url("images/bgcontextm.gif") ; */
+	/*background-image: url("images/fagnon_m5.gif") ;*/
+	/*background-color: #009EE0; */
+	background-color: #fbc034;
+	/*background-repeat:repeat-x ;*/
+    vertical-align : top;
+    color: black; 
+    padding : 0px 0px 0px 0px;
+    margin :0px;
+    text-align:center; 
+   font-weight: normal;
+}
+
+
+
+.fiche th.bg {
+	text-align:center; 
+	color: black; 
+	
+	
+	}
+
+.fiche tr{
+	border-spacing: 0px;
+	border-collapse: collapse;
+	/*font-size: 12px;*/
+	
+	    
+	}
+
+.fiche th{
+	background-color: #F0F0F0;
+	text-align : right; 
+     margin: 2px;
+       padding : 4px;
+      /* width:35%; */
+       	border-color:black;
+       	border-width: 1px;
+	border-style:solid;
+	
+	}
+
+.fiche td{
+	background-color: #E9E9E9;
+	text-align : left;
+    padding : 4px;
+    margin: 2px;
+    	border-color:black;
+    	border-width: 1px;
+	border-style:solid;
+	
+	}
+
+
+.fiche .sansbordure td {
+	padding :3px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	border:none;
+	}
+	
+/**
+barre outils htmlarea
+*/	
+	
+.toolbar td{
+	background-color: #E9E9E9;
+	text-align : left;
+    padding : 0px;
+    margin: 0px;
+    /*	border-color:black;*/
+    	border-width: 0px;
+	/*border-style:solid;*/
+	
+	}	
+	
+
+/**
+*  resultats du qcm
+*  TODO 
+*/
+
+table.resultats {
+}
+	
+	
+/**
+* histogramme
+*/
+	
+td.histogramme {
+	/*background-color: #FFFFFF;*/
+	vertical-align : bottom;
+	text-align : center;
+	height :50px;
+}
+
+
+
+
+tr.paire {
+	background-color: #E8E8E8;
+}
+
+
+
+
+tr.impaire {
+	background-color: #DFDFDF;
+}
+/**
+* question changée en selection manuelle 
+*/
+tr.changee {
+	background-color: #00FFFF;
+}
+
+
+
+/**
+*  styles requis par fabtabulous.js
+*/
+.panel {
+	clear: both;
+	display: none;
+	border: 1px solid #CCC;
+	padding: 1em;
+}
+.panel.active-tab-body {
+	display: block;
+}
+#tabs {
+	list-style: none;
+	
+	margin-left: -45px;
+}
+
+#tabs li {
+	float: left;
+}
+
+#tabs a {
+	float: left;
+	padding: 5px 8px;
+	margin-left: 6px;
+	background-color: #F2F2F2;
+	text-decoration: none;
+	color: #999999;
+}
+
+#tabs a.active-tab {
+	background-color: #CCC;
+	border-top: 3px solid #999;
+	padding-top: 3px;
+	color: #000;
+}
+
+/**
+* styles des QCM 
+*
+* elements à renseigner 
+*{p_i] vaut soit 
+*   rien pour un qcm normal
+*    paire ou impaire pour un qcm en 2 colonnes 
+div id="qcm"
+table class="qcm"
+tr class="question_entete{p_i}
+td class="question_entete"
+tr class="question{p_i}
+td class="question"
+
+tr class="docs{p_i}
+li  class="doc">{url_doc}</li>
+			 
+tr class="reponses{p_i}"
+ul class="reponses"              
+li class="reponse"
+input type=checbox class=case
+span class bonne
+<span class=mauvaise
+*/
+
+table.qcm {
+	width:100%;
+	 padding:6px 0px;
+	 /* cellSpacing=1*/ 
+	 background-color:#CCCCCC;
+}
+
+#qcm .question_entete {
+	background-color: #D7E8EC;
+	}
+
+#qcm ul.reponses, .docs ul{
+		list-style :none;
+	} 
+
+#qcm li.reponse {
+	background-color:#EAF2F4;
+}
+
+#qcm li.doc {
+	display :inline;
+}
+	
+#qcm span.bonne {
+	width:20px;
+	padding :0px 4px;
+	}
+	
+#qcm span.mauvaise {
+	width:20px;
+	padding :0px 10px;
+	}	
+
+
+
+/**
+* alignements 
+*/
+
+.gauche {
+   text-align : left;
+}
+
+.droite {
+   text-align : right;
+}
+
+.centre {
+   text-align : center;
+}
+
+
+.barree {
+   text-decoration:line-through ;
+}
+
+.mailto {
+	background: url("images/mail_icon.gif") no-repeat scroll 0px 1px;
+    padding:1px 0px 1px 18px;	
+   /* font-size :10px;*/
+}
+
+
+
+
+/*
+critères de recherche 
+*/
+
+#criteres {
+	position:absolute;
+	 top: 154px;
+	 z-index:999; 
+	 visibility: hidden; 
+	/* width:800px; */
+	width : 95%;
+	/* 
+	 background-image: url("images/bgcontextm.gif") ;
+	background-repeat:repeat-x ;
+	color: white;
+	*/
+	background : #FBC034;
+	
+	}
+
+/*
+forme cachée d'ajout d'un nouvel item
+
+
+#nouveau {
+	 position:absolute;
+	 display:block;
+	 text-align:left;
+	 top:115px;
+	 z-index:2; 
+	 visibility: hidden;
+	 width:800px;
+	background-image: url("images/bgcontextm.gif") ;
+	background-repeat:repeat ;
+	color: white;
+}
+*/
+
+/*icones */
+
+/*centre l'icone dans la cellule tableau */
+td.icone_action {
+	padding:1px 0px 1px 10px; 
+}
+
+/* uté pour compatibilté W3C strict */ 
+th.icone_action {
+	width: 40px; 
+}
+
+
+.icone_consulter {
+	background: url('images/i_consulter.gif') no-repeat;
+}	
+.icone_consulter:hover {
+	background: url('images/i_consulter_a.gif') no-repeat; 
+}
+
+.icone_modifier  , .icone_crayon{
+	background: url('images/i_crayon.gif') no-repeat;
+}
+
+.icone_modifier:hover , .icone_crayon:hover  {
+	background: url('images/i_crayon_a.gif') no-repeat;
+}
+
+.icone_supprimer , .icone_corbeille {
+	background: url('images/i_corbeille.gif') no-repeat;
+}
+
+.icone_supprimer:hover , .icone_corbeille:hover  {
+	background: url('images/i_corbeille_a.gif') no-repeat;
+}
+
+.icone_dupliquer {
+	background: url('images/i_dupliquer.gif') no-repeat;
+}
+
+.icone_dupliquer:hover  {
+	background: url('images/i_dupliquer_a.gif') no-repeat;
+}
+
+.icone_filtrer {
+	background: url('images/filter.png') no-repeat;
+}
+
+/*
+.icone_filtrer:hover {
+	background: url('images/filter_a.gif') no-repeat; 
+}
+*/
+
+.icone_defiltrer {
+	background: url('images/unfilter.png') no-repeat;
+}	
+
+/*
+.icone_defiltrer:hover {
+	background: url('images/unfilter_a.gif') no-repeat; 
+}
+*/
+
+.icone_valider {
+	background: url('images/i_retirer.gif') no-repeat;
+}	
+.icone_valider:hover {
+	background: url('images/i_retirer_a.gif') no-repeat; 
+}
+
+
+.icone_invalider {
+	background: url('images/i_retirer.gif') no-repeat;
+}	
+.icone_invalider:hover {
+	background: url('images/i_retirer_a.gif') no-repeat; 
+}
+
+
+.icone_commenter_email {
+	background: url('images/mail_icon.gif') no-repeat;
+}
+
+
+.icone_valide {
+	background: url('images/i_valide.gif') no-repeat;
+}	
+.icone_valide:hover {
+	background: url('images/i_valide_a.gif') no-repeat; 
+}
+
+
+.icone_non_valide {
+	background: url('images/i_non_valide.gif') no-repeat;
+}	
+.icone_non_valide:hover {
+	background: url('images/i_non_valide_a.gif') no-repeat; 
+}
+
+
+.icone_non_examinee {
+	background: url('images/i_non_examinee.gif') no-repeat;
+}	
+.icone_non_examinee:hover {
+	background: url('images/i_non_examinee_a.gif') no-repeat; 
+}
+
+.icone_attente {
+	background: url('images/i_attente.gif') no-repeat;
+}	
+.icone_attente:hover {
+	background: url('images/i_attente_a.gif') no-repeat; 
+}
+
+.icone_nouveau {
+	background: url('images/i_nouveau.gif') no-repeat;
+}	
+.icone_nouveau:hover {
+	background: url('images/i_nouveau_a.gif') no-repeat; 
+}
+
+
+.icone_criteres {
+	background: url('images/i_consulter.gif') no-repeat;
+}	
+.icone_criteres:hover {
+	background: url('images/i_consulter_a.gif') no-repeat; 
+}
+
+.icone_afficher_tout {
+	background: url('images/i_afficher_tout.gif') no-repeat;
+}	
+.icone_afficher_tout:hover {
+	background: url('images/i_afficher_tout_a.gif') no-repeat; 
+}
+
+
+.icone_legende {
+	background: url('images/i_legende.gif') no-repeat;
+}	
+.icone_legende:hover {
+	background: url('images/i_legende_a.gif') no-repeat; 
+}
+
+
+.icone_desinscrire {
+	background: url('images/i_desinscrire.gif') no-repeat;
+}	
+.icone_desinscrire:hover {
+	background: url('images/i_desinscrire_a.gif') no-repeat; 
+}
+
+.icone_ods {
+	background: url('images/i_ods.gif') no-repeat;
+}	
+.icone_csv {
+	background: url('images/i_csv.gif') no-repeat; 
+}
+
+.icone_imprimer {
+	background: url('images/i_imprimer.gif') no-repeat; 
+}
+
+.icone_import {
+	background: url('images/i_import.gif') no-repeat; 
+}
+
+.icone_export {
+	background: url('images/i_export.gif') no-repeat; 
+}
+
+.icone_bilan {
+	background: url('images/i_bilan.gif') no-repeat; 
+}
+
+
+
+.icone_menu_questions {
+	background: url('images/i_questions.gif') no-repeat;
+}	
+.icone_menu_questions:hover {
+	background: url('images/i_questions_a.gif') no-repeat; 
+}
+
+.icone_menu_exams {
+	background: url('images/i_exams.gif') no-repeat;
+}	
+.icone_menu_exams:hover {
+	background: url('images/i_exams_a.gif') no-repeat; 
+}
+
+.icone_menu_inscrits {
+	background: url('images/i_inscrits.gif') no-repeat;
+}	
+.icone_menu_inscrits:hover {
+	background: url('images/i_inscrits_a.gif') no-repeat; 
+}
+
+.icone_menu_config {
+	background: url('images/i_config.gif') no-repeat;
+}	
+.icone_menu_config:hover {
+	background: url('images/i_config_a.gif') no-repeat; 
+}
+
+
+.icone_menu_notions {
+	background: url('images/i_notions.gif') no-repeat;
+}	
+.icone_menu_notions:hover {
+	background: url('images/i_notions_a.gif') no-repeat; 
+}
+
+.icone_menu_ressources {
+	background: url('images/i_ressources.gif') no-repeat;
+}	
+.icone_menu_ressources:hover {
+	background: url('images/i_ressources_a.gif') no-repeat; 
+}
+
+
+.icone_menu_qcm {
+	background: url('images/i_exams.gif') no-repeat;
+}	
+.icone_menu_qcm:hover {
+	background: url('images/i_exams_a.gif') no-repeat; 
+}
+
+
+.icone_menu_parcours {
+	background: url('images/i_parcours.gif') no-repeat;
+}	
+.icone_menu_parcours:hover {
+	background: url('images/i_parcours_a.gif') no-repeat; 
+}
+
+.icone_menu_retour {
+	background: url('images/i_retour.gif') no-repeat;
+}	
+.icone_menu_retour:hover {
+	background: url('images/i_retour_a.gif') no-repeat; 
+}
+
+
+.icone_menu_quitter {
+	background: url('images/i_quitter.gif') no-repeat;
+}	
+.icone_menu_quitter:hover {
+	background: url('images/i_quitter_a.gif') no-repeat; 
+}
+
+.icone_menu_fermer {
+	background: url('images/i_quitter.gif') no-repeat;
+}	
+.icone_menu_fermer:hover {
+	background: url('images/i_quitter_a.gif') no-repeat; 
+}
+
+
+ul.menu_niveau1 {
+display: inline; 
+}
+
+ul.menu_niveau2 {
+	display: inline ;
+	padding : 0px;
+	margin :0px;
+	}
+
+
+li.menu_niveau1_item {
+	display: inline; 
+	list-style :none;
+	/* important pour que l'iamge de fond en 26x26 apparaisse entierement */
+	padding-top :0px;
+	padding-bottom :12px;
+	padding-left : 26px; 
+	/*width :120px; ignoré en CSS pour un element inline */
+	}
+	
+li.menu_niveau2_item {
+	display: inline;
+	list-style :none;
+	/* important pour que l'iamge de fond en 16x16 apparaisse entierement */
+	/*height : 50px;*/
+	padding-top :0px;
+	padding-bottom :16px;
+	margin-left :5px;
+	/*margin-top:4px;*/
+	cursor : pointer;
+}
+
+
+/**
+* fiches de saisie et validation
+*/
+
+.saisie {
+	border: 1px solid #000000;
+	color : #000;
+	background-color:#FFFFFF;
+	/*font-size: 11px;*/
+	
+}
+
+
+input.disabled {
+	border: 1px solid #F2F2F2;
+	background-color: #F2F2F2;
+}
+
+input.required, textarea.required {
+	border: 1px solid #FF0000;
+}
+input.validation-failed, textarea.validation-failed {
+	border: 1px solid #FF3300;
+	color : #FF3300;
+}
+input.validation-passed, textarea.validation-passed {
+	border: 1px solid #00CC00;
+	color : #000;
+}
+
+.validation-advice {
+	margin: 5px ;
+	padding: 3px;
+
+	background-color: #FF3300;
+	color : #FFF;
+	/*font-weight: bold;*/
+}
+
+.custom-advice {
+	margin: 5px 0;
+	padding: 5px;
+	background-color: #C8AA00;
+	color : #FFF;
+	/*font-weight: bold;*/
+}
+
+fieldset {
+	padding: 1em;
+	margin-bottom: 0.5em;
+	border: 1px solid black;
+	/*text-align:left;*/
+	/*font-size: 11px;*/
+}
+
+label {
+	text-align:right;
+	font-weight: bold;
+    clear: none;  
+	}
+
+
+/**
+* div divers
+*/
+
+
+input[disabled] {
+	border: 1px solid #999;
+	background-color: #ddd;
+}
+
+.saisie_bouton {
+	border: #000000 1pt solid; 
+	background-color: #FFCC00;
+	color: #000000; 
+	cursor: pointer;
+}
+
+
+
+/**
+* essai de mise en page de formulaire sans tableau
+* d'après http://covertprestige.info/test/27-formulaires-sans-tableaux.html
+*/
+/**
+p {
+	margin: 1em 0;
+}
+***/
+p.double {
+	/* Empêcher le dépassement des flottants */
+	overflow: hidden;
+	/* Idem pour IE6 */
+	width: 100%;
+}
+
+p.double label {
+	float: left;
+	text-align: right;
+	font-weight: bold;
+	cursor: pointer;
+}
+p.double label span.info {
+	display: block;
+	margin-top: .2em;
+	font-size: .8em;
+	font-weight: normal;
+	cursor: default;
+}
+
+p.double select,
+p.double input,
+p.double textarea {
+	margin-left: 12px;
+	padding: 2px 4px;
+}
+
+p.double textarea {
+	padding: 2px 0 0 4px;
+	height: 6em;
+}
+
+
+
+
+/**
+* formulaires de taille normale 
+*/
+
+.normale p.double label {
+	width: 150px;
+}
+
+/**
+.normale p.double input,
+.normale  p.double textarea {
+	width: 350px;	
+}
+**/
+
+.normale p.simple {
+	margin-left: 250px;
+}
+
+/**
+* formulaires de taille reduite 
+*/
+
+.mini p.double label {
+	width: 80px;
+}
+
+/**
+.mini  p.double input,
+.mini  p.double textarea {
+	width: 150px;
+}
+*/
+
+.mini p.simple {
+	margin-left: 100px;
+}
+
+.cache {
+	display:none;
+}
+
+.visible {
+	display:inline;
+}
+
+/**
+* ancienne feuille de style valider au fur et a mesure
+et remonter aus dessus 
+*/
+
+
+
+ #timer {
+left:550px;
+
+position:absolute;
+}
+
+.commentaire1 {
+	/*font-size: 10px;*/
+	color: #666666;
+	font-style: normal;
+	
+}
+.commentaire2 {
+	/*font-size: 12px;*/
+	color: #666666;
+	font-style: italic;
+}
+
+
+.taille1 {
+	/*font-size: 10px;*/
+	color: #000000;
+}
+
+.taille2 {
+	/*font-size: 12px;*/
+	color: #000000;
+}
+
+
+.vert {
+        color: #009200;
+}
+
+.rouge {
+        color: #FF0000;
+}
+
+.orange { 
+       color:#f49418;
+
+}
+
+.rouge1 {
+	/*font-size: 10px;*/
+	
+	color: #FF0000;
+}
+
+.rouge2 {
+	/*font-size: 12px;*/
+	
+	color: #FF0000;
+}
+
+
+
+.bordeau1 {
+	/*font-size: 10px;*/
+
+	color: #990000;
+}
+
+
+
+
+.texte_login {
+	/*font-size: 12px;*/
+	
+	color: #ffffff;
+}
+
+
+
+
+
+.titre {
+	/*font-size: 14px;*/
+	/**/
+	color: #000000;
+	font-weight: bold;
+}
+
+.titre1 {
+	/*font-size: 12px;*/
+	/**/
+	color: #000000;
+	font-weight: bold;
+}
+
+
+/*
+templates en positionnement
+*/
+
+.test_resultat {
+	background:#FEFFCB; 
+	padding:15px
+}

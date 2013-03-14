@@ -1,0 +1,1538 @@
+<?xml version="1.0"?>
+<wsdl:definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:apache="http://xml.apache.org/xml-soap" xmlns:tns="CFGWWWROOT/ws/wsdl" targetNamespace="CFGWWWROOT/ws/wsdl">
+  <wsdl:types>
+    <xsd:schema targetNamespace="CFGWWWROOT/ws/wsdl">
+      <xsd:complexType name="stringArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="bilanDetailleRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:bilanDetailleRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="bilanDetailleRecord">
+        <xsd:all>
+          <xsd:element name="date" type="xsd:int"/>
+          <xsd:element name="details" type="tns:scoreRecordArray"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="examen" type="xsd:string"/>
+          <xsd:element name="ip" type="xsd:string"/>
+          <xsd:element name="login" type="xsd:string"/>
+          <xsd:element name="numetudiant" type="xsd:string"/>
+          <xsd:element name="origine" type="xsd:string"/>
+          <xsd:element name="score" type="xsd:float"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="scoreRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:scoreRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="scoreRecord">
+        <xsd:all>
+          <xsd:element name="competence" type="xsd:string"/>
+          <xsd:element name="score" type="xsd:float"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="inscritInputRecord">
+        <xsd:all>
+          <xsd:element name="auth" type="xsd:string"/>
+          <xsd:element name="email" type="xsd:string"/>
+          <xsd:element name="etablissement" type="xsd:int"/>
+          <xsd:element name="login" type="xsd:string"/>
+          <xsd:element name="nom" type="xsd:string"/>
+          <xsd:element name="numetudiant" type="xsd:string"/>
+          <xsd:element name="origine" type="xsd:string"/>
+          <xsd:element name="password" type="xsd:string"/>
+          <xsd:element name="passwordmd5" type="xsd:string"/>
+          <xsd:element name="prenom" type="xsd:string"/>
+          <xsd:element name="tags" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="inscritRecord">
+        <xsd:all>
+          <xsd:element name="auth" type="xsd:string"/>
+          <xsd:element name="email" type="xsd:string"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="etablissement" type="xsd:int"/>
+          <xsd:element name="examens" type="xsd:string"/>
+          <xsd:element name="genre" type="xsd:string"/>
+          <xsd:element name="id" type="xsd:int"/>
+          <xsd:element name="login" type="xsd:string"/>
+          <xsd:element name="nom" type="xsd:string"/>
+          <xsd:element name="numetudiant" type="xsd:string"/>
+          <xsd:element name="origine" type="xsd:string"/>
+          <xsd:element name="prenom" type="xsd:string"/>
+          <xsd:element name="tags" type="xsd:string"/>
+          <xsd:element name="ts_datecreation" type="xsd:int"/>
+          <xsd:element name="ts_datemodification" type="xsd:int"/>
+          <xsd:element name="ts_derniere_connexion" type="xsd:int"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="inscritInputRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:inscritInputRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="inscritRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:inscritRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="examenInputRecord">
+        <xsd:all>
+          <xsd:element name="affiche_chrono" type="xsd:int"/>
+          <xsd:element name="auteur" type="xsd:string"/>
+          <xsd:element name="auteur_mail" type="xsd:string"/>
+          <xsd:element name="certification" type="xsd:string"/>
+          <xsd:element name="correction" type="xsd:string"/>
+          <xsd:element name="envoi_resultat" type="xsd:int"/>
+          <xsd:element name="mot_de_passe" type="xsd:string"/>
+          <xsd:element name="nbquestions" type="xsd:int"/>
+          <xsd:element name="nom_examen" type="xsd:string"/>
+          <xsd:element name="ordre_q" type="xsd:string"/>
+          <xsd:element name="ordre_r" type="xsd:string"/>
+          <xsd:element name="positionnement" type="xsd:string"/>
+          <xsd:element name="referentielc2i" type="xsd:string"/>
+          <xsd:element name="resultat_mini" type="xsd:string"/>
+          <xsd:element name="tags" type="xsd:string"/>
+          <xsd:element name="ts_datedebut" type="xsd:int"/>
+          <xsd:element name="ts_datefin" type="xsd:int"/>
+          <xsd:element name="ts_dureelimitepassage" type="xsd:int"/>
+          <xsd:element name="type_tirage" type="xsd:string"/>
+          <xsd:element name="verouille" type="xsd:int"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="examenRecord">
+        <xsd:all>
+          <xsd:element name="affiche_chrono" type="xsd:int"/>
+          <xsd:element name="auteur" type="xsd:string"/>
+          <xsd:element name="auteur_mail" type="xsd:string"/>
+          <xsd:element name="certification" type="xsd:string"/>
+          <xsd:element name="correction" type="xsd:string"/>
+          <xsd:element name="eid" type="xsd:string"/>
+          <xsd:element name="envoi_resultat" type="xsd:int"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="id_etab" type="xsd:int"/>
+          <xsd:element name="id_examen" type="xsd:int"/>
+          <xsd:element name="langue" type="xsd:string"/>
+          <xsd:element name="mot_de_passe" type="xsd:string"/>
+          <xsd:element name="nbinscrits" type="xsd:int"/>
+          <xsd:element name="nbpassages" type="xsd:int"/>
+          <xsd:element name="nbquestions" type="xsd:int"/>
+          <xsd:element name="nom_examen" type="xsd:string"/>
+          <xsd:element name="ordre_q" type="xsd:string"/>
+          <xsd:element name="ordre_r" type="xsd:string"/>
+          <xsd:element name="positionnement" type="xsd:string"/>
+          <xsd:element name="referentielc2i" type="xsd:string"/>
+          <xsd:element name="resultat_mini" type="xsd:string"/>
+          <xsd:element name="tags" type="xsd:string"/>
+          <xsd:element name="ts_datecreation" type="xsd:int"/>
+          <xsd:element name="ts_datedebut" type="xsd:int"/>
+          <xsd:element name="ts_datefin" type="xsd:int"/>
+          <xsd:element name="ts_datemodification" type="xsd:int"/>
+          <xsd:element name="ts_dureelimitepassage" type="xsd:int"/>
+          <xsd:element name="type_tirage" type="xsd:string"/>
+          <xsd:element name="verouille" type="xsd:int"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="personnelInputRecord">
+        <xsd:all>
+          <xsd:element name="auth" type="xsd:string"/>
+          <xsd:element name="email" type="xsd:string"/>
+          <xsd:element name="etablissement" type="xsd:int"/>
+          <xsd:element name="login" type="xsd:string"/>
+          <xsd:element name="nom" type="xsd:string"/>
+          <xsd:element name="numetudiant" type="xsd:string"/>
+          <xsd:element name="origine" type="xsd:string"/>
+          <xsd:element name="password" type="xsd:string"/>
+          <xsd:element name="prenom" type="xsd:string"/>
+          <xsd:element name="tags" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="personnelRecord">
+        <xsd:all>
+          <xsd:element name="auth" type="xsd:string"/>
+          <xsd:element name="email" type="xsd:string"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="etablissement" type="xsd:int"/>
+          <xsd:element name="id" type="xsd:int"/>
+          <xsd:element name="login" type="xsd:string"/>
+          <xsd:element name="nom" type="xsd:string"/>
+          <xsd:element name="numetudiant" type="xsd:string"/>
+          <xsd:element name="origine" type="xsd:string"/>
+          <xsd:element name="prenom" type="xsd:string"/>
+          <xsd:element name="profils" type="xsd:string"/>
+          <xsd:element name="tags" type="xsd:string"/>
+          <xsd:element name="ts_datecreation" type="xsd:int"/>
+          <xsd:element name="ts_datemodification" type="xsd:int"/>
+          <xsd:element name="ts_derniere_connexion" type="xsd:int"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="affectRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:affectRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="affectRecord">
+        <xsd:all>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="value" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="resultatExamenInputRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:resultatExamenInputRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="resultatExamenInputRecord">
+        <xsd:all>
+          <xsd:element name="date" type="xsd:int"/>
+          <xsd:element name="login" type="xsd:string"/>
+          <xsd:element name="score" type="xsd:float"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="resultatDetailleInputRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:resultatDetailleInputRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="resultatDetailleInputRecord">
+        <xsd:all>
+          <xsd:element name="date" type="xsd:int"/>
+          <xsd:element name="login" type="xsd:string"/>
+          <xsd:element name="question" type="xsd:string"/>
+          <xsd:element name="score" type="xsd:float"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="qcmItemRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:qcmItemRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="qcmItemRecord">
+        <xsd:all>
+          <xsd:element name="documents" type="tns:documentRecordArray"/>
+          <xsd:element name="question" type="tns:questionRecord"/>
+          <xsd:element name="reponses" type="tns:reponseRecordArray"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="documentRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:documentRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="documentRecord">
+        <xsd:all>
+          <xsd:element name="base64" type="xsd:string"/>
+          <xsd:element name="description" type="xsd:string"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="extension" type="xsd:string"/>
+          <xsd:element name="id" type="xsd:int"/>
+          <xsd:element name="id_doc" type="xsd:string"/>
+          <xsd:element name="id_etab" type="xsd:int"/>
+          <xsd:element name="qid" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="questionRecord">
+        <xsd:all>
+          <xsd:element name="alinea" type="xsd:int"/>
+          <xsd:element name="auteur" type="xsd:string"/>
+          <xsd:element name="auteur_mail" type="xsd:string"/>
+          <xsd:element name="certification" type="xsd:string"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="etat" type="xsd:string"/>
+          <xsd:element name="id" type="xsd:int"/>
+          <xsd:element name="id_etab" type="xsd:int"/>
+          <xsd:element name="id_famille_proposee" type="xsd:int"/>
+          <xsd:element name="id_famille_validee" type="xsd:int"/>
+          <xsd:element name="langue" type="xsd:string"/>
+          <xsd:element name="positionnement" type="xsd:string"/>
+          <xsd:element name="qid" type="xsd:string"/>
+          <xsd:element name="referentielc2i" type="xsd:string"/>
+          <xsd:element name="tags" type="xsd:string"/>
+          <xsd:element name="titre" type="xsd:string"/>
+          <xsd:element name="ts_datecreation" type="xsd:int"/>
+          <xsd:element name="ts_dateenvoi" type="xsd:int"/>
+          <xsd:element name="ts_datemodification" type="xsd:int"/>
+          <xsd:element name="ts_dateutilisation" type="xsd:int"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="reponseRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:reponseRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="reponseRecord">
+        <xsd:all>
+          <xsd:element name="bonne" type="xsd:boolean"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="id" type="xsd:int"/>
+          <xsd:element name="id_etab" type="xsd:int"/>
+          <xsd:element name="num" type="xsd:int"/>
+          <xsd:element name="qid" type="xsd:string"/>
+          <xsd:element name="reponse" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="questionRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:questionRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="alineaRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:alineaRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="alineaRecord">
+        <xsd:all>
+          <xsd:element name="alinea" type="xsd:int"/>
+          <xsd:element name="aptitude" type="xsd:string"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="id" type="xsd:string"/>
+          <xsd:element name="referentielc2i" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="etablissementRecord">
+        <xsd:all>
+          <xsd:element name="certification" type="xsd:int"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="id_etab" type="xsd:int"/>
+          <xsd:element name="locale" type="xsd:int"/>
+          <xsd:element name="nationale" type="xsd:int"/>
+          <xsd:element name="nom_etab" type="xsd:string"/>
+          <xsd:element name="pere" type="xsd:int"/>
+          <xsd:element name="positionnement" type="xsd:int"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="etablissementRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:etablissementRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="qcmRecord">
+        <xsd:all>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="examen" type="tns:examenRecord"/>
+          <xsd:element name="questions" type="tns:qcmItemRecordArray"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="examenRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:examenRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="familleRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:familleRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="familleRecord">
+        <xsd:all>
+          <xsd:element name="alinea" type="xsd:int"/>
+          <xsd:element name="auteur" type="xsd:string"/>
+          <xsd:element name="auteur_mail" type="xsd:string"/>
+          <xsd:element name="commentaires" type="xsd:string"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="famille" type="xsd:string"/>
+          <xsd:element name="idf" type="xsd:int"/>
+          <xsd:element name="mots_clesf" type="xsd:string"/>
+          <xsd:element name="referentielc2i" type="xsd:string"/>
+          <xsd:element name="tags" type="xsd:string"/>
+          <xsd:element name="ts_datecreation" type="xsd:int"/>
+          <xsd:element name="ts_dateutilisation" type="xsd:int"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="noteRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:noteRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="noteRecord">
+        <xsd:all>
+          <xsd:element name="date" type="xsd:int"/>
+          <xsd:element name="examen" type="xsd:string"/>
+          <xsd:element name="ip" type="xsd:string"/>
+          <xsd:element name="login" type="xsd:string"/>
+          <xsd:element name="numetudiant" type="xsd:string"/>
+          <xsd:element name="origine" type="xsd:string"/>
+          <xsd:element name="score" type="xsd:float"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="referentielRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:referentielRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="referentielRecord">
+        <xsd:all>
+          <xsd:element name="domaine" type="xsd:string"/>
+          <xsd:element name="error" type="xsd:string"/>
+          <xsd:element name="referentielc2i" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="personnelRecordArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:personnelRecord[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="loginReturn">
+        <xsd:all>
+          <xsd:element name="client" type="xsd:int"/>
+          <xsd:element name="sessionkey" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <message name="a_passe_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="userid" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="a_passe_examenResponse">
+    <part name="a_passe_examenReturn" type="xsd:boolean"/>
+  </message>
+  <message name="corrige_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="idcandidat" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="idexamen" type="xsd:string"/>
+    <part name="listequestions" type="xsd:string"/>
+    <part name="listereponses" type="tns:stringArray"/>
+  </message>
+  <message name="corrige_examenResponse">
+    <part name="corrige_examenReturn" type="tns:bilanDetailleRecordArray"/>
+  </message>
+  <message name="cree_candidatRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="candidat" type="tns:inscritInputRecord"/>
+  </message>
+  <message name="cree_candidatResponse">
+    <part name="cree_candidatReturn" type="tns:inscritRecord"/>
+  </message>
+  <message name="cree_candidatsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="candidats" type="tns:inscritInputRecordArray"/>
+  </message>
+  <message name="cree_candidatsResponse">
+    <part name="cree_candidatsReturn" type="tns:inscritRecordArray"/>
+  </message>
+  <message name="cree_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="examen" type="tns:examenInputRecord"/>
+    <part name="id_etab" type="xsd:int"/>
+  </message>
+  <message name="cree_examenResponse">
+    <part name="cree_examenReturn" type="tns:examenRecord"/>
+  </message>
+  <message name="cree_personnelRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="personnel" type="tns:personnelInputRecord"/>
+  </message>
+  <message name="cree_personnelResponse">
+    <part name="cree_personnelReturn" type="tns:personnelRecord"/>
+  </message>
+  <message name="desinscrit_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+    <part name="candidats" type="tns:stringArray"/>
+    <part name="idfield" type="xsd:string"/>
+  </message>
+  <message name="desinscrit_examenResponse">
+    <part name="desinscrit_examenReturn" type="tns:affectRecordArray"/>
+  </message>
+  <message name="deverouille_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="deverouille_examenResponse">
+    <part name="deverouille_examenReturn" type="xsd:boolean"/>
+  </message>
+  <message name="envoi_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+    <part name="type_pf" type="xsd:string"/>
+    <part name="copies" type="tns:resultatExamenInputRecordArray"/>
+    <part name="details" type="tns:resultatDetailleInputRecordArray"/>
+  </message>
+  <message name="envoi_examenResponse">
+    <part name="envoi_examenReturn" type="xsd:boolean"/>
+  </message>
+  <message name="envoi_questionsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="questions" type="tns:qcmItemRecordArray"/>
+  </message>
+  <message name="envoi_questionsResponse">
+    <part name="envoi_questionsReturn" type="tns:questionRecordArray"/>
+  </message>
+  <message name="est_inscrit_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="userid" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="est_inscrit_examenResponse">
+    <part name="est_inscrit_examenReturn" type="xsd:boolean"/>
+  </message>
+  <message name="get_alineasRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_ref" type="xsd:string"/>
+  </message>
+  <message name="get_alineasResponse">
+    <part name="get_alineasReturn" type="tns:alineaRecordArray"/>
+  </message>
+  <message name="get_bilans_detailles_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+    <part name="type" type="xsd:int"/>
+  </message>
+  <message name="get_bilans_detailles_examenResponse">
+    <part name="get_bilans_detailles_examenReturn" type="tns:bilanDetailleRecordArray"/>
+  </message>
+  <message name="get_bilans_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="get_bilans_examenResponse">
+    <part name="get_bilans_examenReturn" type="tns:bilanDetailleRecordArray"/>
+  </message>
+  <message name="get_corrige_examen_htmlRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="userid" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="get_corrige_examen_htmlResponse">
+    <part name="get_corrige_examen_htmlReturn" type="xsd:string"/>
+  </message>
+  <message name="get_documentsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_question" type="xsd:string"/>
+  </message>
+  <message name="get_documentsResponse">
+    <part name="get_documentsReturn" type="tns:documentRecordArray"/>
+  </message>
+  <message name="get_etablissementRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id" type="xsd:string"/>
+  </message>
+  <message name="get_etablissementResponse">
+    <part name="get_etablissementReturn" type="tns:etablissementRecord"/>
+  </message>
+  <message name="get_etablissementsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_pere" type="xsd:int"/>
+  </message>
+  <message name="get_etablissementsResponse">
+    <part name="get_etablissementsReturn" type="tns:etablissementRecordArray"/>
+  </message>
+  <message name="get_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id" type="xsd:string"/>
+  </message>
+  <message name="get_examenResponse">
+    <part name="get_examenReturn" type="tns:examenRecord"/>
+  </message>
+  <message name="get_examen_anonymeRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="email" type="xsd:string"/>
+  </message>
+  <message name="get_examen_anonymeResponse">
+    <part name="get_examen_anonymeReturn" type="tns:qcmRecord"/>
+  </message>
+  <message name="get_examensRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="typep" type="xsd:string"/>
+    <part name="id_etab" type="xsd:string"/>
+  </message>
+  <message name="get_examensResponse">
+    <part name="get_examensReturn" type="tns:examenRecordArray"/>
+  </message>
+  <message name="get_examens_bytagsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="tags" type="xsd:string"/>
+  </message>
+  <message name="get_examens_bytagsResponse">
+    <part name="get_examens_bytagsReturn" type="tns:examenRecordArray"/>
+  </message>
+  <message name="get_examens_inscritRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="userid" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="typep" type="xsd:string"/>
+  </message>
+  <message name="get_examens_inscritResponse">
+    <part name="get_examens_inscritReturn" type="tns:examenRecordArray"/>
+  </message>
+  <message name="get_famillesRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+  </message>
+  <message name="get_famillesResponse">
+    <part name="get_famillesReturn" type="tns:familleRecordArray"/>
+  </message>
+  <message name="get_inscritRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="userid" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+  </message>
+  <message name="get_inscritResponse">
+    <part name="get_inscritReturn" type="tns:inscritRecord"/>
+  </message>
+  <message name="get_inscritsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="get_inscritsResponse">
+    <part name="get_inscritsReturn" type="tns:inscritRecordArray"/>
+  </message>
+  <message name="get_inscrits_bytagsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="tags" type="xsd:string"/>
+  </message>
+  <message name="get_inscrits_bytagsResponse">
+    <part name="get_inscrits_bytagsReturn" type="tns:inscritRecordArray"/>
+  </message>
+  <message name="get_notes_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="get_notes_examenResponse">
+    <part name="get_notes_examenReturn" type="tns:noteRecordArray"/>
+  </message>
+  <message name="get_parcours_examen_htmlRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="userid" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="get_parcours_examen_htmlResponse">
+    <part name="get_parcours_examen_htmlReturn" type="xsd:string"/>
+  </message>
+  <message name="get_passages_recentsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+    <part name="timestart" type="xsd:int"/>
+  </message>
+  <message name="get_passages_recentsResponse">
+    <part name="get_passages_recentsReturn" type="tns:noteRecordArray"/>
+  </message>
+  <message name="get_personnelRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="userid" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+  </message>
+  <message name="get_personnelResponse">
+    <part name="get_personnelReturn" type="tns:personnelRecord"/>
+  </message>
+  <message name="get_qcmRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="get_qcmResponse">
+    <part name="get_qcmReturn" type="tns:qcmRecord"/>
+  </message>
+  <message name="get_questionRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id" type="xsd:string"/>
+  </message>
+  <message name="get_questionResponse">
+    <part name="get_questionReturn" type="tns:questionRecord"/>
+  </message>
+  <message name="get_questionsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="get_questionsResponse">
+    <part name="get_questionsReturn" type="tns:questionRecordArray"/>
+  </message>
+  <message name="get_questions_bytagsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="tags" type="xsd:string"/>
+  </message>
+  <message name="get_questions_bytagsResponse">
+    <part name="get_questions_bytagsReturn" type="tns:questionRecordArray"/>
+  </message>
+  <message name="get_questions_obsoletesRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="typep" type="xsd:string"/>
+  </message>
+  <message name="get_questions_obsoletesResponse">
+    <part name="get_questions_obsoletesReturn" type="tns:questionRecordArray"/>
+  </message>
+  <message name="get_referentielsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+  </message>
+  <message name="get_referentielsResponse">
+    <part name="get_referentielsReturn" type="tns:referentielRecordArray"/>
+  </message>
+  <message name="get_reponsesRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_question" type="xsd:string"/>
+  </message>
+  <message name="get_reponsesResponse">
+    <part name="get_reponsesReturn" type="tns:reponseRecordArray"/>
+  </message>
+  <message name="get_resultats_examen_htmlRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="userid" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="get_resultats_examen_htmlResponse">
+    <part name="get_resultats_examen_htmlReturn" type="xsd:string"/>
+  </message>
+  <message name="get_score_candidatRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="idcandidat" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="idexamen" type="xsd:string"/>
+  </message>
+  <message name="get_score_candidatResponse">
+    <part name="get_score_candidatReturn" type="tns:bilanDetailleRecordArray"/>
+  </message>
+  <message name="get_scores_candidatRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="idcandidat" type="xsd:string"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="typep" type="xsd:string"/>
+    <part name="consolid" type="xsd:int"/>
+  </message>
+  <message name="get_scores_candidatResponse">
+    <part name="get_scores_candidatReturn" type="tns:bilanDetailleRecordArray"/>
+  </message>
+  <message name="get_themeurlRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+  </message>
+  <message name="get_themeurlResponse">
+    <part name="get_themeurlReturn" type="xsd:string"/>
+  </message>
+  <message name="get_toutes_questionsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="typep" type="xsd:string"/>
+  </message>
+  <message name="get_toutes_questionsResponse">
+    <part name="get_toutes_questionsReturn" type="tns:questionRecordArray"/>
+  </message>
+  <message name="get_toutes_questions_et_reponsesRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="typep" type="xsd:string"/>
+  </message>
+  <message name="get_toutes_questions_et_reponsesResponse">
+    <part name="get_toutes_questions_et_reponsesReturn" type="tns:qcmItemRecordArray"/>
+  </message>
+  <message name="get_utilisateurs_bytagsRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="tags" type="xsd:string"/>
+  </message>
+  <message name="get_utilisateurs_bytagsResponse">
+    <part name="get_utilisateurs_bytagsReturn" type="tns:personnelRecordArray"/>
+  </message>
+  <message name="get_versionRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+  </message>
+  <message name="get_versionResponse">
+    <part name="get_versionReturn" type="xsd:string"/>
+  </message>
+  <message name="inscrit_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+    <part name="candidats" type="tns:stringArray"/>
+    <part name="idfield" type="xsd:string"/>
+    <part name="tags" type="xsd:string"/>
+  </message>
+  <message name="inscrit_examenResponse">
+    <part name="inscrit_examenReturn" type="tns:affectRecordArray"/>
+  </message>
+  <message name="loginRequest">
+    <part name="username" type="xsd:string"/>
+    <part name="password" type="xsd:string"/>
+  </message>
+  <message name="loginResponse">
+    <part name="loginReturn" type="tns:loginReturn"/>
+  </message>
+  <message name="logoutRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+  </message>
+  <message name="logoutResponse">
+    <part name="logoutReturn" type="xsd:boolean"/>
+  </message>
+  <message name="modifie_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="idexamen" type="xsd:string"/>
+    <part name="examen" type="tns:examenInputRecord"/>
+  </message>
+  <message name="modifie_examenResponse">
+    <part name="modifie_examenReturn" type="tns:examenRecord"/>
+  </message>
+  <message name="verouille_examenRequest">
+    <part name="client" type="xsd:int"/>
+    <part name="sesskey" type="xsd:string"/>
+    <part name="id_examen" type="xsd:string"/>
+  </message>
+  <message name="verouille_examenResponse">
+    <part name="verouille_examenReturn" type="xsd:boolean"/>
+  </message>
+  <wsdl:portType name="c2i_soapserverPortType">
+    <wsdl:operation name="a_passe_examen">
+      <wsdl:input message="tns:a_passe_examenRequest"/>
+      <wsdl:output message="tns:a_passe_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="corrige_examen">
+      <wsdl:input message="tns:corrige_examenRequest"/>
+      <wsdl:output message="tns:corrige_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="cree_candidat">
+      <wsdl:input message="tns:cree_candidatRequest"/>
+      <wsdl:output message="tns:cree_candidatResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="cree_candidats">
+      <wsdl:input message="tns:cree_candidatsRequest"/>
+      <wsdl:output message="tns:cree_candidatsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="cree_examen">
+      <wsdl:input message="tns:cree_examenRequest"/>
+      <wsdl:output message="tns:cree_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="cree_personnel">
+      <wsdl:input message="tns:cree_personnelRequest"/>
+      <wsdl:output message="tns:cree_personnelResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="desinscrit_examen">
+      <wsdl:input message="tns:desinscrit_examenRequest"/>
+      <wsdl:output message="tns:desinscrit_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="deverouille_examen">
+      <wsdl:input message="tns:deverouille_examenRequest"/>
+      <wsdl:output message="tns:deverouille_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="envoi_examen">
+      <wsdl:input message="tns:envoi_examenRequest"/>
+      <wsdl:output message="tns:envoi_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="envoi_questions">
+      <wsdl:input message="tns:envoi_questionsRequest"/>
+      <wsdl:output message="tns:envoi_questionsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="est_inscrit_examen">
+      <wsdl:input message="tns:est_inscrit_examenRequest"/>
+      <wsdl:output message="tns:est_inscrit_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_alineas">
+      <wsdl:input message="tns:get_alineasRequest"/>
+      <wsdl:output message="tns:get_alineasResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_bilans_detailles_examen">
+      <wsdl:input message="tns:get_bilans_detailles_examenRequest"/>
+      <wsdl:output message="tns:get_bilans_detailles_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_bilans_examen">
+      <wsdl:input message="tns:get_bilans_examenRequest"/>
+      <wsdl:output message="tns:get_bilans_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_corrige_examen_html">
+      <wsdl:input message="tns:get_corrige_examen_htmlRequest"/>
+      <wsdl:output message="tns:get_corrige_examen_htmlResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_documents">
+      <wsdl:input message="tns:get_documentsRequest"/>
+      <wsdl:output message="tns:get_documentsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_etablissement">
+      <wsdl:input message="tns:get_etablissementRequest"/>
+      <wsdl:output message="tns:get_etablissementResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_etablissements">
+      <wsdl:input message="tns:get_etablissementsRequest"/>
+      <wsdl:output message="tns:get_etablissementsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_examen">
+      <wsdl:input message="tns:get_examenRequest"/>
+      <wsdl:output message="tns:get_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_examen_anonyme">
+      <wsdl:input message="tns:get_examen_anonymeRequest"/>
+      <wsdl:output message="tns:get_examen_anonymeResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_examens">
+      <wsdl:input message="tns:get_examensRequest"/>
+      <wsdl:output message="tns:get_examensResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_examens_bytags">
+      <wsdl:input message="tns:get_examens_bytagsRequest"/>
+      <wsdl:output message="tns:get_examens_bytagsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_examens_inscrit">
+      <wsdl:input message="tns:get_examens_inscritRequest"/>
+      <wsdl:output message="tns:get_examens_inscritResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_familles">
+      <wsdl:input message="tns:get_famillesRequest"/>
+      <wsdl:output message="tns:get_famillesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_inscrit">
+      <wsdl:input message="tns:get_inscritRequest"/>
+      <wsdl:output message="tns:get_inscritResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_inscrits">
+      <wsdl:input message="tns:get_inscritsRequest"/>
+      <wsdl:output message="tns:get_inscritsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_inscrits_bytags">
+      <wsdl:input message="tns:get_inscrits_bytagsRequest"/>
+      <wsdl:output message="tns:get_inscrits_bytagsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_notes_examen">
+      <wsdl:input message="tns:get_notes_examenRequest"/>
+      <wsdl:output message="tns:get_notes_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_parcours_examen_html">
+      <wsdl:input message="tns:get_parcours_examen_htmlRequest"/>
+      <wsdl:output message="tns:get_parcours_examen_htmlResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_passages_recents">
+      <wsdl:input message="tns:get_passages_recentsRequest"/>
+      <wsdl:output message="tns:get_passages_recentsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_personnel">
+      <wsdl:input message="tns:get_personnelRequest"/>
+      <wsdl:output message="tns:get_personnelResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_qcm">
+      <wsdl:input message="tns:get_qcmRequest"/>
+      <wsdl:output message="tns:get_qcmResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_question">
+      <wsdl:input message="tns:get_questionRequest"/>
+      <wsdl:output message="tns:get_questionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_questions">
+      <wsdl:input message="tns:get_questionsRequest"/>
+      <wsdl:output message="tns:get_questionsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_questions_bytags">
+      <wsdl:input message="tns:get_questions_bytagsRequest"/>
+      <wsdl:output message="tns:get_questions_bytagsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_questions_obsoletes">
+      <wsdl:input message="tns:get_questions_obsoletesRequest"/>
+      <wsdl:output message="tns:get_questions_obsoletesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_referentiels">
+      <wsdl:input message="tns:get_referentielsRequest"/>
+      <wsdl:output message="tns:get_referentielsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_reponses">
+      <wsdl:input message="tns:get_reponsesRequest"/>
+      <wsdl:output message="tns:get_reponsesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_resultats_examen_html">
+      <wsdl:input message="tns:get_resultats_examen_htmlRequest"/>
+      <wsdl:output message="tns:get_resultats_examen_htmlResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_score_candidat">
+      <wsdl:input message="tns:get_score_candidatRequest"/>
+      <wsdl:output message="tns:get_score_candidatResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_scores_candidat">
+      <wsdl:input message="tns:get_scores_candidatRequest"/>
+      <wsdl:output message="tns:get_scores_candidatResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_themeurl">
+      <wsdl:input message="tns:get_themeurlRequest"/>
+      <wsdl:output message="tns:get_themeurlResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_toutes_questions">
+      <wsdl:input message="tns:get_toutes_questionsRequest"/>
+      <wsdl:output message="tns:get_toutes_questionsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_toutes_questions_et_reponses">
+      <wsdl:input message="tns:get_toutes_questions_et_reponsesRequest"/>
+      <wsdl:output message="tns:get_toutes_questions_et_reponsesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_utilisateurs_bytags">
+      <wsdl:input message="tns:get_utilisateurs_bytagsRequest"/>
+      <wsdl:output message="tns:get_utilisateurs_bytagsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_version">
+      <wsdl:input message="tns:get_versionRequest"/>
+      <wsdl:output message="tns:get_versionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="inscrit_examen">
+      <wsdl:input message="tns:inscrit_examenRequest"/>
+      <wsdl:output message="tns:inscrit_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdl:input message="tns:loginRequest"/>
+      <wsdl:output message="tns:loginResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <wsdl:input message="tns:logoutRequest"/>
+      <wsdl:output message="tns:logoutResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="modifie_examen">
+      <wsdl:input message="tns:modifie_examenRequest"/>
+      <wsdl:output message="tns:modifie_examenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="verouille_examen">
+      <wsdl:input message="tns:verouille_examenRequest"/>
+      <wsdl:output message="tns:verouille_examenResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <binding name="c2i_soapserverBinding" type="tns:c2i_soapserverPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="a_passe_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=a_passe_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="corrige_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=corrige_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cree_candidat">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=cree_candidat" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cree_candidats">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=cree_candidats" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cree_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=cree_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cree_personnel">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=cree_personnel" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="desinscrit_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=desinscrit_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deverouille_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=deverouille_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envoi_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=envoi_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envoi_questions">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=envoi_questions" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="est_inscrit_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=est_inscrit_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_alineas">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_alineas" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_bilans_detailles_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_bilans_detailles_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_bilans_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_bilans_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_corrige_examen_html">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_corrige_examen_html" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_documents">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_documents" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_etablissement">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_etablissement" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_etablissements">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_etablissements" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_examen_anonyme">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_examen_anonyme" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_examens">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_examens" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_examens_bytags">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_examens_bytags" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_examens_inscrit">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_examens_inscrit" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_familles">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_familles" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_inscrit">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_inscrit" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_inscrits">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_inscrits" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_inscrits_bytags">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_inscrits_bytags" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_notes_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_notes_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_parcours_examen_html">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_parcours_examen_html" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_passages_recents">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_passages_recents" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_personnel">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_personnel" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_qcm">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_qcm" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_question">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_question" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_questions">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_questions" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_questions_bytags">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_questions_bytags" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_questions_obsoletes">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_questions_obsoletes" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_referentiels">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_referentiels" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_reponses">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_reponses" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_resultats_examen_html">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_resultats_examen_html" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_score_candidat">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_score_candidat" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_scores_candidat">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_scores_candidat" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_themeurl">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_themeurl" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_toutes_questions">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_toutes_questions" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_toutes_questions_et_reponses">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_toutes_questions_et_reponses" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_utilisateurs_bytags">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_utilisateurs_bytags" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_version">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=get_version" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inscrit_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=inscrit_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=login" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=logout" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modifie_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=modifie_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verouille_examen">
+      <soap:operation soapAction="CFGWWWROOT/ws/service.php&amp;method=verouille_examen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="CFGWWWROOT/ws/wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </binding>
+  <wsdl:service name="c2i_soapserver">
+    <wsdl:port name="c2i_soapserverPort" binding="tns:c2i_soapserverBinding">
+      <soap:address location="CFGWWWROOT/ws/service.php"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

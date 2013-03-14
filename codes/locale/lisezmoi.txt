@@ -1,0 +1,4 @@
+ce dossier pourra contenir des scripts locaux aux pf locales
+qui ne seraint pas pertinents sur la nationale ou qui ne seraient pas affectes par une mise a jour
+a voir
+PP
