@@ -851,7 +851,6 @@ function synchro_ressources($ide,$test,&$resultats) {
 
 /**
  * lecture des referentiels connus sur le serveur public C2i
- * Enter description here ...
  * @return referentielRecord[]
  */
 
@@ -898,6 +897,9 @@ function c2i_get_referentiels (&$resultats) {
         return array();
     }    
 }
+
+
+
 
 
 

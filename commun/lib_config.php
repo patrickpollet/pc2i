@@ -57,7 +57,7 @@ $CFG->serverroot=$pu['scheme']."://".$pu['host'];
 
 
 $CFG->encodage="UTF-8";
-$CFG->prefix="c2i";  // attention la table c2iconfig DOIT avoir ce prefixe !
+$CFG->prefix=$prefix;  // attention la table c2iconfig DOIT avoir ce prefixe !
 
 $version=return_version_pf(true);  //lecture fichier version.txt
 
@@ -116,9 +116,9 @@ function maj_bd_config() {
 function lecture_config() {
     global $CFG,$version,$chemin;
 
-    $lignes=get_records_sql("select * from c2iconfig order by cle",1,"err_lecture_config","");
+    //$lignes=get_records_sql("select * from c2iconfig order by cle",1,"err_lecture_config","");
     // surtout pas ca ! c2iconfig ne peut pas avoir de prefix !
-   // $lignes=get_records("config",null,"cle",null,null,1,"err_lecture_config","");
+    $lignes=get_records("config",null,"cle",null,null,1,"err_lecture_config","");
     //print_r($lignes);
     if ($lignes)
     foreach($lignes as $ligne) {
@@ -135,14 +135,11 @@ function lecture_config() {
 		set_config('pfc2i','version',$version,0);
 	}
 
-// rev 972 ajout option de configutation par type de C2I
-// rev 985 renommage des C2I sans la lettre n !!!
-if (($CFG->c2i=='c2in1'))
-    set_config('pfc2i','c2i','c2i1',0);
+
 //rev 987 adresses variables des listes de feedback
 // a calculer ici car on a besoin de connaitre le type de c2i 
-$adfq="qcm-".$CFG->c2i."@education.gouv.fr";
-add_config('questions','adresse_feedback_questions',$adfq,$adfq,'adresse des experts validateurs des questions',0);
+//$adfq="qcm-".$CFG->c2i."@education.gouv.fr";
+//add_config('questions','adresse_feedback_questions',$adfq,$adfq,'adresse des experts validateurs des questions',0);
 
 // rev 1013  simplifie les tests plus tards
 $CFG->unicodedb= strtoupper( $CFG->encodage) != "ISO-8859-1";
@@ -152,10 +149,6 @@ $CFG->unicodedb= strtoupper( $CFG->encodage) != "ISO-8859-1";
             tex_filter_maj_bd();
      }
 
-// rev 981 le theme v14 est PERIME
-if ($CFG->theme=='v14') {
-    set_config('pfc2i','theme','v15');
-}
 
 
 // important apr�s relecture du theme dans la config
@@ -169,16 +162,12 @@ $CFG->utiliser_form_actions=1;  // rev 981 simplification forte des liens openPo
 }
 
 /**
- * renvoie la valeur d'une clé '
- * on n'utilise PAS insert_record ,update_record... car cette table  ne peut pas avoir un prefixe different
- * elle doit s'appeler c2iconfig car c'est  elle qui va nous donner l'�ventuel prefixe' .
-        'des autres !'
- * TODO passer pat get_field
+ * renvoie la valeur d'une clé 
  */
 function get_config_item ($cle,$die=1) {
         global $CFG;
    $sql =<<<EOR
-SELECT * FROM c2iconfig
+SELECT * FROM {$CFG->prefix}config
 WHERE cle='$cle'
 EOR;
 
@@ -207,7 +196,7 @@ function set_config ($categorie,$cle,$valeur,$modifiable=1,$die=0) {
         //attention aux parentheses ET au triple �gal (certaines valeurs de config sont =0 !!!!)
         if (($old=get_config($cle,false)) !==false){ //d�ja en base (cle est une valeur unique !)
           if ($old !=$valeur) {
-        	$sql="update c2iconfig set valeur='".addslashes($valeur)."' where cle ='".$cle."' ";
+        	$sql="update {$CFG->prefix}config set valeur='".addslashes($valeur)."' where cle ='".$cle."' ";
 
         	ExecRequete($sql,false,$die);
           } else return $old;
@@ -240,7 +229,7 @@ function add_config ($categorie,$cle,$valeur,$defaut,$description='',$modifiable
 	$defaut=addslashes($defaut);
 	$description=addslashes($description);
 	$sql=<<<EOS
-	insert into c2iconfig
+	insert into {$CFG->prefix}config
 	(categorie,cle,valeur,defaut,description,modifiable,validation,drapeau)
 	values ('$categorie','$cle','$valeur_esc','$defaut','$description','$modifiable','$validation','$drapeau')
 EOS;
@@ -265,7 +254,7 @@ function config_en_menu () {
     $menu  = &new HTML_TreeMenu();
 
     $sql =<<<EOS
-    select distinct categorie from c2iconfig order by categorie
+    select distinct categorie from {$CFG->prefix}config order by categorie
 EOS;
     $cats=get_records_sql($sql);
     foreach ($cats as $cat) {
@@ -276,7 +265,7 @@ EOS;
         $menu->addItem($noderef);
 
         $sql2=<<<EOS
-            select * from c2iconfig
+            select * from {$CFG->prefix}config
             where categorie='$cat->categorie' and modifiable=1
             order by cle
 EOS;

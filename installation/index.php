@@ -164,11 +164,8 @@ Veuillez régler les problèmes signalés en rouge avant de continuer l'installa
 
 EOT;
 
-$resultats=array();
-$refs=c2i_get_referentiels($resultats);
 
-//print_r ($refs);
-//die();
+
 
 $options=array (
 	"corps_byvar"=>$fiche
@@ -240,7 +237,9 @@ $tpl->assign("c2i",$c2i);
 print_bouton($tpl,"bouton_tester","tester","javascript:document.forms[0].tester.value=1;document.forms[0].action=\"index.php\";document.forms[0].onsubmit();","","submit" );
 print_bouton($tpl,"bouton_continuer","continuer","","","submit" );
 
-
+//selection du c2i visé depuis les c2i connus au niveau nationale
+$resultats=array();
+$refs=c2i_get_referentiels($resultats);
 print_select_from_table($tpl, 'c2i', $refs, 'c2i','saisie', '', 'c2i','c2i', false, $c2i);
 
 $CFG->c2i=$c2i;
