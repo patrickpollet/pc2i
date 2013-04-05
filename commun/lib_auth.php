@@ -260,5 +260,3 @@ function evt_plage_suppression ($data) {
     return true;
 }
 
-
-?>

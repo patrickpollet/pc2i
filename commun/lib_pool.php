@@ -420,7 +420,3 @@ if (0) {
 	$fils=generer_groupes(368,65);
 	print_r($fils);
 }
-
-
-
-?>

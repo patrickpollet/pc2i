@@ -1814,4 +1814,3 @@ $textes_langues['algo_tirage_1']='avec équilibrage par domaine';
 $textes_langues['algo_tirage_2']='avec équilibrage par compétence';
 $textes_langues['algo_tirage_3']='avec équilibrage par thème';
 
-?>

@@ -7,14 +7,14 @@
  * @package c2ipf
  */
 /*
- * bibliotheque d'acces à la BD
+ * bibliotheque d'acces ï¿½ la BD
  * a inclure AVANT les autres (voir c2i_params)
- * très fortement inspirée de la bibliothèque datalib de Moodle
- * mais simplifiée ( chaque opération n'a qu'un critère à créér par l'appelant
+ * trï¿½s fortement inspirï¿½e de la bibliothï¿½que datalib de Moodle
+ * mais simplifiï¿½e ( chaque opï¿½ration n'a qu'un critï¿½re ï¿½ crï¿½ï¿½r par l'appelant
  * NE PAS FAIRE DE MAJ BD ICI !
  */
 /**
- * globale utilisée partout
+ * globale utilisï¿½e partout
  */
 $connexion = Connexion($base_utilisateur, $base_mdp, $ines_base, $adresse_serveur,$mysql_names);
 /**
@@ -40,13 +40,13 @@ function __envoi_erreur_fatale($errMsg1, $errMsg2, $sql = "") {
     else
         die($errMsg1 . " " . $errMsg2);
 }
-// Fonction Connexion: connexion à MySQL
+// Fonction Connexion: connexion ï¿½ MySQL
 function Connexion($pNom, $pMotPasse, $pBase, $pServeur, $pNames='') { // Connexion au serveur
     $connexion = mysql_connect($pServeur, $pNom, $pMotPasse);
     if (!$connexion) {
         __envoi_erreur_fatale("err_mysql_serveur", $pServeur);
     }
-    // Connexion à la base
+    // Connexion ï¿½ la base
     if (!mysql_select_db($pBase, $connexion)) {
         __envoi_erreur_fatale("", "err_mysql_bd", mysql_error($connexion));
     }
@@ -61,7 +61,7 @@ function Connexion($pNom, $pMotPasse, $pBase, $pServeur, $pNames='') { // Connex
 
 /**
  *
- *Exécution d'une requête avec MySQL style V1.4
+ *Exï¿½cution d'une requï¿½te avec MySQL style V1.4
  *@param $requete le sql
  *@param $conn    la connexion BD, si manque prends la connexion globale presque toujours sauf maj.php et export_mysql !
  *@param $erreur  erreur_fatale ou non
@@ -91,12 +91,12 @@ function RechercheDonnee($resultat, $ligne) {
 }
 
 /**
- * point de passage obligé des fonctions get_xxxx des lib_xxxxx
- * @param string $sql	la réquéte
+ * point de passage obligï¿½ des fonctions get_xxxx des lib_xxxxx
+ * @param string $sql	la rï¿½quï¿½te
  * @param
  */
 function get_record_sql($sql, $die = 1, $errMsg1 = "", $errMsg2 = "") {
-    //si die est vrai on envoie l'erreur fatale personnalisée ici '
+    //si die est vrai on envoie l'erreur fatale personnalisï¿½e ici '
     if ($resultat = ExecRequete($sql, false, false))
         if ($ligne = LigneSuivante($resultat))
             return stripslashes_object($ligne);
@@ -106,8 +106,8 @@ function get_record_sql($sql, $die = 1, $errMsg1 = "", $errMsg2 = "") {
         return false;
 }
 /**
- * point de passage obligé des fonctions get_xxxx des lib_xxxxx
- * @param string $sql	la réquéte
+ * point de passage obligï¿½ des fonctions get_xxxx des lib_xxxxx
+ * @param string $sql	la rï¿½quï¿½te
  * @param
  */
 function get_records_sql($sql, $die = 0, $errMsg1 = "", $errMsg2 = "") {
@@ -119,7 +119,7 @@ function get_records_sql($sql, $die = 0, $errMsg1 = "", $errMsg2 = "") {
             else
                 return array (); // un tableau vide
             // mieux que return false car derriere on fait souvent
-            // un foreach qui sera donc sans conséquence
+            // un foreach qui sera donc sans consï¿½quence
             // NI notice/warning PHP du genre
             //Warning: Invalid argument supplied for foreach()
             //in /var/www/c2i/V1.4/plate-forme/commun/noteuse.class.php on line 153
@@ -149,7 +149,7 @@ function get_record($table, $critere = "", $die = 1, $errMsg1 = "", $errMsg2 = "
 }
 
 //similaire a get_record_select de Moodle
-//pb ici avec la relecture de la config CFG->prefix n'est pas encore renseigné ...'
+//pb ici avec la relecture de la config CFG->prefix n'est pas encore renseignï¿½ ...'
 function get_records($table, $critere = '', $tri = '', $debut = 0, $nombre = 0, $die = 0, $errMsg1 = "", $errMsg2 = "") {
     global $CFG;
     $sql = "select * from " . $CFG->prefix . "$table ";
@@ -210,14 +210,14 @@ function delete_records($table, $critere = "", $die = 0, $errMsg1 = "", $errMsg2
 function insert_record($table, $dataobject, $returnid = true, $primarykey = 'id', $die = 1, $errMsg1 = "", $errMsg2 = "") {
     global $CFG;
     if (!$dataobject || (!is_object($dataobject) && !is_array($dataobject)))
-        __envoi_erreur_fatale("DEV : tentative d'insérer un non objet dans ", "$table", print_r($dataobject, true));
+        __envoi_erreur_fatale("DEV : tentative d'insï¿½rer un non objet dans ", "$table", print_r($dataobject, true));
     /// In Moodle we always use auto-numbering fields for the primary key
     /// so let's unset it now before it causes any trouble later
     if ($primarykey) //pas encore partout avec la PF c2i
         unset ($dataobject-> {
         $primarykey });
     /// Get the correct SQL from adoDB
-    /// PP j'ai reecrit la fonction (simplifieé ici!)
+    /// PP j'ai reecrit la fonction (simplifieï¿½ ici!)
     if (!$insertSQL = get_insert_sql($table, (array) $dataobject)) {
         __envoi_erreur_fatale("DEV : SQL invalide en insertion dans ", $table, print_r($dataobject, true));
     }
@@ -310,7 +310,7 @@ function update_record($table, $dataobject, $key1 = 'id', $key2 = '', $die = 1, 
 /**
  * Get a single value from a table row where all the given fields match the given values.
  * modif PP un seul argument $critere (de la form  "xx='valeur' and yy ='valeur'....)
- * pour être homogène avec get_record
+ * pour ï¿½tre homogï¿½ne avec get_record
  * @param string $table the table to query.
  * @param string $field the field to return the value of.
  * @param int $die , $errMsg1, $errMsg2
@@ -445,11 +445,11 @@ function mysql_add_column_if_not_exist($colonne, $attrs = "VARCHAR( 255 ) NULL",
 
 
 /**
- * Liste d'entités contenant un ou plusieurs TAGS
- * code inspiré de la recherche multicritères des cours de Moodle
+ * Liste d'entitï¿½s contenant un ou plusieurs TAGS
+ * code inspirï¿½ de la recherche multicritï¿½res des cours de Moodle
  *
  * @param string table (nom de la table SANS le prefixe)
- * @param string $search mots a chercher dans les tags , eventuellement expressions réguliéres etprécedés de + ou -
+ * @param string $search mots a chercher dans les tags , eventuellement expressions rï¿½guliï¿½res etprï¿½cedï¿½s de + ou -
  * @param string $sort tri
  * @param int $page ?
  * @param int $recordsperpage ?
@@ -531,8 +531,3 @@ function search_table_bytags($table,$search, $sort='', $page=0, $recordsperpage=
   // print_r($ret); print $c;
     return $ret;
 }
-
-
-
-
-?>

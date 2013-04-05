@@ -1484,6 +1484,3 @@ if (0) {
  for ($i=10; $i<100; $i=$i+10)
  print("<br/>".get_preconisations($i));
 }
-
-
-?>

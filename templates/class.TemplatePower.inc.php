@@ -1654,4 +1654,3 @@ class C2IMiniPopup extends C2ITemplate {
 	}
 
 }
-?>

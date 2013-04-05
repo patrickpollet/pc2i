@@ -14,6 +14,7 @@ $chemin = '..';
 $chemin_commun = $chemin."/commun";
 $chemin_images = $chemin."/images";
 
+print_r($_POST); die();
 
 /**
  * soit ce fichier a �t� cr� par index.php soit il a �t� cr�� � la main
@@ -32,9 +33,10 @@ require_once("lib_install.php");
 require_once ($chemin_commun."/lib_bd.php");
 
 
-$wwwroot=optional_param("wwwroot","http://localhost/c2i/",PARAM_RAW);
-$dataroot=optional_param("dataroot",$CFG->chemin_ressources,PARAM_RAW);
-
+$wwwroot=required_param("wwwroot",PARAM_RAW);
+$dataroot=required_param("dataroot",PARAM_RAW);
+$c2i=required_param("c2i",PARAM_RAW);
+$prefix=required_param("prefix",PARAM_RAW);
 
 //ajax
 if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
@@ -52,6 +54,10 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
 	set_config("pfc2i","wwwroot",$wwwroot,true);
 	set_config("pfc2i","verifier_install",0,true);
     set_config("pfc2i","date_installation",time(),time(),"",0,0);
+    set_config("pfc2i","c2i",$c2i,"",0,0);
+    set_config("pfc2i","prefix",$c2i,"",0,0);
+    set_config("pfc2i","adresse_pl_nationale","https://c2i.education.fr/{$c2i}/","",0,0);
+    set_config("pfc2i","adresse_feedback_questions","qcm-{$c2i}@education.gouv.fr/","",0,0);
 
 
 print  traduction ("epilogue_install");

@@ -667,4 +667,3 @@ if (0) {
 	print_r ($noteuse->note_etudiant($etudiant));
 }
 
-?>

@@ -873,6 +873,3 @@ function dayofweek($day, $month, $year) {
     // strftime('%w', mktime(12, 0, 0, $month, $daysinmonth, $year, 0));
     return intval(date('w', mktime(12, 0, 0, $month, $day, $year, 0)));
 }
-
-
-?>

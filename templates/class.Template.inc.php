@@ -835,4 +835,3 @@ class Template extends TemplateParser
         return $content;
     }
 }
-?>

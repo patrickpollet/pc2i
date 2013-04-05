@@ -124,7 +124,3 @@ function dump_event ($id,$data) {
     }
 
 }
-
-
-
-?>

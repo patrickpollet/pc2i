@@ -52,6 +52,8 @@ $supp=array(
 "form_nom_bdd"=>"nom de la base MySQL",
 "form_user_bdd"=>"utilisateur",
 "form_pass_bdd"=>"mot de passe",
+"form_prefix"=>"prefixe des tables",
+"form_type_c2i"=>'type de la plateforme',
 
 "parametres_installation"=>"Paramètres d'installation de la plateforme'",
 "form_repertoire_installation"=>"URL d'accès à votre plateforme","ex_form_ri"=>"(ex. http://votre-univ.fr/c2i/)",

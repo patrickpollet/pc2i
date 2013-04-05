@@ -10,8 +10,8 @@
 
 /**
  * bibliotheque de manipulations de fichiers
- * @uses global $CFG configuration générale
- * @uses $CFG->chemin_ressources   (par défaut en 1.4 $chemin/ressources en relatif)
+ * @uses global $CFG configuration gï¿½nï¿½rale
+ * @uses $CFG->chemin_ressources   (par dï¿½faut en 1.4 $chemin/ressources en relatif)
  */
 
  if (is_admin()) {   //utilisateur courant uniquement
@@ -27,7 +27,7 @@ $currdir = $CFG->chemin_ressources;
 if (($res = verifie_droits_fichiers($currdir)) != '')
 	erreur_fatale($res,$currdir);
 
-// création des dossiers minimaux
+// crï¿½ation des dossiers minimaux
 cree_dossier_si_absent($currdir . "/csv");
 cree_dossier_si_absent($currdir . "/questions");
 cree_dossier_si_absent($currdir . "/telechargement");
@@ -40,7 +40,7 @@ cree_dossier_si_absent($currdir . "/archives");
 cree_dossier_si_absent($currdir . "/filter");
 cree_dossier_si_absent($currdir . "/ressources_locales");
 
-// création d'un fichier .htaccess au cas ou ce dossier est dans la zone "web"
+// crï¿½ation d'un fichier .htaccess au cas ou ce dossier est dans la zone "web"
 if (!file_exists($currdir . '/.htaccess')) {
 	if ($handle = fopen($currdir . '/.htaccess', 'w')) { // For safety
 		@ fwrite($handle, "deny from all\r\nAllowOverride None\r\nNote: this file is broken intentionally, we do not want anybody to undo it in subdirectory!\r\n");
@@ -69,7 +69,7 @@ if (!empty($CFG->verifier_install)) {
 
 /**
 * Renvoie la liste des sous-dossiers visibles d'un dossier
-* utilisé pour charger dynamiquement des classes
+* utilisï¿½ pour charger dynamiquement des classes
 */
 function get_list_of_plugins($plugin = 'codes', $exclude = '', $basedir = '') {
     global $CFG;
@@ -140,15 +140,15 @@ function get_list_of_files($exclude='',$basedir) {
 
 /**
  * verifie que l'utilisateur " apache " a les droits sur un dossier
- * peut être appelée depuis un écran de changement de configuration
- * @param string  $dir le dossier a tester (peut être relatif)
- * @return string vide sans erreur sinon une clé d'erreur dans le fichier de langue'
+ * peut ï¿½tre appelï¿½e depuis un ï¿½cran de changement de configuration
+ * @param string  $dir le dossier a tester (peut ï¿½tre relatif)
+ * @return string vide sans erreur sinon une clï¿½ d'erreur dans le fichier de langue'
  */
 function verifie_droits_fichiers($dir) {
-	// vérification de l'existence
+	// vï¿½rification de l'existence
 	if (! @is_dir($dir))
 		return "err_dossier_ressources_inconnu";
-	// vérification des droits
+	// vï¿½rification des droits
 	if (!is_writable($dir))
 		return "err_dossier_ressources_droits";
 	return "";
@@ -162,27 +162,27 @@ function cree_dossier_si_absent($dir) {
 
 
 /**
- * retourne le type MIME à partir de l'extension de fichier contenu dans $nomFichier
- * Exemple : $nomFichier = " fichier . pdf " => type renvoyé : " application / pdf "
+ * retourne le type MIME ï¿½ partir de l'extension de fichier contenu dans $nomFichier
+ * Exemple : $nomFichier = " fichier . pdf " => type renvoyï¿½ : " application / pdf "
  */
 
 function typeMime($nomFichier) {
-  //code perimé
+  //code perimï¿½
   /***********************************
   global $chemin;
-   // on détecte d'abord le navigateur, <E7>a nous servira plus tard
+   // on dï¿½tecte d'abord le navigateur, <E7>a nous servira plus tard
    if(preg_match("@Opera(/| )([0-9].[0-9]{1,2})@", $_SERVER['HTTP_USER_AGENT'], $resultats))
       $navigateur="Opera";
    elseif(preg_match("@MSIE ([0-9].[0-9]{1,2})@", $_SERVER['HTTP_USER_AGENT'], $resultats))
       $navigateur="Internet Explorer";
    else $navigateur="Mozilla";
 
-   // on ré>cup<E8>re la liste des extensions de fichiers et leurs types Mime associé>s
+   // on rï¿½>cup<E8>re la liste des extensions de fichiers et leurs types Mime associï¿½>s
    $mime=parse_ini_file($chemin."/commun/mime.ini");
    $extension=strtolower(substr($nomFichier, strrpos($nomFichier, ".")+1));
 
    //
-   ///on affecte le type Mime si on a trouvé> l'extension sinon le type par dé>faut (un flux d'octets).
+   ///on affecte le type Mime si on a trouvï¿½> l'extension sinon le type par dï¿½>faut (un flux d'octets).
    // Attention : Internet Explorer et Opera ne supporte pas le type MIME standard
    if(@array_key_exists($extension, $mime)) $type=$mime[$extension];
    else $type=($navigateur!="Mozilla") ? 'application/octetstream' : 'application/octet-stream';
@@ -196,7 +196,7 @@ function typeMime($nomFichier) {
 
 
 function isgoodfile ($idf) {
-// vérifie le nom du fichier à afficher
+// vï¿½rifie le nom du fichier ï¿½ afficher
 // = lettres|chiffres|_ ou -  suivi de .csv ou .tsv ou .xls, rien d'autre
 // un point interne est permis mais pas de "/"
         return eregi("(^[a-z_0-9A-Z.\-]+\.(csv|tsv|xls|txt|pdf|ods|odt|doc|gif|jpg|jpeg|png|htm|html|zip|tex)$)",$idf);
@@ -212,8 +212,8 @@ print isgoodfile("resultats_65_12.csv") ?" OK":" KO";print"\n";
 */
 
 /* copier_element
- * @param       string  nom d'origine de l'é>lement
- * @param       string  nom de destination de l'é>lement
+ * @param       string  nom d'origine de l'ï¿½>lement
+ * @param       string  nom de destination de l'ï¿½>lement
  *
  * @return      bool    resultat de la copie
  *
@@ -246,7 +246,7 @@ function copier_element($origine, $dest)
  *
  * @return      bool    resultat de la copie
  *
- * copie ré>cursive d'un dossier
+ * copie rï¿½>cursive d'un dossier
  */
 function copier_dossier($origine, $dest){
 	if ( !is_dir("$dest") )	{
@@ -273,7 +273,7 @@ function copier_dossier($origine, $dest){
 function supprimer_dossier($dossier){
 	if ( $dossier == "" ) {
 
-		// Pb de sécurite (pourrait effectuer un unlink à la racine...)
+		// Pb de sï¿½curite (pourrait effectuer un unlink ï¿½ la racine...)
 		return false;
 	}
 
@@ -302,7 +302,7 @@ function supprimer_dossier($dossier){
 # and placed into the public domain.
 # d'aprs http://fr.php.net/manual/fr/function.move-uploaded-file.php
 # @function upload_file
-# NE GERE PAS un renommage de fichier; i.e. dirPath doit être un DOSSIER
+# NE GERE PAS un renommage de fichier; i.e. dirPath doit ï¿½tre un DOSSIER
 #
 # @param $field        string        the name of the file upload form field
 # @param $dirPath    string        the relative path to which to store the file (no trailing slash)
@@ -359,9 +359,9 @@ print_r($_FILES);     // for debug purposes
 
 
 /**
- * @param string $dossier_parent   chemin complet du dossier parent du dossier à zipper
- * @param string $nom_dossier nom (relatif) du dossier à zipper
- * @param string $nom_archive nom complet de l'archive zip à créer '
+ * @param string $dossier_parent   chemin complet du dossier parent du dossier ï¿½ zipper
+ * @param string $nom_dossier nom (relatif) du dossier ï¿½ zipper
+ * @param string $nom_archive nom complet de l'archive zip ï¿½ crï¿½er '
  */
 function zip_dossier ($dossier_parent,$nom_dossier,$nom_archive) {
 	global $CFG;
@@ -383,7 +383,7 @@ function zip_dossier ($dossier_parent,$nom_dossier,$nom_archive) {
 	}
 	else { //pclzip 2.7 boggue aussi avec une archive de 3.4 Mo !!!!
 
-    	//rev 973 il peut y a avoir plusieurs appels à zip_dossier
+    	//rev 973 il peut y a avoir plusieurs appels ï¿½ zip_dossier
     	if (!defined('PCLZIP_TEMPORARY_DIR')) {
 
         	//define( 'PCLZIP_TEMPORARY_DIR', $CFG->chemin_ressources."/tmp/"  ); //important
@@ -407,8 +407,8 @@ function zip_dossier ($dossier_parent,$nom_dossier,$nom_archive) {
 
 		$archive->add($dossier_parent.'/'.$nom_dossier,PCLZIP_OPT_REMOVE_PATH, $dossier_parent."/");
 
-		//test gros zip (48Mo de données)
-		//l'argument PCLZIP_OPT_ADD_TEMP_FILE_THRESHOLD est très important !! (si >1Mo utiliser temporaires !)
+		//test gros zip (48Mo de donnï¿½es)
+		//l'argument PCLZIP_OPT_ADD_TEMP_FILE_THRESHOLD est trï¿½s important !! (si >1Mo utiliser temporaires !)
 		// pclzip > 1.7 !
 		// $archive = new PclZip($CFG->chemin_ressources."/tmp/test.zip");
 		// $archive->add($CFG->chemin_ressources,PCLZIP_OPT_REMOVE_PATH, $CFG->chemin_ressources."/",PCLZIP_OPT_ADD_TEMP_FILE_ON);
@@ -420,7 +420,7 @@ function zip_dossier ($dossier_parent,$nom_dossier,$nom_archive) {
 }
 
 /**
- * rev 980 si éditeur HTML activé stocker les images dans un dossier tempo pour les
+ * rev 980 si ï¿½diteur HTML activï¿½ stocker les images dans un dossier tempo pour les
  * nouvelles questions d'ou le nouveau parametre autocreate
  */
 function get_document_location($idq,$ide,$autocreate=false) {
@@ -436,7 +436,7 @@ function get_document_location($idq,$ide,$autocreate=false) {
 }
 
 /**
- * encode en base64 un document attaché à une question
+ * encode en base64 un document attachï¿½ ï¿½ une question
  * @param string $idf nom du document (sans chemin) ex 1.jpg
  * @param int $idq, $ide : identifiants questions
  */
@@ -464,7 +464,7 @@ function encode_document( $idf, $idq,$ide ) {
 
 
 /**
- * decode (base64) et sauve un document attaché à une question
+ * decode (base64) et sauve un document attachï¿½ ï¿½ une question
  * @param string $idf nom du document (sans chemin) ex 1.jpg
  * @param string $base64 le contenu
  * @param int $idq, $ide : identifiants questions
@@ -473,7 +473,7 @@ function decode_document( $idf, $base64,$idq,$ide ) {
 	global $CFG;
 
 	//$idf=$CFG->chemin_ressources."/questions/".$ide."_".$idq."/documents/".$idf;
-    // avec autocration si nécessaire
+    // avec autocration si nï¿½cessaire
 	$idf=get_document_location($idq,$ide,true)."/".$idf;
 
 
@@ -697,5 +697,3 @@ function mimeinfo($element, $filename) {
 }
 
 //print ("zzz".encode_document('5.jpg',2359,1));
-
-?>

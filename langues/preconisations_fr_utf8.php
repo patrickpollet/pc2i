@@ -60,4 +60,3 @@ $preconisations_demo=array(
 "100"=>"tu prends ma place"
 );
 
-?>

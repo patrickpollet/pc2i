@@ -847,11 +847,3 @@ function array_for_document($qid, $document) {
     return $res;
 }
 
-
-
-?>
-
-
-
-
-

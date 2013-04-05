@@ -283,10 +283,10 @@ Validation.addAllThese([
 ]);
 // ajout PP
 Validation.addAllThese([
-                        ['validate-password', 'le mot de passe ne peut être d\'une taille inférieure à 5 caractères', {
+                        ['validate-password', 'le mot de passe ne peut Ãªtre d\'une taille infÃ©rieure Ã  5 caractÃ¨res', {
                           minLength : 5
                        }],
-                        ['validate-password-confirm', 'le mot de passe et sa confirmation doivent être identiques', {
+                        ['validate-password-confirm', 'le mot de passe et sa confirmation doivent Ãªtre identiques', {
                            equalToField : 'password'
                        }]
                      ]);

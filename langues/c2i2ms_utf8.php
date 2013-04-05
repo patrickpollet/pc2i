@@ -45,8 +45,3 @@ $textes_langues["mail_mdp_oublie"] = "En cas de problème d'affichage de ce mail
 
 
 //fin
-
-
-
-
-?>

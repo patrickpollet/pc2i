@@ -10,8 +10,8 @@
 
 /*
  * taches de maintenance
- * n'est pas chargées dans les pages courantes
- * utiliser require_once quand nécessaire
+ * n'est pas chargï¿½es dans les pages courantes
+ * utiliser require_once quand nï¿½cessaire
  */
 if (is_admin()) { //utilisateur courant uniquement
     maj_bd_csv();
@@ -28,7 +28,7 @@ if (0) {
 
 /**
  * convertit une valeur a emettre en virant d'evnetuels blancs, saut de lignes, tab ...
- * et le séparateur CSV'
+ * et le sï¿½parateur CSV'
  */
 function to_csv ($chaine) {
     global $CFG;
@@ -39,9 +39,9 @@ function to_csv ($chaine) {
 /**
 * prepare une ligne CSV
 * @param colonnes tableau des noms de colonnes dans la BD ou autre dans l'ordre voulu
-* @param ligne un objet contenant les infos à emettre
-*                si false, on emet la ligne d'entéte en traduisant les noms de colonnes
-* @param $cvt (rev 820) un tableua de booleens pour la conversion point en virgule décimale
+* @param ligne un objet contenant les infos ï¿½ emettre
+*                si false, on emet la ligne d'entï¿½te en traduisant les noms de colonnes
+* @param $cvt (rev 820) un tableua de booleens pour la conversion point en virgule dï¿½cimale
 */
 function ligne_to_csv ($colonnes, $ligne,$cvt=array(),$cvt_utf8=false) {
     global $CFG;
@@ -82,7 +82,7 @@ class CsvExporter {
     var  $entete_csv = array ();
     // ligne suivantes les noms des attributs dans $ligne dans cet ordre
     var  $ligne_csv = array ();
-    // rev 948 conversion numérique du score
+    // rev 948 conversion numï¿½rique du score
     var  $ligne_cvt = array ();
     var $filename_csv='';
     var $row=0;
@@ -119,7 +119,7 @@ class CsvExporter {
     }
 
     /**
-     * ajoute une ligne déja formatée
+     * ajoute une ligne dï¿½ja formatï¿½e
      */
     function add_comment($ligne) {
     	global $CFG;
@@ -136,5 +136,3 @@ class CsvExporter {
        return $CFG->chemin_ressources.'/csv/'.$this->filename_csv;
     }
 }
-
-?>

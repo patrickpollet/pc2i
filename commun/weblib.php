@@ -2409,9 +2409,3 @@ function detectMobileDevice() {
     } else 
         return false; 
 }
-
-
-
-
-
-?>

@@ -1388,5 +1388,3 @@ if (0) {
     print_r(get_familles_liste('D1','rand()',0));
     print ('</pre>');
 }
-
-?>

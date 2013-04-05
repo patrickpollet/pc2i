@@ -72,4 +72,3 @@ class TPLSerializer extends TemplatePowerParser
         $this->__serializeTPL();
     }
 }
-?>

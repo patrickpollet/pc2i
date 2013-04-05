@@ -249,4 +249,3 @@ if ($id_examen && $id_etab)
 
 header("location:$chemin/codes/quitter.php?err_c2i=err_pa&page_origine=".$page_origine."&amp;".$session_nom."=".session_id().$extra);
 
-?>

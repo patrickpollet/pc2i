@@ -937,6 +937,3 @@ function unset_flag (&$drapeau, $valeur,$masque=0) {
 	      	return $dump;
 	    	}
 	}
-
-
-?>

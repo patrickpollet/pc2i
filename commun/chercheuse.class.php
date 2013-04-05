@@ -83,9 +83,3 @@ class chercheuse {
 
 }
 
-
-
-?>
-
-
-

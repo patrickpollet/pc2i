@@ -18,7 +18,7 @@ $chemin_commun = $chemin."/commun";
 $chemin_images = $chemin."/images";
 
 
-if (!isset($type_p)) {  // caslogin n' pas inclus (cas non forcé)  mais appelé comme action d'un formulaire
+if (!isset($type_p)) {  // caslogin n' pas inclus (cas non forcï¿½)  mais appelï¿½ comme action d'un formulaire
 	$type_p=isset($_POST["type_p"])? $_POST["type_p"]:"";
 }
 // rev 978
@@ -34,7 +34,7 @@ ouvrir_session();
 
 // ces trois varibales ont requises par enter.php
 // au 1er qppel de caslogin elles  sont soient difinies soit dans le postet on les met en session
-// au retour du serveur CAS elles sont reprises de la session pour être passée a enter.php
+// au retour du serveur CAS elles sont reprises de la session pour ï¿½tre passï¿½e a enter.php
 if (!empty($type_p)) var_register_session('type_p',$type_p);
 else $type_p= var_get_session('type_p');
 if (!empty($id_examen)) var_register_session('id_examen',$id_examen);
@@ -48,7 +48,7 @@ else $id_etab= var_get_session('id_etab');
 // initialize phpCAS
 
 $CFG->cas_version_maj=1;   // force utilisation version mise a jour
-if (empty($cas_proxycas)) $cas_proxycas=0;  // drapeau non documenté
+if (empty($cas_proxycas)) $cas_proxycas=0;  // drapeau non documentï¿½
 if (empty($cas_version)) $cas_version='2.0';
 
 if ($CFG->cas_version_maj)  {
@@ -70,7 +70,7 @@ else {
     phpCAS::client(CAS_VERSION_2_0,$cas_url,$cas_port,$cas_service);
 
 }
-// crée une trace dans /tmp/phpcas.log
+// crï¿½e une trace dans /tmp/phpcas.log
 phpCAS::setDebug();
 
 
@@ -88,15 +88,14 @@ else
 
 // at this step, the user has been authenticated by the CAS server
 // and the user's login name can be read with phpCAS::getUser().
-// PAS de retour ici tantq que l'authentification n'a pas réussi !
+// PAS de retour ici tantq que l'authentification n'a pas rï¿½ussi !
 
 
 $verif="ent";
 $page_origine_explode = explode("?",basename($_SERVER['REQUEST_URI']));
 $page_origine=$page_origine_explode[0];
 $identifiant=phpCAS::getUser();
-$passe="cas"; //juste pour qu'il ne soit pas vide (isset() testé dans entrer.php)
+$passe="cas"; //juste pour qu'il ne soit pas vide (isset() testï¿½ dans entrer.php)
 $premiereFois=1;
 
 include("$chemin/codes/entrer.php");
-?>

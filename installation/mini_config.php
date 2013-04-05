@@ -48,6 +48,8 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 $CFG->admin_mail='' ;
 $CFG->adresse_forum='http://www.c2i.education.fr/forum-c2i-1/' ;
 $CFG->adresse_pl_nationale='https://c2i.education.fr/plate-forme/' ;
+$CFG->adresse_serveur_public_c2i ='https://c2i.education.fr/c2iws/service.php';
+
 $CFG->adresse_version='http://c2i.education.fr/version.txt' ;
 $CFG->adresse_wiki='http://c2i.education.fr/wikipfc2i-X/index.php/Accueil' ;
 $CFG->bodydir='ltr' ;
@@ -105,5 +107,3 @@ $USER->id_user='admin'; //tempo pour mise � jour
 
 //existe pas en installation (seulement en maj)
 @$USER->id_etab_perso=$universite_serveur ;   //extrait de constantes.php v 1.4 (tempo)
-
-?>

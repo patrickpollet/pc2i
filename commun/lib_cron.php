@@ -8,8 +8,8 @@
 require_once ($CFG->chemin_commun."/lib_ldap.php");
 /*
  * taches de maintenance
- * n'est pas chargées dans les pages courantes
- * utiliser require_once quand nécessaire
+ * n'est pas chargï¿½es dans les pages courantes
+ * utiliser require_once quand nï¿½cessaire
  */
  if (is_admin()) {   //utilisateur courant uniquement
     maj_bd_cron();
@@ -21,7 +21,7 @@ require_once ($CFG->chemin_commun."/lib_ldap.php");
 
 
 /**
- * suppression des inscrits qui ne sont pas inscrits à un examen
+ * suppression des inscrits qui ne sont pas inscrits ï¿½ un examen
  */
 
 function compte_candidats_non_inscrits($ide){
@@ -58,7 +58,7 @@ function purge_comptes_plus_ldap() {
 	 * algo
 	 * pour tous les comptes etudiants +profs connus
 	 * 		si plus dans ldap ET ldap OK !!!
-	 * 			virer les resultats si étudiants
+	 * 			virer les resultats si ï¿½tudiants
 	 * 			virer les inscriptions
 	 * 			virer du tracking ???
 	 * puis appel a purge_non_inscrits ...
@@ -79,7 +79,3 @@ function synchro_comptes_ldap() {
 	 */
 
 }
-
-
-
-?>

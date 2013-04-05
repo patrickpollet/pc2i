@@ -631,4 +631,3 @@ require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion d
     print cree_parcours_HTML(get_examen(551,65003),$res);
 }
 
-?>

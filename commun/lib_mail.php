@@ -281,5 +281,3 @@ send_mail("ppollet","test mail php","<html><body>ca roule ma poule ???</body><ht
 
 }
 
-
-?>

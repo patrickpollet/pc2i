@@ -71,8 +71,3 @@ function espion3($action,$objet,$id_objet,$instance) {
         espion2('bug events',$objet.'_'.$action,$id_objet); //bug a signaler aux developpeurs
 }
 
-
-
-
-
-?>

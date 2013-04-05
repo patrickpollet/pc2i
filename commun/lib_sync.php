@@ -174,7 +174,7 @@ function connect_to_nationale() {
    if(empty($CFG->curl_force_ssl3)) 
        set_ok ("synchro standard avec soapClient",$resultats);   
     else 
-        set_ok ("synchro standard avec soapClient personnalis�",$resultats);
+        set_ok ("synchro standard avec soapClient personnalisé",$resultats);
    $test=false;
 
    foreach ($options as $option=>$doit) {
@@ -185,7 +185,7 @@ function connect_to_nationale() {
 			   case 1:synchro_etablissements($c2i,$lr,$ide,$test,$resultats); break;
 			   case 2:synchro_familles($c2i,$lr,$ide,$test,$resultats); break;
 			  // case 3:synchro_notions($c2i,$lr,$ide,$test,$resultats); break;
-			   case 3:synchro_ressources($c2i,$lr,$ide,$test,$resultats); break;
+			   case 3:synchro_ressources($ide,$test,$resultats); break;
 			   case 4:synchro_questions_fast($c2i,$lr,$ide,$test,$resultats); break;
 			   case 5:synchro_questions_obsoletes($c2i,$lr,$ide,$test,$resultats); break;
                case 6:synchro_referentiel($c2i,$lr,$ide,$test,$resultats); break;
@@ -787,10 +787,9 @@ function envoi_mes_examens ($c2i,$lr,$ide,$test,$mes_examens) {
  * accede le web service public pour cette information 
  */
 
-function synchro_ressources($c2i,$lr,$ide,$test,&$resultats) {
+function synchro_ressources($ide,$test,&$resultats) {
     global $CFG;
     $registrationurl=$CFG->adresse_serveur_public_c2i;
-    //$registrationurl = 'http://prope.insa-lyon.fr/c2i/c2iws/service.php';
     
     set_ok (traduction ("info_connecte_public",false,$CFG->adresse_serveur_public_c2i),$resultats);
     $data = array(
@@ -815,13 +814,7 @@ function synchro_ressources($c2i,$lr,$ide,$test,&$resultats) {
         if (is_array($ressources)){
             set_ok (traduction("nb_items_recus",false,count($ressources)),$resultats);
             foreach ($ressources as $ressource) {
-                if (!$CFG->unicodedb) {
-                    foreach ($ressource as $key=>$value)
-                    if (is_string($value)) {
-                        $ressource->$key=utf8_decode($value);
-                        //print "*";
-                    }
-                }
+                
                 unset($ressource->url); //tempo
                 $ressource->id_etab=1;
                 $ressource->modifiable=0;
@@ -856,13 +849,62 @@ function synchro_ressources($c2i,$lr,$ide,$test,&$resultats) {
     }
 }
 
+/**
+ * lecture des referentiels connus sur le serveur public C2i
+ * Enter description here ...
+ * @return referentielRecord[]
+ */
+
+function c2i_get_referentiels (&$resultats) {
+    global $CFG;
+    
+    global $CFG;
+    $registrationurl=$CFG->adresse_serveur_public_c2i;
+    
+    set_ok (traduction ("info_connecte_public",false,$CFG->adresse_serveur_public_c2i),$resultats);
+    $data = array(
+              'wsfunction'=>'c2i_get_referentiels',
+              'wsformatout'=>'php',
+             
+    
+    );
+    $request = array(
+    CURLOPT_URL        => $registrationurl,
+    CURLOPT_POST       => 1,
+    CURLOPT_POSTFIELDS => $data,
+    );
+    
+    $res=c2i_http_request($request);
+    
+    //print_r($res);
+    if ($res->errno==0) {
+        $ressources=unserialize($res->data);
+        // print_r($ressources);
+        if (is_array($ressources)){
+            $ret=array();
+            set_ok (traduction("nb_items_recus",false,count($ressources)),$resultats);
+            foreach ($ressources as $ressource) {
+                $ressource->c2i=strtolower($ressource->c2i);
+             }
+             return $ressources;
+        } else {
+            //message d'erreur renvoy� par CURL ( not found) ou par le WS
+            set_erreur($res->data,$resultats);
+            return array();
+        }    
+        
+    } else {
+        set_erreur('erreur curl '.$res->errno.' '.$res->error,$resultats);
+        return array();
+    }    
+}
 
 
 
 /**
 *
-* excute une requete HTTP en mode REST via curl ajout�e rev 986
-* pour l'instant utilis�e seulement vers https://c2i.education.fr/c2iws/service.php
+* excute une requete HTTP en mode REST via curl ajoutée rev 986
+* pour l'instant utilisée seulement vers https://c2i.education.fr/c2iws/service.php
 * pour obtenir les ressources
 * @param array $config
 * @param boolean $quiet
@@ -876,7 +918,7 @@ function c2i_http_request($config, $quiet=false,$id_objet='') {
         if ($quiet)
         return false;
         else
-        die ('extension php curl non install�e');
+        die ('extension php curl non installée');
     }
 
 
@@ -935,7 +977,4 @@ function c2i_http_request($config, $quiet=false,$id_objet='') {
     return $result;
 }
 
-
-
-?>
 

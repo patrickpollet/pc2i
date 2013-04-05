@@ -21,7 +21,7 @@ $err_c2i=optional_param("err_c2i",0,PARAM_ALPHA);
 $id_examen=optional_param('id_examen',0,PARAM_INT);
 $id_etab=optional_param('id_etab',0,PARAM_INT);
 
-//gros pb si la session a expiré plus rien d'ou le test...
+//gros pb si la session a expirï¿½ plus rien d'ou le test...
 /**
 print_r($_SESSION);
 print_r($USER);
@@ -44,4 +44,3 @@ if ($USER->type_plateforme) {
     header("location:$chemin/index.php");
 }
 
-?>

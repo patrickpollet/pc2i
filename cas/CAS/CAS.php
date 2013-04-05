@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// code récupéré de Moodle 2.3 
+// code rï¿½cupï¿½rï¿½ de Moodle 2.3 
 // hack by Patrick Pollet when using this under php 5.3 with strict error checking enabled
 // see https://issues.jasig.org/browse/PHPCAS-46
 // turn off E_STRICT in error reporting for all pages using this library
@@ -1587,4 +1587,4 @@ class phpCAS {
 /**
  * @example example_custom_urls.php
  */
-?>
+

@@ -395,5 +395,3 @@ class OdsExporter {
         return $this->filename_ods;
     }
 }
-
-?>

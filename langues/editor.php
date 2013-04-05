@@ -130,4 +130,4 @@ $string['vertical'] = 'Vertical';
 $string['width'] = 'Largeur';
 $string['wordclean'] = 'Nettoyer le code HTML de Word';
 $string['zip'] = 'Compresser';
-?>
+

@@ -8,7 +8,7 @@
 
 
 /**
- * gestion des rapports d'opérations
+ * gestion des rapports d'opï¿½rations
  * usage
  * voir
 
@@ -32,7 +32,7 @@ function table_en_texte($table) {
 }
 
 /**
- * affiche les résulats d'une opération
+ * affiche les rï¿½sulats d'une opï¿½ration
  * @param $resultats : tableau de chaine. [0] les Ok, [1] les echecs
  * TODO utiliser des div
  */
@@ -62,7 +62,7 @@ function print_details ($resultats){
 
 EOF;
 
-$tpl= new SubTemplatePower($details,T_BYVAR);    //créer une instance
+$tpl= new SubTemplatePower($details,T_BYVAR);    //crï¿½er une instance
 // a le meme chemin que le template porteur
 $tpl->prepare($CFG->chemin);
 
@@ -90,6 +90,3 @@ else if (@count($resultats[1])) {
  */
  return $tpl->getOutputContent();
 }
-
-
-?>

@@ -1,7 +1,7 @@
 <?php
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
-// gestion personnalisée des variables de session
+// gestion personnalisï¿½e des variables de session
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
 
@@ -19,22 +19,22 @@ function ouvrir_session(){
 	global $session_nom;
 	session_name($session_nom);
     // bizarrement avec CAS 1.1 l'include de enter.php dans caslogin donne une notice PHP
-    // de session déja ouverte alors qu'on ne l'avait pas avec CAS 0.4 ????
+    // de session dï¿½ja ouverte alors qu'on ne l'avait pas avec CAS 0.4 ????
 	return @session_start();
 }
 
-// détruire la session courante et ses variables
+// dï¿½truire la session courante et ses variables
 function detruire_session()
 {
 	global $session_nom;
 	session_name($session_nom);
-    //rev 978  fait expirer le cookie associé à la PF
-    // rev 981 pas de warning PHP si activé ...
+    //rev 978  fait expirer le cookie associï¿½ ï¿½ la PF
+    // rev 981 pas de warning PHP si activï¿½ ...
     @setcookie($session_nom, '', time() - 3600);
 	return session_destroy();
 }
 
-// définir une variable à conserver en session
+// dï¿½finir une variable ï¿½ conserver en session
 
 function var_register_session($var,$val)
 {
@@ -47,7 +47,7 @@ function var_register_session($var,$val)
 		$HTTP_SESSION_VARS[$var] = $val;
 	}
 	else{
-		//depreciée en php 5.3
+		//depreciï¿½e en php 5.3
 		session_register($var);
 	}
 }
@@ -63,7 +63,7 @@ function var_unregister_session($var)
 		unset( $HTTP_SESSION_VARS[$var]);
 	}
 	else{
-        //depreciée en php 5.3
+        //depreciï¿½e en php 5.3
 		session_unregister($var);
 	}
 }
@@ -77,7 +77,7 @@ function get_session_param() {
 
 /**
  * rev 981 si l'URL est dans une balise script src='javascript' il FAUt utiliser et & et pas &amp;
- * (cas de l'éditeur HTML en ligne)
+ * (cas de l'ï¿½diteur HTML en ligne)
  */
 function p_session($url,$js=0, $sep='&amp;'){
 	// retourne l'url $url avec un ajout de la variable de session si le serveur ne la transmet pas tout seul.
@@ -111,7 +111,7 @@ function p_session($url,$js=0, $sep='&amp;'){
 
 
 function form_session(&$tpl, $bloc="id_session"){
-// génére un input dans le formulaire contenant la variable de session à passer si le serveur ne le fait pas tout seul
+// gï¿½nï¿½re un input dans le formulaire contenant la variable de session ï¿½ passer si le serveur ne le fait pas tout seul
 
 	global $session_nom;
 	session_name($session_nom);
@@ -123,7 +123,7 @@ function form_session(&$tpl, $bloc="id_session"){
 }
 
 
-//PP vérifie qu'une variable est dans la session uniquement !
+//PP vï¿½rifie qu'une variable est dans la session uniquement !
 function var_get_session ($var) {
 	global $session_nom;
     session_name($session_nom);
@@ -136,7 +136,7 @@ function var_get_session ($var) {
 	return '';
 }
 
-//PP vérifie qu'une variable est dans la session uniquement !
+//PP vï¿½rifie qu'une variable est dans la session uniquement !
 function var_exist_session ($var) {
 	return var_get_session ($var);
 }
@@ -148,9 +148,9 @@ function var_exist_session ($var) {
 
 /**
  * V 1.5 ajout param die pour ajax (false)
- *  vérifie dans la session uniquement que l'utilisateur connecté à bien
+ *  vï¿½rifie dans la session uniquement que l'utilisateur connectï¿½ ï¿½ bien
  *  le type requis (P=utilisateur, E= etudiant
- * a appeler au début de chaque page et fichier inclus .
+ * a appeler au dï¿½but de chaque page et fichier inclus .
  */
 
 function require_login ($typeU='P',$die=true) {
@@ -180,14 +180,14 @@ function require_login ($typeU='P',$die=true) {
 
 
  	//definir le type d'utilisateur personnel
-    //definir les variables à enregistrer en session : identifiant d'utilisateur, son type P ou E pour personnel ou étudiant,
+    //definir les variables ï¿½ enregistrer en session : identifiant d'utilisateur, son type P ou E pour personnel ou ï¿½tudiant,
     // le type de plateforme en cours d'utilisation positionnement ou certification
 
 /**
  * garder en session les varaibles critiques
- * cette manip n'est faites qu'à la 1ere connexion dans entrer.php
- * ces valeurs sont ensuite relues dans c2i_params et transferées dans la globale $USER
- * a partir de la V 1.5 il ne doit plus y avoirt de variables globales créées automatiquement
+ * cette manip n'est faites qu'ï¿½ la 1ere connexion dans entrer.php
+ * ces valeurs sont ensuite relues dans c2i_params et transferï¿½es dans la globale $USER
+ * a partir de la V 1.5 il ne doit plus y avoirt de variables globales crï¿½ï¿½es automatiquement
  * soit avec registrer_globals ou par c2i_parms. On DOIT les ignorer si elles existent
  */
 
@@ -196,12 +196,12 @@ function register_user_data($compte,$verif,$typepf,$page_origine) {
     var_register_session("id_user", $compte->login);
     var_register_session("type_user", $compte->type_user);
     var_register_session("type_p", $typepf);
-    var_register_session("verif", $verif); //PP on se rappelle comment il est entré
+    var_register_session("verif", $verif); //PP on se rappelle comment il est entrï¿½
     var_register_session("adresse_ip", getremoteaddr());
     var_register_session("page_origine", $page_origine);
     var_register_session("auth", $compte->auth);
     var_register_session("derniere_connexion", $compte->ts_derniere_connexion);
-    //révision pour UVT
+    //rï¿½vision pour UVT
     var_register_session("email", $compte->email);
 
 }
@@ -222,11 +222,7 @@ function get_user_data () {
     $USER->auth=var_get_session("auth");
     $USER->page_origine=var_get_session("page_origine");
     $USER->adresse_ip=var_get_session("adresse_ip");
-    //révision pour UVT
+    //rï¿½vision pour UVT
     $USER->email=var_get_session("email");
 }
 
-
-
-
-?>

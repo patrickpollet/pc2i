@@ -405,5 +405,3 @@ EOS;
 //set_config('','examen_anonyme',"1","1");
 //set_config('','afficher_lien_mail_liste_qcm',"0","0");
 //set_config('','peut_dupliquer_question',0,1);
-
-?>

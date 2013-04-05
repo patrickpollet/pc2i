@@ -243,5 +243,3 @@ if ($CFG->utiliser_notions_parcours || $CFG->universite_serveur==1)
 //invalide_question(2489,1);
 //valide_question(998,1);
 
-
-?>

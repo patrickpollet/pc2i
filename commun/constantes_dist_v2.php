@@ -9,7 +9,7 @@
 
 /**
  * section 0
- * en cas d'erreurs bizarres (écrans blanc...)
+ * en cas d'erreurs bizarres (ï¿½crans blanc...)
  * decommentez les deux lignes ci dessous
  */
 
@@ -18,40 +18,40 @@
 
 
 /**
- * section 1 adresse de consultation de la version la plus récente
+ * section 1 adresse de consultation de la version la plus rÃ©cente
  */
 define ('ADRESSE_VERSION', 'http://c2i.education.fr/version.txt');
 
 /**
  * section 2
- * ces 7 parametres sont nécessaires au bon lancement de la plateforme
- * les autres options ont été déplacées dans la table c2iconfig
+ * ces 7 parametres sont nï¿½cessaires au bon lancement de la plateforme
+ * les autres options ont ï¿½tï¿½ dï¿½placï¿½es dans la table c2iconfig
  */
 
-$session_nom	="c2iv15";				// nom de la session à utiliser pour cette version IMPORTANT
+$session_nom	="c2iv2";				// nom de la session Ã  utiliser pour cette version IMPORTANT
 
-$adresse_serveur = "{serveur_bdd}"; 	// adresse du serveur sur lequel se trouve la Base de Données
-$ines_base		 = "{nom_bdd}"; 		// nom de la Base de Données dans mysql
-$base_utilisateur= "{user_bdd}"; 		// utilisateur ayant les droits d'administrer la Base de Données
+$adresse_serveur = "{serveur_bdd}"; 	// adresse du serveur sur lequel se trouve la Base de DonnÃ©es
+$ines_base		 = "{nom_bdd}"; 		// nom de la Base de DonnÃ©es dans mysql
+$base_utilisateur= "{user_bdd}"; 		// utilisateur ayant les droits d'administrer la Base de DonnÃ©es
 $base_mdp		 = "{pass_bdd}"; 		// mot-de-passe de cet utilisateur dans mysql
-$mysql_names     = '';                  //laisser vide pour le latin1 (changer en utf8 en version 1.6)
-
+$mysql_names     = 'UTF8';              //laisser vide pour le latin1 (changer en utf8 en version 1.6)
+$prefix          = "{prefix}";          //prefix des tables 
 
 $locale_url_univ = "{locale_url_univ}";  // adresse internet plateforme locale
 
-$chemin_ressources ="{chemin_ressources}";    // emplacement de la zone des ressources doit etre accessible en écriture à l'utilisateur 'apache
+$chemin_ressources ="{chemin_ressources}";    // emplacement de la zone des ressources doit etre accessible en ï¿½criture ï¿½ l'utilisateur 'apache
 
-$fichier_langue_defaut = "fr.php"; 	// fichier de langue par défaut
-$fichier_langue_plateforme= "plateforme.php"; // fichier spécifique au type de plateforme
+$fichier_langue_defaut = "fr_utf8.php"; 	// fichier de langue par dÃ©faut
+$fichier_langue_plateforme= "{c2i}_utf8.php"; // fichier spÃ©cifique au type de plateforme
 
 
 
 /**
  * section 4  service CAS
- * si les  variables cas_* sont définies ici, les authentifications
+ * si les  variables cas_* sont dï¿½finies ici, les authentifications
  * se feront par le CAS,
- * si la valeur cas_force est à 1 on passe obligatoirement par la CAS
- * sinon la plateforme affiche un écran de login 'mixte'
+ * si la valeur cas_force est ï¿½ 1 on passe obligatoirement par la CAS
+ * sinon la plateforme affiche un ï¿½cran de login 'mixte'
 */
 
 /*
@@ -63,7 +63,7 @@ $cas_service="cas";
 
 /**
  * section 5
- * exportation directe des résultats vers une base de données MySQL
+ * exportation directe des rï¿½sultats vers une base de donnï¿½es MySQL
  * export direct des resultats synthetiques vers une Bd MySQL externe
  *  cette zone DOIT etre adaptee a la base MySQL ET a la structure de la table visee
  *  une option supplementaire apparaitra dans la fiche de consultation d'un examen
@@ -79,10 +79,10 @@ $extDB['password']='';  // mot de passe
 
 /**
  * le CSV contient TOUJOURS les colonnes suivantes
- * Numéro étudiant;Login;Nom;Prenom;Examen;Score;A1;A2;B1;B2;B3;B4;B5;B6;B7;Date
+ * Numï¿½ro ï¿½tudiant;Login;Nom;Prenom;Examen;Score;A1;A2;B1;B2;B3;B4;B5;B6;B7;Date
  * 2517932;jkarnold;ARNOLD;Jean-Kristian;65.175;3.57%;0%;0%;0%;0%;0%;0%;16.67%;12.5%;0%;2007-06-02 00:00:00
  * mettre DANS cet ordre le nom des colonnes de la table correpondante dans le tableau $extDB ci-dessous
- * mettre à blanc pour ne pas écrire la colonne (ex $extDB[1]="" , on n'ecrira pas la colonne Nom)
+ * mettre ï¿½ blanc pour ne pas ï¿½crire la colonne (ex $extDB[1]="" , on n'ecrira pas la colonne Nom)
  * si on change la structure du CSV "synthetiques, ne pas oublier de MAJ ce tableau !!!
  * exemple avec la BD suivante :
 --
@@ -130,7 +130,7 @@ $extraColonnes=array(
 // ... liste a completer selon besoins
 "annee"=>"ANNEE",
 "type"=>"TYPEP",
-"ts_examen"=>"TSDEBUT" // ajouté rev 984 pour régler des pb de conversions de date entre le CSV et MySQL
+"ts_examen"=>"TSDEBUT" // ajoutï¿½ rev 984 pour rï¿½gler des pb de conversions de date entre le CSV et MySQL
 );
 
 //fin export BD externe

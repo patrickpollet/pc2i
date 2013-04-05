@@ -289,4 +289,3 @@ function editorshortcutshelpbutton() {
     return helpbutton('editorshortcuts', get_string('editorshortcutkeys'), 'moodle', true, false, '', true, $imagetext);
 }
 
-?>

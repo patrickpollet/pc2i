@@ -1914,5 +1914,3 @@ function evt_qcm_passage ($data) {
 
 
 //if(1) print_r(get_stats_examen(320,65));
-
-?>

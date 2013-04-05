@@ -73,4 +73,3 @@ function die_erreur ($msg) {
 }
 
 
-?>

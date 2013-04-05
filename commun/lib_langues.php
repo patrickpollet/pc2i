@@ -8,7 +8,7 @@
 
 /*
  * bibliotheque de manipulation de la traduction
- * pour l'instant les langues ne SONT pas gérées par établissement au niveau national
+ * pour l'instant les langues ne SONT pas gï¿½rï¿½es par ï¿½tablissement au niveau national
  * ou par composantes au niveau local
  * pour traduire la plateforme il faut :
  * -
@@ -19,14 +19,14 @@
 
 
 // charger les langues en premier
-// rev 1027 ne pas appeler erreur_fatale car rien n'est encore initialisé donc die() !!!!
+// rev 1027 ne pas appeler erreur_fatale car rien n'est encore initialisï¿½ donc die() !!!!
 
 *********************************************************************************/
 //fichier commun a toutes les plate-formes
 if (!isset($fichier_langue_defaut))
 	$fichier_langue_defaut="fr.php";
 
- // rev 978 fichier spécifique à la pf c2in1, c2i2mead ...
+ // rev 978 fichier spï¿½cifique ï¿½ la pf c2in1, c2i2mead ...
  if (!isset($fichier_langue_plateforme))
     $fichier_langue_plateforme="plateforme.php";
 
@@ -41,7 +41,7 @@ if (! is_readable($chemin."/langues/".$fichier_langue))
 
 include_once ($chemin."/langues/".$fichier_langue);
 
-// rev 1026 svn 970) fichier spécifique à chaque plateforme C2I
+// rev 1026 svn 970) fichier spï¿½cifique ï¿½ chaque plateforme C2I
 if (! is_readable($chemin.'/langues/'.$fichier_langue_plateforme))
     die  ("err_fichier_langues_inconnu ".$chemin.'/langues/'.$fichier_langue_plateforme);
 
@@ -129,7 +129,7 @@ function est_traduite($cle) {
 /**
  * rev 973  pour des clients REST qui causent utf8
  *  si la Bd est en utf8 ET que les fichiers de langues ne le sont pas encore
- * reglé en revision 978 si la BD est en utf8, les fichiers de langue le seront aussi
+ * reglï¿½ en revision 978 si la BD est en utf8, les fichiers de langue le seront aussi
  *
  */
 function retouche_utf8($string) {
@@ -148,7 +148,7 @@ function traduction($cle,$ucFirst=1) {
 			return retouche_utf8(ucFirstConditionnel($textes_langues[$cle],$ucFirst));
 		else {
 			$res=$textes_langues[$cle];
-			if (strstr($res,"%s")) {  //il y a bien des %s dans la clé de traduction (sinon renvoie 1)
+			if (strstr($res,"%s")) {  //il y a bien des %s dans la clï¿½ de traduction (sinon renvoie 1)
 				$args="";
 				for ($i=2; $i <func_num_args(); $i++) {
 					$args.= ",\"".func_get_arg($i)."\"";
@@ -161,7 +161,7 @@ function traduction($cle,$ucFirst=1) {
 				//print "$res\n";
 				return retouche_utf8(ucFirstConditionnel($res,$ucFirst));
 
-			} else {   //pas de %s tout mettre bout à bout
+			} else {   //pas de %s tout mettre bout ï¿½ bout
 				$ret=retouche_utf8(ucFirstConditionnel($textes_langues[$cle],$ucFirst));
 				for ($i=2; $i <func_num_args(); $i++) {
 					$ret.= " ".func_get_arg($i)." ";
@@ -171,20 +171,20 @@ function traduction($cle,$ucFirst=1) {
 		}
 	}
 
-	//attention lib_langues chargé vant lib_config
-	// donc notice possibles au 1er écran
+	//attention lib_langues chargï¿½ vant lib_config
+	// donc notice possibles au 1er ï¿½cran
 	if (!empty($CFG->debug_traduction)) {
 
             return "[[$cle]]";
-    }         // signale pb au développeur
+    }         // signale pb au dï¿½veloppeur
 	else {
 
-        return null; // signale pb au développeur en mode DEBUG_TEMPLATES géré par templatepower
+        return null; // signale pb au dï¿½veloppeur en mode DEBUG_TEMPLATES gï¿½rï¿½ par templatepower
     }
 }
 
 // compat Moodle
-//utilisé pour les fichiers de traduction de l'éditeur HTML
+//utilisï¿½ pour les fichiers de traduction de l'ï¿½diteur HTML
 function get_string ($str,$ou='',$a='') {
 	global $CFG,$string; //tres important de mettre $string en global pour le 2eme chargement !!!
 	//print ("$str $ou\n");
@@ -203,5 +203,3 @@ function get_string ($str,$ou='',$a='') {
     	echo get_string($str,$ou,$a);
     }
 
-
-?>

@@ -80,7 +80,7 @@ class trieuse {
 
 		        } else {
 			        $this->tpl->assignURL($colonne->nomBlock."url_".$colonne->id,
-				        concatAvecSeparateur($this->urlTri,"tri=$numero","&amp;")); // ascendant par défaut
+				        concatAvecSeparateur($this->urlTri,"tri=$numero","&amp;")); // ascendant par dï¿½faut
 			        $this->printIconesTri($colonne,0);
 		        }
         }
@@ -116,7 +116,3 @@ class trieuse {
     }
 
 }
-
-
-
-?>

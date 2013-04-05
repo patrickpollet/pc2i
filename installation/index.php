@@ -12,7 +12,8 @@
 
 $chemin = '..';
 $chemin_commun = $chemin."/commun";
-$fichier_langue_defaut="fr.php";
+$fichier_langue_defaut="fr_utf8.php";
+$fichier_langue_plateforme="c2i1_utf8.php";
 
 require_once($chemin_commun."/weblib.php");
 require_once ($chemin_commun."/fonctions_session.php");
@@ -25,19 +26,26 @@ $serveur_bdd=optional_param("serveur_bdd","",PARAM_RAW);
 $nom_bdd=optional_param("nom_bdd","",PARAM_RAW);
 $pass_bdd=optional_param("pass_bdd","",PARAM_RAW);
 $user_bdd=optional_param("user_bdd","",PARAM_RAW);
-$wwwroot=optional_param("wwwroot","http://localhost/c2i/",PARAM_RAW);
 
+$tester=optional_param("tester","",PARAM_INT);
+
+
+$c2i=optional_param("c2i","c2i1",PARAM_RAW);
+$prefix=optional_param("prefix",$c2i,PARAM_RAW);
+$wwwroot=optional_param("wwwroot","http://localhost/{$c2i}/",PARAM_RAW);
 
 $locale_url_univ=$wwwroot;
 
 require_once("mini_config.php");
+require_once ($chemin_commun."/lib_sync.php");
+
 $dataroot=optional_param("dataroot",$CFG->chemin_ressources,PARAM_RAW);
 
 require_once("lib_install.php");
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 //mise en page v1.6 sans tables
-$tpl = new C2IPrincipale($CFG->chemin."/templates2/popup.tpl"); //créer une instance
+$tpl = new C2IPrincipale($CFG->chemin."/templates2/popup.tpl"); //crï¿½er une instance
 
 //ajax
 if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
@@ -46,7 +54,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
 	test_config($dataroot,$chemin_commun);
 	test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd);
 
-	$modele="constantes_dist_v15.php";
+	$modele="constantes_dist_v2.php";
 
 	$tmptpl= new subTemplatePower($chemin_commun."/".$modele);
 	$tmptpl->prepare($chemin);
@@ -58,18 +66,20 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
 	$tmptpl->assign("pass_bdd",$pass_bdd);
 	$tmptpl->assign("chemin_ressources",$dataroot);
     $tmptpl->assign("locale_url_univ",$wwwroot);
+    $tmptpl->assign("prefix",$prefix);
+    $tmptpl->assign("c2i",$c2i);
 
 
 	$cible=realpath($chemin_commun."/constantes.php");
 	//$cible=realpath("/tmp/constantes.php");
-	intituleTests("Essai de création du fichier $cible " );
+	intituleTests("Essai de crÃ©ation du fichier $cible " );
 
 	$fp = @fopen($cible, "w");
 	if ($fp) {
 		fwrite ($fp,$tmptpl->getOutputContent());
 		fclose ($fp);
 		succesTests( "");
-	}else echecTests("erreur écriture ");
+	}else echecTests("erreur Ã©criture ");
 
 	die_ok(true);
 }
@@ -77,14 +87,12 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
 
 
 $fiche=<<<EOT
-<!--
- <div id="titre">{titre_popup} </div>
--->
+
 <div class="information_gauche " id="tests" >
 <fieldset>
 <legend>{tests_parametres}</legend>
 
-Veuillez régler les problèmes signalés en rouge avant de continuer l installation
+Veuillez rÃ©gler les problÃ¨mes signalÃ©s en rouge avant de continuer l'installation
 {contenu_direct}
 
 </fieldset>
@@ -114,6 +122,11 @@ Veuillez régler les problèmes signalés en rouge avant de continuer l installatio
 <input type="password" name="pass_bdd"  id="pass_bdd" value="{pass_bdd}" size="40" class="saisie required" title="js_valeur_manquante"/>
 </p>
 
+<p class="double">
+<label for="prefix">{form_prefix}<span class="info"></span></label>
+<input type="text" name="prefix"  id="prefix" value="{prefix}" size="40" class="saisie required" title="js_valeur_manquante"/>
+</p>
+
 </fieldset>
 
 
@@ -130,7 +143,13 @@ Veuillez régler les problèmes signalés en rouge avant de continuer l installatio
 <input type="text" name="dataroot" id="dataroot" value="{dataroot}" size="40" class="saisie required" title="{js_valeur_chemin_incorrecte}"/>
 </p>
 
+<p class="double">
+<label for="c2i">{form_type_c2i}</label>
+{c2i}
+</p>
+
 </fieldset>
+
 
 
 
@@ -140,13 +159,16 @@ Veuillez régler les problèmes signalés en rouge avant de continuer l installatio
 {bouton_tester}  &nbsp; {bouton_continuer}
 </p>
 
-
+<input type='hidden' name='tester' value='0'/>
 </form>
 
 EOT;
 
+$resultats=array();
+$refs=c2i_get_referentiels($resultats);
 
-
+//print_r ($refs);
+//die();
 
 $options=array (
 	"corps_byvar"=>$fiche
@@ -165,7 +187,40 @@ $tpl->traduit ("titre_popup","installation1");
 
 
 ob_start();
+if (!$tester) {
 	test_config($dataroot,$chemin_commun);
+}else {
+    test_config($dataroot,$chemin_commun);
+    test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd);
+    
+    $modele="constantes_dist_v2.php";
+    
+    $tmptpl= new subTemplatePower($chemin_commun."/".$modele);
+    $tmptpl->prepare($chemin);
+    
+    //$tmptpl->assign("session_nom","c2iv15");
+    $tmptpl->assign("serveur_bdd",$serveur_bdd);
+    $tmptpl->assign("nom_bdd",$nom_bdd);
+    $tmptpl->assign("user_bdd",$user_bdd);
+    $tmptpl->assign("pass_bdd",$pass_bdd);
+    $tmptpl->assign("chemin_ressources",$dataroot);
+    $tmptpl->assign("locale_url_univ",$wwwroot);
+    $tmptpl->assign("prefix",$prefix);
+    $tmptpl->assign("c2i",$c2i);
+    
+    
+    $cible=realpath($chemin_commun."/constantes.php");
+    //$cible=realpath("/tmp/constantes.php");
+    intituleTests("Essai de crÃ©ation du fichier $cible " );
+    
+    $fp = @fopen($cible, "w");
+    if ($fp) {
+        fwrite ($fp,$tmptpl->getOutputContent());
+        fclose ($fp);
+        succesTests( "");
+    }else echecTests("erreur Ã©criture ");
+    
+}
 $content = ob_get_contents();
 ob_end_clean();
 $tpl->assign("_ROOT.contenu_direct",$content);
@@ -177,10 +232,18 @@ $tpl->assign("user_bdd",$user_bdd);
 $tpl->assign("pass_bdd",$pass_bdd);
 $tpl->assign("wwwroot",$wwwroot);
 $tpl->assign("dataroot",$dataroot);
+$tpl->assign("prefix",$prefix);
+$tpl->assign("c2i",$c2i);
 
-print_bouton($tpl,"bouton_tester","tester","javascript:majDiv(\"tests\",\"index.php\",false,\"monform\");","","button" );
+//print_bouton($tpl,"bouton_tester","tester","javascript:majDiv(\"tests\",\"index.php\",false,\"monform\");","","button" );
+
+print_bouton($tpl,"bouton_tester","tester","javascript:document.forms[0].tester.value=1;document.forms[0].action=\"index.php\";document.forms[0].onsubmit();","","submit" );
 print_bouton($tpl,"bouton_continuer","continuer","","","submit" );
 
+
+print_select_from_table($tpl, 'c2i', $refs, 'c2i','saisie', '', 'c2i','c2i', false, $c2i);
+
+$CFG->c2i=$c2i;
 
 $tpl->printToScreen(); //affichage
 ?>

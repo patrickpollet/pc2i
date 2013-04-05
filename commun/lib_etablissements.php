@@ -270,6 +270,3 @@ function evt_etablissement_suppression ($data) {
     dump_event(__FUNCTION__,$data);
     return true;
 }
-
-
-?>

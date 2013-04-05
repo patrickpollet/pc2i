@@ -7,7 +7,7 @@
  */
 
 /*
- * bibliotheque de manipulations des l'entités utilisateurs, inscrits et etablissement
+ * bibliotheque de manipulations des l'entitï¿½s utilisateurs, inscrits et etablissement
  */
 
 /**
@@ -24,13 +24,13 @@
   /**
  * bug decouvert le 16/05/2011 la mise a jour des tables inscrits et utilisateuirs DOIT
  * se faire dans lib_auth.php  et pas ici car lorsque l'on inclus lib_access les droits
- * ne sont pas encore connu ... (c'est elle qui les lit !!!) donc is_admùin() renvoie FAUX
+ * ne sont pas encore connu ... (c'est elle qui les lit !!!) donc is_admï¿½in() renvoie FAUX
  */
   // NE RIEN FAIRE ICI
  }
 
 
-// context definitions  non utilisées en V 1.5
+// context definitions  non utilisï¿½es en V 1.5
 define('CONTEXT_SITE', 10);
 define('CONTEXT_ETABLISSEMENT', 20);
 define('CONTEXT_EXAMEN', 30);
@@ -61,20 +61,20 @@ function capacite_requise( $capa,$context=false, $id=false) {
 
 
 /**
- * teste une capacité dans un contexte
- * pour l'instant le contexte est un établissement
- * TODO gerer les composantes par héritage
+ * teste une capacitï¿½ dans un contexte
+ * pour l'instant le contexte est un ï¿½tablissement
+ * TODO gerer les composantes par hï¿½ritage
  */
 
 function a_capacite( $capa,$context=false, $id=false) {
 	global $USER;
 	if (!$id) $id=$USER->id_user;
-	if (!$id)  return false; //pas logé rien
+	if (!$id)  return false; //pas logï¿½ rien
 
 	if (! $context) $context=$USER->id_etab_perso;
 	if (! $context)  return false;
     if (is_admin($id,$context)) return true;  //pour cet etablissement et ses composantes
-    if ($context !=$USER->id_etab_perso) return false;  // pas d'héritage encore sur les autres droits
+    if ($context !=$USER->id_etab_perso) return false;  // pas d'hï¿½ritage encore sur les autres droits
 	if (isset($USER->droits['row_droits']->$capa))
 		return $USER->droits['row_droits']->$capa;
 	else erreur_fatale ("DEV:err_droit_inconnu",$capa)	;
@@ -84,20 +84,20 @@ function a_capacite( $capa,$context=false, $id=false) {
 
 
 /**remplace l'ancien include/commun/droits.php
- * a lire une fois a chaque entrée sur une page
+ * a lire une fois a chaque entrï¿½e sur une page
  *
  */
 
 function lecture_droits ($context=false) {
 	global $USER,$CFG;
-	// global $row_droits,$row_admin; //compatibilté V <1.41 en attendant gros ménage des tests des droits dans les pages FINI le 20/04/2009 svn 714
+	// global $row_droits,$row_admin; //compatibiltï¿½ V <1.41 en attendant gros mï¿½nage des tests des droits dans les pages FINI le 20/04/2009 svn 714
 
 	$row_droits= new StdClass();
 	$row_admin= new StdClass();
 
 	if (!empty($USER->id_user)) {
 
-		// vérification des droits
+		// vï¿½rification des droits
 		$sql = "select est_superadmin, est_admin_univ, limite_positionnement from {$CFG->prefix}utilisateurs where login='".addslashes($USER->id_user)."'";
 
 		if ($res= get_record_sql($sql,false)) $row_admin=$res;
@@ -119,24 +119,24 @@ function lecture_droits ($context=false) {
 
 }
 
-//vérifie qu'un droit (ex. "ql","em")  est bien dans la tableau global des
+//vï¿½rifie qu'un droit (ex. "ql","em")  est bien dans la tableau global des
 // droit de l'utilisateur courant  version 1.4
 
 //define ('DEBUG_DROITS',1);
 function teste_droit( $droit) {
-    global $ide,$idexe; //l'etablissement du "machin" concerné" relu par required_param (pas terrible !)
+    global $ide,$idexe; //l'etablissement du "machin" concernï¿½" relu par required_param (pas terrible !)
     global $USER,$CFG;
 
-    //manipulation des questions : $idexe a priorité sur $ide !
-    //$ide n'est pas toujours renseigné !
+    //manipulation des questions : $idexe a prioritï¿½ sur $ide !
+    //$ide n'est pas toujours renseignï¿½ !
     if (!isset($ide))
         $ide=$USER->id_etab_perso;
 
-    //etablissement visé peut etre different (exemple une question a valider
+    //etablissement visï¿½ peut etre different (exemple une question a valider
     // il FAUT corriger ca ....)
     if (isset($idexe)) $etab=$idexe;
     else $etab=$ide;
-    if (!isset($USER->droits)) return false; // un étudiant ...
+    if (!isset($USER->droits)) return false; // un ï¿½tudiant ...
 
     $etab_perso=$USER->id_etab_perso;
     $row_droits=$USER->droits['row_droits'];
@@ -148,7 +148,7 @@ function teste_droit( $droit) {
             usr=$USER->id_user  v=$USER->verif
             ESA: {$row_admin->est_superadmin}
             ELA: {$row_admin->est_admin_univ}
-            etab.  visé $ide  ou $idexe = $etab
+            etab.  visï¿½ $ide  ou $idexe = $etab
             etab. perso $USER->id_etab_perso
             droit requis $droit et a {$row_droits->$droit}
 EOR;
@@ -163,8 +163,8 @@ EOR;
    return (($row_droits->$droit==1) && ($etab==$etab_perso)) || ($droit=="ql" || $droit=="el");
 
 }
-// vérifie droit or die !
-// à inserer au début de chaque page et fichier inclus
+// vï¿½rifie droit or die !
+// ï¿½ inserer au dï¿½but de chaque page et fichier inclus
 function v_d_o_d ($droit) {
     global $USER;
     if (! teste_droit($droit)) {
@@ -175,10 +175,10 @@ function v_d_o_d ($droit) {
 }
 
 /**
- * renvoie les méthodes d'authentification dans un tableau d'objets
- * prêt à l'emploi dans un select
- * en ajouter si nécessaire et adapter la fonction lib_auth.php:authentifie_compte($compte,$passe)
- * rev 936 on teste si LDAP est pertinent pour cet établissement
+ * renvoie les mï¿½thodes d'authentification dans un tableau d'objets
+ * prï¿½t ï¿½ l'emploi dans un select
+ * en ajouter si nï¿½cessaire et adapter la fonction lib_auth.php:authentifie_compte($compte,$passe)
+ * rev 936 on teste si LDAP est pertinent pour cet ï¿½tablissement
  * rev 937 ajout option webservices si compte de type "personnel"
  */
 function get_auth_methodes ($ide=false,$estPersonnel=false) {
@@ -195,7 +195,7 @@ function get_auth_methodes ($ide=false,$estPersonnel=false) {
 
 
 /**
- * rev 1022 type d'annauires LDAP supporté
+ * rev 1022 type d'annauires LDAP supportï¿½
  */
 function get_ldap_annuaires() {
        $ret= array();
@@ -252,7 +252,7 @@ function get_candidat ($login,$die=1) {
 
 
 /**
- * rev 944  simplificationb et appel par le WS (ex profs ayant passés un examen possible)
+ * rev 944  simplificationb et appel par le WS (ex profs ayant passï¿½s un examen possible)
  * trouve un compte en BD et ajoute lui son type (dans lattente d'une meilleure gestion des droits)')
  */
 function get_compte_by($valeur,$colonne,$die=0) {
@@ -379,7 +379,7 @@ function cree_candidat ($ligne, $ide=false) {
     if (empty($ligne->login)) return false;
     if (!$ide) $ide=$USER->id_etab_perso;
     $ligne->ts_datecreation=$ligne->ts_datemodification=time();
-    //rev 921 valeurs par défaut pour appel par le web service
+    //rev 921 valeurs par dï¿½faut pour appel par le web service
     if (empty($ligne->etablissement))$ligne->etablissement=$ide;
     //rev 948
     if (!empty($ligne->passwordmd5)) {
@@ -394,8 +394,8 @@ function cree_candidat ($ligne, $ide=false) {
 
     espion3("ajout","etudiant", $ligne->login,$ligne); //rev 883
 
-    //attention la table c2iinscrits n'a pas de numéro automatique
-    //donc si on demande returnid (3eme paramétre) ca renvoie 0 false !!!!
+    //attention la table c2iinscrits n'a pas de numï¿½ro automatique
+    //donc si on demande returnid (3eme paramï¿½tre) ca renvoie 0 false !!!!
     return insert_record("inscrits",$ligne,false,'',false );// pas e fatale si echec
 
 
@@ -417,17 +417,17 @@ function supprime_candidat ($supp_id) {
 
 	  if (est_inscrit_examen(false,false,$supp_id)==0  || is_utilisateur_anonyme($supp_id)) {
             //ses notes
-            //TODO selon un CFG garder ses résultats pour les stats examens mais pas son historique !
+            //TODO selon un CFG garder ses rï¿½sultats pour les stats examens mais pas son historique !
             //BIZARRE CE CODE si il n'est inscrit a rien
             // comment peut-on retrouver ces examens pour les purger ?????
             // car on a pu le desinscrire "a la main" ou c'est un anonyme que l'on peut supprimer'
             $exams=get_examens_inscrits($supp_id,'id');
-            require_once($CFG->chemin_commun."/lib_resultats.php");  // non chargée par c2i_params
+            require_once($CFG->chemin_commun."/lib_resultats.php");  // non chargï¿½e par c2i_params
 			foreach($exams as $exam) {
 			   purge_resultats_inscrit($exam->id_examen,$exam->id_etab,$supp_id,$avecHistorique=true);
 			}
             //ses parcours
-			if ($CFG->utiliser_notions_parcours) { // rev 984 attention si lib_nions a été chargée
+			if ($CFG->utiliser_notions_parcours) { // rev 984 attention si lib_nions a ï¿½tï¿½ chargï¿½e
 				$parcs=get_parcours_utilisateur($supp_id);
 				foreach($parcs as $p)
 				supprime_parcours($p->id_parcours);
@@ -450,12 +450,12 @@ function supprime_utilisateur ($supp_id) {
 
 		//rev 948 si un "prof" peut passer un QCM
 		$exams=get_examens_inscrits($supp_id,'id');
-		require_once($CFG->chemin_commun."/lib_resultats.php");  // non chargée par c2i_params
+		require_once($CFG->chemin_commun."/lib_resultats.php");  // non chargï¿½e par c2i_params
 		foreach($exams as $exam) {
 			purge_resultats_inscrit($exam->id_examen,$exam->id_etab,$supp_id,$avecHistorique=true);
 		}
 		//ses parcours
-		if ($CFG->utiliser_notions_parcours) { // rev 984 attention si lib_nions a été chargée
+		if ($CFG->utiliser_notions_parcours) { // rev 984 attention si lib_nions a ï¿½tï¿½ chargï¿½e
 			$parcs=get_parcours_utilisateur($supp_id);
 			foreach($parcs as $p)
 			supprime_parcours($p->id_parcours);
@@ -471,7 +471,7 @@ function supprime_utilisateur ($supp_id) {
 }
 
 /**
- * ajouté revision 962
+ * ajoutï¿½ revision 962
  * supprime un utilisateur d'un profil
  */
 
@@ -488,7 +488,7 @@ function cree_utilisateur ($ligne, $ide=false) {
     if (empty($ligne->login)) return false;
     if (!$ide) $ide=$USER->id_etab_perso;
     $ligne->ts_datecreation=$ligne->ts_datemodification=time();
-      //rev 921 valeurs par défaut pour appel par le web service
+      //rev 921 valeurs par dï¿½faut pour appel par le web service
     if (empty($ligne->etablissement))$ligne->etablissement=$ide;
 	if (empty($ligne->password)){
 	 	$ligne->password=mot_de_passe_a($CFG->longueur_mot_de_passe_aleatoire);
@@ -514,8 +514,8 @@ function update_utilisateur ($ligne,$espion=true) {
 
 /**
  * @access private
- * retourne la concaténation du nom et du prénom de la personne ayant pour login $login
- * selon les régles de configuration
+ * retourne la concatï¿½nation du nom et du prï¿½nom de la personne ayant pour login $login
+ * selon les rï¿½gles de configuration
  */
 
 function _regle_nom_prenom ($nom,$prenom){
@@ -535,14 +535,14 @@ if ( $CFG->regle_nom_en_majuscule)
 }
 
 /**
- * essaie d'appliquer la régle nom prénom a un nom complet
- * d'auteur tel qu'écrit dans les tables questions et examens
+ * essaie d'appliquer la rï¿½gle nom prï¿½nom a un nom complet
+ * d'auteur tel qu'ï¿½crit dans les tables questions et examens
  */
 
 function applique_regle_nom_prenom($auteur){ // rev 841
 
     $tmp=explode(" ",$auteur);
-    if (count($tmp) !=2 ) return $auteur; //raté ou nom composé ex Bruno Le Berre
+    if (count($tmp) !=2 ) return $auteur; //ratï¿½ ou nom composï¿½ ex Bruno Le Berre
 
 
     return _regle_nom_prenom ($tmp[0],$tmp[1]);
@@ -550,8 +550,8 @@ function applique_regle_nom_prenom($auteur){ // rev 841
 }
 
 /**
- * le parametre connexion est resté pour la comat V 1.4
- * il n'est pas utilisé'
+ * le parametre connexion est restï¿½ pour la comat V 1.4
+ * il n'est pas utilisï¿½'
  */
 function nom_user($login,$die=1){
 	global $CFG;
@@ -569,7 +569,7 @@ function nom_inscrit($login,$die=1){
 }
 
 /**
- * tant que les deux tables c2iinscrits et céiutilisataurs n'ont pas été fusionnées
+ * tant que les deux tables c2iinscrits et cï¿½iutilisataurs n'ont pas ï¿½tï¿½ fusionnï¿½es
  * passer par ici
  * TODo passer par get_xxxx et virer le global connexion
  */
@@ -595,7 +595,7 @@ function mel_inscrit($login,$die=1){
 }
 
 /**
- * tant que les deux tables c2iinscrits et c2iutilisateurs n'ont pas été fusionnées
+ * tant que les deux tables c2iinscrits et c2iutilisateurs n'ont pas ï¿½tï¿½ fusionnï¿½es
  * passer par ici
  *  * TODo passer par get_xxxx et virer le global connexion
  */
@@ -656,7 +656,7 @@ EOS;
 
 
 function supprime_profil ($supp_id) {
-	 // double vérification que le profil n'est pas utilisé
+	 // double vï¿½rification que le profil n'est pas utilisï¿½
         if (!get_utilisateurs_avec_profil($supp_id)) {
             	// suppression du profil
             	delete_records("profils","id_profil=" . (int)$supp_id,true,"err_suppression_profil",$supp_id);
@@ -667,8 +667,8 @@ function supprime_profil ($supp_id) {
 
 /**
  * renvoie un soustemplate pr pour u n assignInclude()
- * est appelé par la fiche d'un profil et pour rappeler les profils connus (ajout personnel)'
- * completer sin on ajoute des capacités a un profil
+ * est appelï¿½ par la fiche d'un profil et pour rappeler les profils connus (ajout personnel)'
+ * completer sin on ajoute des capacitï¿½s a un profil
  */
 function profil_en_table() {
 	$res=<<<EOF
@@ -838,7 +838,7 @@ function profil_en_inputs() {
             <td><table class="sansbordure">
               <tr>
                 <td><input type="checkbox" value="1" name="configurer" {ch_configurer}/>{config}</td></tr><tr>
-                <td><input type="checkbox" value="1" name="acces_tracking" {ch_acces_tracking}/>{track} (nécessite que configuration soit actif)</td></tr><tr>
+                <td><input type="checkbox" value="1" name="acces_tracking" {ch_acces_tracking}/>{track} (nï¿½cessite que configuration soit actif)</td></tr><tr>
                 <td><input type="checkbox" value="1" name="resultats_afficher" {ch_resultats_afficher}/>{result}</td></tr>
             </table>            </td>
           </tr>
@@ -849,11 +849,11 @@ EOF;
 
 
 /**
- * coche ou non les cases du profil en table renvoyé ci-dessus
- * completer sin on ajoute des capacités a un profil
+ * coche ou non les cases du profil en table renvoyï¿½ ci-dessus
+ * completer sin on ajoute des capacitï¿½s a un profil
  */
 function garni_table_profil($tpl,$ligne) {
-	//si on avait le bonne idée de mettre les meme noms aux balises
+	//si on avait le bonne idï¿½e de mettre les meme noms aux balises
 // alors un tpl->assignObject($ligne) devrait faire !  FAIT rev 962
 /***
 $tpl->assign("ch_a_q", $ligne->q_ajouter);
@@ -901,7 +901,7 @@ $tpl->assignObjet($ligne);
 
 
 /** recherche du numero anonyme suivant
- * donc ne pas appeler deux fois pour un même compte !
+ * donc ne pas appeler deux fois pour un mï¿½me compte !
  */
 function no_anonyme(){
 	global $CFG;
@@ -915,9 +915,9 @@ function no_anonyme(){
 
 
 /**
- * cree un compte anonyme dans l'établissement $ide
- * @param $ide l'établissement de ratachment du compte (normalement celui de l'examen associé)
- * @param $email adresse de courriel éventuelle
+ * cree un compte anonyme dans l'ï¿½tablissement $ide
+ * @param $ide l'ï¿½tablissement de ratachment du compte (normalement celui de l'examen associï¿½)
+ * @param $email adresse de courriel ï¿½ventuelle
  * TODO verifier qu'on ne peut pas se connecter avec ce compte .... '
  *
  **/
@@ -944,7 +944,7 @@ function cree_compte_anonyme($ide,$email='') {
 
 ///////////////////////////////////////////////////////////////// debut V 1.4 a revoir
 
-//revision 962 simplification des éditions des profils
+//revision 962 simplification des ï¿½ditions des profils
 
 
 class profil {
@@ -1054,4 +1054,3 @@ function evt_profil_suppression ($data) {
 }
 
 
-?>

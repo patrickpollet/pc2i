@@ -48,7 +48,3 @@ passe: [password]";
 
 //fin
 
-
-
-
-?>

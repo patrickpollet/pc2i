@@ -1494,6 +1494,3 @@ function enregistrement_resultats_etudiant($login,$idq,$ide,$reponses_etudiant,$
     set_ok (traduction("info_score_importe",false,$score,$login,$ide,$idq),$resultats);
 }
 
-
-
-?>

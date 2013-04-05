@@ -142,7 +142,7 @@ private $finished = false;
 		$this->backgroundBar = sprintf($this->stepElement,$backgroundLength);
 
 		//stop buffering
-    	@ob_end_flush();  // PP enelve une notice au départ
+    	@ob_end_flush();  // PP enelve une notice au dï¿½part
     	//start buffering
     	ob_start();
 
@@ -205,4 +205,3 @@ private $finished = false;
 		}
 	}
 }
-?>

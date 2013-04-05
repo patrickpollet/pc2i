@@ -59,6 +59,13 @@ function test_config($dataroot,$chemin_commun) {
     } else {
         echecTests();
     }
+    
+    intituleTests("Test de la librairie curl");
+    if(extension_loaded('curl')) {
+        succesTests();
+    } else {
+        echecTests();
+    }
 
 
     intituleTests("Test de la librairie zlib");
@@ -175,8 +182,10 @@ function test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd) {
 
 
         }
+    }else {
+        echecTests("Paramàtres d'acès à la base de données incomplets");
     }
 
+    
 
 }
-?>

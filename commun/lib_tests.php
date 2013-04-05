@@ -78,7 +78,3 @@ function cree_candidat_test ($login,$etab=false,$numetud,$nom,$prenom,$mail=fals
 }
 
 
-
-
-
-?>
