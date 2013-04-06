@@ -882,9 +882,13 @@ function c2i_get_referentiels (&$resultats) {
         if (is_array($ressources)){
             $ret=array();
             set_ok (traduction("nb_items_recus",false,count($ressources)),$resultats);
-            foreach ($ressources as $ressource) {
+            foreach ($ressources as $num=>$ressource) {
                 $ressource->c2i=strtolower($ressource->c2i);
+                if ($ressource->c2i==='c2i2e')
+                    unset($ressources[$num]);
              }
+            // ksort($ressources);
+            //print_r($ressources); die();
              return $ressources;
         } else {
             //message d'erreur renvoy� par CURL ( not found) ou par le WS

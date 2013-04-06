@@ -29,8 +29,7 @@ $user_bdd=optional_param("user_bdd","",PARAM_RAW);
 
 $tester=optional_param("tester","",PARAM_INT);
 
-
-$c2i=optional_param("c2i","c2i1",PARAM_RAW);
+$c2i=optional_param("c2i","c2i",PARAM_RAW);
 $prefix=optional_param("prefix",$c2i,PARAM_RAW);
 $wwwroot=optional_param("wwwroot","http://localhost/{$c2i}/",PARAM_RAW);
 
@@ -46,43 +45,6 @@ require_once("lib_install.php");
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 //mise en page v1.6 sans tables
 $tpl = new C2IPrincipale($CFG->chemin."/templates2/popup.tpl"); //cr�er une instance
-
-//ajax
-if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
-	// un petit peu d'ajax
-	require_once($CFG->chemin_commun."/lib_ajax.php");   //bonnes entetes avec encodage iso ...
-	test_config($dataroot,$chemin_commun);
-	test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd);
-
-	$modele="constantes_dist_v2.php";
-
-	$tmptpl= new subTemplatePower($chemin_commun."/".$modele);
-	$tmptpl->prepare($chemin);
-
-	//$tmptpl->assign("session_nom","c2iv15");
-	$tmptpl->assign("serveur_bdd",$serveur_bdd);
-	$tmptpl->assign("nom_bdd",$nom_bdd);
-	$tmptpl->assign("user_bdd",$user_bdd);
-	$tmptpl->assign("pass_bdd",$pass_bdd);
-	$tmptpl->assign("chemin_ressources",$dataroot);
-    $tmptpl->assign("locale_url_univ",$wwwroot);
-    $tmptpl->assign("prefix",$prefix);
-    $tmptpl->assign("c2i",$c2i);
-
-
-	$cible=realpath($chemin_commun."/constantes.php");
-	//$cible=realpath("/tmp/constantes.php");
-	intituleTests("Essai de création du fichier $cible " );
-
-	$fp = @fopen($cible, "w");
-	if ($fp) {
-		fwrite ($fp,$tmptpl->getOutputContent());
-		fclose ($fp);
-		succesTests( "");
-	}else echecTests("erreur écriture ");
-
-	die_ok(true);
-}
 
 
 
@@ -104,27 +66,27 @@ Veuillez régler les problèmes signalés en rouge avant de continuer l'installa
 
 <label for="serveur_bdd">{form_serveur_bdd}<span class="info">{ex_form_serveur_bdd}</span></label>
 
-<input type="text" name="serveur_bdd" id="serveur_bdd" value="{serveur_bdd}" size="40" class="saisie required" title="js_valeur_manquante"/>
+<input type="text" name="serveur_bdd" id="serveur_bdd" value="{serveur_bdd}" size="40" class="saisie required" title="{js_valeur_manquante}"/>
 </p>
 
 <p class="double">
 <label for="nom_bdd">{form_nom_bdd}<span class="info"></span></label>
-<input type="text" name="nom_bdd"  id="nom_bdd" value="{nom_bdd}" size="40" class="saisie required" title="js_valeur_manquante"/>
+<input type="text" name="nom_bdd"  id="nom_bdd" value="{nom_bdd}" size="40" class="saisie required" title="{js_valeur_manquante}"/>
 </p>
 
 <p class="double">
 <label for="user_bdd">{form_user_bdd}<span class="info"></span></label>
-<input type="text" name="user_bdd"  id="user_bdd" value="{user_bdd}" size="40" class="saisie required" title="js_valeur_manquante"/>
+<input type="text" name="user_bdd"  id="user_bdd" value="{user_bdd}" size="40" class="saisie required" title="{js_valeur_manquante}"/>
 </p>
 
 <p class="double">
 <label for="pass_bdd">{form_pass_bdd}<span class="info"></span></label>
-<input type="password" name="pass_bdd"  id="pass_bdd" value="{pass_bdd}" size="40" class="saisie required" title="js_valeur_manquante"/>
+<input type="password" name="pass_bdd"  id="pass_bdd" value="{pass_bdd}" size="40" class="saisie required" title="{js_valeur_manquante}"/>
 </p>
 
 <p class="double">
 <label for="prefix">{form_prefix}<span class="info"></span></label>
-<input type="text" name="prefix"  id="prefix" value="{prefix}" size="40" class="saisie required" title="js_valeur_manquante"/>
+<input type="text" name="prefix"  id="prefix" value="{prefix}" size="40" class="saisie required" title="{js_valeur_manquante}"/>
 </p>
 
 </fieldset>
@@ -159,7 +121,7 @@ Veuillez régler les problèmes signalés en rouge avant de continuer l'installa
 {bouton_tester}  &nbsp; {bouton_continuer}
 </p>
 
-<input type='hidden' name='tester' value='0'/>
+<input type='hidden' name='tester' value='1'/>
 </form>
 
 EOT;
@@ -188,10 +150,8 @@ if (!$tester) {
 	test_config($dataroot,$chemin_commun);
 }else {
     test_config($dataroot,$chemin_commun);
-    test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd);
     
-    $modele="constantes_dist_v2.php";
-    
+    $modele="constantes_dist_v2.php";   
     $tmptpl= new subTemplatePower($chemin_commun."/".$modele);
     $tmptpl->prepare($chemin);
     
@@ -217,6 +177,8 @@ if (!$tester) {
         succesTests( "");
     }else echecTests("erreur écriture ");
     
+    test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd);
+    
 }
 $content = ob_get_contents();
 ob_end_clean();
@@ -234,13 +196,14 @@ $tpl->assign("c2i",$c2i);
 
 //print_bouton($tpl,"bouton_tester","tester","javascript:majDiv(\"tests\",\"index.php\",false,\"monform\");","","button" );
 
-print_bouton($tpl,"bouton_tester","tester","javascript:document.forms[0].tester.value=1;document.forms[0].action=\"index.php\";document.forms[0].onsubmit();","","submit" );
+print_bouton($tpl,"bouton_tester","tester","javascript:document.forms[0].action=\"index.php\";","","submit" );
+
 print_bouton($tpl,"bouton_continuer","continuer","","","submit" );
 
 //selection du c2i visé depuis les c2i connus au niveau nationale
 $resultats=array();
 $refs=c2i_get_referentiels($resultats);
-print_select_from_table($tpl, 'c2i', $refs, 'c2i','saisie', '', 'c2i','c2i', false, $c2i);
+print_select_from_table($tpl, 'c2i', $refs, 'c2i','saisie', '', 'c2i','titre', false, $c2i);
 
 $CFG->c2i=$c2i;
 
