@@ -67,7 +67,8 @@ foreach ($questions as $ligne_q) {
 		  $referentiel = "(".trim($ligne_q->referentielc2i) . "." . trim($ligne_q->alinea).")";
     else
 		$referentiel="";
-	$ligne="$num_q - $referentiel " .trim($ligne_q->titre);
+    // rev 986 avril 2013 enleve saut de lignes si present dans le texte
+    $ligne="$num_q - $referentiel " .trim(clean($ligne_q->titre,strlen($ligne_q->titre)));
 	fputs($fp,$ligne."\n");
 	// r�ponses
 	$melange_reponses=$melange_reponses && $ligne->ordre_r !='fixe';
@@ -79,8 +80,10 @@ foreach ($questions as $ligne_q) {
 	foreach($reps as $ligne_r) {
 		$num_r++;
 		//$ligne ="$num_r - " .trim($ligne_r->reponse);
-		$ligne= chr($num_r)." - ".trim($ligne_r->reponse);
-
+		//$ligne= chr($num_r)." - ".trim($ligne_r->reponse);
+		// rev 986 avril 2013 enleve saut de lignes si present dans le texte
+		$ligne= chr($num_r)." - ".trim(clean($ligne_r->reponse,strlen($ligne_r->reponse)));
+		
 		if ($ligne_r->bonne == "OUI")
 			$ligne.= chr(9) . "V";
 		fputs($fp,$ligne."\n");

@@ -28,7 +28,7 @@ function set_ok ($msg,&$resultats) {
 function table_en_texte($table) {
   if (count($table))
     return implode("\r\n",$table);
-  else return $table;
+  else return "";
 }
 
 /**

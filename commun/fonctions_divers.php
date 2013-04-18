@@ -851,6 +851,26 @@ function get_real_size($size=0) {
   }
 //}
 
+  
+  /**
+   * bug dans les positionnement via smartphone introuit avec le passage php <5.4 
+   * vers php 5.4 et ultérieure
+   * introuidt revision 1.5 987 
+   * j'utilisais htmlhemtities qui a par default ISO-8859-1 avec php 5.4 et UTF-8 aprs
+   * resultats les chaines avec accents étaient virées lors de envoi aux smartphone
+   * cett fonction fait le boulot selon la config de la BD 
+   * donc ne plus utiliser htmlentities(ŝ) mais mon_htmlentities(s$) PARTOUT 
+   * @param unknown_type $string
+   * @return string
+   */
+  function mon_htmlentities ($string) { 
+      global $CFG;
+      if ($CFG->unicodedb)
+          return htmlentities($string,ENT_COMPAT,"UTF-8");
+      else 
+      return htmlentities($string,ENT_COMPAT,"ISO-8859-1");
+  }
+
 
 function get_flag ($drapeau, $valeur) {
     return $drapeau & $valeur;
