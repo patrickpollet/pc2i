@@ -158,6 +158,10 @@ $CFG->chemin_images=$CFG->chemin_theme.'/images';
 //rev 981
 $CFG->utiliser_form_actions=1;  // rev 981 simplification forte des liens openPopup ....
 
+//seulement sur les nationales
+$CFG->utiliser_commentaires_reponses=$CFG->universite_serveur==1; 
+
+
 
 }
 

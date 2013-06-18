@@ -277,7 +277,8 @@ if ($doit) {
                 $num_q++;
                 $tpl->newBlock("question");
 
-                list ($fiche, $nbr) = imprime_question($num_q, $ligne_e, $ligne_q, false, false, false, 3, QCM_CORRECTION, false);
+                list ($fiche, $nbr) = imprime_question($num_q, $ligne_e, $ligne_q, false, false, false, 
+                      3, QCM_CORRECTION, false,$CFG->utiliser_commentaires_reponses);
                 $tpl->assign("question_ici", $fiche);
 
                 if ($droit_commentaires == 1) {

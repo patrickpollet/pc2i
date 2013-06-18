@@ -175,7 +175,13 @@ $fiche=<<<EOF
             title="{js_reponse_manquante}">{reponse}</textarea>
             -->
             {editeur}
-            <input type="checkbox" value="OUI" name="bonne_{r}" {chr} /></td>
+            <input type="checkbox" value="OUI" name="bonne_{r}" {chr} />
+             <!-- START BLOCK : rep_comm -->
+              <div class="commentaire2">{commentaires_reponses}</div>
+              {editeur_comm}
+             <!-- END BLOCK : rep_comm -->
+            </td>
+            
           </tr>
 
 <!-- END BLOCK : rep -->
@@ -391,6 +397,16 @@ foreach ($reponses as $reponse) {
 
 
     $tpl->setChecked ($reponse->bonne == "OUI","chr");
+    if ($CFG->utiliser_commentaires_reponses) {
+        $tpl->newBlockNum('rep_comm',$i,'r');
+        
+        $tpl->assign('editeur_comm',print_textarea($CFG->utiliser_editeur_html,3,45,0,0,
+                     "comm_$i",$reponse->commentaires,
+                     'saisie'.'','',true,$idq,$ide));
+        
+        
+        
+    }
 
     $i++;
 

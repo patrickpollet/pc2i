@@ -73,7 +73,7 @@ else {
 
 
 //les reponses
-// les r�ponses requises
+// les réponses requises
 $reponses=array();
 for ($r=1; $r <=$CFG->nombre_reponses_mini; $r++) {
     $rep=new StdClass();
@@ -81,6 +81,7 @@ for ($r=1; $r <=$CFG->nombre_reponses_mini; $r++) {
     $rep->id_etab=$ide;
     $rep->reponse=required_param("reponse_".$r,PARAM_RAW);
     $rep->bonne=optional_param("bonne_".$r,'NON',PARAM_ALPHA);
+    $rep->commentaires=optional_param("comm_".$r,'',PARAM_RAW);
     $reponses[]=$rep;
 
 }
@@ -92,6 +93,7 @@ for ($r=$CFG->nombre_reponses_mini+1; $r <=$CFG->nombre_reponses_maxi; $r++) {
 		$rep->id_etab=$ide;
 		$rep->reponse=$tmp;
 		$rep->bonne=optional_param("bonne_".$r,'NON',PARAM_ALPHA);
+		$rep->commentaires=optional_param("comm_".$r,'',PARAM_RAW);
         $reponses[]=$rep;
 	}
 }
@@ -148,7 +150,7 @@ else { // modification de l'item
 // supprimer les anciennes r�ponses (on ne peut pas modifier une question qui est d�j� utilis�e donc pas de probl�me de cl�)
 delete_records("reponses","id=".$id." and id_etab=".$ide);
 
-// insertion des r�ponses non vides
+// insertion des réponses non vides
 foreach ($reponses as $reponse) {
         $reponse->id=$id; //important !
     	insert_record ("reponses",$reponse,false,'num');

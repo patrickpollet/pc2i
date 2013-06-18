@@ -825,6 +825,7 @@ CREATE TABLE IF NOT EXISTS `c2ireponses` (
   `reponse` text NOT NULL,
   `bonne` enum('OUI','NON') DEFAULT 'NON',
   `feedback` text NOT NULL,
+  `commentaires` text NOT NULL,
   PRIMARY KEY (`num`,`id`,`id_etab`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

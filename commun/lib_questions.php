@@ -166,6 +166,7 @@ EOS;
 function get_reponse_vide(){
 	$ret= new StdClass();
 	$ret->reponse="";
+	$ret->commentaires="";
 	$ret->bonne='NON';
 	return $ret;
 }

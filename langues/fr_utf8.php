@@ -1611,6 +1611,11 @@ question est négatif il est ramené à 0. Ne rien cocher vaut 0.',
 't_adresses'=>'adresses',
 'plages'=>'plages',
 't_utilisees_examens'=>"nombre d'examens",
+
+
+'commentaires_reponses'=>'Entrez un éventuel commentaire pour cette réponse',
+
+
 );
 
 //web service

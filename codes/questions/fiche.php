@@ -127,7 +127,13 @@ $fiche =<<<EOF
 <!-- START BLOCK : rep -->
           <tr>
             <th> <img src="{chemin_images}/case{bonne}.gif"  alt='' />&nbsp;{reponse} {r}</th>
-            <td>{val} </td>
+            <td>{val} 
+            <!-- START BLOCK : rep_comm -->
+            <div class="commentaire2"> {comm}</div>
+            <!-- END BLOCK : rep_comm -->
+            
+            
+            </td>
           </tr>
 
 <!-- END BLOCK : rep -->
@@ -357,6 +363,10 @@ foreach($reponses as $ligne_r) {
 		$tpl->assign("bonne", "1");
 	else
 		$tpl->assign("bonne", "0");
+	if ($CFG->utiliser_commentaires_reponses && !empty($ligne_r->commentaires)) {
+	    $tpl->newBlock('rep_comm');
+	    $tpl->assign ('comm','('.$ligne_r->commentaires.')');
+	}
 }
 
 //examen l'utilisant

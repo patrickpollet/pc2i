@@ -1136,7 +1136,7 @@ function setImprimable ($tpl,$num_q,$version_imprimable) {
  * @param $montreref 0 non 1 oui 3  néquestion  4 les 2
  */
 function imprime_question ($num_q,$ligne_e,$ligne_q,
-$melange_questions,$melange_reponses,$version_imprimable,$montre_ref,$mode,$login) {
+$melange_questions,$melange_reponses,$version_imprimable,$montre_ref,$mode,$login,$avec_commentaires=false) {
     global $CFG;
 
     $modele=<<<EOM
@@ -1191,7 +1191,12 @@ $melange_questions,$melange_reponses,$version_imprimable,$montre_ref,$mode,$logi
                         {corrige} <img src='{url_image}' alt=""/>
                     <!-- END BLOCK : img -->
 
-                {reponse} {num_r}  : {intitule_r}</li>
+                {reponse} {num_r}  : {intitule_r}
+                 <!-- START BLOCK : rep_comm -->
+            		<span class="commentaire2"> {comm}</span>
+            	 <!-- END BLOCK : rep_comm -->
+                
+                </li>
 <!-- END BLOCK : reponse -->
               </ul>
              </td>
@@ -1285,6 +1290,14 @@ EOM;
 	                else
 	                	$tpl->assign("num_r", chr(ord('A')+$num_r-1));
 	                $tpl->assign("intitule_r", affiche_texte_reponse($ligne_r->reponse));
+	                
+	                if ($avec_commentaires && !empty($ligne_r->commentaires)) {
+	                    $tpl->newBlock('rep_comm');
+	                    $tpl->assign ('comm','('.$ligne_r->commentaires.')');
+	                }
+	                
+	                
+	                
 	                $numrep= $ligne_q->id_etab . "_" . $ligne_q->id . "_" . $ligne_r->num;
 
 	                if ($mode==QCM_PREVISUALISATION) {
