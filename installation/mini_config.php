@@ -92,9 +92,9 @@ $CFG->tsv_separateur=' ' ;
 $CFG->utiliser_infobulle_js='1' ;
 
 $CFG->utiliser_notions_parcours='1' ;
-$CFG->version='1.5 ' ;
+$CFG->version='2.0 ' ;
 
-$CFG->version_release='20090215' ;
+$CFG->version_release='20130715' ;
 $CFG->regle_nom_prenom=1;
 $CFG->regle_nom_en_majuscule=1;
 $CFG->utiliser_mkjoli=1;

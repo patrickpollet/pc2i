@@ -14,7 +14,7 @@ $chemin = '..';
 $chemin_commun = $chemin."/commun";
 $chemin_images = $chemin."/images";
 
-print_r($_POST); die();
+//print_r($_POST); die();
 
 /**
  * soit ce fichier a �t� cr� par index.php soit il a �t� cr�� � la main
@@ -38,14 +38,23 @@ $dataroot=required_param("dataroot",PARAM_RAW);
 $c2i=required_param("c2i",PARAM_RAW);
 $prefix=required_param("prefix",PARAM_RAW);
 
+//important pour affichage correct des logos 
+$CFG->c2i=$c2i;
+
 //ajax
 if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
 	// un petit peu d'ajax
+	
+    
 	require_once($CFG->chemin_commun."/lib_ajax.php");
-
-    //print $dataroot.' '.$wwwroot; die();
-
-	require ("initbase.php");
+	
+	$test = new InstallSqlLoader ($connexion);
+	$test->parse_file('database.sql',false);
+	if ($test->getErrors()) {
+	    print_r($test->getErrors());
+	    echo "0";
+	    die ();
+	}
 	//todo maj de chemin_ressources
 	//celui recu de la nationale est faux !
 	//maintenant on peut ...
@@ -55,7 +64,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
 	set_config("pfc2i","verifier_install",0,true);
     set_config("pfc2i","date_installation",time(),time(),"",0,0);
     set_config("pfc2i","c2i",$c2i,"",0,0);
-    set_config("pfc2i","prefix",$c2i,"",0,0);
+    set_config("pfc2i","prefix",$prefix,"",0,0);
     set_config("pfc2i","adresse_pl_nationale","https://c2i.education.fr/{$c2i}/","",0,0);
     set_config("pfc2i","adresse_feedback_questions","qcm-{$c2i}@education.gouv.fr/","",0,0);
 
@@ -73,6 +82,9 @@ $fiche=<<<EOF
 <form id="monform"  action="#">
 <input type="hidden" name="wwwroot" value="{wwwroot}"/>
 <input type="hidden" name="dataroot" value="{dataroot}"/>
+<input type="hidden" name="c2i" value="{c2i}"/>
+<input type="hidden" name="prefix" value="{prefix}"/>
+
 </form>
 <!--
  <div id="titre">{titre_popup} </div>
@@ -100,9 +112,11 @@ $CFG->utiliser_prototype_js=1;
 
 $tpl->traduit ("titre_popup","installation2");
 
-//rev 978 renvoyer � Ajax
+//rev 978 renvoyer � Ajax capital sinon les required_params vont échouer !!!
 $tpl->assign('wwwroot',$wwwroot);
 $tpl->assign('dataroot',$dataroot);
+$tpl->assign('c2i',$c2i);
+$tpl->assign('prefix',$prefix);
 
 ob_start();
 

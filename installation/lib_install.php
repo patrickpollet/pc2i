@@ -7,6 +7,119 @@
  * @package c2ipf
  */
 
+
+/**
+ * 
+ * classe d'installation du contenu d'une base de données
+ * a partir d'un fihier SQL obtenu par export de phpmyadmin
+ * 
+ *
+ */
+class InstallSqlLoader
+{
+    /**
+     * @var connexion
+     */
+    protected $connexion;
+
+    /**
+     * @var array List of keywords which will be replaced in queries
+     */
+    protected $metadata = array();
+
+    /**
+     * @var array List of errors during last parsing
+     */
+    protected $errors = array();
+
+    protected $queries = array();
+
+    /**
+     * @param $connexion
+     */
+    public function __construct($connexion)
+    {
+     
+        $this->connexion = $connexion;
+    }
+
+    /**
+     * Set a list of keywords which will be replaced in queries
+     *
+     * @param array $data
+     */
+    public function setMetaData(array $data)
+    {
+        foreach ($data as $k => $v)
+        $this->metadata[$k] = $v;
+    }
+
+    /**
+     * Parse a SQL file and execute queries
+     *
+     * @param string $filename
+     * @param bool $stop_when_fail
+     */
+    public function parse_file($filename, $stop_when_fail = true)
+    {
+        if (!file_exists($filename))
+        throw new Exception("File $filename not found");
+
+        return $this->parse(file_get_contents($filename), $stop_when_fail);
+    }
+
+    /**
+     * Parse and execute a list of SQL queries
+     *
+     * @param string $content
+     * @param bool $stop_when_fail
+     */
+    public function parse($content, $stop_when_fail = true)
+    {
+        $this->errors = array();
+
+        $content = str_replace(array_keys($this->metadata), array_values($this->metadata), $content);
+        //point-virgule suivi eventuellement d'espaces ET d'au moins un saut de ligne
+        $this->queries = preg_split('#;\s*[\r\n]+#', $content);
+        foreach ($this->queries as $query) {
+            $query = trim($query);
+            if (!$query)
+            continue;
+            if (!mysql_query($query,$this->connexion)){
+                $this->errors[] = array(
+            'errno' => mysql_errno(),
+            'error' => mysql_error(),
+            'query' => $query,
+                );
+
+            if ($stop_when_fail)
+            return false;
+            }
+        
+        }
+
+        return count($this->errors) ? false : true;
+    }
+
+    /**
+     * Get list of errors from last parsing
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+    public function getQueries()
+    {
+        return $this->queries;
+    }
+}
+
+
+
+
+
 function enteteTests($var){
 echo '<div style="background:#c0C0C0"><p>';
 echo traduction_cond( $var) ;
