@@ -51,6 +51,8 @@ EOP;
  * pb avec la nationale qui a les 2 � 0 !!!
  *
  */
+
+
 if ($etab=get_etablissement($CFG->universite_serveur,0)) {
     if ($etab->positionnement ==0)
         header("location:$chemin/certification.php");

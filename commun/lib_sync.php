@@ -176,7 +176,12 @@ function connect_to_nationale() {
     else 
         set_ok ("synchro standard avec soapClient personnalisé",$resultats);
    $test=false;
-
+   //la nationale est elle en UTF8 ?
+   $version_nationale=$c2i->get_version($lr->getClient(),$lr->getSessionKey());
+   //maj d'une globale pour la suite 
+   $CFG->synchro_conversion_utf8=$version_nationale < 1.6;
+   //MERCI au protocole SOAP qui convertit automatiquement si nécessaire d'iso en utf8 ;-) 
+  
    foreach ($options as $option=>$doit) {
 	   if ($doit) {
 		   set_ok (traduction("debut_de",true,traduction("sync_$option")),$resultats);
@@ -219,7 +224,7 @@ function synchro_etablissements ($c2i,$lr,$ide,$test,&$resultats) {
 
     foreach ($res as $etab) {
         $etab=(object)$etab;   //nusoap rempli des tableaux pas des classes rev 945
-	    if ($etab->id_etab !=$USER->id_etab_perso) {
+        //V2 il FAUT récuperer l'établissement courant lors de la synchro initiale !
 		    if (!$etab->error) {
 			    unset($etab->error); //important
 			    if (!empty( $table[$etab->id_etab])) { // rev 835
@@ -233,11 +238,6 @@ function synchro_etablissements ($c2i,$lr,$ide,$test,&$resultats) {
 				    unset($res[$i]);
 			    }
 		    } else unset($res[$i]); //ne pas garder les records avec error set pour la suite
-	    } else {
-          //  set_erreur(traduction("pas_modifier_etab_perso",false,$etab->id_etab,$etab->nom_etab),$resultats);
-            unset($res[$i]);
-            unset($table[$etab->id_etab]);
-	    }
 	    $i++;
     }
     set_ok (traduction("nb_items_maj",false,$nb),$resultats);
@@ -360,6 +360,9 @@ function synchro_familles ($c2i,$lr,$ide,$test,&$resultats) {
 
     foreach ($res as $famille) {
           $famille=(object)$famille;   //nusoap rempli des tableaux pas des classes rev 945
+          
+          
+          
 	    if (!$famille->error) {
 		    unset($famille->error); //important
 		    if (! empty($table[$famille->idf])) { // rev 835
@@ -455,6 +458,17 @@ function synchro_questions_fast ($c2i,$lr,$ide,$test,&$resultats) {
 			$reponses=$question->reponses;
 			$documents=$question->documents;
 		}
+		//double referentiel plus supporté
+		if (!empty($q->alineaV2))
+		    $q->alinea = $q->alineaV2;
+		if (!empty($q->referentielc2iV2))
+		    $q->referentielc2i = $q->referentielc2iV2;
+		
+		unset($q->alineaV2);
+		unset($q->referentielc2iV2);
+		//changement de contenu 
+		$q->etat=QUESTION_VALIDEE;
+		
 		if (!$q->error) {
 			unset($q->error); //important
 			if (!empty($table[$q->qid])) { // rev 835
@@ -580,6 +594,17 @@ function synchro_questions_fast ($c2i,$lr,$ide,$test,&$resultats) {
 			$documents=$question->documents;
 		}
 		unset($q->error); //important
+		//double referentiel plus supporté
+		if (!empty($q->alineaV2))
+		    $q->alinea = $q->alineaV2;
+		if (!empty($q->referentielc2iV2))
+		    $q->referentielc2i = $q->referentielc2iV2;
+		unset($q->alineaV2);
+		unset($q->referentielc2iV2);
+		
+		//changement de contenu
+		$q->etat=QUESTION_VALIDEE;
+		
 		set_ok(traduction("ajout_item",false,$quoi,$q->qid,addslashes($q->titre) ), $resultats);
 		unset($table[$q->qid]);
 		if (!$test) {
