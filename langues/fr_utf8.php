@@ -1819,3 +1819,15 @@ $textes_langues['algo_tirage_1']='avec équilibrage par domaine';
 $textes_langues['algo_tirage_2']='avec équilibrage par compétence';
 $textes_langues['algo_tirage_3']='avec équilibrage par thème';
 
+
+
+$textes_langues["texte_mode_maintenance"]=<<<EOF
+La plate-forme est actuellement en mode maintenance <br/>
+Seuls les utilisateurs ayant un rôle administrateur peuvent s'y connecter.
+EOF;
+
+$textes_langues['activer_maintenance']='Activer le mode maintenance de la plate-forme';
+$textes_langues['desactiver_maintenance']='Désactiver le mode maintenance de la plate-forme';
+
+
+

@@ -108,7 +108,7 @@ EOH;
  * cree un lien vers un script sans popup
  * exemple script envoyant ensuite des fichiers xml ou ods ...
  * requis avec IE qui n'accepte pas qu'un popup se referme tout seul avec
- * redirection vers un lien de télechargement
+ * redirection vers un lien de tï¿½lechargement
  */
 function cree_item_lien_direct($texte, $url) {
     global $CFG;
@@ -196,7 +196,7 @@ function construit_menu($ligne, $noderef) {
 		$node = & $noderef->addItem(cree_sous_menu(traduction('tracking')));
 
 		$node->addItem(cree_item_lien(traduction('tracking'), "tracking/liste.php?"));
-		// rev 911 statistiques  déplacée page questions
+		// rev 911 statistiques  dï¿½placï¿½e page questions
 		$node->addItem(cree_item_lien(traduction('statistiques'), "statistiques/liste.php?"));
 
 		//admin de cet etablissement pas d'une composante
@@ -210,7 +210,15 @@ function construit_menu($ligne, $noderef) {
 
 	//admin de cet etablissement pas d'une composante
 	if ( is_admin($USER->id_user, $CFG->universite_serveur)) {
+
 		$node = & $noderef->addItem(cree_sous_menu(traduction('configuration_avancee')));
+		
+		if (!empty($CFG->mode_maintenance))
+		    $node->addItem(cree_item_lien(traduction('desactiver_maintenance'), "config_avancee2.php?"));
+		else
+		    $node->addItem(cree_item_lien(traduction('activer_maintenance'), "config_avancee2.php?"));
+		 
+		
 		$node->addItem(cree_item_lien(traduction('configuration_avancee'), "config_avancee2.php?"));
 		if ($CFG->restrictions_ip)
 		    $node->addItem(cree_item_lien(traduction('restrictions_ips'), "ips/liste.php?"));	

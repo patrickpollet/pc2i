@@ -160,6 +160,17 @@ if ( $verif == "bdd" || $verif=="ent" || $verif=="anonyme"){
 				maj_info_connexion ($compte,$verif,$type_p);  //maj date de connexion...
 				if($compte->type_user=="P") lecture_droits();	//pour l'instant '
 			}
+			
+			// V2 voir si la PF est en mode maintenance 
+			if (!empty($CFG->mode_maintenance)) {
+			    if (!is_admin()) {
+			        detruire_session();
+			        header ("location:{$CFG->chemin}/codes/maintenance.php");
+			    }    
+			}
+			
+			
+			
 			//garder en session ce qui doit l'�tre
 			register_user_data($compte,$verif,$type_p,$page_origine);
 
