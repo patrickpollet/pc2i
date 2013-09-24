@@ -117,7 +117,7 @@ class mon_c2i_soapserver extends c2i_soapserver{
 function connect_to_nationale() {
     
     if(!extension_loaded('soap')) {
-        die ('extension php soap non install�e');
+        die ('extension php soap non installée');
     }
     
     
@@ -234,7 +234,7 @@ function synchro_etablissements ($c2i,$lr,$ide,$test,&$resultats) {
 			    }
 		    } else unset($res[$i]); //ne pas garder les records avec error set pour la suite
 	    } else {
-            set_erreur(traduction("pas_modifier_etab_perso",false,$etab->id_etab,$etab->nom_etab),$resultats);
+          //  set_erreur(traduction("pas_modifier_etab_perso",false,$etab->id_etab,$etab->nom_etab),$resultats);
             unset($res[$i]);
             unset($table[$etab->id_etab]);
 	    }
@@ -283,7 +283,7 @@ function synchro_referentiel ($c2i,$lr,$ide,$test,&$resultats) {
     $res=$c2i->get_referentiels($lr->getClient(),$lr->getSessionKey());
     set_ok (traduction("nb_items_recus",false,count($res)),$resultats);
     //print_r($res);
-    $mes=get_referentiels();
+    $mes=get_referentiels('referentielc2i',false);//pas d'erreur si aucun (install initiale)
     if (!$test) {
         delete_records($tableSQL,'');
         set_ok (traduction("nb_items_supprimes",false,count($mes)),$resultats);

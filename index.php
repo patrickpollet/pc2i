@@ -1,6 +1,6 @@
 <?php
 /**************************************************************************************
-This file is part of "Plate-forme de certification et positionnement pour le C2i niveau 1" Copyright (C) 2004-2007 : MEN- MESR-SG-SDTICE Rachid EL BOUSSARGHINI - Stéphane BAUDOUX This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public licence as published by the Free Software Foundation; either version 2 of the License, or any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This file is part of "Plate-forme de certification et positionnement pour le C2i niveau 1" Copyright (C) 2004-2007 : MEN- MESR-SG-SDTICE Rachid EL BOUSSARGHINI - Stï¿½phane BAUDOUX This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public licence as published by the Free Software Foundation; either version 2 of the License, or any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 **************************************************************************************/
 
 /**
@@ -48,20 +48,24 @@ $page=<<<EOP
 EOP;
 
 /*
- * pb avec la nationale qui a les 2 à 0 !!!
+ * pb avec la nationale qui a les 2 ï¿½ 0 !!!
  *
  */
 if ($etab=get_etablissement($CFG->universite_serveur,0)) {
     if ($etab->positionnement ==0)
         header("location:$chemin/certification.php");
+} else {
+    // pas d'Ã©tablissements donc base de donnÃ©es non mise Ã  jour depuis une nationale
+    header("location:$chemin/installation/majbase.php");
 }
+
 
 $ano=get_examen_anonyme();
 if ($etab->certification ==0 && !$ano ) // //ca suffit  comme test
         header("location:$chemin/positionnement.php");
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
-$tpl = new C2IPrincipale($page,T_BYVAR );    //créer une instance
+$tpl = new C2IPrincipale($page,T_BYVAR );    //crï¿½er une instance
 $tpl->prepare($chemin);
 
 $tpl->assign ("url_accueil","");
