@@ -55,7 +55,7 @@ EOP;
 //print_r($CFG);die();
 
 if ($etab=get_etablissement($CFG->universite_serveur,0)) {
-	//print_r($etab); die();
+//	print_r($etab); die();
     if ($etab->positionnement ==0)
         header("location:$chemin/certification.php");
 } else {

@@ -835,12 +835,14 @@ function synchro_ressources($ide,$test,&$resultats) {
     //print_r($res);
     if ($res->errno==0) {
         $ressources=unserialize($res->data);
-        // print_r($ressources);
+
         if (is_array($ressources)){
             set_ok (traduction("nb_items_recus",false,count($ressources)),$resultats);
-            foreach ($ressources as $ressource) {
-                
+            foreach ($ressources as $ressource) { //ex pas de ressources pour un C2I
+                if(!is_object($ressource) || !empty($ressource->error))
+					continue;
                 unset($ressource->url); //tempo
+                unset($ressource->error);
                 $ressource->id_etab=1;
                 $ressource->modifiable=0;
                 $ressource->ts_datemodification=time();
