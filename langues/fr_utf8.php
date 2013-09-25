@@ -951,6 +951,7 @@ question est négatif il est ramené à 0. Ne rien cocher vaut 0.',
 
 
 	"msg_pas_de_notions" => "aucune notion trouvée",
+	"msg_pas_de_ressources" => "aucune ressource trouvée",
     "msg_pas_de_familles" => "aucun thème trouvé",
     "msg_pas_de_referentiels" => "aucun domaine trouvé",
     "msg_pas_de_alineas" => "aucune compétence trouvée",

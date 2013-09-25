@@ -134,11 +134,11 @@ $liste=<<<EOL
 </tr>
 <!-- END BLOCK : ligne -->
 
-<!-- START BLOCK : no_notions -->
+<!-- START BLOCK : no_results -->
 <tr class="information">
 <td colspan ="{colspan}">{msg_pas_de_ressources}</td>
 </tr>
-<!-- END BLOCK : no_notions -->
+<!-- END BLOCK : no_results -->
         </tbody>
       </table>
 
