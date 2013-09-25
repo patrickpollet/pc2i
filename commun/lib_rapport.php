@@ -37,7 +37,7 @@ function table_en_texte($table) {
  * TODO utiliser des div
  */
 
-function print_details ($resultats){
+function print_details ($resultats,$rows=6){
     global $CFG;
 
     $details=<<<EOF
@@ -46,14 +46,14 @@ function print_details ($resultats){
 <div class="information">
 <!-- START BLOCK : oks -->
 <label for "oks">{succes}</label> :
-<textarea id="oks"  rows="4" cols="80" class="saisie" readonly>
+<textarea id="oks"  rows="$rows" cols="80" class="saisie" readonly>
 {details}
 </textarea>
 <!-- END BLOCK : oks -->
 <br/>
 <!-- START BLOCK : kos -->
 <label for "kos">{echecs}</label> :
-<textarea id="kos"  rows="4" cols="80" class="saisie" readonly>
+<textarea id="kos"  rows="$rows" cols="80" class="saisie" readonly>
 {details}
 </textarea>
 <!-- END BLOCK : kos -->

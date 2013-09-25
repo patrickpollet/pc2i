@@ -198,7 +198,7 @@ function test_config($dataroot,$chemin_commun) {
     if (class_exists('SoapServer')){
         succesTests();
     } else {
-        moyenTests("vous ne pourrez pas utiliser les WebServices");
+        echecTests("vous ne pourrez pas utiliser les WebServices");
     }
 
 
@@ -296,7 +296,7 @@ function test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd) {
 
         }
     }else {
-        echecTests("Paramàtres d'acès à la base de données incomplets");
+        echecTests("Paramàtres d'accès à la base de données incorrects");
     }
 
     

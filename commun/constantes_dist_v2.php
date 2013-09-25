@@ -28,7 +28,7 @@ define ('ADRESSE_VERSION', 'http://c2i.education.fr/version.txt');
  * les autres options ont �t� d�plac�es dans la table c2iconfig
  */
 
-$session_nom	="c2iv2";				// nom de la session à utiliser pour cette version IMPORTANT
+$session_nom	="{c2i}v2";				// nom de la session à utiliser pour cette version IMPORTANT
 
 $adresse_serveur = "{serveur_bdd}"; 	// adresse du serveur sur lequel se trouve la Base de Données
 $ines_base		 = "{nom_bdd}"; 		// nom de la Base de Données dans mysql

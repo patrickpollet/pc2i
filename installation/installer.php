@@ -75,7 +75,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     } else {
     	//plateforme nationale sans referentiel 
     	//créér un compte super-admin et le laisser faire
-    	
+    	die();
     }
 
 

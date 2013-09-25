@@ -101,7 +101,7 @@ if ($login_nat && $pass_nat) {
         $c2i->logout($lr->getClient(),$lr->getSessionKey());
         set_ok(traduction("info_deconnecte_nationale",false,$CFG->adresse_pl_nationale),$resultats);
         if (count($resultats))
-            $tpl->assign("resultats_op",print_details($resultats));
+            $tpl->assign("resultats_op",print_details($resultats,20));
         else 
             $tpl->assign("resultats_op","");
         //creer le compte du correspondant C2I en local    
