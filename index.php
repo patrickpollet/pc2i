@@ -52,8 +52,10 @@ EOP;
  *
  */
 
+//print_r($CFG);die();
 
 if ($etab=get_etablissement($CFG->universite_serveur,0)) {
+	//print_r($etab); die();
     if ($etab->positionnement ==0)
         header("location:$chemin/certification.php");
 } else {
@@ -61,7 +63,7 @@ if ($etab=get_etablissement($CFG->universite_serveur,0)) {
     header("location:$chemin/installation/majbase.php");
 }
 
-
+//print_r($etab); die();
 $ano=get_examen_anonyme();
 if ($etab->certification ==0 && !$ano ) // //ca suffit  comme test
         header("location:$chemin/positionnement.php");

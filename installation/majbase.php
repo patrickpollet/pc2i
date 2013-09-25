@@ -119,6 +119,8 @@ if ($login_nat && $pass_nat) {
             $data->login=$login_nat;
             $data->id_profil=1; // admin
             insert_record('droits',$data,false,false,false);
+            // et la locale est desermais bien configurée
+            set_config('pfc2i','universite_serveur',$user->etablissement);
         }else {
             set_erreur('info_err_creation_utilisateur', $resultats);
         }

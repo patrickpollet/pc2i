@@ -63,14 +63,22 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
 	set_config("pfc2i","wwwroot",$wwwroot,true);
 	set_config("pfc2i","verifier_install",0,true);
     set_config("pfc2i","date_installation",time(),time(),"",0,0);
-    set_config("pfc2i","c2i",$c2i,"",0,0);
     set_config("pfc2i","prefix",$prefix,"",0,0);
+   
+    set_config("pfc2i","c2i",$c2i,"",0,0);
     set_config("pfc2i","adresse_pl_nationale","https://c2i.education.fr/{$c2i}/","",0,0);
     set_config("pfc2i","adresse_feedback_questions","qcm-{$c2i}@education.gouv.fr/","",0,0);
+    if ($c2i !='xx') { 
+    	set_config('pfc2i','universite_serveur',0);  // force synchro de la BD vide avec la nationale
+    	print  traduction ("epilogue_install");
+    	die();   	 
+    } else {
+    	//plateforme nationale sans referentiel 
+    	//créér un compte super-admin et le laisser faire
+    	
+    }
 
 
-print  traduction ("epilogue_install");
-die();
 
 }
 
