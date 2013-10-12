@@ -360,7 +360,7 @@ function ferme_popup ($opener, $rafraichi=true) {
     $fermer=get_js_closewindow();
 
     if ($opener && $rafraichi) {
-         $action="document.location.href='".p_session($opener,1)."';" ;
+         $action="window.opener.location.href='".p_session($opener,1)."';" ;
        }
     else {
 	    $action="";

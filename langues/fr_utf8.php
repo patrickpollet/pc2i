@@ -108,7 +108,7 @@ $textes_langues = array (
 
 
 	// taches de maintenance
-	"maintenance" => "taches de maintenance",
+	"taches_maintenance" => "taches de maintenance",
 
 	"purger_candidats" => "effacer les candidats de mon établissement/composante non inscrits à un examen",
 	"purger_ex_nat" => "effacer les examens générés automatiquement par la plateforme nationale",
@@ -1821,7 +1821,7 @@ $textes_langues['algo_tirage_2']='avec équilibrage par compétence';
 $textes_langues['algo_tirage_3']='avec équilibrage par thème';
 
 
-
+$textes_langues["maintenance"] = "mode maintenance";
 $textes_langues["texte_mode_maintenance"]=<<<EOF
 La plate-forme est actuellement en mode maintenance <br/>
 Seuls les utilisateurs ayant un rôle administrateur peuvent s'y connecter.
@@ -1830,5 +1830,13 @@ EOF;
 $textes_langues['activer_maintenance']='Activer le mode maintenance de la plate-forme';
 $textes_langues['desactiver_maintenance']='Désactiver le mode maintenance de la plate-forme';
 
+$textes_langues["info_maintenance_on"]=<<<EOF
+En activant le mode maintenance, vous allez interdire à tous les utilisateurs de se connecter
+à la plate-forme. Seuls les administrateurs pourront continuer à travailler normalement. <br/>
+Vous pouvez créer ci-dessus un message d''information qui sera affiché aux utilisateurs, par exemple
+pour leur donner une date de remise à disponibilité.
+EOF;
 
-
+$textes_langues["info_maintenance_off"]=<<<EOF
+La plate-forme est actuellement en mode maintenance. Pour autoriser à nouveau les connexions, cliquez sur le bouton OK.
+EOF;

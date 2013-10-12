@@ -17,7 +17,7 @@
  * ----------------REVISIONS----------------------
 v 1.1 : PP 17/10/2006
            ajout des trois attributs LDAP pour les membres d'un groupe et l'id unique
-v 1.41 les valeurs par défaut sont TOUTES en base ...voir lib_ldap.php/maj_bd_ldap()
+v 1.41 les valeurs par dï¿½faut sont TOUTES en base ...voir lib_ldap.php/maj_bd_ldap()
       l'action de validation est faite ici (plus de script action.php)
 v 1.5 utilisation de validation.js pour certaines valeurs sensibles
 */
@@ -26,7 +26,7 @@ v 1.5 utilisation de validation.js pour certaines valeurs sensibles
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
 $chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 
 require_login('P'); //PP
 
@@ -54,19 +54,19 @@ if (substr($elt,0,4)=="CFG_")  {// option de CFG pas e c2ietablissement
     $title=""; //TODO (validation.js)
 }
 
-// selection de l'établissement de la personne connectée (pour l'insertion d'item)
+// selection de l'ï¿½tablissement de la personne connectï¿½e (pour l'insertion d'item)
 $id_etab =$USER->id_etab_perso;   // V 1.5
 
 //validation
 if (!empty($doit)) {
-    //problème avec les valeurs vides ....gere par validation.js si nécessaire
+    //problï¿½me avec les valeurs vides ....gere par validation.js si nï¿½cessaire
     //$valeur=required_param("valeur",PARAM_CLEAN);  //valeur de l'item
 	/////////////////////////////////////////
 	if ($elt == "param_nb_aleatoire") {
 		$tmpval = $valeur;
 
         //revision 932 (c2ims : nb questions= multiple nombre referentiel)
-        $refs=get_referentiels(); //trié par referentiel
+        $refs=get_referentiels(); //triï¿½ par referentiel
 
 		$tmpvalmodulo = $tmpval % count($refs);
 		if ($tmpvalmodulo != 0) $valeur= $valeur - $tmpvalmodulo;
@@ -124,7 +124,7 @@ if (!empty($doit)) {
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");	//inclusion de moteur de templates
 
-$tpl = new C2IMiniPopup( );	//créer une instance
+$tpl = new C2IMiniPopup( );	//crï¿½er une instance
 
 //inclure d'autre block de templates
 $fiche=<<<EOF
@@ -175,7 +175,7 @@ function val_defaut(){
 </div>
 EOF;
 
-$tpl->assignInclude("contenu",$fiche,T_BYVAR);	// le template gérant la configuration
+$tpl->assignInclude("contenu",$fiche,T_BYVAR);	// le template gï¿½rant la configuration
 
 $tpl->prepare($chemin);
 
@@ -185,12 +185,12 @@ $tpl->traduit("titre_popup","modif_config");
 
 $tpl->assign("etablissement" , $ligne->id_etab);
 
-// valeurs par défaut et validation
+// valeurs par dï¿½faut et validation
 
 
 
 
-//a on commencé par $CFG au début (elt=CFG_xxxxx);
+//a on commencï¿½ par $CFG au dï¿½but (elt=CFG_xxxxx);
 
 if (!$estCFG) {
 	$nomParam="";
@@ -248,7 +248,7 @@ if (!$estCFG) {
             if ($nomParam != 'param_nb_aleatoire')
 			 $etiquette=traduction ("config_".$nomParam);
             else {
-                 $refs=get_referentiels(); //trié par referentiel
+                 $refs=get_referentiels(); //triï¿½ par referentiel
              $etiquette=traduction("config_param_nb_aleatoire", true, count($refs));
             }
 			break; //sortie de boucle while

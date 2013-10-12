@@ -21,7 +21,7 @@ if(defined('E_STRICT')){
 
 
 if (!defined ('NO_HEADERS'))  //rev 889 une notice de moins ...
-    define ('NO_HEADERS',1);  // V 1.5 on ne modifie plus les headers avec cache=0 !!!
+	define ('NO_HEADERS',1);  // V 1.5 on ne modifie plus les headers avec cache=0 !!!
 
 
 /**

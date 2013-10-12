@@ -214,9 +214,9 @@ function construit_menu($ligne, $noderef) {
 		$node = & $noderef->addItem(cree_sous_menu(traduction('configuration_avancee')));
 		
 		if (!empty($CFG->mode_maintenance))
-		    $node->addItem(cree_item_lien(traduction('desactiver_maintenance'), "config_avancee2.php?"));
+		    $node->addItem(cree_item_lien(traduction('desactiver_maintenance'), "maintenance.php?"));
 		else
-		    $node->addItem(cree_item_lien(traduction('activer_maintenance'), "config_avancee2.php?"));
+		    $node->addItem(cree_item_lien(traduction('activer_maintenance'), "maintenance.php?"));
 		 
 		
 		$node->addItem(cree_item_lien(traduction('configuration_avancee'), "config_avancee2.php?"));

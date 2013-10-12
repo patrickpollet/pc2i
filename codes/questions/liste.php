@@ -331,7 +331,7 @@ if ($peutFiltrer) {
     	}
     // TODO $tpl->newBlock("filtrage");
 
-} else $largeur_td_action -= 20;
+}// else $largeur_td_action -= 20;
 
 
 $tpl->assignGlobal('largeur_td_action',$largeur_td_action);

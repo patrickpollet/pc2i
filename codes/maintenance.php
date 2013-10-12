@@ -27,7 +27,11 @@ $page=<<<EOP
 <div id="contenu_principale" class="centre">
     <div style="width:800px;margin: 0 auto;" class="commentaire2">{texte_bienvenue}</div>
 
-    <div class="centre information">{texte_mode_maintenance}
+    <div class="centre information">
+    {texte_mode_maintenance}
+    <p>
+    {info_maintenance}
+    </p>
    </div>
   
 </tr>
@@ -48,5 +52,7 @@ $tpl = new C2IPrincipale($page,T_BYVAR );    //cr�er une instance
 $tpl->prepare($chemin);
 
 $tpl->assign ("url_accueil","");
+if (!empty($CFG->info_maintenance))
+	$tpl->assign("info_maintenance",$CFG->info_maintenance);
 
 $tpl->printToScreen();
