@@ -182,7 +182,10 @@ $fiche =<<<EOF
 <form method="post" name="monform" id="monform"  action="bilan_questions.php">
 <span class="taille2">{options_selection}</span>
 <div class="gauche">
-       {select_referentielc2i} | {select_alinea} | {select_famille} | {select_filtre_valid}
+       {select_referentielc2i} | {select_alinea} | {select_famille}
+  <!-- START BLOCK : filtre_etat -->        
+        | {select_filtre_valid}  
+<!-- END BLOCK : filtre_etat -->     
          <input type="submit" name="ok" value="HTML"/>
           <input type="submit" name="OOo" value="OOo"/>
 <!-- START BLOCK : id_session -->
@@ -247,9 +250,13 @@ print_selecteur_ref_alinea_famille($tpl, "monform", "select_referentielc2i", 're
 false, false, false, //input famille
 $referentielc2i, $alinea, $famille, false); //valeurs actuelles
 
-//liste d�roulante des �tats de questions
-print_select_from_table($tpl, "select_filtre_valid", get_etats_validation(), "filtre_valid", null, "", "id", "texte", traduction("alt_validation"), $filtre_valid);
 
+//liste d�roulante des �tats de questions
+// seuls les experts validateurs peuvent voir les non validées
+if (a_capacite("qv") || empty($CFG->seulement_validees_liste)) {
+	$tpl->newBlock ('filtre_etat');
+	print_select_from_table($tpl, "select_filtre_valid", get_etats_validation(), "filtre_valid", null, "", "id", "texte", traduction("alt_validation"), $filtre_valid);
+}
 $tpl->gotoBlock("_ROOT");
 
 if ($doit) {

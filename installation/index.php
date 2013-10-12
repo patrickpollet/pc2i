@@ -203,6 +203,11 @@ print_bouton($tpl,"bouton_continuer","continuer","","","submit" );
 //selection du c2i visé depuis les c2i connus au niveau nationale
 $resultats=array();
 $refs=c2i_get_referentiels($resultats);
+//ajouter l'option 'sans réferentiel' = nouvelle plate-forme à parametrer entierement
+$tmp=new StdClass();
+$tmp->c2i='xx';
+$tmp->titre='Sans réferentiel';
+$refs[]=$tmp;
 print_select_from_table($tpl, 'c2i', $refs, 'c2i','saisie', '', 'c2i','titre', false, $c2i);
 
 $CFG->c2i=$c2i;

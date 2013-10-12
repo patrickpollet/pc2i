@@ -20,7 +20,8 @@ function clear_criteres_questions(){
          for (var i = 0; (node = f.getElementsByTagName("select").item(i)); i++) {
             node.value="";
          }
-        document.getElementById("filtre_valid").selectedIndex=1;
+         if (document.getElementById("filtre_valid") !=null)
+        	document.getElementById("filtre_valid").selectedIndex=1;
         f.submit();
        }
 }

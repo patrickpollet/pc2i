@@ -28,10 +28,9 @@ $textes_langues["epilogue_install"]=<<<EOF
     <br/>
     Vous pouvez maintenant tester si vos paramètres sont corrects. Un utilisateur ayant les mêmes login et mot de passe que ceux de la personne ayant téléchargé la plateforme depuis la plateforme nationale a été créé<br>
     Pensez à supprimer les fichiers d installation (le dossier installation) lorsque vous aurez fini les tests afin que personne ne puisse les modifier sans votre accord. gardez-en une copie en cas de besoin.<br>
-    <span class="rouge">Si vous avez opté pour l installation automatique, n oubliez pas d enlever les droits d écriture sur le fichier commun/constantes.php. </span><br/>
+    <span class="rouge">Si vous avez opté pour l installation automatique, n'oubliez pas d'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
 
 
-remarque : Si vous utilisez un ENT vérifiez la présence de PEAR sur le serveur et consultez le wiki pour plus de détails.
 </div>
 EOF;
 
@@ -57,8 +56,10 @@ $supp=array(
 "form_type_c2i"=>'type de la plateforme',
 
 "parametres_installation"=>"Paramètres d'installation de la plateforme'",
-"form_repertoire_installation"=>"URL d'accès à votre plateforme","ex_form_ri"=>"(ex. http://votre-univ.fr/c2i/)",
-"form_repertoire_ressources"=>"Chemin des ressources","ex_form_re"=>"(ex. /usr/share/c2i)",
+"form_repertoire_installation"=>"URL d'accès à votre plateforme",
+"ex_form_ri"=>"(ex. http://votre-univ.fr/c2i/)",
+"form_repertoire_ressources"=>"Chemin des ressources",
+"ex_form_re"=>"(ex. /usr/share/c2i)",
 
 "info_etat_connexion_bd_ok"=>"connexion réussie avec la base de données",
  "info_etat_droits_bd_ok"=>"les droits d'accès sur la base de données semblent suffisants ",

@@ -70,13 +70,13 @@ $liste =<<<EOL
           | {t_titre} : <input class="saisie" name="titre_rech" size="7" value="{titre_rech}"/>
 
 
-
      {select_referentielc2i} {select_alinea} | {select_famille} |
 
   {t_famille} : <input class="saisie" name="famille_rech" size="7" value="{famille_rech}"/>
-
+  <!-- START BLOCK : filtre_etat -->
    | {t_etat} : {select_filtre_valid}
-
+ <!-- END BLOCK : filtre_etat -->
+ 
    <!-- START BLOCK : filtrage -->
    | {t_filtre} :  <input type="checkbox" class="saisie" name="filtrage" value="{filtrage}"/>
    <!-- END BLOCK : filtrage -->
@@ -716,7 +716,11 @@ foreach ($ets as $et) {
 print_select_from_table($tpl, "_ROOT.select_filtre_univ", $ets, "filtre_univ", null, "style=\"width:100px\"", "id_etab", "nom_etab", traduction("universite"), $filtre_univ);
 
 //liste d�roulante des �tats de questions
-print_select_from_table($tpl, "_ROOT.select_filtre_valid", get_etats_validation(), "filtre_valid", null, "", "id", "texte", traduction("alt_validation"), $filtre_valid);
+// seuls les experts validateurs peuvent voir les non validées
+if (a_capacite("qv") || empty($CFG->seulement_validees_liste)) {
+	$tpl->newBlock ('filtre_etat');
+	print_select_from_table($tpl, "select_filtre_valid", get_etats_validation(), "filtre_valid", null, "", "id", "texte", traduction("alt_validation"), $filtre_valid);
+}
 
 $items = array ();
 if (a_capacite("qa")) {

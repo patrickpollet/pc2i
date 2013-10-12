@@ -75,6 +75,14 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     } else {
     	//plateforme nationale sans referentiel 
     	//créér un compte super-admin et le laisser faire
+    	$user=new StdClass();
+    	$user->login='admin';
+    	$user->password=mot_de_passe_a(6);
+    	$user->etablissement=1;
+    	$user->est_superdamin=$user->est_admin_univ='O';
+    	cree_utilisateur($user,$user->1);
+    	
+    	print  traduction ("epilogue_install2");
     	die();
     }
 

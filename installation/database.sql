@@ -86,7 +86,7 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 (14, 'pfc2i', 'tsv_separateur', '', '', '', 0, 'required', 1),
 (180, 'examen', 'convoque_mail_copie_auteur', '0', '0', 'lors des convocations spar email, envoyer aussi une copie à l''auteur', 1, 'required', 1),
 (16, 'dev', 'debug_templates', '0', '0', '', 1, 'required', 1),
-(17, 'dev', 'debug_in_html', '1', '0', 'ajouter des infos de debug dans la page html', 1, 'required', 1),
+(17, 'dev', 'debug_in_html', '0', '0', 'ajouter des infos de debug dans la page html', 1, 'required', 1),
 (18, 'dev', 'debug_level', '0', '0', 'niveau de debug php', 1, 'required', 1),
 (19, 'dev', 'syslog_level', '0', '0', '', 1, 'required', 1),
 (20, 'pfc2i', 'largeur_minipopups', '405', '405', '', 1, 'required', 1),
@@ -113,7 +113,7 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 (41, 'utilisateur', 'regle_nom_en_majuscule', '0', '0', '1 pour oui, 0 pour non ', 1, 'required', 1),
 (42, 'pfc2i', 'err_mysql_avec_requete', '1', '0', 'ajoute la requeste SQL a l''erreur fatale', 1, 'required', 1),
 (43, 'pfc2i', 'log_erreur_fatale', '1', '1', 'trace dans c2itracking ou non', 1, 'required', 1),
-(44, 'dev', 'dump_vars', '1', '0', 'ajoute variables globales à l''HTML', 1, 'required', 1),
+(44, 'dev', 'dump_vars', '0', '0', 'ajoute variables globales à l''HTML', 1, 'required', 1),
 (45, 'pfc2i', 'multip_parpage', '0', '0', 'option par page en multipagination (a debogger)', 0, 'required', 1),
 (46, 'pfc2i', 'multip_haut', '1', '1', 'multipagination en haut', 1, 'required', 1),
 (47, 'pfc2i', 'multip_bas', '1', '1', 'multipagination en bas', 1, 'required', 1),
@@ -133,7 +133,7 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 (62, 'candidat', 'peut_creer_compte_inscrit', '0', '0', 'création manuel de compte étudiant sans passer par inscriptions', 1, 'required', 1),
 (63, 'pfc2i', 'universite_serveur', '1', '1', 'code national de l''établissement (ne pas modifier)', 0, 'required', 1),
 (65, 'examen', 'examen_seuil_validation', '50', '50', 'seuil de validation par défaut d''un examen', 1, 'required', 1),
-(66, 'examen', 'examen_type_tirage_defaut', 'manuel', 'manuel', 'type de tirage par défaut : manuel ou aléatoire', 1, 'required', 1),
+(66, 'examen', 'examen_type_tirage_defaut', 'aleatoire', 'aleatoire', 'type de tirage par défaut : manuel ou aleatoire', 1, 'required', 1),
 (67, 'examen', 'examen_ordre_questions_defaut', 'aleatoire', 'aleatoire', 'ordre des questions par défaut : fixe ou aleatoire', 1, 'required', 1),
 (68, 'examen', 'examen_ordre_reponses_defaut', 'aleatoire', 'aleatoire', 'ordre des réponses par défaut : fixe ou aleatoire', 1, 'required', 1),
 (69, 'pool', 'autoriser_pool', '1', '1', 'autoriser les pools d''examen', 1, 'required', 1),
@@ -264,12 +264,13 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 (201, 'parcours', 'activer_tags_parcours', '0', '0', '', 1, 'required', 1),
 (202, 'examen', 'ne_pas_afficher_score_global', '0', '0', 'si 1 on n''affiche pas le score global au candidat en positionnement', 1, 'required', 1),
 (203, 'examen', 'autoriser_qcm_par_domaine_en_certification', '1', '1', 'circulaire 14/07/2011', 1, 'required', 1),
-(204, 'dev', 'debug_events', '1', '0', 'trace du traitement des évenements dans ressources/events.log', 1, 'required', 1),
+(204, 'dev', 'debug_events', '0', '0', 'trace du traitement des évenements dans ressources/events.log', 1, 'required', 1),
 (205, 'pfc2i', 'restrictions_ip', '1', '1', 'activer les restrictions ip pour les QCMs', 1, 'required', 1),
 (206, 'question', 'adresse_feedback_questions', 'qcm-c2i1@education.gouv.fr', 'qcm-c2i1@education.gouv.fr', 'adresse des experts validateurs des questions', 0, 'required', 1),
 (207, 'pfc2i', 'adresse_serveur_public_c2i', 'https://c2i.education.fr/c2iws/service.php', 'https://c2i.education.fr/c2iws/service.php', '', 0, 'required', 1),
 (209, 'pfc2i', 'date_installation', '1359387486', '1359387486', '', 127, 'required', 1),
-(208, 'examen', 'seulement_mes_examens', '0', '0', 'n''afficher à un enseignant que les examens qu''il a généré', 1, 'required', 1);
+(208, 'examen', 'seulement_mes_examens', '0', '0', 'n''afficher à un enseignant que les examens qu''il a généré', 1, 'required', 1),
+(210, 'question', 'seulement_validees_liste', '1', '1', 'n''afficher que les validées dans les listes, sauf aux experts validateurs', 1, 'required', 1);
 
 -- --------------------------------------------------------
 
@@ -693,7 +694,7 @@ INSERT INTO `c2iprofils` (`id_profil`, `intitule`, `q_ajouter`, `q_modifier`, `q
 (3, 'Experts du groupe de suivi', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0),
 (4, 'Experts validateurs', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
 (5, 'Auteur', 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
-(6, 'Saisie', 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(6, 'Saisie', 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (7, 'Positionnement', 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0),
 (8, 'Correspondant C2i', 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0),
 (9, 'ComposanteUniversité', 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
