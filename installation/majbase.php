@@ -15,7 +15,7 @@ require_once($chemin_commun."/c2i_params.php");					//fichier de param�tres
 require_once($chemin_commun."/lib_sync.php");
 
 
- set_time_limit(0); //important
+set_time_limit(0); //important
 
 $ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //�tab de l'examen, d�faut = ici '
 
@@ -74,67 +74,85 @@ $forme1=<<<EOF
 EOF;
 
 $forme2=<<<EOF
+
 {resultats_op}
+
+<div class="information">
+{info_compte_cree}
+</div>
 EOF;
 
-//pas encore de login connu 
+//pas encore de login connu
 $USER= new StdClass();
 $USER->type_plateforme='certification';
 
 if ($login_nat && $pass_nat) {
 
-    require_once ($chemin."/commun/lib_rapport.php");
-   $c2i=connect_to_nationale();
-    try {
-        $lr=$c2i->login($login_nat,$pass_nat);
-       // print_r($lr);
-        $tpl->assignInclude("corps",$forme2,T_BYVAR);
-        $tpl->prepare($chemin);
-        
-        //recuperer ses infos personnelles
-        $user=$c2i->get_personnel($lr->getClient(),$lr->getSessionKey(),$login_nat,'login');
-        //important pour la synchro
-        $USER->id_etab_perso=$user->etablissement;
-        
-        
-        $resultats=synchro_nationale($c2i,$lr,$options);
-        $c2i->logout($lr->getClient(),$lr->getSessionKey());
-        set_ok(traduction("info_deconnecte_nationale",false,$CFG->adresse_pl_nationale),$resultats);
-        if (count($resultats))
-            $tpl->assign("resultats_op",print_details($resultats,20));
-        else 
-            $tpl->assign("resultats_op","");
-        //creer le compte du correspondant C2I en local    
-        //remettre le MDP qui n'a pas été envoyé par la nationale
-        $user->password=md5($pass_nat);
-        unset($user->profils); // donnée erronnée envoyée par la nationale V1.5
-        unset($user->id); // donnée erronnée envoyée par la nationale V1.5
-        unset($user->error); // donnée envoyée par la nationale V1.5
-        $user->est_admin_univ='O'; //important
-        //print_r($user);
-       
-        if (cree_utilisateur($user,$user->etablissement)) {
-            // avec ses droits
-            $data=new StdClass();
-            $data->login=$login_nat;
-            $data->id_profil=1; // admin
-            insert_record('droits',$data,false,false,false);
-            // et la locale est desermais bien configurée
-            set_config('pfc2i','universite_serveur',$user->etablissement);
-        }else {
-            set_erreur('info_err_creation_utilisateur', $resultats);
-        }
-        
+	require_once ($chemin."/commun/lib_rapport.php");
+	$c2i=connect_to_nationale();
+	try {
+		$lr=$c2i->login($login_nat,$pass_nat);
+		// print_r($lr);
+		$tpl->assignInclude("corps",$forme2,T_BYVAR);
+		$tpl->prepare($chemin);
 
-$tpl->assign("_ROOT.titre_popup",traduction("synchronisation_plateforme"));
+		//recuperer ses infos personnelles
+		$user=$c2i->get_personnel($lr->getClient(),$lr->getSessionKey(),$login_nat,'login');
+		//important pour la synchro
+		$USER->id_etab_perso=$user->etablissement;
+		
+		$resultats=synchro_nationale($c2i,$lr,$options);
+		$c2i->logout($lr->getClient(),$lr->getSessionKey());
+		set_ok(traduction("info_deconnecte_nationale",false,$CFG->adresse_pl_nationale),$resultats);
+		if (count($resultats))
+			$tpl->assign("resultats_op",print_details($resultats,20));
+		else
+			$tpl->assign("resultats_op","");
+		//creer le compte du correspondant C2I en local
+		//remettre le MDP qui n'a pas été envoyé par la nationale
+		$user->password=md5($pass_nat);
+		unset($user->profils); // donnée eronnée envoyée par la nationale V1.5
+		unset($user->id); // donnée eronnée envoyée par la nationale V1.5
+		unset($user->error); // donnée envoyée par la nationale V1.5
+		$user->est_admin_univ='O'; //important
+		//print_r($user);
+		 
+		if (cree_utilisateur($user,$user->etablissement)) {
+			// avec ses droits
+			$data=new StdClass();
+			$data->login=$login_nat;
+			$data->id_profil=1; // admin
+			insert_record('droits',$data,false,false,false);
+			
+			//mettre a jour le compte admin
+			$admin=new StdClass();
+			$admin->login='admin';
+			$admin->etablissement=$user->etablissement;		
+			update_utilisateur($admin,true);
+			
+			// et la locale est desermais bien configurée
+			set_config('pfc2i','universite_serveur',$user->etablissement);
+			
+			
+			
+			
+			
+		}else {
+			set_erreur('info_err_creation_utilisateur', $resultats);
+		}
+		
+		
 
-$tpl->gotoBlock("_ROOT");
-$tpl->print_boutons_fermeture();
-        $tpl->printToScreen();
-        die();
-    } catch (Exception $e) {
-        print_r($e);
-    }
+
+		$tpl->assign("_ROOT.titre_popup",traduction("synchronisation_plateforme"));
+
+		$tpl->gotoBlock("_ROOT");
+		$tpl->print_boutons_fermeture();
+		$tpl->printToScreen();
+		die();
+	} catch (Exception $e) {
+		print_r($e);
+	}
 }
 
 
@@ -146,27 +164,28 @@ $tpl->prepare($chemin);
 $tpl->assign("_ROOT.titre_popup",traduction("synchronisation_plateforme"));
 $tpl->assign("ide", $ide);
 
-// rev 977 le referentile  peut encore �voluer
 
+// mode simulation
 $tpl->newBlock("option");
 $tpl->assign ("num",0);
 $tpl->assign ("val_option",traduction("sync_0"));
-$tpl->setChecked (true,"checked");
-    
+$tpl->setChecked (false,"checked");
+
+// synchro referentiel
 $tpl->newBlock("option");
 $tpl->assign ("num",6);
 $tpl->assign ("val_option",traduction("sync_6"));
 $tpl->setChecked (true,"checked");
 
 for ($i=1; $i <=15; $i++) {
-  if ($i==6) continue; //synchro referentiel d�ja affich�
-  if ($i==3 && ! $CFG->utiliser_notions_parcours) continue;  //cette PF n'utilise pas les notions
-  if (est_traduite("sync_$i")) {
-    $tpl->newBlock("option");
-    $tpl->assign ("num",$i);
-    $tpl->assign ("val_option",traduction("sync_".$i));
-    $tpl->setChecked (true,"checked");
-}
+	if ($i==6) continue; //synchro referentiel d�ja affich�
+	if ($i==3 && ! $CFG->utiliser_notions_parcours) continue;  //cette PF n'utilise pas les notions
+	if (est_traduite("sync_$i")) {
+		$tpl->newBlock("option");
+		$tpl->assign ("num",$i);
+		$tpl->assign ("val_option",traduction("sync_".$i));
+		$tpl->setChecked (true,"checked");
+	}
 
 }
 

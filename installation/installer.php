@@ -68,21 +68,30 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     set_config("pfc2i","c2i",$c2i,"",0,0);
     set_config("pfc2i","adresse_pl_nationale","https://c2i.education.fr/{$c2i}/","",0,0);
     set_config("pfc2i","adresse_feedback_questions","qcm-{$c2i}@education.gouv.fr/","",0,0);
+    
+    //créér un compte admin
+    $user=new StdClass();
+    $user->login='admin';
+    $user->password=mot_de_passe_a($CFG->longueur_mot_de_passe_aleatoire);
+    $user->etablissement=0;
+    $user->est_admin_univ='O';
+    cree_utilisateur($user,0);
+    
     if ($c2i !='xx') { 
     	set_config('pfc2i','universite_serveur',0);  // force synchro de la BD vide avec la nationale
-    	print  traduction ("epilogue_install");
+    	print  traduction ("epilogue_install",true,$user->password);
     	die();   	 
     } else {
     	//plateforme nationale sans referentiel 
-    	//créér un compte super-admin et le laisser faire
+    	//mettre le compte super-admin et le laisser faire
     	$user=new StdClass();
     	$user->login='admin';
-    	$user->password=mot_de_passe_a(6);
     	$user->etablissement=1;
     	$user->est_superdamin=$user->est_admin_univ='O';
-    	cree_utilisateur($user,$user->1);
+    	update_utilisateur($user,true);
     	
-    	print  traduction ("epilogue_install2");
+    	set_config('pfc2i','universite_serveur',1);  // pas de synchro de la BD vide avec la nationale
+    	print  traduction ("epilogue_install2",true,$user->password);
     	die();
     }
 

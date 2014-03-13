@@ -43,7 +43,6 @@ function nom_univ($id_etab, $connexion=false){
  * @return objet 		la ligne extraite de la BD ou null en cas d'erreur (et $die=0)
  */
 function get_etablissement ($id,$die=1) {
-  // noter les '' pour �viter une b�te erreur mysql si ide est vide ...
 	return get_record("etablissement",'id_etab='.(int)$id,$die,"err_etablissement_inconnu",$id);
 }
 

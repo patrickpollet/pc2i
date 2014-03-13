@@ -131,7 +131,7 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 (60, 'pfc2i', 'adresse_wiki', 'http://c2i.education.fr/wikipfc2i-X/index.php/Accueil', 'http://c2i.education.fr/wikipfc2i-X/index.php/Accueil', '', 0, 'required', 1),
 (61, 'pfc2i', 'adresse_forum', 'http://www.c2i.education.fr/forum-c2i-1/', 'http://www.c2i.education.fr/forum-c2i-1/', '', 0, 'required', 1),
 (62, 'candidat', 'peut_creer_compte_inscrit', '0', '0', 'création manuel de compte étudiant sans passer par inscriptions', 1, 'required', 1),
-(63, 'pfc2i', 'universite_serveur', '1', '1', 'code national de l''établissement (ne pas modifier)', 0, 'required', 1),
+(63, 'pfc2i', 'universite_serveur', '0', '0', 'code national de l''établissement (ne pas modifier)', 0, 'required', 1),
 (65, 'examen', 'examen_seuil_validation', '50', '50', 'seuil de validation par défaut d''un examen', 1, 'required', 1),
 (66, 'examen', 'examen_type_tirage_defaut', 'aleatoire', 'aleatoire', 'type de tirage par défaut : manuel ou aleatoire', 1, 'required', 1),
 (67, 'examen', 'examen_ordre_questions_defaut', 'aleatoire', 'aleatoire', 'ordre des questions par défaut : fixe ou aleatoire', 1, 'required', 1),

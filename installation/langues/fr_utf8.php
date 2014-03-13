@@ -24,9 +24,10 @@ $textes_langues["maj"]="Mise à jour de votre base de données pour la version 1
 $textes_langues["epilogue_install"]=<<<EOF
     <hr><hr>
     <div class="information_gauche">Installation Terminée.<br>
-    Selon la version téléchargée vous y accéderez par certification.php ou positionnement.php ou index.php.
+   
     <br/>
-    Vous pouvez maintenant tester si vos paramètres sont corrects. Un utilisateur ayant les mêmes login et mot de passe que ceux de la personne ayant téléchargé la plateforme depuis la plateforme nationale a été créé<br>
+    Vous pouvez maintenant tester si vos paramètres sont corrects. 
+   <br/>
     Pensez à supprimer les fichiers d installation (le dossier installation) lorsque vous aurez fini les tests afin que personne ne puisse les modifier sans votre accord. gardez-en une copie en cas de besoin.<br>
     <span class="rouge">Si vous avez opté pour l installation automatique, n'oubliez pas d'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
 
@@ -34,12 +35,13 @@ $textes_langues["epilogue_install"]=<<<EOF
 </div>
 EOF;
 
-$textes_langues["epilogue_maj"]=<<<EOF
-    <hr><hr>
-    <div style="information_gauche">Mise à jour terminée.<br>
-
+$textes_langues["info_compte_cree"]=<<<EOF
+<div>
+Un utilisateur ayant les mêmes login et mot de passe que votre correspondant C2I sur  la plateforme nationale a été créé localement.<br/>
+Vous pouvez desormais utiliser ce compte pour créer des examens sur votre plate-forme.
 </div>
 EOF;
+
 
 
 
