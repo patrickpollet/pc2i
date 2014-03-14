@@ -41,8 +41,9 @@ function __envoi_erreur_fatale($errMsg1, $errMsg2, $sql = "") {
         die($errMsg1 . " " . $errMsg2);
 }
 // Fonction Connexion: connexion � MySQL
-function Connexion($pNom, $pMotPasse, $pBase, $pServeur, $pNames='') { // Connexion au serveur
-    $connexion = mysql_connect($pServeur, $pNom, $pMotPasse);
+
+function Connexion($pNom, $pMotPasse, $pBase, $pServeur, $pNames='',$newLink=false) { // Connexion au serveur
+    $connexion = mysql_connect($pServeur, $pNom, $pMotPasse,$newLink);
     if (!$connexion) {
         __envoi_erreur_fatale("err_mysql_serveur", $pServeur);
     }

@@ -43,7 +43,14 @@ Vous pouvez desormais utiliser ce compte pour créer des examens sur votre plate
 EOF;
 
 
-
+$textes_langues["info_importation_plateforme"]=<<<EOF
+ 
+    <div class="information_gauche">
+    Avec cette option vous aller pouvoir importer dans votre nouvelle plateforme les données 
+    d'une ancienne plateforme C2I (comptes, examens, résultats ...).
+    <br>
+    </div>
+EOF;
 
 
 $supp=array(
@@ -68,6 +75,13 @@ $supp=array(
  "info_etat_droits_bd_ko"=>"problème de droits sur la base de données ? ",
 "info_etat_droits_ok"=>"les droits sur le dossier des ressources sont corrects" ,
 "info_etat_droits_ko"=>"erreur en tentant de créer une table sur la base de données" ,
+
+
+"importation_plateforme"=>"Données de connexion de l'ancienne plateforme",
+"info_import_serveur_bd"=>"Laisser vide si sur le même serveur que cette PF",
+"info_import_nom_bd"=>"Nom de la base de données version 1.5",
+"info_import_user_bd"=>"Laisser vide si le même que pour cette PF",
+"info_import_pass_bd"=>"Laisser vide si le même que pour cette PF",
 
 );
 
