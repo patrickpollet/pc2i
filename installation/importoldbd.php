@@ -4,7 +4,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package c2ipf V2
  * Importation avec conversion UTF8 des table d'une ancienne PF
- * SAUF la config les questions et les établissements
+ * SAUF la config et les questions 
  */
 
 $chemin = '..';
@@ -17,6 +17,9 @@ require_once($chemin_commun."/c2i_params.php");					//fichier de paramétres
 set_time_limit(0); //important
 
 $ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //étab de l'examen, défaut = ici '
+
+require_login("P"); //PP
+v_d_o_d("config");
 
 $nom_bdd=optional_param("nom_bdd","",PARAM_RAW);
 
@@ -216,7 +219,7 @@ function doImport() {
 			'questions'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ), // cas des questions locales ?
 			'questionsdocuments'	=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'questionsexamen'		=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'questionsvalidation'	=> array('SKIP'=>1,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'questionsvalidation'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array('date'),'NOACC'=>array() ),
 			'referentiel'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'referentielV2'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),   //existe plus
 			'reponses'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),   // cas des questions locales ?
