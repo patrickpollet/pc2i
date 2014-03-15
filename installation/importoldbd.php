@@ -4,7 +4,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package c2ipf V2
  * Importation avec conversion UTF8 des table d'une ancienne PF
- * SAUF la config les questions et les établissements 
+ * SAUF la config les questions et les établissements
  */
 
 $chemin = '..';
@@ -97,18 +97,18 @@ $USER->type_plateforme='certification';
 $USER->id_user='admin';
 
 if ($nom_bdd) {
-    $tpl->assignInclude("corps",$forme2,T_BYVAR);
-    $tpl->prepare($chemin);
-    $resultats=array(); //états des opérations
+	$tpl->assignInclude("corps",$forme2,T_BYVAR);
+	$tpl->prepare($chemin);
+	$resultats=array(); //états des opérations
 	require_once ($chemin."/commun/lib_rapport.php");
 	try {
 			
 		$tpl->assign("_ROOT.titre_popup",traduction("importation_plateforme"));
 		$resultats= doImport();
 		if (count($resultats))
-		    $tpl->assign("resultats_op",print_details($resultats,20));
+			$tpl->assign("resultats_op",print_details($resultats,20));
 		else
-		    $tpl->assign("resultats_op","xxx");
+			$tpl->assign("resultats_op","xxx");
 		$tpl->gotoBlock("_ROOT");
 		$tpl->print_boutons_fermeture();
 		$tpl->printToScreen();
@@ -138,120 +138,164 @@ $tpl->printToScreen();										//affichage
 
 
 function doImport() {
-    global $USER, $CFG,  $connexion; 
-     $resultats = array();
-    global $nom_bdd,$serveur_bdd,$user_bdd,$pass_bdd;
-    
-    // on force le name space latin ET une nouvelle connexion
-    // voir http://fr.php.net/mysql_connect#82040 (important si meme login/passe 
-    // sur les 2 BD
-    // notez que mysql_error() DOIT ici connaitre LA connexion utilisée  
-    
-    
-    $oldConnexion =Connexion($user_bdd, $pass_bdd, $nom_bdd, $serveur_bdd,'latin1',true);
-    set_ok ("Connexion établie avec l'ancienne base de données $nom_bdd",$resultats);
-   
-   
-    
-    if ($ligne = get_old_record('config', "cle='c2i'", $oldConnexion)) {
-        if ($ligne->valeur === $CFG->c2i)
-            set_ok ("controle type de C2I {$ligne->valeur} OK.",$resultats);
-        else {
-            set_erreur ("cette plateforme n'est pas pour le {$CFG->c2i}",$resultats);
-            return $resultats;
-        }
-    } else {
-        set_erreur (mysql_error($oldConnexion),$resultats);
-        return $resultats;
-    }
-    
-    if ($ligne = get_old_record('config', "cle='encodage'", $oldConnexion)) {
-        if ($ligne->valeur === 'ISO-8859-1')
-        set_ok ("controle encodage {$ligne->valeur} OK.",$resultats);
-        else {
-            set_erreur ("cette plateforme n'est pas en encodage ISO-8859-1",$resultats);
-            return $resultats;
-        }
-    } else {
-        set_erreur (mysql_error($oldConnexion),$resultats);
-        return $resultats;
-    }
-    
-    
-    $tables=array (
-        // MBV = la table cible must be vide
-        // DEL tableau des champs n'existant plus en V2
-        // NOACC tableau des champs donc les valeurs ne doivent plus avoir d'accents comme
-        // (création, validée ...)  
-        'droits'=> array('MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-        'plagesip'=> array('MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-        'preferences'=> array('MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-    	'profils'=> array('MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-        'qcm'   => array('MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-    	'webservices_clients_allow'   => array('MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-    	//'webservices_sessions'   => array('MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-    
-    );
-    
-    foreach ($tables as $tableNom=>$actions) {
-        set_ok ("traitement de {$CFG->prefix}$tableNom",$resultats);
-        
-        if ($actions['MBV'] && (count_records($tableNom)!=0)) {
-            set_erreur("La table $tableNom n'est pas vide dans la nouvelle base. ",$resultats);
-            continue;
-        }
-        
-        if (($oldRecords = get_old_records($tableNom,'', $oldConnexion))!==false) {
-            $cnt=count($oldRecords);
-            $nb = 0;
-            set_ok ("traitement de $cnt lignes depuis {$CFG->prefix}$tableNom",$resultats);
-            $enteteErreur=false; //drapeau pour nom de la table dans les erreurs  
-            foreach($oldRecords as $oldRecord) {
-                if (!empty($actions['DEL'])) {
-                    foreach($actions['DEL'] as $field)
-                        unset( $oldRecord->$field);
-                }
-                if (!empty($actions['NOACC'])) {
-                    foreach($actions['NOACC'] as $field)
-                    $oldRecord->$field = stripAccents($oldRecord->$field);
-                }
-                
-                $oldRecord =encodeutf8_object($oldRecord);
-                
-                if (insert_record($tableNom,$oldRecord,false,false,false))
-                    $nb++;
-                else {
-                    if (!$enteteErreur) {
-                        set_erreur ("---------",$resultats);
-                        set_erreur ("traitement de $cnt lignes depuis {$CFG->prefix}$tableNom",$resultats);
-                        set_erreur ("---------",$resultats);
-                        
-                        $enteteErreur=true;
-                    }
-                    set_erreur (mysql_error($connexion),$resultats);
-                    //return $resultats;
-                }
-                
-            }
-            set_ok ("Importation de {$nb}/{$cnt} lignes depuis {$CFG->prefix}$tableNom OK",$resultats);
-            unset($oldRecords);
-            
-            
-        } else {
-            set_erreur (mysql_error($oldConnexion),$resultats);
-            return $resultats;
-        }
-        
-        
-        
-    }
-    set_ok ("Fin du traitement de $nom_bdd",$resultats);
-    return $resultats;
+	global $USER, $CFG,  $connexion;
+	$resultats = array();
+	global $nom_bdd,$serveur_bdd,$user_bdd,$pass_bdd;
+
+	// on force le name space latin ET une nouvelle connexion
+	// voir http://fr.php.net/mysql_connect#82040 (important si meme login/passe
+	// sur les 2 BD)
+	// notez que mysql_error() DOIT ici connaitre LA connexion utilisée
+
+
+	$oldConnexion =Connexion($user_bdd, $pass_bdd, $nom_bdd, $serveur_bdd,'latin1',true);
+	set_ok ("Connexion établie avec l'ancienne base de données $nom_bdd",$resultats);
+	 
+	 
+
+	if ($ligne = get_old_record('config', "cle='c2i'", $oldConnexion)) {
+		if ($ligne->valeur === $CFG->c2i)
+			set_ok ("controle type de C2I {$ligne->valeur} OK.",$resultats);
+		else {
+			set_erreur ("cette plateforme n'est pas pour le {$CFG->c2i}",$resultats);
+			return $resultats;
+		}
+	} else {
+		set_erreur (mysql_error($oldConnexion),$resultats);
+		return $resultats;
+	}
+
+	if ($ligne = get_old_record('config', "cle='encodage'", $oldConnexion)) {
+		if ($ligne->valeur === 'ISO-8859-1')
+			set_ok ("controle encodage {$ligne->valeur} OK.",$resultats);
+		else {
+			set_erreur ("cette plateforme n'est pas en encodage ISO-8859-1",$resultats);
+			return $resultats;
+		}
+	} else {
+		set_erreur (mysql_error($oldConnexion),$resultats);
+		return $resultats;
+	}
+
+
+	$tables=array (
+			// SKIP traiter ou non cette table
+			// MBV = la table cible must be vide
+			// DEL tableau des champs n'existant plus en V2
+			// NOACC tableau des champs donc les valeurs ne doivent plus avoir d'accents comme
+			// (création, validée ...)
+			'alinea'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'alineaV2'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'cache_filters'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'config'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'droits'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'etablissement'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'events'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'examens'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'extelec'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'familles'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'feedbackexamen'		=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'inscrits'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'ldap'					=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'liens'					=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'notions'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'notionsparcours'		=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'parcours'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'plagesip'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'preferences'			=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'profils'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'qcm'  					=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'questions'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'questionsdocuments'	=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'questionsexamen'		=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'questionsvalidation'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'referentiel'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'referentielV2'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'reponses'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'ressources'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'ressourcesparcours'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'resultats'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'resultatscompetences'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'resultatsdetailles'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'resultatsexamens'		=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'resultatsreferentiels'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'tracking'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'utilisateurs'			=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'webservices_clients_allow'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'webservices_sessions'  => array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+
+	);
+
+	foreach ($tables as $tableNom=>$actions) {
+		if ($actions['SKIP']) //table a ignorer
+			continue;
+		 
+		set_ok ("traitement de {$CFG->prefix}$tableNom",$resultats);
+		$currentRecords= count_records($tableNom);
+		if ($actions['MBV'] && ($currentRecords !=0)) {
+			set_erreur("La table $tableNom n'est pas vide dans la nouvelle base. ",$resultats);
+			continue;
+		}
+		$cnt=count_old_records($tableNom,'', $oldConnexion);
+		$nb = 0;
+		set_ok ("traitement de $cnt lignes depuis l'ancienne table {$CFG->prefix}$tableNom",$resultats);
+		set_ok ("la nouvelle table {$CFG->prefix}$tableNom contient $currentRecords lignes ",$resultats);
+		$enteteErreur=false; //drapeau pour nom de la table dans les erreurs
+
+		$delta =1000 ; // par paquet de 1000 pour preserver la mémoire
+		$debut =0;
+
+		while ($debut < $cnt) {
+			$max=$debut+$delta-1;
+			if ($max >=$cnt)
+				$max = $cnt-1;
+			set_ok ("traitement des lignes de {$debut} à {$max} lignes de {$CFG->prefix}$tableNom : ",$resultats);
+			if (($oldRecords = get_old_records($tableNom,'', $oldConnexion,$debut,$delta))!==false) {
+				foreach($oldRecords as $oldRecord) {
+					if (!empty($actions['DEL'])) {
+						foreach($actions['DEL'] as $field)
+							unset( $oldRecord->$field);
+					}
+					if (!empty($actions['NOACC'])) {
+						foreach($actions['NOACC'] as $field)
+							$oldRecord->$field = stripAccents($oldRecord->$field);
+					}
+
+					$oldRecord =encodeutf8_object($oldRecord);
+
+					if (insert_record($tableNom,$oldRecord,false,false,false))
+						$nb++;
+					else {
+						if (!$enteteErreur) {
+							set_erreur ("---------",$resultats);
+							set_erreur ("traitement de $cnt lignes depuis {$CFG->prefix}$tableNom",$resultats);
+							set_erreur ("---------",$resultats);
+							$enteteErreur=true;
+						}
+						set_erreur (mysql_error($connexion),$resultats);
+						//return $resultats;  non fatale (violation d'index on continue
+					}
+
+				}
+			
+				unset($oldRecords);
+				 
+			} else { //erreur fatale
+				set_erreur (mysql_error($oldConnexion),$resultats);
+				return $resultats;
+			}
+			
+			$debut = $debut + $delta ;  //page suivante
+		}
+	}
+	set_ok ("Importation de {$nb}/{$cnt} lignes depuis {$CFG->prefix}$tableNom OK",$resultats);
+	set_ok ("Fin du traitement de $nom_bdd",$resultats);
+	return $resultats;
 
 }
 
 /**
- * 
+ *
  * lecture d'une ligne de l'ancienne BD
  * @param string $tablename  nom de la table SANS le prefixe
  * @param string $critere  clause where optionnelle
@@ -259,54 +303,70 @@ function doImport() {
  * @return object avec les slashes retirés
  */
 function get_old_record ($tablename, $critere, $oldConnexion) {
-    
-    global $connexion ; 
-    
-    $savConnexion = $connexion; 
-    $connexion = $oldConnexion;
-    $res = get_record ($tablename,$critere,false);
-    $connexion = $savConnexion;
-    return $res;
+
+	global $connexion ;
+
+	$savConnexion = $connexion;
+	$connexion = $oldConnexion;
+	$res = get_record ($tablename,$critere,false);
+	$connexion = $savConnexion;
+	return $res;
 }
 
 /**
-*
-* lecture de lignes de l'ancienne BD
-* @param string $tablename  nom de la table SANS le prefixe
-* @param string $critere  clause where optionnelle
-* @param  $oldConnexion  connexion BD a utiliser
-* * @return array of object avec les slashes retirés
-*/
-function get_old_records ($tablename, $critere, $oldConnexion) {
+ *
+ * lecture de lignes de l'ancienne BD
+ * @param string $tablename  nom de la table SANS le prefixe
+ * @param string $critere  clause where optionnelle
+ * @param  $oldConnexion  connexion BD a utiliser
+ * * @return array of object avec les slashes retirés
+ */
+function get_old_records ($tablename, $critere, $oldConnexion,$debut=0,$nombre=0) {
 
-    global $connexion ;
+	global $connexion ;
 
-    $savConnexion = $connexion;
-    $connexion = $oldConnexion;
-    $res = get_records ($tablename,$critere,false,false,false,false);
-    $connexion = $savConnexion;
-    return $res;
+	$savConnexion = $connexion;
+	$connexion = $oldConnexion;
+	$res = get_records ($tablename,$critere,false,false,$debut,$nombre);
+	$connexion = $savConnexion;
+	return $res;
 }
 
 /**
-* conversion UTF8 d'un data record
-*
-* $dataobject is an object containing needed data
-*
-* @param $dataobject Object containing the database record
-* @return object Same object with neccessary characters converted
-*/
+ * compte le nb de lignes matchant un critere dans une table de l'ancienne BD
+ * @param string $tablename
+ * @param string $critere
+ * @param  $oldConnexion
+ */
+function count_old_records ($tablename, $critere, $oldConnexion) {
+	global $connexion ;
+
+	$savConnexion = $connexion;
+	$connexion = $oldConnexion;
+	$res = count_records ($tablename,$critere,false);
+	$connexion = $savConnexion;
+	return $res;
+}
+
+/**
+ * conversion UTF8 d'un data record
+ *
+ * $dataobject is an object containing needed data
+ *
+ * @param $dataobject Object containing the database record
+ * @return object Same object with neccessary characters converted
+ */
 function encodeutf8_object( $dataobject ) {
-    $a = get_object_vars( $dataobject);
-    foreach ($a as $key=>$value) {
-        if (is_string($value))
-            $a[$key] =  utf8_encode ( $value );
-    }
-    return (object)$a;
+	$a = get_object_vars( $dataobject);
+	foreach ($a as $key=>$value) {
+		if (is_string($value))
+			$a[$key] =  utf8_encode ( $value );
+	}
+	return (object)$a;
 }
 
 function stripAccents($string){
-    return strtr($string,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ',
-'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+	return strtr($string,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ',
+			'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
 }
 
