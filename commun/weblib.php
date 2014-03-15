@@ -641,7 +641,7 @@ function __print_menu_personnel ($tpl,$type_item) {
             }
 
             if ($CFG->prof_peut_passer_qcm)
-                __print_menu_etudiant15($tpl,$type_item);
+                __print_menu_etudiant($tpl,$type_item);
 
 
      // V 1.41 l'item retour est dans un block dans principale.html ', il �tait syst�matique dans le template avant

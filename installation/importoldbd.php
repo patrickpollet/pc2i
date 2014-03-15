@@ -185,49 +185,57 @@ function doImport() {
 			// NOACC tableau des champs donc les valeurs ne doivent plus avoir d'accents comme
 			// (création, validée ...)
 			'alinea'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'alineaV2'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'alineaV2'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ), //existe plus
 			'cache_filters'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'config'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'droits'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'etablissement'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'etablissement'			=> array('SKIP'=>0 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ), //requis pour  les evnetuelles composantes
 			'events'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'examens'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'examens'				=> array('SKIP'=>0 , 'MBV'=>0, 
+			                                 'DEL'=>array('date_de_creation','date_examen','heure_debut','heure_fin',
+			                                              'alinea','os','suite_bureau','autre_logiciel','mots_cles',
+			                                              'difficulte','pre_requis','contexte','caracteristiques',
+			                                              'date_examen_fin','different_de_difficulte',
+			                                              'different_de_contexte','different_de_caracteristiques',
+			                                              'different_de_os','different_de_suite_bureau',
+			                                              'version_referentiel' ),
+			                                 'NOACC'=>array('type_tirage','ordre_q','ordre_r') ),
 			'extelec'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'familles'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'feedbackexamen'		=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'inscrits'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'inscrits'				=> array('SKIP'=>0 , 'MBV'=>0, 'DEL'=>array('connexion','derniere_connexion'),'NOACC'=>array() ),
 			'ldap'					=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'liens'					=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'notions'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'notionsparcours'		=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'parcours'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'liens'					=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),   //existe plus
+			'notions'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),     //existe plus
+			'notionsparcours'		=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),     //existe plus
+			'parcours'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array('date'),'NOACC'=>array('type') ),
 			'plagesip'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'preferences'			=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'profils'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'qcm'  					=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'questions'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'questions'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ), // cas des questions locales ?
 			'questionsdocuments'	=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'questionsexamen'		=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'questionsvalidation'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'questionsvalidation'	=> array('SKIP'=>1,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'referentiel'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'referentielV2'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'reponses'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'ressources'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'referentielV2'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),   //existe plus
+			'reponses'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),   // cas des questions locales ?
+			'ressources'			=> array('SKIP'=>0 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ), //en cas de ressources locales
 			'ressourcesparcours'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'resultats'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'resultats'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array('date','heure'),'NOACC'=>array() ),
 			'resultatscompetences'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'resultatsdetailles'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'resultatsexamens'		=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'resultatsreferentiels'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'tracking'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'utilisateurs'			=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'webservices_clients_allow'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'webservices_sessions'  => array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'tracking'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array('date_t'),'NOACC'=>array() ), //trop gros inutile
+			'utilisateurs'			=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array('connexion','derniere_connexion'),'NOACC'=>array() ),
+		'webservices_clients_allow'	=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
+			'webservices_sessions'  => array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ), //trop gros inutile
 
 	);
 
 	foreach ($tables as $tableNom=>$actions) {
-		if ($actions['SKIP']) //table a ignorer
+		if ($actions['SKIP']!=0) //table a ignorer
 			continue;
 		 
 		set_ok ("traitement de {$CFG->prefix}$tableNom",$resultats);
@@ -238,6 +246,7 @@ function doImport() {
 		}
 		$cnt=count_old_records($tableNom,'', $oldConnexion);
 		$nb = 0;
+		$nbErreurs=0;
 		set_ok ("traitement de $cnt lignes depuis l'ancienne table {$CFG->prefix}$tableNom",$resultats);
 		set_ok ("la nouvelle table {$CFG->prefix}$tableNom contient $currentRecords lignes ",$resultats);
 		$enteteErreur=false; //drapeau pour nom de la table dans les erreurs
@@ -273,6 +282,7 @@ function doImport() {
 							$enteteErreur=true;
 						}
 						set_erreur (mysql_error($connexion),$resultats);
+						$nbErreurs ++ ;
 						//return $resultats;  non fatale (violation d'index on continue
 					}
 
@@ -287,8 +297,8 @@ function doImport() {
 			
 			$debut = $debut + $delta ;  //page suivante
 		}
+		set_ok ("Importation de {$nb}/{$cnt} lignes depuis {$CFG->prefix}$tableNom} OK et {$nbErreurs} erreurs",$resultats);
 	}
-	set_ok ("Importation de {$nb}/{$cnt} lignes depuis {$CFG->prefix}$tableNom OK",$resultats);
 	set_ok ("Fin du traitement de $nom_bdd",$resultats);
 	return $resultats;
 
@@ -327,7 +337,7 @@ function get_old_records ($tablename, $critere, $oldConnexion,$debut=0,$nombre=0
 
 	$savConnexion = $connexion;
 	$connexion = $oldConnexion;
-	$res = get_records ($tablename,$critere,false,false,$debut,$nombre);
+	$res = get_records ($tablename,$critere,false,$debut,$nombre,false);
 	$connexion = $savConnexion;
 	return $res;
 }
