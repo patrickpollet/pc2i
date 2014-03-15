@@ -179,6 +179,20 @@ function doImport() {
 		set_erreur (mysql_error($oldConnexion),$resultats);
 		return $resultats;
 	}
+	
+	if ($CFG->c2i === 'c2i1') {
+		if ($ligne = get_old_record('config', "cle='version_referentiel'", $oldConnexion)) {
+			if ($ligne->valeur >1)
+				set_ok ("controle version 2 du référentiel du C2I niveau 1 OK.",$resultats);
+			else {
+				set_erreur ("vous ne pouvez pas importer une plateforme C2I niveau 1 avec l'ancien réferentiel",$resultats);
+				return $resultats;
+			}
+		} else {
+			set_erreur (mysql_error($oldConnexion),$resultats);
+			return $resultats;
+		}
+	}
 
 
 	$tables=array (
@@ -252,7 +266,7 @@ function doImport() {
 		$nbErreurs=0;
 		set_ok ("traitement de $cnt lignes depuis l'ancienne table {$CFG->prefix}$tableNom",$resultats);
 		set_ok ("la nouvelle table {$CFG->prefix}$tableNom contient $currentRecords lignes ",$resultats);
-		$enteteErreur=false; //drapeau pour nom de la table dans les erreurs
+		$enteteErreur=false; //drapeau pour mettre une fois le nom de la table dans les erreurs
 
 		$delta =1000 ; // par paquet de 1000 pour preserver la mémoire
 		$debut =0;
@@ -263,7 +277,19 @@ function doImport() {
 				$max = $cnt-1;
 			set_ok ("traitement des lignes de {$debut} à {$max} lignes de {$CFG->prefix}$tableNom : ",$resultats);
 			if (($oldRecords = get_old_records($tableNom,'', $oldConnexion,$debut,$delta))!==false) {
+				
 				foreach($oldRecords as $oldRecord) {
+					
+					//filtrage a la volée 
+					if ($CFG->c2i=== 'c2i1' && $tableNom ==='examens') {
+						if ($oldRecord->version_referentiel ==1) {
+							$id= $oldRecord->id_etab.".".$oldRecord->id_examen;
+							set_erreur ("Examen {$id} non importé car créé ave l'ancienne version du réferentiel C2i1",$resultats);
+							$nbErreurs ++;
+							continue;
+						}
+					}
+					
 					if (!empty($actions['DEL'])) {
 						foreach($actions['DEL'] as $field)
 							unset( $oldRecord->$field);
