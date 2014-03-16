@@ -16,7 +16,7 @@ $textes_langues["installation1"]="Installation Etape 1 -Paramètres initiaux";
 
 $textes_langues["installation2"]="Installation Etape 2 - Création de la base de données";
 
-$textes_langues["maj"]="Mise à jour de votre base de données pour la version 1.5";
+$textes_langues["maj"]="Mise à jour de votre base de données pour la version 2";
 
 
 
@@ -28,8 +28,8 @@ $textes_langues["epilogue_install"]=<<<EOF
     <br/>
     Vous pouvez maintenant tester si vos paramètres sont corrects. 
    <br/>
-    Pensez à supprimer les fichiers d installation (le dossier installation) lorsque vous aurez fini les tests afin que personne ne puisse les modifier sans votre accord. gardez-en une copie en cas de besoin.<br>
-    <span class="rouge">Si vous avez opté pour l installation automatique, n'oubliez pas d'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
+    Pensez à supprimer les fichiers d'installation (le dossier installation) lorsque vous aurez fini les tests afin que personne ne puisse les modifier sans votre accord. gardez-en une copie en cas de besoin.<br>
+    <span class="rouge">Si vous avez opté pour l'installation automatique, n'oubliez pas d'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
 
 
 </div>
@@ -49,9 +49,19 @@ $textes_langues["info_importation_plateforme"]=<<<EOF
     Avec cette option vous aller pouvoir importer dans votre nouvelle plateforme les données 
     d'une ancienne plateforme C2I (comptes, examens, résultats ...).
     <br>
+    Vous devez être connecté à la plateforme cible (V2) comme administrateur dans un autre onglet.
     </div>
 EOF;
 
+$textes_langues["info_importation_plateforme_fin"]=<<<EOF
+
+    <div class="information_gauche">
+    Importation terminée.
+    <br>
+    Vous pouvez consulter les résultats ci-dessous et eventuellement répeter l'opération après avoir corrigé quelques erreurs
+    dans la base de données cible, comme des erreurs de violation de clé.
+    </div>
+EOF;
 
 $supp=array(
 "tests_parametres"=>"test de votre environnement",
@@ -77,7 +87,8 @@ $supp=array(
 "info_etat_droits_ko"=>"erreur en tentant de créer une table sur la base de données" ,
 
 
-"importation_plateforme"=>"Données de connexion de l'ancienne plateforme",
+"importation_plateforme"=>"Importation depuis une plateforme V1.5",
+"importation_old_plateforme"=>"Données de connexion de l'ancienne plateforme",
 "info_import_serveur_bd"=>"Laisser vide si sur le même serveur que cette PF",
 "info_import_nom_bd"=>"Nom de la base de données version 1.5",
 "info_import_user_bd"=>"Laisser vide si le même que pour cette PF",

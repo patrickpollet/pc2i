@@ -31,7 +31,7 @@ $user_bdd=optional_param("user_bdd",$base_utilisateur,PARAM_RAW);
 
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
-$tpl = new C2IPrincipale();    //cr�er une instance
+$tpl = new C2IPopup();    //cr�er une instance
 //inclure d'autre block de templates
 
 $forme1=<<<EOF
@@ -39,30 +39,30 @@ $forme1=<<<EOF
 <div id="maj_ajax">
 <form class="normale" id="monform" method="post" action="importoldbd.php">
 <fieldset>
-<legend>{importation_plateforme} </legend>
+<legend>{importation_old_plateforme} </legend>
 
 <div class="commentaire1">{info_importation_plateforme} </div>
 
 
 <p class="double">
 <label for="nom_bdd">{form_nom_bdd}<span class="info">{info_import_nom_bd}</span></label>
-<input type="text" name="nom_bdd"  id="nom_bdd" value="{nom_bdd}" size="40" class="saisie required" title="js_valeur_manquante"/>
+<input type="text" name="nom_bdd"  id="nom_bdd" value="" size="40" class="saisie required" title="js_valeur_manquante"/>
 </p>
 
 <p class="double">
 <label for="serveur_bdd">{form_serveur_bdd}<span class="info">{info_import_serveur_bd}</span></label>
-<input type="text" name="serveur_bdd" id="serveur_bdd" value="{serveur_bdd}" size="40" class="saisie"/>
+<input type="text" name="serveur_bdd" id="serveur_bdd" value="" size="40" class="saisie"/>
 </p>
 
 
 <p class="double">
 <label for="user_bdd">{form_user_bdd}<span class="info">{info_import_user_bd}</span></label>
-<input type="text" name="user_bdd"  id="user_bdd" value="{user_bdd}" size="40" class="saisie"/>
+<input type="text" name="user_bdd"  id="user_bdd" value="" size="40" class="saisie"/>
 </p>
 
 <p class="double">
 <label for="pass_bdd">{form_pass_bdd}<span class="info">{info_import_pass_bd}</span></label>
-<input type="password" name="pass_bdd"  id="pass_bdd" value="{pass_bdd}" size="40" class="saisie"/>
+<input type="password" name="pass_bdd"  id="pass_bdd" value="" size="40" class="saisie"/>
 </p>
 
 <input name="ide" type="hidden" value="{ide}"/>
@@ -86,18 +86,19 @@ $forme1=<<<EOF
 EOF;
 
 $forme2=<<<EOF
+<div class="commentaire1">
+{info_importation_plateforme_fin}
+</div>
+
 
 {resultats_op}
 
-<div class="information">
-
-</div>
 EOF;
 
-//pas encore de login connu
-$USER= new StdClass();
-$USER->type_plateforme='certification';
-$USER->id_user='admin';
+//pas encore de login connu(si avec require_login en haut !
+//$USER= new StdClass();
+//$USER->type_plateforme='certification';
+//$USER->id_user='admin';
 
 if ($nom_bdd) {
 	$tpl->assignInclude("corps",$forme2,T_BYVAR);
@@ -112,8 +113,7 @@ if ($nom_bdd) {
 			$tpl->assign("resultats_op",print_details($resultats,20));
 		else
 			$tpl->assign("resultats_op","xxx");
-		$tpl->gotoBlock("_ROOT");
-		$tpl->print_boutons_fermeture();
+		
 		$tpl->printToScreen();
 		die();
 	} catch (Exception $e) {
@@ -201,6 +201,16 @@ function doImport() {
 			// DEL tableau des champs n'existant plus en V2
 			// NOACC tableau des champs donc les valeurs ne doivent plus avoir d'accents comme
 			// (création, validée ...)
+			// on commence par les examens qui DOIT ETRE VIDE sinon affreux melange des inscriptions, des questions et des résultats
+			'examens'				=> array('SKIP'=>0 , 'MBV'=>1,
+					'DEL'=>array('date_de_creation','date_examen','heure_debut','heure_fin',
+							'alinea','os','suite_bureau','autre_logiciel','mots_cles',
+							'difficulte','pre_requis','contexte','caracteristiques',
+							'date_examen_fin','different_de_difficulte',
+							'different_de_contexte','different_de_caracteristiques',
+							'different_de_os','different_de_suite_bureau',
+							'version_referentiel' ),
+					'NOACC'=>array('type_tirage','ordre_q','ordre_r') ),
 			'alinea'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'alineaV2'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ), //existe plus
 			'cache_filters'			=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
@@ -208,15 +218,7 @@ function doImport() {
 			'droits'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'etablissement'			=> array('SKIP'=>0 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ), //requis pour  les evnetuelles composantes
 			'events'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
-			'examens'				=> array('SKIP'=>0 , 'MBV'=>0, 
-			                                 'DEL'=>array('date_de_creation','date_examen','heure_debut','heure_fin',
-			                                              'alinea','os','suite_bureau','autre_logiciel','mots_cles',
-			                                              'difficulte','pre_requis','contexte','caracteristiques',
-			                                              'date_examen_fin','different_de_difficulte',
-			                                              'different_de_contexte','different_de_caracteristiques',
-			                                              'different_de_os','different_de_suite_bureau',
-			                                              'version_referentiel' ),
-			                                 'NOACC'=>array('type_tirage','ordre_q','ordre_r') ),
+
 			'extelec'				=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'familles'				=> array('SKIP'=>1 , 'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
 			'feedbackexamen'		=> array('SKIP'=>0,  'MBV'=>0, 'DEL'=>array(),'NOACC'=>array() ),
@@ -255,11 +257,18 @@ function doImport() {
 		if ($actions['SKIP']!=0) //table a ignorer
 			continue;
 		 
-		set_ok ("traitement de {$CFG->prefix}$tableNom",$resultats);
+		set_ok ("\ntraitement de {$CFG->prefix}$tableNom",$resultats);
 		$currentRecords= count_records($tableNom);
 		if ($actions['MBV'] && ($currentRecords !=0)) {
-			set_erreur("La table $tableNom n'est pas vide dans la nouvelle base. ",$resultats);
-			continue;
+			if ($tableNom==='examens') {
+				set_erreur("La nouvelle plateforme ne doit avoir aucun examen . ",$resultats);
+				return ($resultats);
+			}
+			else {
+				set_erreur("La table $tableNom n'est pas vide dans la nouvelle base. ",$resultats);
+				continue;
+			}
+			
 		}
 		$cnt=count_old_records($tableNom,'', $oldConnexion);
 		$nb = 0;
@@ -326,9 +335,9 @@ function doImport() {
 			
 			$debut = $debut + $delta ;  //page suivante
 		}
-		set_ok ("Importation de {$nb}/{$cnt} lignes depuis {$CFG->prefix}$tableNom} OK et {$nbErreurs} erreurs",$resultats);
+		set_ok ("Importation de {$nb}/{$cnt} lignes depuis {$CFG->prefix}$tableNom OK et {$nbErreurs} erreurs",$resultats);
 	}
-	set_ok ("Fin du traitement de $nom_bdd",$resultats);
+	set_ok ("\nFin du traitement de $nom_bdd",$resultats);
 	return $resultats;
 
 }
