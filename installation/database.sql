@@ -89,7 +89,7 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 (17, 'dev', 'debug_in_html', '0', '0', 'ajouter des infos de debug dans la page html', 1, 'required', 1),
 (18, 'dev', 'debug_level', '0', '0', 'niveau de debug php', 1, 'required', 1),
 (19, 'dev', 'syslog_level', '0', '0', '', 1, 'required', 1),
-(20, 'pfc2i', 'largeur_minipopups', '405', '405', '', 1, 'required', 1),
+(20, 'pfc2i', 'largeur_minipopups', '460', '460', '', 1, 'required', 1),
 (21, 'pfc2i', 'largeur_popups', '900', '900', '', 1, 'required', 1),
 (22, 'pfc2i', 'hauteur_minipopups', '320', '320', '', 1, 'required', 1),
 (23, 'pfc2i', 'hauteur_popups', '600', '600', '', 1, 'required', 1),
