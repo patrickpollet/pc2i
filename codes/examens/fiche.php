@@ -654,6 +654,7 @@ if ($id=optional_param('id','',PARAM_CLE_C2I)) {
 }
 v_d_o_d("el");
 
+
 $refresh=optional_param("refresh",0,PARAM_INT); //rafraichir la liste des exaemns sous-jacente qui a ouvert le popup
 
 

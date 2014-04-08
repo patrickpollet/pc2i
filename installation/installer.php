@@ -31,7 +31,7 @@ require_once("lib_install.php");
 
 //donc on peut ...
 require_once ($chemin_commun."/lib_bd.php");
-
+require_once ($chemin_commun."/lib_acces.php");
 
 $wwwroot=required_param("wwwroot",PARAM_RAW);
 $dataroot=required_param("dataroot",PARAM_RAW);
@@ -83,7 +83,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     $user->password=mot_de_passe_a($CFG->longueur_mot_de_passe_aleatoire);
     $user->etablissement=0;
     $user->est_admin_univ='O';
-    cree_utilisateur($user,0);
+    cree_utilisateur($user,0,false); //pas d'espion encore
     
     if ($c2i !='xx') { 
     	set_config('pfc2i','universite_serveur',0);  // force synchro de la BD vide avec la nationale
@@ -96,7 +96,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     	$user->login='admin';
     	$user->etablissement=1;
     	$user->est_superdamin=$user->est_admin_univ='O';
-    	update_utilisateur($user,true);
+    	update_utilisateur($user,false);  //pas d'espion encore
     	
     	set_config('pfc2i','universite_serveur',0);  // pas de synchro de la BD vide avec la nationale
     	print  traduction ("epilogue_install2",true,$user->password);

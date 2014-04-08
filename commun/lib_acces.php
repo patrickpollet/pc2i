@@ -482,7 +482,7 @@ function supprime_utilisateur_profil ($idprofil,$login) {
 }
 
 
-function cree_utilisateur ($ligne, $ide=false) {
+function cree_utilisateur ($ligne, $ide=false,$espion=true) {
     global $USER,$CFG;
 
     if (empty($ligne->login)) return false;
@@ -497,7 +497,8 @@ function cree_utilisateur ($ligne, $ide=false) {
 	 if (empty($ligne->auth))$ligne->auth="manuel";
 
     //tracking :
-    espion3("ajout","personnel", $ligne->login,$ligne); //rev 883
+    if ($espion) 
+        espion3("ajout","personnel", $ligne->login,$ligne); //rev 883
     return insert_record("utilisateurs",$ligne,'',false,false);// pas e fatale si echec
 
 }

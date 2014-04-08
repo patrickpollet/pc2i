@@ -85,6 +85,7 @@ EOF;
 //pas encore de login connu
 $USER= new StdClass();
 $USER->type_plateforme='certification';
+$USER->id_user='admin';
 
 if ($login_nat && $pass_nat) {
 

@@ -23,8 +23,7 @@ $textes_langues["maj"]="Mise à jour de votre base de données pour la version 2
 
 $textes_langues["epilogue_install"]=<<<EOF
     <hr>
-    <div class="information_gauche">Installation terminée.<br>
-   
+    <div class='information_gauche'>Installation terminée.<br> 
     <br/>
     Un compte administrateur vient d'être créé avec comme identifiant <b>admin</b> et comme mot de passe <b>%s</b>. 
    <br/>
@@ -36,22 +35,16 @@ $textes_langues["epilogue_install"]=<<<EOF
    <li> des questions validées et leurs thèmes associés
    <li> des ressources nationales associées aux domaines et aux compétences  du réferentiel
    <li> des établissements
-   </ul>
-   
-   
-   
+   </ul>   
     Pensez à supprimer les fichiers d'installation (le dossier installation) lorsque vous aurez fini les tests afin que personne ne puisse les modifier sans votre accord. gardez-en une copie en cas de besoin.<br>
-    <span class="rouge">Si vous avez opté pour l'installation automatique, n'oubliez pas d'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
-
-
+    <span class='rouge'>Si vous avez opté pour l'installation automatique, n'oubliez pas d\'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
 </div>
 EOF;
 
 
 $textes_langues["epilogue_install2"]=<<<EOF
     <hr>
-    <div class="information_gauche">Installation générique terminée.<br>
-   
+    <div class='information_gauche'>Installation générique terminée.<br>  
     <br/>
     Vous avez opté pour l'installation générique de le plate-forme. Vous n'avez donc pas accès aux  options de synchronisation depuis
     une plate-forme nationale. 
@@ -63,6 +56,9 @@ Avant toute utilisation de cette plate-forme, il convient de définir dans cet o
 <li> votre réferentiel de compétences
 <li> la liste des domaines traités
 <li> la liste de vos QCM 
+</ul>
+    Pensez à supprimer les fichiers d'installation (le dossier installation) lorsque vous aurez fini les tests afin que personne ne puisse les modifier sans votre accord. gardez-en une copie en cas de besoin.<br>
+    <span class='rouge'>Si vous avez opté pour l'installation automatique, n'oubliez pas d'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
 </div>
 EOF;
 
@@ -73,7 +69,6 @@ Un utilisateur ayant les mêmes login et mot de passe que votre correspondant C2
 Vous pouvez desormais utiliser ce compte pour créer des examens sur votre plate-forme.
 </p>
 <p>
-
 </p>
 </div>
 EOF;

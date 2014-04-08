@@ -239,17 +239,17 @@ $fiche=<<<EOF
   <tr>
     <th>{form_ordre_q}</th>
     <td>
-    	<input name="ordre_q" type="radio" value="{fixe}" 		{ch_oqf} /> {form_fixe}
+    	<input name="ordre_q" type="radio" value="fixe" 		{ch_oqf} /> {form_fixe}
     	&nbsp;&nbsp;
-        <input name="ordre_q" type="radio" value="{aleatoire}" 	{ch_oqa} /> {form_aleatoire}
+        <input name="ordre_q" type="radio" value="aleatoire" 	{ch_oqa} /> {form_aleatoire}
    </td>
  </tr>
   <tr>
     <th>{form_ordre_r}</th>
     <td>
-    	<input name="ordre_r" type="radio" value="{fixe}" 		{ch_orf} /> {form_fixe}
+    	<input name="ordre_r" type="radio" value="fixe" 		{ch_orf} /> {form_fixe}
     	&nbsp;&nbsp;
-        <input name="ordre_r" type="radio" value="{aleatoire}" 	{ch_ora} /> {form_aleatoire}
+        <input name="ordre_r" type="radio" value="aleatoire" 	{ch_ora} /> {form_aleatoire}
    </td>
  </tr>
 

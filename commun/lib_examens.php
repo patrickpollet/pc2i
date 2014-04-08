@@ -953,7 +953,7 @@ function type_tirage ($examen) {
  * dans l'attente d'un changement de structure BD pour virer 'aléatoire' (accent !)
 */
 function ordre_affichage($valeur) {
-    if ($valeur=='EXAMEN_ORDRE_Q_ALEATOIRE') 
+    if ($valeur==EXAMEN_ORDRE_Q_ALEATOIRE) 
         return traduction ('form_aleatoire');
     else 
         return traduction ('form_fixe') ;
