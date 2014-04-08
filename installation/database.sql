@@ -327,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `c2ietablissement` (
 --
 
 INSERT INTO `c2ietablissement` (`id_etab`, `nom_etab`, `pere`, `positionnement`, `certification`, `locale`, `nationale`, `nb_telechargements`, `param_nb_items`, `param_nb_aleatoire`, `param_nb_experts`, `param_nb_qac`, `param_ldap`, `base_ldap`, `rdn_ldap`, `passe_ldap`, `param_langue`, `nb_quest_recup`, `ldap_group_class`, `ldap_group_attribute`, `ldap_id_attribute`, `url`, `ldap_login_attribute`, `ldap_mail_attribute`, `ldap_nom_attribute`, `ldap_prenom_attribute`, `ldap_version`, `ldap_user_type`) VALUES
-(1, 'Ministère de l''éducation nationale', -1, 0, 0, 0, 0, 35, 100, 45, 3, 45, 'ou=fr', '', '', '', 'fr', 50, '', '', '', '', 'uid', 'mail', 'sn', 'givenName', '2', 'rfc2307bis');
+(1, 'Ministère de l''éducation nationale', -1, 0, 1, 1, 0, 0, 100, 45, 3, 45, 'ou=fr', '', '', '', 'fr', 50, '', '', '', '', 'uid', 'mail', 'sn', 'givenName', '2', 'rfc2307bis');
 
 -- --------------------------------------------------------
 

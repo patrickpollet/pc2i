@@ -76,18 +76,28 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     if ($c2i=='c2i1')
         set_config("pfc2i","algo_tirage",3,true);  //par famille
     else 
-        set_config("pfc2i","algo_tirage",2,true);      // par alinea
+        set_config("pfc2i","algo_tirage",1,true);      // par domaine
+    
     //créér un compte admin
+    $pwd= mot_de_passe_a($CFG->longueur_mot_de_passe_aleatoire);
     $user=new StdClass();
-    $user->login='admin';
-    $user->password=mot_de_passe_a($CFG->longueur_mot_de_passe_aleatoire);
+    $user->login=$user->nom=$user->prenom='admin';
+    $user->email='admin@univ';
+    $user->password=md5($pwd);
     $user->etablissement=0;
     $user->est_admin_univ='O';
     cree_utilisateur($user,0,false); //pas d'espion encore
     
+    // avec ses droits
+    $data=new StdClass();
+    $data->login='admin';
+    $data->id_profil=1; // admin
+    insert_record('droits',$data,false,false,false);
+    
+    
     if ($c2i !='xx') { 
     	set_config('pfc2i','universite_serveur',0);  // force synchro de la BD vide avec la nationale
-    	print  traduction ("epilogue_install",true,$user->password,$c2i,$c2i);
+    	print  traduction ("epilogue_install",true,$pwd,$c2i,$c2i);
     	die();   	 
     } else {
     	//plateforme nationale sans referentiel 
