@@ -149,13 +149,15 @@ ob_start();
 if (!$tester) {
 	test_config($dataroot,$chemin_commun);
 }else {
+
+    // creation du fichier constantes.php
     test_config($dataroot,$chemin_commun);
     
     $modele="constantes_dist_v2.php";   
     $tmptpl= new subTemplatePower($chemin_commun."/".$modele);
     $tmptpl->prepare($chemin);
     
-    //$tmptpl->assign("session_nom","c2iv15");
+   
     $tmptpl->assign("serveur_bdd",$serveur_bdd);
     $tmptpl->assign("nom_bdd",$nom_bdd);
     $tmptpl->assign("user_bdd",$user_bdd);

@@ -61,14 +61,22 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
 	require_once($chemin_commun."/lib_config.php");
 	set_config("pfc2i","chemin_ressources",$dataroot,true);
 	set_config("pfc2i","wwwroot",$wwwroot,true);
-	set_config("pfc2i","verifier_install",0,true);
-    set_config("pfc2i","date_installation",time(),time(),"",0,0);
-    set_config("pfc2i","prefix",$prefix,"",0,0);
+	set_config("pfc2i","verifier_install",0);
+	$now=time();
+    set_config("pfc2i","date_mise_a_jour",$now,0);
+    set_config("pfc2i","date_installation",$now,0);
+    set_config("pfc2i","date_creation_config",$now,0);
+    set_config("pfc2i","date_derniere_maj",$now,0);
+    set_config("pfc2i","prefix",$prefix,0);
    
-    set_config("pfc2i","c2i",$c2i,"",0,0);
-    set_config("pfc2i","adresse_pl_nationale","https://c2i.education.fr/{$c2i}/","",0,0);
-    set_config("pfc2i","adresse_feedback_questions","qcm-{$c2i}@education.gouv.fr/","",0,0);
+    set_config("pfc2i","c2i",$c2i,0);
+    set_config("pfc2i","adresse_pl_nationale","https://c2i.education.fr/{$c2i}/",0);
+    set_config("pfc2i","adresse_feedback_questions","qcm-{$c2i}@education.gouv.fr/",0);
     
+    if ($c2i=='c2i1')
+        set_config("pfc2i","algo_tirage",3,true);  //par famille
+    else 
+        set_config("pfc2i","algo_tirage",2,true);      // par alinea
     //créér un compte admin
     $user=new StdClass();
     $user->login='admin';
@@ -79,7 +87,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     
     if ($c2i !='xx') { 
     	set_config('pfc2i','universite_serveur',0);  // force synchro de la BD vide avec la nationale
-    	print  traduction ("epilogue_install",true,$user->password);
+    	print  traduction ("epilogue_install",true,$user->password,$c2i,$c2i);
     	die();   	 
     } else {
     	//plateforme nationale sans referentiel 
@@ -90,7 +98,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     	$user->est_superdamin=$user->est_admin_univ='O';
     	update_utilisateur($user,true);
     	
-    	set_config('pfc2i','universite_serveur',1);  // pas de synchro de la BD vide avec la nationale
+    	set_config('pfc2i','universite_serveur',0);  // pas de synchro de la BD vide avec la nationale
     	print  traduction ("epilogue_install2",true,$user->password);
     	die();
     }

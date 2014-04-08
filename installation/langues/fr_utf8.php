@@ -22,12 +22,24 @@ $textes_langues["maj"]="Mise à jour de votre base de données pour la version 2
 
 
 $textes_langues["epilogue_install"]=<<<EOF
-    <hr><hr>
-    <div class="information_gauche">Installation Terminée.<br>
+    <hr>
+    <div class="information_gauche">Installation terminée.<br>
    
     <br/>
-    Vous pouvez maintenant tester si vos paramètres sont corrects. 
+    Un compte administrateur vient d'être créé avec comme identifiant <b>admin</b> et comme mot de passe <b>%s</b>. 
    <br/>
+   Pour être fonctionnelle cette plate-forme locale a besoin d'être synchronisée avec une plate-forme nationale. <br/>
+   A la première connexion, vous allez être automatiquement redirigé vers la mise à jour depuis la plate-forme nationale %s correspondante.
+   En fournissant les identifiants nationaux de votre correspondant C2I, vous récupererez alors les toutes dernieres versions :
+   <ul> 
+   <li> du referentiel C2i  %s
+   <li> des questions validées et leurs thèmes associés
+   <li> des ressources nationales associées aux domaines et aux compétences  du réferentiel
+   <li> des établissements
+   </ul>
+   
+   
+   
     Pensez à supprimer les fichiers d'installation (le dossier installation) lorsque vous aurez fini les tests afin que personne ne puisse les modifier sans votre accord. gardez-en une copie en cas de besoin.<br>
     <span class="rouge">Si vous avez opté pour l'installation automatique, n'oubliez pas d'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
 
@@ -35,10 +47,34 @@ $textes_langues["epilogue_install"]=<<<EOF
 </div>
 EOF;
 
+
+$textes_langues["epilogue_install2"]=<<<EOF
+    <hr>
+    <div class="information_gauche">Installation générique terminée.<br>
+   
+    <br/>
+    Vous avez opté pour l'installation générique de le plate-forme. Vous n'avez donc pas accès aux  options de synchronisation depuis
+    une plate-forme nationale. 
+    <br/>
+    Un compte administrateur vient d'être créé avec comme identifiant <b>admin</b> et comme mot de passe <b>%s</b>. 
+   <br/>
+Avant toute utilisation de cette plate-forme, il convient de définir dans cet ordre :
+<ul>
+<li> votre réferentiel de compétences
+<li> la liste des domaines traités
+<li> la liste de vos QCM 
+</div>
+EOF;
+
 $textes_langues["info_compte_cree"]=<<<EOF
 <div>
+<p>
 Un utilisateur ayant les mêmes login et mot de passe que votre correspondant C2I sur  la plateforme nationale a été créé localement.<br/>
 Vous pouvez desormais utiliser ce compte pour créer des examens sur votre plate-forme.
+</p>
+<p>
+
+</p>
 </div>
 EOF;
 
