@@ -335,7 +335,7 @@ function return_version_pf($force=false){
 	global $CFG;
 	global $chemin;
 
-	//d�but compat V2
+	//début compat V2
 	if (!$force & isset($CFG->version)) return $CFG->version;
 
 	if (!isset($chemin)) $chemin=".";
@@ -344,11 +344,11 @@ function return_version_pf($force=false){
     //print $fichier_version;
 	if (is_file($fichier_version)){
 		if ($fp = fopen ($fichier_version, "r")) $ret= fgets($fp, 4096);
-		else $ret= traduction( "non d�finie");
+		else $ret= traduction( "non définie");
 	}
 	else $ret = traduction( "inconnu");
 	$ret=clean(trim($ret));
-	$CFG->version=$ret; // vire sat de lignes eventuels
+	$CFG->version=$ret; // vire saut de lignes eventuels
 	return $ret;
 }
 
@@ -404,17 +404,18 @@ function get_version_svn() {
 }
 
 function verifier_version_pf(){
+	global $CFG;
 
-		$vl = return_version_pf();
-		$vn=get_version_svn();
+		$vl =floatval( return_version_pf());  //version locale
+		$vn =floatval( get_version_svn());
 
-		// attention 2 espaces dans le fichier de refrence !
+		// attention 2 espaces dans le fichier de reference !
        // print "|".$vn. "|".$vl."|";
-       // print strlen($vn)." ".strlen($vl);
-       // print hexdump($vn,false,false, true)."|".hexdump($vl,false,false,true);
+      
        $via=empty($CFG->utiliser_curl)?'fopen':'curl';
-		if ("V".$vl != "V".$vn) return ('Votre version est la '.$vl.', attention il existe une version plus r&eacute;cente '.$vn);
-         else return 'version '.$vl. ' &agrave; jour  via '.$via;
+	//	if ("V".$vl != "V".$vn) return ('Votre version est la '.$vl.', attention il existe une version plus r&eacute;cente '.$vn);
+       if ($vl < $vn) return ('Votre version est la V'.$vl.', attention il existe une version plus r&eacute;cente V'.$vn);
+         else return 'Version '.$vl. ' &agrave; jour  (via '.$via.')';
 }
 
 /**

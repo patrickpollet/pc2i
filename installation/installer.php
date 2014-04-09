@@ -17,8 +17,8 @@ $chemin_images = $chemin."/images";
 //print_r($_POST); die();
 
 /**
- * soit ce fichier a �t� cr� par index.php soit il a �t� cr�� � la main
- * sans les deux cas il doit �tre utilis�
+ * soit ce fichier a été créé par index.php soit il a été créé à la main
+ * sans les deux cas il doit être utilisé
  */
 require_once ($chemin_commun."/constantes.php");
 
@@ -86,6 +86,8 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     $user->password=md5($pwd);
     $user->etablissement=0;
     $user->est_admin_univ='O';
+    $user->origine='install';
+    $user->ts_connexion = $user->ts_derniere_connexion =time();
     cree_utilisateur($user,0,false); //pas d'espion encore
     
     // avec ses droits

@@ -26,7 +26,9 @@ $options=optional_param("option",array(),PARAM_RAW);
 
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
-$tpl = new C2IPrincipale();    //cr�er une instance
+//mise en page v1.6 sans tables
+$tpl = new C2IPrincipale($CFG->chemin."/templates2/popup.tpl"); //cr�er une instance
+
 //inclure d'autre block de templates
 
 $forme1=<<<EOF
