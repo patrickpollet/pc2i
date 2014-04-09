@@ -265,40 +265,45 @@ client."
 }
 
 function test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd) {
-    global $CFG;
+	global $CFG;
 
-    enteteTests("test de la connexion à la base de données");
-    if ($serveur_bdd &&  $user_bdd && $pass_bdd) {
-        intituleTests("Test de connexion au serveur ".$user_bdd."@".$serveur_bdd );
-        $connexion = @mysql_connect($serveur_bdd, $user_bdd, $pass_bdd);
-        if (!$connexion) {
-            echecTests(mysql_error());
-        }
-        else  {
-            succesTests( "");
-            intituleTests("Test d'accès la la base ".$nom_bdd);
-            if (!@mysql_select_db($nom_bdd, $connexion)) {
-                echecTests(mysql_error($connexion));
-            }else {
-                succesTests( "");
-                intituleTests("Test du droit 'CREATE TABLE " );
-                $sql="CREATE TABLE c2itest(test varchar(5) NOT NULL)";
-                if ( @mysql_query($sql,$connexion)) {
-                    succesTests( "");
-                    intituleTests("Test du droit 'DROP TABLE " );
-                    $sql="drop table c2itest";
-                    if ( @mysql_query($sql,$connexion))
-                        succesTests( "");
-                }
-                else  echecTests( mysql_error($connexion));
-            }
+	enteteTests("test de la connexion à la base de données");
+	if ($serveur_bdd &&  $user_bdd && $pass_bdd) {
+		intituleTests("Test de connexion au serveur ".$user_bdd."@".$serveur_bdd );
+		$connexion = @mysql_connect($serveur_bdd, $user_bdd, $pass_bdd);
+		if (!$connexion) {
+			echecTests(mysql_error());
+		}
+		else  {
+			succesTests( "");
+			intituleTests("Test d'existence de la base ".$nom_bdd);
+			$sql= "SHOW DATABASES LIKE '$nom_bdd'";
+			$res = @mysql_query($sql,$connexion);
+			if (!empty($res) && mysql_num_rows($res)==1) {
+				succesTests( "");
+				intituleTests("Test des droits d'accès à la base ".$nom_bdd);
+				if (!@mysql_select_db($nom_bdd, $connexion)) {
+					echecTests(mysql_error($connexion));
+				}else {
+					succesTests( "");
+					intituleTests("Test du droit 'CREATE TABLE " );
+					$sql="CREATE TABLE c2itest(test varchar(5) NOT NULL)";
+					if ( @mysql_query($sql,$connexion)) {
+						succesTests( "");
+						intituleTests("Test du droit 'DROP TABLE " );
+						$sql="drop table c2itest";
+						if ( @mysql_query($sql,$connexion))
+							succesTests( "");
+					}
+					else  echecTests( mysql_error($connexion));
+				}
 
-
-        }
-    }else {
-        echecTests("Paramàtres d'accès à la base de données incorrects");
-    }
-
-    
+			} else {
+				echecTests("base de donnée $nom_bdd inconnue");
+			}
+		}
+	}else {
+		echecTests("Paramétres d'accès à la base de données incorrects");
+	}    
 
 }

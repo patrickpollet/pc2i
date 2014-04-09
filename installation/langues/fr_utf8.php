@@ -37,7 +37,7 @@ $textes_langues["epilogue_install"]=<<<EOF
    <li> des établissements
    </ul>   
     Pensez à supprimer les fichiers d'installation (le dossier installation) lorsque vous aurez fini les tests afin que personne ne puisse les modifier sans votre accord. gardez-en une copie en cas de besoin.<br>
-    <span class='rouge'>Si vous avez opté pour l'installation automatique, n'oubliez pas d\'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
+    <span class='rouge'>Si vous avez opté pour l'installation automatique, n'oubliez pas d'enlever les droits d'écriture sur le fichier commun/constantes.php. </span><br/>
 </div>
 EOF;
 
