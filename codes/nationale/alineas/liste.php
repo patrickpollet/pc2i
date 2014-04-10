@@ -127,7 +127,7 @@ $tpl->prepare($chemin,array('icones_action'=>1));
 $CFG->wwwroot=$locale_url_univ; //la calcul auto ne marche pas dans ce cas
 $url_retour="$CFG->wwwroot/codes/nationale/alineas/liste.php";
 
-$items=get_alineas(false);
+$items=get_alineas(false,'',false);  //V2 pas d'erreur si aucun ecore defini
 
 //print_r($items);
 $compteur_ligne=0;

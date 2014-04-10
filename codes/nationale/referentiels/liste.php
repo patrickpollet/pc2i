@@ -123,7 +123,7 @@ $tpl->prepare($chemin,array('icones_action'=>1));
 $CFG->wwwroot=$locale_url_univ; //la calcul auto ne marche pas dans ce cas
 $url_retour="$CFG->wwwroot/codes/nationale/referentiels/liste.php";
 
-$items=get_referentiels();
+$items=get_referentiels('referentielc2i',false); //V2 pas d'erreur si aucun ecore defini
 $compteur_ligne=0;
 foreach ($items as $item) {
     $tpl->newBlock("ligne");

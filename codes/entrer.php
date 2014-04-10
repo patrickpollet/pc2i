@@ -214,6 +214,10 @@ if ( $verif == "bdd" || $verif=="ent" || $verif=="anonyme"){
 						$CFG->utiliser_prototype_js=1;
                         $tpl->newBlock ('cherche_version'); // rev 1014
 					}
+					
+					if (!empty($CFG->mode_maintenance))
+						$message_a .= ' ('.traduction('maintenance').').'; 
+					
 					$message_a = get_fullname($USER->id_user)." : ".$message_a;
 					$tpl->assign("_ROOT.message_a",$message_a);
 					$tpl->printToScreen();

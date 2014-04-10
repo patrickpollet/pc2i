@@ -176,7 +176,8 @@ function construit_menu($ligne, $noderef) {
 	$node->addItem(cree_item_input(traduction('config_param_nb_items'), $ligne->param_nb_items, 'config_m.php?elt=param_nb_items'));
 
 	//rev 944 le nombre de refrentiels n'est pas toujours 9 !!!
-	$refs = get_referentiels();
+	//v 2.0 sur une PF générique fraichement installée, il n'y a pas encore de réferentiel 
+	$refs = get_referentiels('referentielc2i',false);
 	$node->addItem(cree_item_input(traduction("config_param_nb_aleatoire", true, count($refs)), $ligne->param_nb_aleatoire, 'config_m.php?elt=param_nb_aleatoire'));
 
 	$node->addItem(cree_item_input(traduction('config_param_nb_experts') . ' (0 ' . traduction('0expert', false) . ')', $ligne->param_nb_experts, 'config_m.php?elt=param_nb_experts'));

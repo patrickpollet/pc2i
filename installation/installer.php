@@ -102,16 +102,24 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     	print  traduction ("epilogue_install",true,$pwd,$c2i,$c2i);
     	die();   	 
     } else {
-    	//plateforme nationale sans referentiel 
+    	//plateforme générique (nationale) sans referentiel 
     	//mettre le compte super-admin et le laisser faire
     	$user=new StdClass();
     	$user->login='admin';
     	$user->etablissement=1;
-    	$user->est_superdamin=$user->est_admin_univ='O';
+    	$user->est_superadmin=$user->est_admin_univ='O';
     	update_utilisateur($user,false);  //pas d'espion encore
     	
-    	set_config('pfc2i','universite_serveur',0);  // pas de synchro de la BD vide avec la nationale
-    	print  traduction ("epilogue_install2",true,$user->password);
+    	//changer le nom de 'Ministere ...' et la considerer comme une "nationale"
+    	$data= new StdClass();
+    	$data->id_etab = 1;
+    	$data->nom_etab = 'Plate-forme générique';
+    	$data->nationale = 1;
+    	$data->locale = 0;
+    	update_record('etablissement', $data,'id_etab') ;
+    	
+    	set_config('pfc2i','universite_serveur',1);  // pas de synchro de la BD vide avec la nationale
+    	print  traduction ("epilogue_install2",true,$pwd);
     	die();
     }
 

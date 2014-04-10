@@ -59,7 +59,7 @@ $fiche =<<<EOF
             <th>{form_langue}</th>
             <td>{param_langue}</td>
 		  </tr>
-<!--  rev 928 viré
+<!--  rev 928 virï¿½
 		    <tr>
             <th>{form_nbqar}</th>
             <td>{nbqar}</td>
@@ -142,7 +142,6 @@ $tpl->assign("ch_l", $ligne->locale);
 $tpl->assign("ch_n", $ligne->nationale);
 
 $tpl->assignObjet($ligne);
-
 
 
 if (get_examen_anonyme()) $tpl->__assign("ch_a","1");

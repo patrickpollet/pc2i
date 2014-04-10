@@ -272,6 +272,10 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 (208, 'examen', 'seulement_mes_examens', '0', '0', 'n''afficher à un enseignant que les examens qu''il a généré', 1, 'required', 1),
 (210, 'question', 'seulement_validees_liste', '1', '1', 'n''afficher que les validées dans les listes, sauf aux experts validateurs', 1, 'required', 1);
 
+INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `description`, `modifiable`, `validation`, `drapeau`) VALUES
+(211, 'pfc2i', 'info_maintenance', 'Remise en route prévue<b> ce soir 18h</b>', '', 'Message de l''administrateur lors de la mise en maintenance de la PF', 0, 'required', 1),
+(212, 'pfc2i', 'mode_maintenance', '0', '1', '', 1, 'required', 1);
+
 -- --------------------------------------------------------
 
 --
