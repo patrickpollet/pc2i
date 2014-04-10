@@ -57,16 +57,16 @@ EOP;
 if ($etab = get_etablissement($CFG->universite_serveur,false)) {
 	//print_r($etab); die();
     if ($etab->positionnement ==0)
-        header("location:$chemin/certification.php");
+        redirect("$chemin/certification.php",false,false,false);
 } else {
     // pas d'établissements donc base de données non mise à jour depuis une nationale
-    header("location:$chemin/installation/majbase.php");
+    redirect("$chemin/installation/majbase.php",false,false,false);
 }
 
 //print_r($etab); die();
 $ano=get_examen_anonyme();
 if ($etab->certification ==0 && !$ano ) // //ca suffit  comme test
-        header("location:$chemin/positionnement.php");
+        redirect("$chemin/positionnement.php",false,false,false);
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
 $tpl = new C2IPrincipale($page,T_BYVAR );    //cr�er une instance

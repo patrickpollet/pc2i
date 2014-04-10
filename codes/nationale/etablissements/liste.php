@@ -10,7 +10,7 @@
 $chemin = '../../..';
 $chemin_commun = $chemin . "/commun";
 $chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
 require_login('P'); //PP
 if (!is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
@@ -19,7 +19,7 @@ if (!is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
 $supp_id=optional_param("supp_id",0,PARAM_INT);
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 
 $modele=<<<EOM
@@ -81,8 +81,10 @@ $CFG->montrer_fiche_apres_modification=0; //important on revient ici
 
 $tpl->prepare($chemin,array('icones_action'=>1));
 
-$CFG->wwwroot=$locale_url_univ; //la calcul auto ne marche pas dans ce cas
-$url_retour="$CFG->wwwroot/codes/nationale/etablissements/liste.php";
+//attention url-retour est filtrÃ© par clean_param (LOCALURL)
+//donc eviter un double slash dedans ...
+//$CFG->wwwroot=add_slash_url($locale_url_univ);
+$url_retour=add_slash_url($CFG->wwwroot).'codes/nationale/etablissements/liste.php';
 
 $url_gestion="$CFG->chemin/codes/acces/etablissement";
 

@@ -128,8 +128,6 @@ $CFG->utiliser_tables_sortables_js=1;
 $CFG->utiliser_inlinemod_js=1;
 
 $tpl->prepare($chemin,array('icones_action'=>1));
-$CFG->wwwroot=$locale_url_univ; //la calcul auto ne marche pas dans ce cas
-$url_retour="$CFG->wwwroot/codes/config/ips/liste.php";
 
 
 $items=get_plages_ip_declarees($USER->id_etab_perso,'id');

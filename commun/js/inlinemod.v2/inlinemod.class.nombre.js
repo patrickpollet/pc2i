@@ -15,14 +15,14 @@ function Nombre()
 
 
 
-//Fonction déterminant si la valeur passée au script PHP doit être formatée par celui-ci ou pas (avec mysql_real_escape_string($str);)
-//Ici non, car il s'agit de valeur numérique
+//Fonction dï¿½terminant si la valeur passï¿½e au script PHP doit ï¿½tre formatï¿½e par celui-ci ou pas (avec mysql_real_escape_string($str);)
+//Ici non, car il s'agit de valeur numï¿½rique
 Nombre.prototype.echaperValeur = function ()
 {
 	return "false";
 }
 
-//Si le texte entré ne représente pas un nombre, on renvoie true
+//Si le texte entrï¿½ ne reprï¿½sente pas un nombre, on renvoie true
 Nombre.prototype.erreur = function ()
 {
 	
@@ -37,13 +37,13 @@ Nombre.prototype.erreur = function ()
 	var v=this.getValeur();
 	if(v =="" || isNaN(v))
 	{
-		this.texteErreur = "Vous devez entrer une valeur numérique !";
+		this.texteErreur = "Vous devez entrer une valeur num&eacute;rique !";
 		return true;
 	}
 	else
 		return false;
 }
 
-//important de le faire APRES la surcharge des méthodes de la classe Mere 
-// si on utilise la version de hériter qui supporte _super ! 
+//important de le faire APRES la surcharge des mï¿½thodes de la classe Mere 
+// si on utilise la version de hï¿½riter qui supporte _super ! 
 heriter(Nombre.prototype, TexteNV.prototype); 

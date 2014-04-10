@@ -19,7 +19,7 @@ TexteMultiNV.prototype.erreur = function ()
 {
 	if(trim(this.getValeur()) == "")
 	{
-		this.texteErreur = "Aucune saisie effectuée !";
+		this.texteErreur = "Aucune saisie effectuÃ©e !";
 		//alert(this.texteErreur);
 		return true;
 	}
@@ -27,6 +27,6 @@ TexteMultiNV.prototype.erreur = function ()
 		return false;
 }
 
-//important de le faire APRES la surcharge des méthodes de la classe Mere 
+//important de le faire APRES la surcharge des mï¿½thodes de la classe Mere 
 // avec la version de heriter qui supporte _super !
 heriter(TexteMultiNV.prototype, TexteMulti.prototype); 
