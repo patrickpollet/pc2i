@@ -24,7 +24,7 @@ $tpl = new C2IPopup(); //cr�er une instance
 //inclure d'autre block de templates
 
 $modele=<<<EOM
-</div>
+
 <div class="commentaire1">{info_restrictions_ips}</div>
 
 <div class="gauche">{menu_niveau2} </div>
@@ -54,6 +54,7 @@ $modele=<<<EOM
 <!-- END BLOCK : id_session -->
 </fieldset>
 </form>
+<div class="commentaire1">{info_restrictions_ips}</div>
 </div>
 
 

@@ -30,7 +30,7 @@ $user_bdd=optional_param("user_bdd","",PARAM_RAW);
 $tester=optional_param("tester","",PARAM_INT);
 
 $c2i=optional_param("c2i","c2i",PARAM_RAW);
-$prefix=optional_param("prefix",$c2i,PARAM_RAW);
+$prefix=optional_param("prefix",$c2i,PARAM_RAW); //non éditable pour l'instant
 $wwwroot=optional_param("wwwroot","http://localhost/{$c2i}/",PARAM_RAW);
 
 $locale_url_univ=$wwwroot;
@@ -83,11 +83,13 @@ Veuillez régler les problèmes signalés en rouge avant de continuer l'installa
 <label for="pass_bdd">{form_pass_bdd}<span class="info"></span></label>
 <input type="password" name="pass_bdd"  id="pass_bdd" value="{pass_bdd}" size="40" class="saisie required" title="{js_valeur_manquante}"/>
 </p>
-
+<!--
 <p class="double">
 <label for="prefix">{form_prefix}<span class="info"></span></label>
 <input type="text" name="prefix"  id="prefix" value="{prefix}" size="40" class="saisie required" title="{js_valeur_manquante}"/>
 </p>
+-->
+<input type="hidden" name="prefix"  id="prefix" value="c2i" />
 
 </fieldset>
 

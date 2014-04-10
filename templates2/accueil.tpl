@@ -10,7 +10,7 @@
                   <li>des inscrits.</li>
 <!-- START BLOCK : notions_parcours -->
                   <li>des parcours</li>
-                  <li>des notions  </li>
+                  <li>des ressources  </li>
 <!-- END BLOCK : notions_parcours -->
 
 

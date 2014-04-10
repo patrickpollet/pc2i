@@ -839,7 +839,7 @@ function profil_en_inputs() {
             <td><table class="sansbordure">
               <tr>
                 <td><input type="checkbox" value="1" name="configurer" {ch_configurer}/>{config}</td></tr><tr>
-                <td><input type="checkbox" value="1" name="acces_tracking" {ch_acces_tracking}/>{track} (n�cessite que configuration soit actif)</td></tr><tr>
+                <td><input type="checkbox" value="1" name="acces_tracking" {ch_acces_tracking}/>{track} (nécessite que configuration soit actif)</td></tr><tr>
                 <td><input type="checkbox" value="1" name="resultats_afficher" {ch_resultats_afficher}/>{result}</td></tr>
             </table>            </td>
           </tr>

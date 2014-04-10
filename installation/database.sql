@@ -693,7 +693,7 @@ CREATE TABLE IF NOT EXISTS `c2iprofils` (
 --
 
 INSERT INTO `c2iprofils` (`id_profil`, `intitule`, `q_ajouter`, `q_modifier`, `q_dupliquer`, `q_lister`, `q_supprimer`, `ex_ajouter`, `ex_modifier`, `ex_dupliquer`, `ex_lister`, `ex_supprimer`, `q_valider`, `acces_tracking`, `etudiant_ajouter`, `etudiant_modifier`, `etudiant_lister`, `etudiant_supprimer`, `resultats_afficher`, `utilisateur_ajouter`, `utilisateur_modifier`, `utilisateur_lister`, `utilisateur_supprimer`, `plc_telecharger`, `plp_telecharger`, `banquedd_telecharger`, `configurer`) VALUES
-(1, 'administrateurs', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(1, 'administrateurs', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (2, 'Responsables nationaux du C2i', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0),
 (3, 'Experts du groupe de suivi', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0),
 (4, 'Experts validateurs', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),

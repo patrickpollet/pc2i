@@ -583,8 +583,10 @@ function __print_menu_personnel ($tpl,$type_item) {
     global $USER,$CFG;
     require_login("P");
     $isAdmin=is_admin($USER->id_user); // pas la peine de le tester � chaque fois
-
-
+    
+    // V2 en cas de pf générique, ne pas afficher certains items si le referentiel n'a pas été défini
+	$refs= get_referentiels('',false);
+	if (count($refs) >0 ) {
         if ($isAdmin ||a_capacite("ql")){
                 $tpl->newBlock("menu_item");
                 $tpl->assign ('item','questions');
@@ -600,6 +602,7 @@ function __print_menu_personnel ($tpl,$type_item) {
                  $tpl->traduit('alt','alt_gerer_examens');
                 $tpl->assignURL("url",$CFG->chemin."/codes/examens/liste.php");
          }
+	}     
 
             if ($isAdmin || a_capacite("etl") || a_capacite("ul")){
                $tpl->newBlock("menu_item");
@@ -2064,7 +2067,7 @@ function clean_param($param, $type) {
                     // relative - let's make sure there are no tricks
                     if (validateUrlSyntax($param, 's-u-P-a-p-f+q?r?')) {
                         // looks ok.
-                        //print "ok3";
+                       // print "ok3";
                     } else {
                         //print "KO";
                         $param = '';
