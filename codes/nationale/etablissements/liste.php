@@ -15,14 +15,24 @@ require_once ($chemin_commun . "/c2i_params.php"); //fichier de param�tres
 require_login('P'); //PP
 if (!is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
 
+//seulement sur une nationale
+//if (($CFG->universite_serveur !=1 ) || !is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
 
-$supp_id=optional_param("supp_id",0,PARAM_INT);
+
+// rev 982 et suivante simplifiaction des liens emis sur les icones d'action'
+$action=optional_param('action','',PARAM_ALPHA);
+if ($action) {
+	$id_action=required_param('id_action',PARAM_INT);
+}
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 $tpl = new C2IPopup(); //cr�er une instance
 //inclure d'autre block de templates
 
 $modele=<<<EOM
+
+<!-- INCLUDESCRIPT BLOCK : ./actions_js.php -->
+
 <table width="100%">
 <tr class="gauche"><td>{menu_niveau2}</td>
 <td class="droite commentaire1">{nb_items}</td>
@@ -35,9 +45,7 @@ $modele=<<<EOM
       <th  class="bg"> {t_nom} </th>
       <th  class="bg"> {t_nb_aleatoire} </th>
       <th  class="bg"> {t_nb_items} </th>
-    <th width="8%" class="bg nosort">{t_consult}</th>
-    <th width="8%" class="bg nosort">{t_modif}</th>
-    <th width="8%" class="bg nosort">{t_supp}</th>
+   <th class="bg" style="width:100px;">{t_actions}</th>   
       </tr>
 </thead>
   <tfoot>
@@ -61,12 +69,19 @@ $modele=<<<EOM
           ondblclick="inlineMod('{id_etab}',this,'param_nb_items','Nombre','{ajax_modif}');"
                             >{param_nb_items}</td>
 
-    <!-- INCLUDE BLOCK : icones_action_liste -->
+          <!-- START BLOCK : icones_actions -->
+          <td>
+          {icones_actions}
+          </td>
+<!-- END BLOCK : icones_actions -->
+                            
     </tr>
     <!-- END BLOCK : ligne -->
   </tbody>
 
 </table>
+
+{form_actions}
 EOM;
 
 
@@ -83,14 +98,15 @@ $tpl->prepare($chemin,array('icones_action'=>1));
 
 //attention url-retour est filtré par clean_param (LOCALURL)
 //donc eviter un double slash dedans ...
-//$CFG->wwwroot=add_slash_url($locale_url_univ);
 $url_retour=add_slash_url($CFG->wwwroot).'codes/nationale/etablissements/liste.php';
+
+print_form_actions ($tpl,'form_actions',$url_retour,$url_retour);
 
 $url_gestion="$CFG->chemin/codes/acces/etablissement";
 
-
-if ($supp_id){ //
-     supprime_etablissement($supp_id,false);  //test
+if ($action=="supprimer"){
+	if (etablissement_est_supprimable($id_action))
+     supprime_etablissement($id_action,false);  //test
 }
 
 
@@ -100,20 +116,19 @@ foreach ($items as $item) {
     $tpl->newBlock("ligne");
       $tpl->setCouleurLigne($compteur_ligne);
     $tpl->assignobjet($item);
-
-    $tpl->newBlockNum("icones_action_liste",$compteur_ligne);
-    $tpl->newblockNum("td_consulter_oui",$compteur_ligne);
-    $tpl->assignURL("url_consulter",$url_gestion."/fiche.php?idq=".$item->id_etab);
-    $tpl->newBlockNum("td_modifier_oui",$compteur_ligne);
-    $tpl->assignURL("url_modifier",$url_gestion."/ajout.php?idq=".$item->id_etab."&amp;url_retour=" . $url_retour);
-
-   if (etablissement_est_supprimable($item->id_etab)) {
-    $tpl->newBlockNum("td_supprimer_oui",$compteur_ligne);
-    $tpl->assign("js_supp", traduction("js_etablissement_supprimer_0") . " " . $item->id_etab . " " .
-	    traduction("js_action_annuler"));
-    $tpl->assignURL("url_supprimer","liste.php?supp_id=" . $item->id_etab);
-   } else  $tpl->newBlock("td_supprimer_non");
-
+    
+    $items=array();
+    $items[]=new icone_action('consulter',"consulterItem('{$item->id_etab}')");
+    // liens vers descripts dans codes/acces/etablissements
+    $items[]=new icone_action('modifier',"modifierItem('{$item->id_etab}')");
+    
+    if (etablissement_est_supprimable($item->id_etab)) { 
+    	$items[]=new icone_action('supprimer',"supprimerItem('{$item->id_etab}')" );
+    }else  $items[]=new icone_action( );
+    
+    $tpl->newBlock ('icones_actions');
+    print_icones_action($tpl,'icones_actions',$items,'actions_'.$compteur_ligne);
+    
 
     $compteur_ligne++;
 }

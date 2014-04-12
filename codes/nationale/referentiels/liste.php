@@ -15,8 +15,15 @@ require_once ($chemin_commun . "/c2i_params.php"); //fichier de param�tres
 require_once("../lib_nationale.php");
 
 require_login('P'); //PP
-if (!is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
 
+//seulement sur une nationale
+if (($CFG->universite_serveur !=1 ) || !is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
+
+// rev 982 et suivante simplifiaction des liens emis sur les icones d'action'
+$action=optional_param('action','',PARAM_ALPHA);
+if ($action) {
+	$id_action=required_param('id_action',PARAM_ALPHANUM);
+}
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 $tpl = new C2IPopup(); //cr�er une instance
@@ -50,6 +57,7 @@ $modele=<<<EOM
 
 </div>
 
+<!-- INCLUDESCRIPT BLOCK : ./actions_js.php -->
 
 
 <table width="100%">
@@ -64,10 +72,8 @@ $modele=<<<EOM
       <th  class="bg"> {t_id} </th>
       <th  class="bg"> {t_domaine} </th>
       <th class='bg'> {t_nbqa} </th>
-        <th width="8%" class="bg nosort">{t_consult}</th>
-    <!--<th width="8%" class="bg nosort">{t_modif}</th> -->
-    <th width="8%" class="bg nosort">{t_supp}</th>
-
+	<th class="bg" style="width:100px;">{t_actions}</th>
+      
       </tr>
 </thead>
   <tfoot>
@@ -85,24 +91,27 @@ $modele=<<<EOM
           ondblclick="inlineMod('{referentielc2i}',this,'domaine','TexteMultiNV','{ajax_modif}');"
                             >{domaine}</td>
       <td class='droite'>{nbqa}</td>
-    <!-- INCLUDE BLOCK : icones_action_liste -->
-
+        <!-- START BLOCK : icones_actions -->
+          <td>
+          {icones_actions}
+          </td>
+<!-- END BLOCK : icones_actions -->
+      
     </tr>
     <!-- END BLOCK : ligne -->
   </tbody>
 
 </table>
 
-
+{form_actions}
 
 
 EOM;
 
-$supp_id=optional_param("supp_id",0,PARAM_ALPHANUM);
 
-if ($supp_id){ //
-    if (peut_supprimer_referentiel($supp_id))
-       delete_records("referentiel","referentielc2i='$supp_id'");
+if ($action=='supprimer'){ //
+    if (peut_supprimer_referentiel($id_action))
+       delete_records("referentiel","referentielc2i='$id_action'");
 }
 
 
@@ -120,8 +129,10 @@ $CFG->utiliser_tables_sortables_js=1;
 $CFG->utiliser_inlinemod_js=1;
 
 $tpl->prepare($chemin,array('icones_action'=>1));
-$CFG->wwwroot=$locale_url_univ; //la calcul auto ne marche pas dans ce cas
-$url_retour="$CFG->wwwroot/codes/nationale/referentiels/liste.php";
+
+
+print_form_actions ($tpl,'form_actions','','liste.php');
+
 
 $items=get_referentiels('referentielc2i',false); //V2 pas d'erreur si aucun ecore defini
 $compteur_ligne=0;
@@ -137,21 +148,16 @@ foreach ($items as $item) {
 
      $tpl->assign('nbqa',$nbvalides.'/'.$nbtotal);
 
-       $tpl->newBlockNum("icones_action_liste",$compteur_ligne);
-    $tpl->newblockNum("td_consulter_oui",$compteur_ligne);
-    $tpl->assignURL("url_consulter","fiche.php?id=".$item->referentielc2i);
-    /*  rev 1041 rien a modifier !
-    $tpl->newBlockNum("td_modifier_oui",$compteur_ligne);
-    $tpl->assignURL("url_modifier","ajout.php?id=".$item->referentielc2i."&url_retour=" . $url_retour);
-    */
-    if (peut_supprimer_referentiel($item->referentielc2i)) {
-	    $tpl->newBlockNum("td_supprimer_oui",$compteur_ligne);
-	    $tpl->assign("js_supp", traduction("js_ref_supprimer_0") . " " . $item->referentielc2i . " " .
-		    traduction("js_action_annuler"));
-	    $tpl->assignURL("url_supprimer","liste.php?supp_id=" . $item->referentielc2i);
-    }
-    else  $tpl->newBlock("td_supprimer_non");
-
+     $items=array();
+     $items[]=new icone_action('consulter',"consulterItem('{$item->referentielc2i}')");
+      
+     if (peut_supprimer_referentiel($item->referentielc2i)) {
+     	$items[]=new icone_action('supprimer',"supprimerItem('{$item->referentielc2i}')" );
+     }else  $items[]=new icone_action( );
+     
+     
+     $tpl->newBlock ('icones_actions');
+     print_icones_action($tpl,'icones_actions',$items,'actions_'.$compteur_ligne);
 
     $compteur_ligne++;
 }

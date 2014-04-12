@@ -15,7 +15,7 @@ require_once($chemin_commun."/lib_sync.php");
 
 require_login("P"); //PP
 
-
+if (!is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
 
  set_time_limit(0); //important
 
@@ -25,7 +25,7 @@ $pass_nat=optional_param("pass_nat","",PARAM_RAW);
 $test=optional_param("test",0,PARAM_INT);
 $a_envoyer=optional_param("questions",array(),PARAM_RAW);
 
-v_d_o_d("config"); //apres lecture $ide
+//v_d_o_d("config"); //apres lecture $ide
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
 $tpl = new C2IPopup(  );	//cr�er une instance

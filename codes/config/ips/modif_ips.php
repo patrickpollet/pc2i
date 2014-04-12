@@ -26,9 +26,9 @@ if (!$id  || !$champ)
 
 if (! is_admin()) die (traduction ("err_acces"));
 
-// nb table c2ialinea mise à jour avec un id unique !!!
+// nb table c2ialinea mise ï¿½ jour avec un id unique !!!
 
-    $ret=set_field("plagesip",$champ,$valeur,"id=$id",false);
+    $ret=set_field("plagesip",$champ,stripslashes($valeur),"id=$id",false);
     if ($ret)
         $ret=set_field("plagesip",'ts_datemodification',time(),"id=$id",false);
 if (! $ret) envoi_erreur("maj_restriction");

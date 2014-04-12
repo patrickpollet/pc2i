@@ -15,19 +15,22 @@ require_once($chemin_commun."/lib_sync.php");
 
 require_login("P"); //PP
 
-
-
+if (!is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
 
  set_time_limit(0); //important
 
 $ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //�tab de l'examen, d�faut = ici '
+// 19/05/2009 un admin d'une composante ne PEUT pas synchroniser toute la plateforme
+$ide=plateforme($ide); // si composante remonte au père
+if (! a_capacite("bddt", $ide)) erreur_fatale("err_acces");
+	
 
 $login_nat=optional_param("login_nat","",PARAM_RAW);
 $pass_nat=optional_param("pass_nat","",PARAM_RAW);
 
 $options=optional_param("option",array(),PARAM_RAW);
 
-v_d_o_d("config"); //apres lecture $ide
+//v_d_o_d("config"); //apres lecture $ide
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
 $tpl = new C2IPopup(  );	//cr�er une instance

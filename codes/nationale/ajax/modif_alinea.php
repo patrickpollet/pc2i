@@ -28,7 +28,7 @@ if (! is_admin()) die (traduction ("err_acces"));
 
 // nb table c2ialinea mise � jour avec un id unique !!!
 
-$ret=set_field("alinea",$champ,$valeur,"id=$id",false);
+$ret=set_field("alinea",$champ,stripslashes($valeur),"id=$id",false);
 if (! $ret)__envoi_erreur_fatale("","","maj_alinea");
 
 

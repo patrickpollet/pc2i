@@ -13,20 +13,20 @@ require_once($chemin_commun."/c2i_params.php");
 //require_once($chemin_commun."/lib_ajax.php");
 
 if (! require_login ("P",false))
-        print(traduction ("err_acces"));
+        die(traduction ("err_acces"));
 
 //ajax pas d'erreur fatale ...
 $id=optional_param("id","",PARAM_INT);
 $champ=optional_param("champ","",PARAM_RAW);
 $echap=optional_param("echap","",PARAM_RAW);
-$valeur=optional_param("valeur","",PARAM_RAW);
+$valeur=optional_param("valeur","",PARAM_RAW); // recu via un encodeURI
 
 if (!$id  || !$champ)
-      print (traduction ("err_param_requis"));
+      die (traduction ("err_param_requis"));
 
-if (! is_admin()) print (traduction ("err_acces"));
+if (! is_admin()) die (traduction ("err_acces"));
 
-$ret=set_field("etablissement",$champ,$valeur,"id_etab=$id",false);
+$ret=set_field("etablissement",$champ,stripslashes($valeur),"id_etab=$id",false);
 if (! $ret)__envoi_erreur_fatale("","","maj_etablissement");
 
 

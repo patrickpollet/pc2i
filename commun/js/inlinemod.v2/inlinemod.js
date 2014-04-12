@@ -1,18 +1,18 @@
-//Objet servant à l'édition de la valeur dans la page
+//Objet servant ï¿½ l'ï¿½dition de la valeur dans la page
 var champ = null;
 
-//On ne pourra éditer qu'une valeur à la fois
+//On ne pourra ï¿½diter qu'une valeur ï¿½ la fois
 var editionEnCours = false;
 
-//variable évitant une seconde sauvegarde lors de la suppression de l'input
+//variable ï¿½vitant une seconde sauvegarde lors de la suppression de l'input
 var sauve = false;
 
 // variable contenant un div d'info //PP
 var info = null;
 
 
-//Fonction de modification inline de l'élément double-cliqué
-//ajout PP l'URL à appeler 
+//Fonction de modification inline de l'ï¿½lï¿½ment double-cliquï¿½
+//ajout PP l'URL ï¿½ appeler 
 function inlineMod(id, obj, nomChamp, classe, URLAjax, extra)
 {
 	if(editionEnCours)
@@ -36,10 +36,10 @@ function inlineMod(id, obj, nomChamp, classe, URLAjax, extra)
      
      informe("Edition en cours. Echap. pour annuler ou cliquez ailleurs pour valider");        
 	
-     //Création de l'objet dont le nom de classe est passé en paramètre
+     //Crï¿½ation de l'objet dont le nom de classe est passï¿½ en paramï¿½tre
 	champ = eval('new ' + classe + '();');
 	
-	//Assignation des différentes propriétés
+	//Assignation des diffï¿½rentes propriï¿½tï¿½s
 	champ.valeur = obj.innerText ? obj.innerText : obj.textContent;
 	champ.valeur = trim(champ.valeur);
 	
@@ -52,7 +52,7 @@ function inlineMod(id, obj, nomChamp, classe, URLAjax, extra)
 	//Remplacement du texte par notre objet input
 	champ.remplacerTexte(obj, sauverMod,annulerMod, extra);
 
-	//"Activation" du champ (focus, sélection ou autres...)
+	//"Activation" du champ (focus, sï¿½lection ou autres...)
 	champ.activerChamp();
 }
 
@@ -60,10 +60,10 @@ function inlineMod(id, obj, nomChamp, classe, URLAjax, extra)
 //Objet XMLHTTPRequest
 var XHR = null;
 
-//Fonction de sauvegarde des modifications apportées
+//Fonction de sauvegarde des modifications apportï¿½es
 function sauverMod()
 {
-	//Si on a déjà sauvé la valeur en cours, on sort
+	//Si on a dï¿½jï¿½ sauvï¿½ la valeur en cours, on sort
 	if(sauve)
 	{
 		return false;
@@ -73,16 +73,16 @@ function sauverMod()
 		sauve = true;
 	}
 
-	//Vérification d'erreur
+	//Vï¿½rification d'erreur
 	if(champ.erreur())
 	{
 		erreur(champ.texteErreur);
-		champ.texteErreur=""; // reseta tantq ue je n'arrive pas à faire marcher _super !
+		champ.texteErreur=""; // reseta tantq ue je n'arrive pas ï¿½ faire marcher _super !
 		sauve = false;
 		return false;
 	}
 		
-	//Si l'objet existe déjà on abandonne la requête et on le supprime
+	//Si l'objet existe dï¿½jï¿½ on abandonne la requï¿½te et on le supprime
 	if(XHR && XHR.readyState != 0)
 	{
 		XHR.abort();
@@ -98,7 +98,7 @@ function sauverMod()
 
 	
 
-	//Création de l'objet XMLHTTPRequest
+	//Crï¿½ation de l'objet XMLHTTPRequest
 	XHR = getXMLHTTP();
 
 	if(!XHR)
@@ -106,28 +106,33 @@ function sauverMod()
 		return false;
 	}
 	
-	//URL du script de sauvegarde auquel on passe la requête à exécuter
-	XHR.open("GET", champ.URL+"?champ=" + escape(champ.nomChamp) + "&valeur=" + escape(champ.getValeur()) + "&echap=" + champ.echaperValeur() + "&id=" + champ.id + ieTrick(), true);
+	//URL du script de sauvegarde auquel on passe la requï¿½te ï¿½ exï¿½cuter
+	// pb avec UTF8 et la fonction javascript escape
+//	XHR.open("GET", champ.URL+"?champ=" + escape(champ.nomChamp) + "&valeur=" + escape(champ.getValeur()) + "&echap=" + champ.echaperValeur() + "&id=" + champ.id + ieTrick(), true);
+	XHR.open("GET", champ.URL+"?champ=" + champ.nomChamp + 
+			                  "&valeur=" + encodeURI(champ.getValeur()) +
+			                  "&echap=" + champ.echaperValeur() + 
+			                  "&id=" + champ.id + ieTrick(), true);
 
-	//On se sert de l'événement OnReadyStateChange pour supprimer l'input et le replacer par son contenu
+	//On se sert de l'ï¿½vï¿½nement OnReadyStateChange pour supprimer l'input et le replacer par son contenu
 	XHR.onreadystatechange = function()
 	{
-		//Si le chargement est terminé
+		//Si le chargement est terminï¿½
 		if (XHR.readyState == 4)
 			if(!XHR.responseText)
 			{
-				//Réinitialisation de la variable d'état d'édition
+				//Rï¿½initialisation de la variable d'ï¿½tat d'ï¿½dition
 				editionEnCours = false;
 
-				//Sortie du mode d'édition
+				//Sortie du mode d'ï¿½dition
 				champ.terminerEdition();
 				
-				//Réinitialisation de l'affichage d'erreur
+				//Rï¿½initialisation de l'affichage d'erreur
 				 succes("Modification enregistr&eacute;e");
 				
 				return true;
 			}
-			else //S'il y a une réponse texte, c'est une erreur PHP
+			else //S'il y a une rï¿½ponse texte, c'est une erreur PHP
 			{
 				//Affichage de l'erreur
 				erreur("Erreur de communication "+XHR.status+" msg "+XHR.responseText); 
@@ -137,14 +142,14 @@ function sauverMod()
 			}
 	}
 
-	//Envoi de la requête
+	//Envoi de la requï¿½te
 	XHR.send(null);
 }
 
-//Fonction d'annulation des modifications apportées  PP
+//Fonction d'annulation des modifications apportï¿½es  PP
 function annulerMod()
 {
-	//Réinitialisation de la variable d'état d'édition
+	//Rï¿½initialisation de la variable d'ï¿½tat d'ï¿½dition
 	editionEnCours = false;
 	//Remplacement de l'input par le texte qu'il contient
 	
@@ -152,10 +157,10 @@ function annulerMod()
 	informe("Edition annul&eacute;e");
 }
 
-//Fonction d'annulation des modifications apportées  PP
+//Fonction d'annulation des modifications apportï¿½es  PP
 function rienChangeMod()
 {
-	//Réinitialisation de la variable d'état d'édition
+	//Rï¿½initialisation de la variable d'ï¿½tat d'ï¿½dition
 	editionEnCours = false;
 	//Remplacement de l'input par le texte qu'il contient
 	champ.annulerEdition();

@@ -9,29 +9,29 @@
 
 ////////////////////////////////
 //
-//	liste des parcours actifs pour l'étudiant connecté
+//	liste des parcours actifs pour l'ï¿½tudiant connectï¿½
 //
 ////////////////////////////////
 
 /*----------------REVISIONS----------------------
 v 1.1 : PP 16/10/2006
       test via require_login("E")
-      pas de loupe  si terminé
-      Dans le cas d'un ENT, les liens Retour et Quitter n'ont pas de raison d'être ...
+      pas de loupe  si terminï¿½
+      Dans le cas d'un ENT, les liens Retour et Quitter n'ont pas de raison d'ï¿½tre ...
 ------------------------------------------------*/
 
 /*
-* Pour la description des différentes méthodes de la classe TemplatePower,
-* il faut se reférer à http://templatepower.codocad.com/
+* Pour la description des diffï¿½rentes mï¿½thodes de la classe TemplatePower,
+* il faut se refï¿½rer ï¿½ http://templatepower.codocad.com/
 */
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
+//******** ---------------- $chemin_images reprï¿½sente le path des images
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
 $chemin_images = $chemin . "/images";
 
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
  if (!$CFG->utiliser_notions_parcours)
     erreur_fatale("err_pas_de_notions_parcours_ici");
@@ -48,7 +48,7 @@ $tri=optional_param("tri","",PARAM_INT);  //critere de tri
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 
-$tpl = new C2IPrincipale(); //créer une instance
+$tpl = new C2IPrincipale(); //crï¿½er une instance
 //inclure d'autre block de templates
 
 $liste=<<<EOL
@@ -75,18 +75,7 @@ $liste=<<<EOL
                <th class="bg"><a href="{url_type}" title="{alt_tri}">{t_type}</a>{tri_type}</th>
             <th class="bg"> <a href="{url_date}" title="{alt_tri}">{t_date}</a>{tri_date}</th>
 			<th class="bg" style="width:150px;">{t_actions}</th>
-<!-- START BLOCK : col_c -->
-            <th class="bg icone_action">{t_consult}</th>
-<!-- END BLOCK : col_c -->
-<!-- START BLOCK : col_d -->
-            <th class="bg icone_action">{t_dupl}</th>
-<!-- END BLOCK : col_d -->
-<!-- START BLOCK : col_m -->
-            <th class="bg icone_action">{t_modif}</th>
-<!-- END BLOCK : col_m -->
-<!-- START BLOCK : col_s -->
-            <th class="bg icone_action">{t_supp}</th>
-<!-- END BLOCK : col_s -->
+
 </tr>
 </thead>
 <tbody>
@@ -104,8 +93,6 @@ $liste=<<<EOL
           {icones_actions}
           </td>
 <!-- END BLOCK : icones_actions -->
-<!-- INCLUDE BLOCK : icones_action_liste -->
-
 
           </tr>
           <!-- END BLOCK : ligne -->
@@ -143,10 +130,10 @@ print_menu_haut($tpl,"parc");
 $tpl->gotoBlock("_ROOT");
 
 ////////////////////////////////////////////////
-//affichage des entêtes de colonnes selon droits
+//affichage des entï¿½tes de colonnes selon droits
 
 $colspan=6;
-// si droit de consulter // à gérer
+// si droit de consulter // ï¿½ gï¿½rer
 //$tpl->newblock("col_c");
 if ($CFG->peut_dupliquer_parcours) {
 	//$tpl->newBlock("col_d");
@@ -169,7 +156,7 @@ require_once ($CFG->chemin_commun . "/trieuse.class.php");
 require_once ($CFG->chemin_commun . "/chercheuse.class.php");
 
 ////////////////////////////////////////////////////
-// critères de recherche  aucun de visible
+// critï¿½res de recherche  aucun de visible
 ////////////////////////////////////////////////////
 $chaine_critere_recherche = "";
 
@@ -180,7 +167,7 @@ else
     $critere_recherche = "login='".addslashes($USER->id_user)."'";  // rev 984
  
 /////////////////////////////////////////////
-// critères de tri
+// critï¿½res de tri
 /////////////////////////////////////////////
 
 $url = "liste.php?" ;
@@ -218,7 +205,7 @@ $indice_max = count_records("parcours","login='" .addslashes( $USER->id_user)."'
 $tpl->assign("_ROOT.nb_items", $indice_max . " " . traduction ("parcours"));
 
 ///////////////////////////////////////////////
-// gestion des retours vers cette page à partir d'une popup sans perte des critères
+// gestion des retours vers cette page ï¿½ partir d'une popup sans perte des critï¿½res
 $url_retour = $chaine_critere_recherche;
 $url_retour=concatAvecSeparateur($url_retour,"indice_deb=" . $indice_deb,"&amp;");
 $url_retour=concatAvecSeparateur($url_retour,"indice_ecart=" . $indice_ecart,"&amp;");
@@ -231,7 +218,7 @@ $url_retour=urlencode($url_retour);
 
 
 ////////////////////////////////////////////////////
-// requete de sélection des parcours à afficher
+// requete de sï¿½lection des parcours ï¿½ afficher
 ////////////////////////////////////////////////////
 
 $lignes=get_records("parcours",$critere_recherche,$critere_tri,$indice_deb,$indice_ecart);
@@ -266,22 +253,6 @@ foreach ($lignes as $ligne) {
 
     $tpl->assign("date",userdate($ligne->ts_datemodification,'strftimedatetime'));
 
-/**
-	$tpl->newBlockNum("icones_action_liste",$compteur_ligne);
-
-	$tpl->newblockNum("td_consulter_oui",$compteur_ligne);
-	$tpl->assignURL("url_consulter","fiche.php?idp=" . $ligne->id_parcours);
-
-	$tpl->newBlockNum("td_dupliquer_oui",$compteur_ligne);
-	$tpl->assignURL("url_dupliquer","ajout2.php?copie_id=".$ligne->id_parcours . "&amp;url_retour=" . $url_retour);
-
-	$tpl->newBlockNum("td_modifier_oui",$compteur_ligne);
-	$tpl->assignURL("url_modifier","ajout2.php?id=".$ligne->id_parcours."&amp;url_retour=" . $url_retour);
-
-    $tpl->newBlockNum("td_supprimer_oui",$compteur_ligne);
-	$tpl->assign("js_supp", traduction("js_parcours_supprimer_0") . " " . $ligne->id_parcours);
-	$tpl->assignURL("url_supprimer","liste.php?supp_id=" . $ligne->id_parcours . "&amp;url_retour=" .urldecode($url_retour));
-**/
     $items=array();
     $items[]=new icone_action('consulter',"consulterItem('$idnat')");
 
@@ -296,7 +267,7 @@ foreach ($lignes as $ligne) {
     print_icones_action($tpl,'icones_actions',$items,'actions_'.$compteur_ligne);
 
 
-	// passage à la ligne suivante
+	// passage ï¿½ la ligne suivante
 	$compteur_ligne++;
 }
 

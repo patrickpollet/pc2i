@@ -18,12 +18,20 @@ if (!is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
 
 if (!$CFG->restrictions_ip) erreur_fatale('err_restrictions_ip');
 
+// rev 982 et suivante simplifiaction des liens emis sur les icones d'action'
+$action=optional_param('action','',PARAM_ALPHA);
+if ($action) {
+	$id_action=required_param('id_action',PARAM_ALPHANUM);
+}
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 $tpl = new C2IPopup(); //cr�er une instance
 //inclure d'autre block de templates
 
 $modele=<<<EOM
+
+<!-- INCLUDESCRIPT BLOCK : ./actions_js.php -->
+
 
 <div class="commentaire1">{info_restrictions_ips}</div>
 
@@ -67,9 +75,7 @@ $modele=<<<EOM
       <th  class="bg"> {t_nom} </th>
       <th  class="bg"> {t_adresses} </th>
         <th class='bg'  width='10%'> {t_utilisees_examens} </th>
-        <th width="8%" class="bg nosort">{t_consult}</th>
-    <th width="8%" class="bg nosort">{t_supp}</th>
-
+  <th class="bg" style="width:100px;">{t_actions}</th>
       </tr>
 </thead>
   <tfoot>
@@ -89,26 +95,28 @@ $modele=<<<EOM
           ondblclick="inlineMod('{id}',this,'adresses','TexteMultiNV','{ajax_modif}');"
                             >{adresses}</td>
         <td class='droite'>{nbqa}</td>
-    <!-- INCLUDE BLOCK : icones_action_liste -->
-
+        
+        <!-- START BLOCK : icones_actions -->
+          <td>
+          {icones_actions}
+          </td>
+     <!-- END BLOCK : icones_actions -->
+    
     </tr>
     <!-- END BLOCK : ligne -->
   </tbody>
 
 </table>
 
-
+{form_actions}
 
 
 EOM;
 
-$supp_id=optional_param("supp_id",0,PARAM_INT);
-
-if ($supp_id){ //
-    supprime_plage ($supp_id);
+if ($action=='supprimer') {
+	$examens=get_examens_utilisant_plage($id_action);
+	if (count($examens)) {} else  supprime_plage ($id_action);
 }
-
-
 
 
 if (optional_param('add',0,PARAM_INT)) {
@@ -129,6 +137,7 @@ $CFG->utiliser_inlinemod_js=1;
 
 $tpl->prepare($chemin,array('icones_action'=>1));
 
+print_form_actions ($tpl,'form_actions','','liste.php');
 
 $items=get_plages_ip_declarees($USER->id_etab_perso,'id');
 
@@ -145,18 +154,17 @@ foreach ($items as $item) {
     } else {
         $tpl->assign('nbqa','');
     }    
+        
+    $items=array();
+    $items[]=new icone_action('consulter',"consulterItem('{$item->id}')");
     
-    $tpl->newBlockNum("icones_action_liste",$compteur_ligne);
-    $tpl->newblockNum("td_consulter_oui",$compteur_ligne);
-    $tpl->assignURL("url_consulter","fiche.php?id=".$item->id);
-    if (count($examens)) {
-        $tpl->newBlock("td_supprimer_non");
-    } else {
-        $tpl->newBlockNum("td_supprimer_oui",$compteur_ligne);
-	    $tpl->assign("js_supp", traduction("js_ips_supprimer_0") . " " . $item->id . " " .
-		    traduction("js_action_annuler"));
-	    $tpl->assignURL("url_supprimer","liste.php?supp_id=" . $item->id);
-    }
+    if (count($examens)) 
+    	$items[]=new icone_action( ); 	 
+    else 
+    	$items[]=new icone_action('supprimer',"supprimerItem('{$item->id}')" ); 
+     
+    $tpl->newBlock ('icones_actions');
+    print_icones_action($tpl,'icones_actions',$items,'actions_'.$compteur_ligne);
     
     $compteur_ligne++;
 }

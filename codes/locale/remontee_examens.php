@@ -10,25 +10,24 @@ $chemin = '../..';
 $chemin_commun = $chemin."/commun";
 $chemin_images = $chemin."/images";
 
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 require_once($chemin_commun."/lib_sync.php");
 
 require_login("P"); //PP
-
-
+if (!is_admin(false,$CFG->universite_serveur)) erreur_fatale("err_acces");
 
  set_time_limit(0); //important
 
-$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //étab de l'examen, défaut = ici '
+$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //ï¿½tab de l'examen, dï¿½faut = ici '
 $login_nat=optional_param("login_nat","",PARAM_RAW);
 $pass_nat=optional_param("pass_nat","",PARAM_RAW);
 $test=optional_param("test",0,PARAM_INT);
 $a_envoyer=optional_param("examens",array(),PARAM_RAW);
 
-v_d_o_d("config"); //apres lecture $ide
+//v_d_o_d("config"); //apres lecture $ide
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
-$tpl = new C2IPopup(  );	//créer une instance
+$tpl = new C2IPopup(  );	//crï¿½er une instance
 //inclure d'autre block de templates
 
 $forme1=<<<EOF

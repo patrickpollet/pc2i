@@ -26,7 +26,7 @@ if (!$id  || !$champ)
 
 if (! teste_droit("qv")) die (traduction ("err_acces"));
 
-$ret=set_field("familles",$champ,$valeur,"idf=$id",false);
+$ret=set_field("familles",$champ,stripslashes($valeur),"idf=$id",false);
 if (! $ret)__envoi_erreur_fatale("","","maj_famille");
 
 

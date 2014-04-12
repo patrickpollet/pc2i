@@ -156,7 +156,6 @@ $liste=<<<EOL
           </td>
 <!-- END BLOCK : icones_actions -->
 
-<!-- INCLUDE BLOCK : icones_action_liste -->
           </tr>
 
 <!-- END BLOCK : ligne -->

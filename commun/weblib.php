@@ -2221,7 +2221,7 @@ return $script;
   	
   	static $dejaEmis=0; // il est aussi forc� dans un popup qui demande une l�gende !!!!
 
-//$params_retour=urlencode($params_retour);  NON !!!!
+
 
 	$params_retour_session=urlencode($params_retour).'&'.get_session_param(); //attention pas de &amp; ici
  

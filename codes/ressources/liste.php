@@ -40,7 +40,7 @@ $alinea = optional_param("alinea", 0, PARAM_INT);
 //$indice_deb=optional_param("indice_deb",0,PARAM_INT);
 $tri=optional_param("tri","",PARAM_INT);  //critere de tri (defaut ref/alinea)
 
-//$supp_id=optional_param("supp_id","",PARAM_CLEAN); // suppression
+
 
 // rev 982 et suivante simplifiaction des liens emis sur les icones d'action'
 $action=optional_param('action','',PARAM_ALPHA);
@@ -99,19 +99,6 @@ $liste=<<<EOL
 
   <th class="bg" style="width:150px;">{t_actions}</th>
 
-<!-- START BLOCK : col_c -->
-<th class="bg icone_action">{t_consult}</th>
-<!-- END BLOCK : col_c -->
-
-<!-- START BLOCK : col_d -->
-            <th class="bg icone_action">{t_dupl}</th>
-<!-- END BLOCK : col_d -->
-<!-- START BLOCK : col_m -->
-            <th class="bg icone_action">{t_modif}</th>
-<!-- END BLOCK : col_m -->
-<!-- START BLOCK : col_s -->
-            <th class="bg icone_action">{t_supp}</th>
-<!-- END BLOCK : col_s -->
 
 </tr>
 </thead>
@@ -130,7 +117,7 @@ $liste=<<<EOL
           {icones_actions}
           </td>
 <!-- END BLOCK : icones_actions -->
-<!-- INCLUDE BLOCK : icones_action_liste -->
+
 </tr>
 <!-- END BLOCK : ligne -->
 
@@ -168,9 +155,6 @@ print_menu_haut($tpl,"n");
 
 $colspan=5;
 
-//$tpl->assign('_ROOT.colspan',$colspan);
-
-//$tpl->newblock("col_c");
 
 $peutModifier = a_capacite("qm");
 $peutSupprimer =a_capacite("qs");
@@ -183,7 +167,6 @@ if ($peutSupprimer) {
     // v15 les actions sont gerer en js avec un simpl parametre action
     if ($action=="supprimer")
     	supprime_ressource ($id_action);
-    //$colspan++;
     if ($action=='filtrer')
         filtre_ressource ($id_action);
     

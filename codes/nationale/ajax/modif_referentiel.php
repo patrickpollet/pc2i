@@ -26,7 +26,7 @@ if (!$id  || !$champ)
 
 if (! is_admin()) die (traduction ("err_acces"));
 
-$ret=set_field("referentiel",$champ,$valeur,"referentielc2i='$id'",false);
+$ret=set_field("referentiel",$champ,stripslashes($valeur),"referentielc2i='$id'",false);
 if (! $ret)__envoi_erreur_fatale("","","maj_referentiel");
 
 

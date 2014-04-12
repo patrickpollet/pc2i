@@ -4,6 +4,7 @@
  * @version $Id: icones_action_liste.tpl 342 2008-12-01 22:38:04Z ppollet $
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package c2ipf
+ * version 2 DEPRECATED   !!!!!
 
  */
 ce template contient les modeles des differentes icones d'action possibles
@@ -15,11 +16,11 @@ et dans le script avant le prepare()
 
 $tpl->assignInclude("icones_action_liste",$CFG->chemin_templates."/icones_action_liste.tpl");
 
-Elles sont instanciées et ajoutées selon les droits
+Elles sont instanciï¿½es et ajoutï¿½es selon les droits
 
 
 
-//voir le script codes/notions/notions.php dès la version 1.5
+//voir le script codes/notions/notions.php dï¿½s la version 1.5
 
 
 
@@ -32,18 +33,17 @@ de nommage :
       la version visible : td_xxxxx_oui et l'invisible td_xxxxx_non
 
       et les deux fichiers d'images i_xxxxx.gif et i_xxxxx_a.gif
-      ne pas oublier d'ajouter une entrée pour les entetes des colonnes (voir
+      ne pas oublier d'ajouter une entrï¿½e pour les entetes des colonnes (voir
       le template entetes_icones_action.tpl)
-l'ordre d'apparition des icones est fixé par l'ordre des blocs ici
+l'ordre d'apparition des icones est fixï¿½ par l'ordre des blocs ici
 
-les classes (icone_action) doivent étre dans la feuille de style
+les classes (icone_action) doivent ï¿½tre dans la feuille de style
 
-version 2 sans les scripts MM_swapimage
-on met systématiquement une image transparente de 20x20 et c'est via le CSS
+version 1.5 sans les scripts MM_swapimage
+on met systï¿½matiquement une image transparente de 20x20 et c'est via le CSS
 que l'on affiche la bonne image, avec un effet via la balise css hover
 
-
-
+version 2 DEPRECATED   !!!!!
 <!-- END COMMENT -->
 
 <!-- START BLOCK : icones_action_liste -->

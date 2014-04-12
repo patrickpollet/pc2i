@@ -1525,7 +1525,7 @@ class C2ITemplate extends TemplatePower {
 
 		if (isset ($options['liste'])) { // options globales pour une fiche de type liste
 			$options['multip'] = true;
-			$options['icones_action'] = true;
+		//	$options['icones_action'] = true;  deprecié v 2.0
 			$options['icones_tri'] = true;
 			
 			// actions aussi possibles dans certains popup
@@ -1536,11 +1536,11 @@ class C2ITemplate extends TemplatePower {
 
 		if (isset ($options['multip']))
 			assignIncludeMultipagination($this);
-
+/***  DEPRECIE V 2.0 on passe par des scripts action_js
 		if (isset ($options['icones_action'])) {
 				$this->assignInclude("icones_action_liste", $CFG->chemin_templates ."/icones_action_liste2.tpl");
 		}
-
+****/
 		if (isset ($options['corps']))
 			$this->assignInclude("corps", $options['corps']);
 		else

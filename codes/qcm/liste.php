@@ -7,33 +7,33 @@
  */
 ////////////////////////////////
 //
-//	liste des examens actifs pour l'étudiant connecté
+//	liste des examens actifs pour l'ï¿½tudiant connectï¿½
 //
 ////////////////////////////////
 
 /*----------------REVISIONS----------------------
 v 1.1 : PP 16/10/2006
       test via require_login("E")
-      pas de loupe  si terminé
-      Dans le cas d'un ENT, les liens Retour et Quitter n'ont pas de raison d'être ...
+      pas de loupe  si terminï¿½
+      Dans le cas d'un ENT, les liens Retour et Quitter n'ont pas de raison d'ï¿½tre ...
 ------------------------------------------------*/
 
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
 $chemin_images = $chemin . "/images";
 
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
 require_login("E"); //PP
 
 
 
 //$indice_deb=optional_param("indice_deb",0,PARAM_INT);
-$tri=optional_param("tri","",PARAM_INT);  //critere de tri par défaut
+$tri=optional_param("tri","",PARAM_INT);  //critere de tri par dï¿½faut
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 
-$tpl = new C2IPrincipale(); //créer une instance
+$tpl = new C2IPrincipale(); //crï¿½er une instance
 //inclure d'autre block de templates
 
 $liste=<<<EOL
@@ -60,9 +60,6 @@ $liste=<<<EOL
 
  		<th class="bg" style="width:50px;">{t_actions}</th>
 
-<!-- START BLOCK : col_c -->
-            <th class="bg icone_action"><a href="#"></a><span class="commentaire1">{t_passer}</span></th>
-<!-- END BLOCK : col_c -->
 </tr>
 </thead>
 <tbody>
@@ -89,8 +86,6 @@ $liste=<<<EOL
           {icones_actions}
           </td>
 <!-- END BLOCK : icones_actions -->
-<!-- INCLUDE BLOCK : icones_action_liste -->
-
           </tr>
 <!-- END BLOCK : question -->
 
@@ -128,17 +123,14 @@ $tpl->gotoBlock("_ROOT");
 
 
 ////////////////////////////////////////////////
-//affichage des entêtes de colonnes selon droits
-
-// si droit de consulter // à gérer
-//$tpl->newblock("col_c");
+//affichage des entÃªtes de colonnes selon droits
 
 
 require_once ($CFG->chemin_commun . "/trieuse.class.php");
 require_once ($CFG->chemin_commun . "/chercheuse.class.php");
 
 ////////////////////////////////////////////////////
-// critères de recherche
+// critï¿½res de recherche
 //mes qcm dans mon type de plateforme et seulement les normaux et les pools
 ////////////////////////////////////////////////////
 $chaine_critere_recherche = "";
@@ -147,13 +139,13 @@ $critere_recherche.=" and E.id_examen=I.id_examen and E.id_etab=I.id_etab and E.
 
 
 /////////////////////////////////////////////
-// critères de tri
+// critï¿½res de tri
 /////////////////////////////////////////////
 $url = "liste.php?";
 $url = concatAvecSeparateur($url, $chaine_critere_recherche, "");
 
 //////
-// critères de tri
+// critï¿½res de tri
 /////////////////////////////////////////////
 
 $trieuse = new trieuse($tpl, "", $url, $tri);
@@ -178,7 +170,7 @@ $url_multipagination = concatAvecSeparateur($url, $trieuse->getParametreTri(), "
 
 
 ///////////////////////////////////////////////
-// gestion des retours vers cette page à partir d'une popup sans perte des critères
+// gestion des retours vers cette page ï¿½ partir d'une popup sans perte des critï¿½res
 // en principe jamais
 $url_retour = $chaine_critere_recherche;
 $url_retour=concatAvecSeparateur($url_retour,"indice_deb=" . $indice_deb,"&");
@@ -190,15 +182,15 @@ $url_retour=urlencode($url_retour);
 
 
 // recherche du nombre de lignes
-//petit pb afiche le nb de  QCMS auquel il est inscrit (et pas ceux affichées)
-// corrigé  rev 872 (voir après la boucle)
+//petit pb afiche le nb de  QCMS auquel il est inscrit (et pas ceux affichï¿½es)
+// corrigï¿½  rev 872 (voir aprï¿½s la boucle)
 /**
 $indice_max =count_records ("examens E,{$CFG->prefix}qcm I",$critere_recherche);
 $tpl->assign("_ROOT.nb_items", $indice_max . " " . traduction ("qcms"));
 **/
 
 ////////////////////////////////////////////////////
-// requete de sélection des examens à afficher
+// requete de sï¿½lection des examens ï¿½ afficher
 ////////////////////////////////////////////////////
 
 $lignes=get_records("examens E,{$CFG->prefix}qcm I",$critere_recherche,$critere_tri,$indice_deb,$indice_ecart);
@@ -208,7 +200,7 @@ $compteur_ligne = 0;
 
 foreach ($lignes as $ligne) {
 	if (compte_passages($ligne->id_examen,$ligne->id_etab,$USER->id_user)==0) {
-		$tpl->newBlock("question"); // une ligne d'examen (template inspiré de celui des questions, d'où le nom)
+		$tpl->newBlock("question"); // une ligne d'examen (template inspirï¿½ de celui des questions, d'oï¿½ le nom)
 		$tpl->setCouleurLigne($compteur_ligne);
 
 		$tpl->assign("id", $ligne->id_etab . "." . $ligne->id_examen);
@@ -239,23 +231,10 @@ foreach ($lignes as $ligne) {
 		$tpl->assign("image_dateh", "e_" . $etat_date_passage);
 		$tpl->assign("alt_image_dateh", traduction($etat_date_passage));
 
-        // examen récent
+        // examen rï¿½cent
         if ($USER->derniere_connexion <= $ligne->ts_datemodification)
             $tpl->newBlock("image_nouv");
-/*
-        $tpl->newBlockNum("icones_action_liste",$compteur_ligne);
 
-		// si droit de consulter
-		if ($etat_date_passage == "en_cours") {
-            $tpl->newblockNum("td_consulter_oui",$compteur_ligne);
-            $tpl->traduit("alt_consulter","alt_passerqcm"); // rev 936
-            $tpl->assignURL("url_consulter","passage.php?idq=" . $ligne->id_examen . "&amp;ide=" . $ligne->id_etab."&amp;url_retour=".$url_retour);
-
-		} else {
-			$tpl->newblock("td_consulter_non");
-		}
-
-*/
  $items=array();
  if ($etat_date_passage == "en_cours") {
     $items[]=new icone_action('consulter',"consulterItem({$ligne->id_examen},{$ligne->id_etab})",
@@ -269,7 +248,7 @@ foreach ($lignes as $ligne) {
 		//end PP
 
 
-		// passage à la ligne suivante
+		// passage ï¿½ la ligne suivante
 		$compteur_ligne++;
 	}
 }

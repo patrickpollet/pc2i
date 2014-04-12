@@ -12,23 +12,23 @@
 ////////////////////////////////
 /**
  * rev 1.41
- * deplacée de codes/acces/etudiants a codes/examen
+ * deplacï¿½e de codes/acces/etudiants a codes/examen
  * donne la liste des absents si $type=1
  * utilse la globale $CFG->csv_sep
  * affiche et ajoute le mail au CSV (+type d'authentification)')
  */
 set_time_limit(0);
 /*
-* Pour la description des différentes méthodes de la classe TemplatePower,
-* il faut se reférer à http://templatepower.codocad.com/
+* Pour la description des diffï¿½rentes mï¿½thodes de la classe TemplatePower,
+* il faut se refï¿½rer ï¿½ http://templatepower.codocad.com/
 */
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
+//******** ---------------- $chemin_images reprï¿½sente le path des images
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
 $chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 require_once($CFG->chemin_commun.'/lib_csv.php');
 require_once($CFG->chemin_commun."/lib_resultats.php");
 require_login('P'); //PP
@@ -110,7 +110,12 @@ $modele=<<<EOM
       <td>{score}</td>
        <td>{date}</td>
         <td>{ip_max}</td>
-        <td>{icones_actions} </td>
+                  <!-- START BLOCK : icones_actions -->
+          <td>
+          {icones_actions}
+          </td>
+<!-- END BLOCK : icones_actions -->
+        
     </tr>
     <!-- END BLOCK : etud -->
 </tbody>
@@ -124,15 +129,15 @@ EOM;
 $entete_csv=array("t_examen","t_id","t_nom","t_prenom","t_mdp","t_numetud","t_mail","t_score","t_date","t_ip");
 // ligne suivantes les noms des attributs dans $ligne dans cet ordre
 $ligne_csv=array("examen","login","nom","prenom","password","numetudiant","email","score","date","ip_max");
-// rev 948 conversion numérique du score
+// rev 948 conversion numï¿½rique du score
 $ligne_cvt=array(false,   false, false, false,  false,     false,        false,  true    ,false  , false); //conversion point virgule pour OO
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 
 
-//pas de multipagination car on génére aussi un  csv
+//pas de multipagination car on gï¿½nï¿½re aussi un  csv
 $CFG->utiliser_tables_sortables_js=1;
 
 $options=array (
@@ -159,7 +164,7 @@ if ($action=='supprimer'){
 }
 
 
-// rev. 1.41 $CFG->chemin_ressources contient le chemin complet et a été vérifié (cf lib_fichiers.php)
+// rev. 1.41 $CFG->chemin_ressources contient le chemin complet et a ï¿½tï¿½ vï¿½rifiï¿½ (cf lib_fichiers.php)
 if ($type == 0) {
 	$filename="inscrits_".$ide."_".$idq.".csv" ;
 	$filename_ods="inscrits_".$ide."_".$idq.".ods" ;
@@ -180,12 +185,12 @@ if ($CFG->export_ods) {
         $myods= new OdsExporter ($filename_ods,$feuille,$entete_csv,$ligne_csv,$ligne_cvt);
 }
 
-    // liste des inscrits à l'examen
+    // liste des inscrits ï¿½ l'examen
 
 	$lignes=get_inscrits($idq,$ide,'nom,prenom');
  	$compteur_ligne= 0;
  	$nb_inscrits=count($lignes);
- 	$cle=$ide."_".$idq; //ajoutée au csv
+ 	$cle=$ide."_".$idq; //ajoutï¿½e au csv
     foreach($lignes as $ligne) {             // V 1.41
         $cp = compte_passages($idq, $ide, $ligne->login);
         if ($type == 1 && $cp > 0)
@@ -203,7 +208,7 @@ if ($CFG->export_ods) {
          	$ligne->score=$res->score;
            // $ligne->examen=$res->examen;
          	$ligne->ip_max=$res->ip_max;
-            //retouche origine notes écran et csv 21/05/2009
+            //retouche origine notes ï¿½cran et csv 21/05/2009
             if ($res->origine) {
                   $ligne->ip_max=$res->origine;
             }
@@ -222,20 +227,7 @@ if ($CFG->export_ods) {
         if ($CFG->export_ods) {
             $myods->add_ligne($ligne);
         }
-	             // rev 936  popup de consultation ou desinscription
-/*****
-        $tpl->newBlockNum("icones_action_liste",$compteur_ligne);
-        if ($ligne->score) {
-            $tpl->newblockNum("td_consulter_oui",$compteur_ligne);
-            $tpl->assignURL("url_consulter","resultats/reponse_par_etudiant2.php?idq=".$idq."&amp;ide=".$ide."&amp;id_us=".$ligne->login."&amp;retour_fiche=0");
-        } else {
-            $tpl->newblockNum("td_supprimer_oui",$compteur_ligne);
-            $tpl->assignURL("url_supprimer","liste_inscrits.php?idq=".$idq."&amp;ide=".$ide."&amp;id_supp=".$ligne->login."&amp;type=".$type."&amp;retour_fiche=".$retour_fiche);
-            $tpl->traduit("alt_supprimer","alt_desinscrire");
-            $tpl->assign("js_supp", traduction("js_desinscrire_0",false,$ligne->login));
-        }
-***/
-		   // debut code revisé theme v15
+
     $items=array();
    
      if ($ligne->score) {
@@ -243,7 +235,7 @@ if ($CFG->export_ods) {
      } else {
      		 $items[]=new icone_action('supprimer',"supprimerItem('{$ligne->login}')",'menu_vide',traduction('alt_desinscrire'));  
      }	
-    //  $tpl->newBlock ('icones_actions');
+    $tpl->newBlock ('icones_actions');
     print_icones_action($tpl,'icones_actions',$items,'actions_'.$compteur_ligne);
 
         $compteur_ligne++;

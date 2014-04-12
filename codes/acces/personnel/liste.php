@@ -17,7 +17,7 @@
 $chemin = '../../..';
 $chemin_commun = $chemin . "/commun";
 $chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
 require_login('P'); //PP
 
@@ -46,7 +46,7 @@ $ligne=get_etablissement($idq);
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 
 //inclure d'autre block de templates
 $liste=<<<EOL
@@ -90,17 +90,6 @@ $liste=<<<EOL
             <th class="bg"><a href="{url_auth}"  title="{alt_tri}">{t_auth}</a>{tri_auth}</th>
 
   <th class="bg" style="width:150px;">{t_actions}</th>
-<!-- START BLOCK : col_c -->
-            <th width="40" class="bg"  >{t_consult}</th>
-<!-- END BLOCK : col_c -->
-
-<!-- START BLOCK : col_m -->
-            <th width="40" class="bg">{t_modif}</th>
-<!-- END BLOCK : col_m -->
-
-<!-- START BLOCK : col_s -->
-            <th width="40" class="bg">{t_supp}</th>
-<!-- END BLOCK : col_s -->
 </tr>
 </thead>
 <tbody>
@@ -115,7 +104,6 @@ $liste=<<<EOL
           {icones_actions}
           </td>
 <!-- END BLOCK : icones_actions -->
-<!-- INCLUDE BLOCK : icones_action_liste -->
 
           </tr>
 <!-- END BLOCK : ligne -->
@@ -146,7 +134,7 @@ $tpl->prepare($chemin,$options);
 $tpl->assign("titre_popup", traduction("liste_personnels") . "<br/>" . ucfirst($ligne->nom_etab));
 
 ////////////////////////////////////////////////
-//affichage des entêtes de colonnes selon droits
+//affichage des entï¿½tes de colonnes selon droits
 
 
 //$tpl->newBlock("col_c");
@@ -156,14 +144,6 @@ $peutModifier = a_capacite("um", $idq);   //pour cet etablissement
 
 $peutSupprimer= a_capacite("us", $idq);   //pour cet etablissement
 if ($peutSupprimer) {
-	//$tpl->newBlock("col_s");
-	// v 1.41 suppression ici
-	/**********************************
-	if ($supp_id) {
-	    supprime_utilisateur($supp_id);
-        $refresh=1;
-	}
-	***********************************/
 	if ($action=="supprimer") { 
     	supprime_utilisateur ($id_action);
     	$refresh=1;
@@ -179,7 +159,7 @@ require_once ($CFG->chemin_commun . "/trieuse.class.php");
 require_once ($CFG->chemin_commun . "/chercheuse.class.php");
 
 ////////////////////////////////////////////////////
-// critères de recherche
+// critï¿½res de recherche
 ////////////////////////////////////////////////////
 $autre_table = "";
 //important limiter a la composante courante
@@ -192,7 +172,7 @@ if ($profil) {
 }
 
 /////////////////////////////////////////////
-// critères de tri
+// critï¿½res de tri
 /////////////////////////////////////////////
 $url = "liste.php?idq=" . $idq;
 $url = concatAvecSeparateur($url, $chaine_critere_recherche, "&amp;");
@@ -216,7 +196,7 @@ $url_multipagination = concatAvecSeparateur($url, $trieuse->getParametreTri(), "
 
 
 ///////////////////////////////////////////////
-// gestion des retours vers cette page à partir d'une popup sans perte des critères
+// gestion des retours vers cette page ï¿½ partir d'une popup sans perte des critï¿½res
 $url_retour = concatAvecSeparateur($chaine_critere_recherche,"idq=".$idq,'&amp;');  //important ici 
 $url_retour=concatAvecSeparateur($url_retour,"indice_deb=" . $indice_deb,"&amp;");
 $url_retour=concatAvecSeparateur($url_retour,"indice_ecart=" . $indice_ecart,"&amp;");
@@ -229,7 +209,7 @@ $url_retour=urlencode($url_retour);
 
 
 ////////////////////////////////////////////////////
-// requete de sélection des personnes
+// requete de sï¿½lection des personnes
 ////////////////////////////////////////////////////
 
 $res=get_records("utilisateurs U" . $autre_table ,$critere_recherche,$critere_tri,$indice_deb,$indice_ecart);
@@ -249,30 +229,6 @@ foreach ($res as $ligne) {
 	$tpl->assign("nom",cree_lien_mailto($ligne->email,get_fullname($ligne->login)));
 	$tpl->assign("auth",$ligne->auth);
 
-/**
-	$tpl->newBlock("icones_action_liste");
-    // si droit de consulter // à gérer
-	$tpl->newblockNum("td_consulter_oui",$compteur_ligne);
-	$tpl->assignURL("url_consulter","fiche.php?id=" . $ligne->login . "&amp;ide=" . $idq);
-
-	// si droit de modifier
-	if ($peutModifier) {
-		$tpl->newBlockNum("td_modifier_oui",$compteur_ligne);
-		$tpl->assignURL("url_modifier", "ajout.php?id=" . $ligne->login . "&amp;ide=" . $idq."&amp;url_retour=" . $url_retour);
-	}
-
-
-	// si droit de supprimer // à gérer
-    if ($peutSupprimer) {
-		if ($USER->id_user != $ligne->login) {  //rev 1.41
-			$tpl->newBlockNum("td_supprimer_oui",$compteur_ligne);
-			$tpl->assign("js_supp", traduction("js_personnel_supprimer_0") . " " . addslashes($ligne->login) . " " .
-			traduction("js_personnel_supprimer_1"));
-			$tpl->assignURL("url_supprimer", "liste.php?supp_id=" . $ligne->login . "&amp;idq=" . $idq . "&amp;" . urldecode($url_retour));
-		}   else $tpl->newBlock("td_supprimer_non");
-	}
-**/
-
   	$items=array();
     $items[]=new icone_action('consulter',"consulterItem('{$ligne->login}',$idq)");
     
@@ -290,7 +246,7 @@ foreach ($res as $ligne) {
     $tpl->newBlock ('icones_actions');
     print_icones_action($tpl,'icones_actions',$items,'actions_'.$compteur_ligne);
 
-	// passage à la ligne suivante
+	// passage ï¿½ la ligne suivante
 	$compteur_ligne++;
 }
 if ($compteur_ligne==0){
@@ -298,7 +254,7 @@ if ($compteur_ligne==0){
 }
 
 
-// génération des listes déroulantes
+// gï¿½nï¿½ration des listes dï¿½roulantes
 $tpl->gotoBlock("_ROOT");
 print_boutons_criteres($tpl);
 $tpl->assign("idq",$idq);
@@ -321,7 +277,7 @@ print_menu($tpl,"_ROOT.menu_niveau2",$items);
 $tpl->print_boutons_fermeture();
 
 //rev 962
-if ($refresh)  {  //retour d'une opération modifiant cette liste  (inscriptions, pools ...)
+if ($refresh)  {  //retour d'une opï¿½ration modifiant cette liste  (inscriptions, pools ...)
         $tpl->newBlock("rafraichi_liste");
 }
 

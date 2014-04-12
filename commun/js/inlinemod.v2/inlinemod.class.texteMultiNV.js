@@ -19,7 +19,7 @@ TexteMultiNV.prototype.erreur = function ()
 {
 	if(trim(this.getValeur()) == "")
 	{
-		this.texteErreur = "Aucune saisie effectuée !";
+		this.texteErreur = "Aucune saisie effectu&eacute;e !";
 		//alert(this.texteErreur);
 		return true;
 	}

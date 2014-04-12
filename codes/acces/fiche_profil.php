@@ -56,7 +56,7 @@ EOF;
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
 $chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
 $idq = required_param("idq", PARAM_INT);
 $ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT);
@@ -74,9 +74,9 @@ $ligne = get_profil($idq); //fatale si inconnu
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
-$tpl->assignInclude("corps",$fiche,T_BYVAR); // le template gérant la fiche du profil
+$tpl->assignInclude("corps",$fiche,T_BYVAR); // le template gï¿½rant la fiche du profil
 $tpl->assignInclude("table_profil",profil_en_table(),T_BYVAR);  //tableau des profils avec cases a cocher non modifiables
 $tpl->prepare($chemin);
 
@@ -101,7 +101,7 @@ if ($membres=get_utilisateurs_avec_profil($idq)) {
         $str=cree_lien_mailto($membre->email,_regle_nom_prenom($membre->nom,$membre->prenom)); //rev 843
         $tpl->assign ("nom_mail",$str);
         print_menu_item($tpl,"consulter_fiche",get_menu_item_consulter("personnel/fiche.php?id=".$membre->login));
-        // rev 962 icone de radiation (plus rapide que d'éditer ce compte)
+        // rev 962 icone de radiation (plus rapide que d'Ã©diter ce compte)
         if (is_admin(false,$CFG->universite_serveur)) {
 	        print_menu_item($tpl,"supprimer_membre",
              get_menu_item_supprimer("fiche_profil.php?idq=".$idq."&amp;supp=".$membre->login,

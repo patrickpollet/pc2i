@@ -10,29 +10,29 @@
 
 ////////////////////////////////
 //
-//	liste des examens et accès à leur gestion
+//	liste des examens et accï¿½s ï¿½ leur gestion
 //
 ////////////////////////////////
 
 
 
 /*
-* Pour la description des différentes méthodes de la classe TemplatePower,
-* il faut se reférer à http://templatepower.codocad.com/
+* Pour la description des diffï¿½rentes mï¿½thodes de la classe TemplatePower,
+* il faut se refï¿½rer ï¿½ http://templatepower.codocad.com/
 */
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
+//******** ---------------- $chemin_images reprï¿½sente le path des images
 $chemin = '../../..';
 $chemin_commun = $chemin . "/commun";
 $chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 require_login("P"); //PP
 
 
 
 //parametres attendus
-$idq=optional_param("idq",$USER->id_etab_perso,PARAM_INT); //etablissement concerné
+$idq=optional_param("idq",$USER->id_etab_perso,PARAM_INT); //etablissement concernï¿½
 $examen=optional_param("examen","",PARAM_CLE_C2I);  //critere de recherche (num.num)
 
 //$indice_deb=optional_param("indice_deb",0,PARAM_INT);
@@ -52,7 +52,7 @@ $ligne=get_etablissement($idq);
 
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 
 $liste=<<<EOL
@@ -136,7 +136,7 @@ $liste=<<<EOL
           {icones_actions}
           </td>
 <!-- END BLOCK : icones_actions -->           
-<!-- INCLUDE BLOCK : icones_action_liste -->
+
           </tr>
 <!-- END BLOCK : ligne -->
 
@@ -167,7 +167,7 @@ $tpl->prepare($chemin,$options);
 $tpl->assign("_ROOT.titre_popup", traduction("liste_etudiants") . "<br/>" . ucfirst($ligne->nom_etab));
 
 ////////////////////////////////////////////////
-//affichage des entêtes de colonnes selon droits
+//affichage des entï¿½tes de colonnes selon droits
 $colspan=6;
 //$tpl->newBlock("col_c");
 $peutModifier = a_capacite("etm", $idq);   //pour cet etablissement
@@ -177,15 +177,6 @@ $peutModifier = a_capacite("etm", $idq);   //pour cet etablissement
 //}
 $peutSupprimer= a_capacite("ets",$idq);
 if ($peutSupprimer) {
-    /******************************
-    $tpl->newBlock("col_s");
-    $colspan++;
-    // v 1.41 suppressions ici
-    if ($supp_id) { //
-      supprime_candidat($supp_id);
-      $refresh=1;
-    }
-    ******************************/
     if ($action=="supprimer") { 
     	supprime_candidat ($id_action);
     	$refresh=1;   	
@@ -198,13 +189,13 @@ require_once ($CFG->chemin_commun . "/trieuse.class.php");
 require_once ($CFG->chemin_commun . "/chercheuse.class.php");
 
 ////////////////////////////////////////////////////
-// critères de recherche
+// critï¿½res de recherche
 ////////////////////////////////////////////////////
 $autre_table = "";
 $chaine_critere_recherche = "";
 
  //important !!!
- //filtrer par établissements/composantes
+ //filtrer par ï¿½tablissements/composantes
 $critere_recherche = "I.etablissement=".$idq. " and not I.login like 'ANONYME%'";
 if ($examen) {
 	$ex = explode(".", $examen);
@@ -214,7 +205,7 @@ if ($examen) {
 }
 
 /////////////////////////////////////////////
-// critères de tri
+// critï¿½res de tri
 /////////////////////////////////////////////
 $url = "liste.php?idq=" . $idq;
 $url = concatAvecSeparateur($url, $chaine_critere_recherche, "&amp;");
@@ -239,7 +230,7 @@ $url_multipagination = concatAvecSeparateur($url, $trieuse->getParametreTri(), "
 
 
 ///////////////////////////////////////////////
-// gestion des retours vers cette page à partir d'une popup sans perte des critères
+// gestion des retours vers cette page ï¿½ partir d'une popup sans perte des critï¿½res
 
 $url_retour = concatAvecSeparateur($chaine_critere_recherche,"idq=".$idq,'&amp;');  //important ici 
 $url_retour=concatAvecSeparateur($url_retour,"indice_deb=" . $indice_deb,"&amp;");
@@ -253,7 +244,7 @@ $url_retour=urlencode($url_retour);
 
 
 ////////////////////////////////////////////////////
-// requete de sélection des etudiants à afficher
+// requete de sï¿½lection des etudiants ï¿½ afficher
 ////////////////////////////////////////////////////
 $res=get_records("inscrits I" . $autre_table ,$critere_recherche,$critere_tri,$indice_deb,$indice_ecart);
 
@@ -294,31 +285,6 @@ foreach($res as $ligne) {
         $tpl->assign ("aussi_inscrit",traduction ("msg_aussi_inscrit",false, $nbe-count($exams),$autre_pf));
 
     }
-/***************************************************
-    $tpl->newBlock("icones_action_liste");
-	$tpl->newblockNum("td_consulter_oui",$compteur_ligne);
-	$tpl->assignURL("url_consulter","fiche.php?id=" . $ligne->login . "&amp;ide=" . $idq);
-
-	// si droit de modifier// à gérer
-	if ($peutModifier)
-	 if  ( !is_utilisateur_anonyme($ligne->login)) { // rev 834
-		$tpl->newBlockNum("td_modifier_oui",$compteur_ligne);
-		$tpl->assignURL("url_modifier", "ajout.php?id=" . $ligne->login . "&amp;ide=" . $idq."&amp;url_retour=" . $url_retour);
-	} else $tpl->newBlock("td_modifier_non");
-
-	// si droit de supprimer // à gérer
-	if ($peutSupprimer) {
-		// rev 1.41 pas si a passé un exam
-		if (is_utilisateur_anonyme($ligne->login) //rev 834
-		   || $nbe==0 ) {
-			$tpl->newBlockNum("td_supprimer_oui",$compteur_ligne);
-            //le addslashe a été ajouté pour pouvoir virer des comptes mal importés en V < 1.5 (guillemets prseents !)
-			$tpl->assign("js_supp",traduction("js_etudiant_supprimer_0") . " " . addslashes($ligne->login) . " " .
-			traduction("js_etudiant_supprimer_1"));
-			$tpl->assignURL("url_supprimer", "liste.php?supp_id=" . $ligne->login . "&amp;idq=" . $idq . "&amp;" . urldecode($url_retour));
-		}   else $tpl->newBlock("td_supprimer_non");
-	}
-*****************************************************/
 
   	$items=array();
     $items[]=new icone_action('consulter',"consulterItem('{$ligne->login}',$idq)");
@@ -340,7 +306,7 @@ foreach($res as $ligne) {
     $tpl->newBlock ('icones_actions');
     print_icones_action($tpl,'icones_actions',$items,'actions_'.$compteur_ligne);
 
-	// passage à la ligne suivante
+	// passage ï¿½ la ligne suivante
 	$compteur_ligne++;
 }
 
@@ -350,7 +316,7 @@ if ($compteur_ligne==0){
 }
 ///////////////////////////////////
 //
-//	gestions de l'affichage des critères de recherche
+//	gestions de l'affichage des critï¿½res de recherche
 //
 ///////////////////////////////////
 $tpl->gotoBlock("_ROOT");
@@ -383,7 +349,7 @@ print_menu($tpl,"_ROOT.menu_niveau2",$items);
 $tpl->print_boutons_fermeture();
 
 // rev 962
-if ($refresh)  {  //retour d'une opération modifiant cette liste  (inscriptions, pools ...)
+if ($refresh)  {  //retour d'une opï¿½ration modifiant cette liste  (inscriptions, pools ...)
         $tpl->newBlock("rafraichi_liste");
 }
 
