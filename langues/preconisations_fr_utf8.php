@@ -35,14 +35,14 @@ $preconisations=array (
 
 "70"=>"Plusieurs points du r&eacute;f&eacute;rentiel m&eacute;ritent d'&ecirc;tre approfondis.
 Lorsque vous avez un score inf&eacute;rieur &agrave; 40% dans un domaine, il faut reprendre les bases et acqu&eacute;rir les connaissances et savoir-faire associ&eacute;s ;
-lorsque vous avez un score compris entre 40% et 70%, vous devez approfondir le domaine en tenant compte de vos r&eacute;sultats dans les diff&eacute;rents alin&eacute;as,
+lorsque vous avez un score compris entre 40% et 70%, vous devez approfondir le domaine en tenant compte de vos r&eacute;sultats dans les diff&eacute;rentes compétences,
 lorsque vous avez un score compris entre 70% et 100%, vous avez, &agrave; priori, les comp&eacute;tences du C2i de ce domaine, vous pouvez compl&eacute;ter vos connaissances en auto-formation.",
 
 "100"=>"Vous avez, &agrave; priori, les comp&eacute;tences du C2i.<br/>
 Vous pouvez envisager de travailler certains points.<br/>
 Lorsque vous avez un score inf&eacute;rieur &agrave; 40% dans un domaine, il faut reprendre les bases
 et acqu&eacute;rir les connaissances et savoir-faire associ&eacute;s ;
- lorsque vous avez un score compris entre 40% et 70%, vous devez approfondir le domaine en tenant compte de vos r&eacute;sultats dans les diff&eacute;rents alin&eacute;s,
+ lorsque vous avez un score compris entre 40% et 70%, vous devez approfondir le domaine en tenant compte de vos r&eacute;sultats dans les diff&eacute;rentes compétences,
 lorsque vous avez un score compris entre 70% et 100%, vous avez, &agrave; priori, les comp&eacute;tences du C2i de ce domaine vous pouvez compl&eacute;ter vos connaissances en auto-formation.",
 
 );

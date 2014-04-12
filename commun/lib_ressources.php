@@ -441,8 +441,13 @@ function cree_parcours_HTML($examen,$res){
 EOM;
 $tmptpl= new SubTemplatePower($modele,T_BYVAR);    //cr�er une instance
 $tmptpl->prepare($CFG->chemin);
+
+// rev 2.0 seuelement referentiels concern�s
 foreach ($res->tabref_score as $ref=>$score) {
-	if ($score < $examen->resultat_mini) {
+	if (empty($score))
+		continue;
+	// en certification resultat_mini est 0 (pas grave car non affiché dans ce cas)
+	if ($score <= $examen->resultat_mini) { // on pourrait donner toujours les ressources ?
 		$referentiel=get_referentiel($ref);
 		$ligne=new StdClass();
 		$ligne->ref=$ref;
