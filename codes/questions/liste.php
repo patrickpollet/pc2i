@@ -135,27 +135,6 @@ rev 981 et ult�rieure : les javascript dans dans un document php inclus par IN
 
     <th class="bg" style="width:{largeur_td_action}px;">{t_actions}</th>
 
-<!-- START BLOCK : col_v -->
-            <th class="bg icone_action">{t_valider}</th>
-<!-- END BLOCK : col_v -->
-<!-- START BLOCK : col_c -->
-            <th class="bg icone_action">{t_consult}</th>
-<!-- END BLOCK : col_c -->
-<!-- START BLOCK : col_d -->
-            <th class="bg icone_action">{t_dupl}</th>
-<!-- END BLOCK : col_d -->
-<!-- START BLOCK : col_m -->
-            <th class="bg icone_action">{t_modif}</th>
-<!-- END BLOCK : col_m -->
-<!-- START BLOCK : col_f -->
-            <th class="bg icone_action">{t_filtrer}</th>
-<!-- END BLOCK : col_f -->
-<!-- START BLOCK : col_iv -->
-            <th class="bg icone_action">{t_invalider}</th>
-<!-- END BLOCK : col_iv -->
-<!-- START BLOCK : col_s -->
-            <th class="bg icone_action">{t_supp}</th>
-<!-- END BLOCK : col_s -->
 
 
 </tr>
@@ -165,13 +144,15 @@ rev 981 et ult�rieure : les javascript dans dans un document php inclus par IN
 <!-- START BLOCK : question -->
  <tr title="{title_id}"  class="{paire_impaire}">
             <td class="{style}" title="{obsolete}" >{id}</td>
-            
+<!-- START BLOCK : editable -->            
             <td class="editable {barree}"
           ondblclick="inlineMod('{id}',this,'titre','TexteMultiNV','{ajax_modif}');"
                             >{titre}</td>
-   
-            
-           <!-- <td class="{barree}">{titre}</td> -->
+ <!-- END BLOCK : editable -->  
+ <!-- START BLOCK : non_editable -->           
+           <td class="{barree}">{titre}</td>
+ <!-- END BLOCK : non_editable -->
+           
             <td>{auteur}</td>
             <td>{ref}</td>
             <td>{alinea}</td>
@@ -521,6 +502,11 @@ $compteur_ligne = 0;
 $nb_experts = config_nb_experts();
 foreach ($lignes as $ligne) {
 
+	// v�rification de l'utilisation de cet item dans un examen
+	$nb = est_utilise_examen($ligne->id, $ligne->id_etab); //tests documents
+	// rev 977 simplification des tests
+	$droitLocal=is_super_admin() || ($USER->id_etab_perso == $ligne->id_etab || is_admin(false, $ligne->id_etab));
+	
 	// rev 982  parametre unique des actions
 	$idnat=$ligne->id_etab.'.'.$ligne->id;
 
@@ -532,8 +518,24 @@ foreach ($lignes as $ligne) {
 
 	$tpl->assign("id", $idnat);
 	$tpl->assign("title_id", nom_univ($ligne->id_etab)); // ajout SB
-	$tpl->assign("titre", affiche_texte_question($ligne->titre));
-	$tpl->assign("id",$ligne->id);
+	
+	// rev 2.0 édition inline des libellés
+	if ($peutModifier) {
+		if (($nb == 0 && !est_validee($ligne)) || is_super_admin()) { //jamais une valid�e
+			if ($droitLocal || ($CFG->universite_serveur == 1 && a_capacite("qv", 1))) //rev 818 un expert peut modifier une question sur la nationale ...
+			{
+				$tpl->newBlock('editable');
+				$tpl->assign("id",$ligne->id);
+			}	
+			else
+				$tpl->newBlock('non_editable');
+		} else $tpl->newBlock('non_editable');
+	} else $tpl->newBlock('non_editable');
+		
+	$tpl->assign("titre", affiche_texte_question($ligne->titre));	
+	$tpl->gotoBlock('question'); //important
+	
+	
 	//rev 944 couleurs selon �tat
 	if ($ligne->etat == QUESTION_REFUSEE) {
 		$tpl->assign("style", "rouge");
@@ -576,11 +578,7 @@ foreach ($lignes as $ligne) {
     // debut code revis� theme v15
     $items=array();
 
-    // v�rification de l'utilisation de cet item dans un examen
-    $nb = est_utilise_examen($ligne->id, $ligne->id_etab); //tests documents
-    // rev 977 simplification des tests
-    $droitLocal=is_super_admin() || ($USER->id_etab_perso == $ligne->id_etab || is_admin(false, $ligne->id_etab));
-
+  
     if ($USER->type_plateforme == "certification") {
         $nb_avis = 0;
         // gestion de l'affichage de l'ic�ne de validation
