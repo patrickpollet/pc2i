@@ -34,7 +34,12 @@ require_once ($chemin_commun."/lib_bd.php");
 require_once ($chemin_commun."/lib_acces.php");
 
 $wwwroot=required_param("wwwroot",PARAM_RAW);
+
+$wwwroot= add_slash_url($wwwroot);
+
 $dataroot=required_param("dataroot",PARAM_RAW);
+$dataroot = add_slash_url($dataroot);
+
 $c2i=required_param("c2i",PARAM_RAW);
 $prefix=required_param("prefix",PARAM_RAW);
 

@@ -31,7 +31,21 @@ $tester=optional_param("tester","",PARAM_INT);
 
 $c2i=optional_param("c2i","c2i",PARAM_RAW);
 $prefix=optional_param("prefix",$c2i,PARAM_RAW); //non éditable pour l'instant
-$wwwroot=optional_param("wwwroot","http://localhost/{$c2i}/",PARAM_RAW);
+$wwwroot=optional_param("wwwroot","",PARAM_RAW);
+print_r($_SERVER);
+//calcul de l'URL de la plateforme au 1er appel
+if (empty($wwwroot) && isset($_SERVER['HTTP_REFERER'])) {
+	$pu=parse_url($_SERVER['HTTP_REFERER']);
+	print_r($pu);
+	$tmp=add_slash_url($chemin);   // ../..  --> ../../
+	$base=dirname($pu['path']);
+	while (strpos($tmp,"../")===0) {
+		$base=dirname($base);
+		$tmp=substr($tmp,3);
+		// print $base."<br/>".$tmp;
+	}
+	$wwwroot=$pu['scheme']."://".$pu['host'].$base;
+}
 
 $locale_url_univ=$wwwroot;
 

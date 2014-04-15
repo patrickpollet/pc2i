@@ -89,6 +89,8 @@ $liste=<<<EOL
 </div>
 
  <!-- INCLUDE BLOCK : multip_haut -->
+ 
+ <div id="erreurMsg"> </div>
 <table id="liste">
 <thead>
           <tr>
@@ -100,18 +102,7 @@ $liste=<<<EOL
             <th class="bg">{t_nbinscrits}</th>
    <th class="bg" style="width:150px;">{t_actions}</th>
 
-<!-- START BLOCK : col_c -->
-            <th class="bg icone_action">{t_consult}</th>
-<!-- END BLOCK : col_c -->
-<!-- START BLOCK : col_d -->
-            <th class="bg icone_action">{t_dupl}</th>
-<!-- END BLOCK : col_d -->
-<!-- START BLOCK : col_m -->
-            <th class="bg icone_action">{t_modif}</th>
-<!-- END BLOCK : col_m -->
-<!-- START BLOCK : col_s -->
-            <th class="bg icone_action">{t_supp}</th>
-<!-- END BLOCK : col_s -->
+
 </tr>
 </thead>
 <tbody>
@@ -119,7 +110,17 @@ $liste=<<<EOL
 
           <tr title="{title_id}" class="{paire_impaire}">
             <td title="{title_id}">{id}{anonyme}</td>
-            <td>{quest}</td>
+
+ <!-- START BLOCK : editable -->
+ <td class="editable"
+          ondblclick="inlineMod('{id_examen}',this,'nom_examen','TexteMultiNV','{ajax_modif}');"
+                            >{nom_examen}</td>
+<!-- END BLOCK : editable -->
+            
+ <!-- START BLOCK : non_editable -->
+<td>{nom_examen}</td> 
+<!-- END BLOCK : non_editable -->
+
             <td>{dateh}<br/><span class="commentaire1">{heures} </span>
             <br/>
             <img src="{chemin_images}/{image_dateh}.gif" alt="{alt_image_dateh}" title="{alt_image_dateh}" />
@@ -184,24 +185,22 @@ $tpl->prepare($chemin,$options);
 
 add_javascript($tpl,$CFG->chemin_commun."/js/sprintf.js");
 
+$CFG->utiliser_inlinemod_js=1; 
+
 
 print_menu_haut($tpl,"e");
 
 $tpl->gotoBlock("_ROOT");
 
 //affichage des ent�tes de colonnes selon droits
-//$tpl->newblock("col_c");
+
 $colspan=7;
 // si droit de modifier
 $peutModifier= a_capacite("em");
-if ($peutModifier) {
-    //$tpl->newblock("col_m");
-   // $colspan++;
-}
+
 // si droit de supprimer
 $peutSupprimer=a_capacite("es");
 if ($peutSupprimer) {
-	 //  $tpl->newblock("col_s");
     // v 1.41 suppression ici donc  retest du droit
     $supp_idq=optional_param("supp_idq","",PARAM_INT);
     $supp_ide=optional_param("supp_ide","",PARAM_INT);
@@ -333,7 +332,15 @@ foreach ($examens as $ligne) {
     $tpl->setConditionalvalue ($ligne->anonyme,"anonyme",
       "<img src='".$CFG->chemin_images."/anonyme.jpg' title='".traduction("exam_anonyme")."' alt='".traduction("exam_anonyme")."' />","");
 	$tpl->assign("title_id", nom_univ($ligne->id_etab)); // ajout SB
-	$tpl->assign("quest", affiche_texte($ligne->nom_examen));
+
+	if ($peutModifier 
+		&& (is_super_admin()  || $USER->id_etab_perso == $ligne->id_etab || is_admin(false,$ligne->id_etab)) )
+			$tpl->newBlock('editable');
+	else	
+		$tpl->newBlock('non_ editable');
+	$tpl->assign("nom_examen", affiche_texte($ligne->nom_examen));
+	$tpl->assign("id_examen", affiche_texte($ligne->id_examen));
+	$tpl->gotoBlock('ligne');  //important 
 
     $ligne->auteur=applique_regle_nom_prenom($ligne->auteur); // rev 841
 
@@ -423,6 +430,10 @@ foreach ($examens as $ligne) {
 
     $tpl->newBlock ('icones_actions');
     print_icones_action($tpl,'icones_actions',$items,'actions_'.$compteur_ligne);
+    
+    // rev 2.0 editeur inline pour le libellé
+    
+    
 	// passage � la ligne suivante
 	$compteur_ligne++;
 }
@@ -459,6 +470,7 @@ print_boutons_criteres($tpl);
 
 $tpl->gotoBlock("_ROOT");
 
+$tpl->assignGlobal("ajax_modif",$chemin_commun."/ajax/modif_examen.php");
 
 $items=array();
 if (a_capacite("ea")) {

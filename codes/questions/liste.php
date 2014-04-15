@@ -112,6 +112,7 @@ rev 981 et ult�rieure : les javascript dans dans un document php inclus par IN
 </div>
 <!-- INCLUDE BLOCK : multip_haut -->
 
+ <div id="erreurMsg"> </div>
 <table id="liste">
 <thead>
 <tr>
@@ -164,7 +165,13 @@ rev 981 et ult�rieure : les javascript dans dans un document php inclus par IN
 <!-- START BLOCK : question -->
  <tr title="{title_id}"  class="{paire_impaire}">
             <td class="{style}" title="{obsolete}" >{id}</td>
-            <td class="{barree}">{quest}</td>
+            
+            <td class="editable {barree}"
+          ondblclick="inlineMod('{id}',this,'titre','TexteMultiNV','{ajax_modif}');"
+                            >{titre}</td>
+   
+            
+           <!-- <td class="{barree}">{titre}</td> -->
             <td>{auteur}</td>
             <td>{ref}</td>
             <td>{alinea}</td>
@@ -211,6 +218,7 @@ $options = array (
 
 $tpl->prepare($chemin, $options);
 
+$CFG->utiliser_inlinemod_js=1;
 /////////////////////////
 // affichage du menu menu
 
@@ -524,8 +532,8 @@ foreach ($lignes as $ligne) {
 
 	$tpl->assign("id", $idnat);
 	$tpl->assign("title_id", nom_univ($ligne->id_etab)); // ajout SB
-	$tpl->assign("quest", affiche_texte_question($ligne->titre));
-
+	$tpl->assign("titre", affiche_texte_question($ligne->titre));
+	$tpl->assign("id",$ligne->id);
 	//rev 944 couleurs selon �tat
 	if ($ligne->etat == QUESTION_REFUSEE) {
 		$tpl->assign("style", "rouge");
@@ -721,6 +729,8 @@ if (a_capacite("qv") || empty($CFG->seulement_validees_liste)) {
 	$tpl->newBlock ('filtre_etat');
 	print_select_from_table($tpl, "select_filtre_valid", get_etats_validation(), "filtre_valid", null, "", "id", "texte", traduction("alt_validation"), $filtre_valid);
 }
+
+$tpl->assignGlobal("ajax_modif",$chemin_commun."/ajax/modif_question.php");
 
 $items = array ();
 if (a_capacite("qa")) {

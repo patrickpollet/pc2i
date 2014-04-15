@@ -53,7 +53,7 @@ $CFG->wwwroot=$locale_url_univ;
 
 $pu=parse_url($CFG->wwwroot);
 // rev 980 pour liens images relatifs au serveur  sans le slah de fin
-$CFG->serverroot=$pu['scheme']."://".$pu['host'];
+//$CFG->serverroot=$pu['scheme']."://".$pu['host'];
 
 
 $CFG->encodage="UTF-8";
@@ -94,20 +94,20 @@ function maj_bd_config() {
     /**
      * developpeurs
      * si vous avez besoin d'une nouvelle variable de config mettez une ligne
-     * comme celles-ci une fois ici (l'entr�e sera cr��e dans la table c2iconfig au prochain
+     * comme celles-ci une fois ici (l'entrée sera créée dans la table c2iconfig au prochain
      * chargement d'une page et utilisez la avec $CFG->nom_de_la_variable dans vos scripts
-     * puis commentez la (ou virez la) et  transf�rez la � la fin de la fonction
+     * puis commentez la (ou virez la) et  transférez la � la fin de la fonction
      * maj_config_14_15() dans installation/lib_maj14_15.php
-     * pour que les mises � jour des PF locales fonctionnent.
+     * pour que les mises à jour des PF locales fonctionnent.
      */
 
 
-
+/***********************
     if (get_config('activer_filtre_latex',false)) {
             require_once($CFG->dirroot.'/commun/filtres/tex/lib.php');
             tex_filter_maj_config();
      }
-
+***********************/
 
 }
 
@@ -143,12 +143,12 @@ function lecture_config() {
 
 // rev 1013  simplifie les tests plus tards
 $CFG->unicodedb= strtoupper( $CFG->encodage) != "ISO-8859-1";
-
+/****
  if (get_config_item('activer_filtre_latex',false)) {
             require_once($CFG->dirroot.'/commun/filtres/tex/lib.php');
             tex_filter_maj_bd();
      }
-
+*****/
 
 
 // important apr�s relecture du theme dans la config
@@ -160,8 +160,6 @@ $CFG->utiliser_form_actions=1;  // rev 981 simplification forte des liens openPo
 
 //seulement sur les nationales
 $CFG->utiliser_commentaires_reponses=$CFG->universite_serveur==1; 
-
-
 
 }
 

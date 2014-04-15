@@ -220,13 +220,13 @@ function supprime_parcours($supp_id)  {
 }
 
 /**
- * a partir des r�sultats de l'examen qui vient d'�tre not�
- * cr��� un parcours a partir des domaines pass�es ET "non valid�es"
+ * a partir des résultats de l'examen qui vient d'être noté
+ * crée un parcours a partir des domaines passés ET "non validés"
  * question referentiel ou competence ? pour l'instant en C2i niveau 1 le scrore
- * s'applique au referentiel, donc on y met toutes les ressources associ�es ...
- * ca pourra �voluer...
+ * s'applique au referentiel, donc on y met toutes les ressources associées ...
+ * ca pourra évoluer...
  * @param idex idexe l'examen
- * @param login le compte concern�
+ * @param login le compte concerné
  * @return id du parcours
  */
 function cree_parcours_croisement_examen ($idex,$idexe,$login) {
