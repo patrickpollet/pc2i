@@ -13,4 +13,6 @@ $CFG->prof_peut_avoir_parcours=0;
 $CFG->afficher_lien_mail_liste_questions=0;
 $CFG->afficher_lien_mail_liste_examens=0;
 
+$CFG->seulement_validee_en_positionnement=1; 
+
 ?>
