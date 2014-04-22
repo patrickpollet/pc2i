@@ -169,7 +169,7 @@ function doImport() {
 	}
 
 	if ($ligne = get_old_record('config', "cle='encodage'", $oldConnexion)) {
-		if ($ligne->valeur === 'ISO-8859-1')
+		if (strtoupper($ligne->valeur) === 'ISO-8859-1')
 			set_ok ("controle encodage {$ligne->valeur} OK.",$resultats);
 		else {
 			set_erreur ("cette plateforme n'est pas en encodage ISO-8859-1",$resultats);
