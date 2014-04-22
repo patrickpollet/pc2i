@@ -337,7 +337,7 @@ foreach ($examens as $ligne) {
 		&& (is_super_admin()  || $USER->id_etab_perso == $ligne->id_etab || is_admin(false,$ligne->id_etab)) )
 			$tpl->newBlock('editable');
 	else	
-		$tpl->newBlock('non_ editable');
+		$tpl->newBlock('non_editable');
 	$tpl->assign("nom_examen", affiche_texte($ligne->nom_examen));
 	$tpl->assign("id_examen", affiche_texte($ligne->id_examen));
 	$tpl->gotoBlock('ligne');  //important 
