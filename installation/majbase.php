@@ -87,7 +87,7 @@ EOF;
 //pas encore de login connu
 $USER= new StdClass();
 $USER->type_plateforme='certification';
-$USER->id_user='admin';
+$USER->id_user='admin1';
 
 if ($login_nat && $pass_nat) {
 
@@ -129,7 +129,7 @@ if ($login_nat && $pass_nat) {
 			
 			//mettre a jour le compte admin
 			$admin=new StdClass();
-			$admin->login='admin';
+			$admin->login='admin1';
 			$admin->etablissement=$user->etablissement;		
 			update_utilisateur($admin,true);
 			

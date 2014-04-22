@@ -102,7 +102,7 @@ $CFG->utiliser_mkjoli=1;
 
 $USER=new StdClass();
 $USER->type_plateforme='certification';
-$USER->id_user='admin'; //tempo pour mise � jour
+$USER->id_user='admin1'; //tempo pour mise � jour
 
 
 //existe pas en installation (seulement en maj)

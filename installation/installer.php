@@ -86,8 +86,8 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     //créér un compte admin
     $pwd= mot_de_passe_a($CFG->longueur_mot_de_passe_aleatoire);
     $user=new StdClass();
-    $user->login=$user->nom=$user->prenom='admin';
-    $user->email='admin@univ';
+    $user->login=$user->nom=$user->prenom='admin1';
+    $user->email='admin1@univ.fr';
     $user->password=md5($pwd);
     $user->etablissement=0;
     $user->est_admin_univ='O';
@@ -97,7 +97,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     
     // avec ses droits
     $data=new StdClass();
-    $data->login='admin';
+    $data->login='admin1';
     $data->id_profil=1; // admin
     insert_record('droits',$data,false,false,false);
     
@@ -110,7 +110,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     	//plateforme générique (nationale) sans referentiel 
     	//mettre le compte super-admin et le laisser faire
     	$user=new StdClass();
-    	$user->login='admin';
+    	$user->login='admin1';
     	$user->etablissement=1;
     	$user->est_superadmin=$user->est_admin_univ='O';
     	update_utilisateur($user,false);  //pas d'espion encore

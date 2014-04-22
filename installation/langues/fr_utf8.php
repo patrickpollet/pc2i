@@ -25,7 +25,7 @@ $textes_langues["epilogue_install"]=<<<EOF
     <hr>
     <div class='information_gauche'>Installation terminée.<br> 
     <br/>
-    Un compte administrateur vient d'être créé avec comme identifiant <b>admin</b> et comme mot de passe <b>%s</b>
+    Un compte administrateur vient d'être créé avec comme identifiant <b>admin1</b> et comme mot de passe <b>%s</b>
    <br/>
    Pour être fonctionnelle cette plate-forme locale a besoin d'être synchronisée avec une plate-forme nationale. <br/>
    A la première connexion, vous allez être automatiquement redirigé vers la mise à jour depuis la plate-forme nationale %s correspondante.
@@ -49,7 +49,7 @@ $textes_langues["epilogue_install2"]=<<<EOF
     Vous avez opté pour l'installation générique de le plate-forme. Vous n'avez donc pas accès aux  options de synchronisation depuis
     une plate-forme nationale. 
     <br/>
-    Un compte administrateur vient d'être créé avec comme identifiant <b>admin</b> et comme mot de passe <b>%s</b> 
+    Un compte administrateur vient d'être créé avec comme identifiant <b>admin1</b> et comme mot de passe <b>%s</b> 
    <br/>
 Avant toute utilisation de cette plate-forme, il convient de définir dans cet ordre :
 <ul>
