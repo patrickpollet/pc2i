@@ -469,7 +469,7 @@ function synchro_questions_fast ($c2i,$lr,$ide,$test,&$resultats) {
 		//changement de contenu 
 		$q->etat=QUESTION_VALIDEE;
 		
-		if (!$q->error) {
+		if (empty($q->error)) {
 			unset($q->error); //important
 			if (!empty($table[$q->qid])) { // rev 835
 				if ( !est_utilise_examen($q->id,$q->id_etab) || $CFG->force_synchro_questions_utilisees) {  // rev 1000

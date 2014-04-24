@@ -294,9 +294,11 @@ function qst_get_info($blocks){
 					get_famille($block['tagData'], false) ? $info->id_famille_proposee = $block['tagData'] : $info->famille_proposee = $block['tagData'];
 					break;
 				case 'DOMAINE':
+				case 'DOMAINEV2' : // import des questions v1.5 c2i1
 					$info->referentielc2i = strtoupper($block['tagData']);
 					break;
 				case 'ALINEA':
+				case 'ALINEAV2' :    
 					$info->alinea = $block['tagData'];
 					break;
 				case 'TITRE':

@@ -437,7 +437,7 @@ function supprime_candidat ($supp_id) {
             // suppression de l'utilisateur
             delete_records("inscrits","login='" . addslashes($supp_id)."'"); // rev 984
             //tracking :
-            espion3("suppression","candidat", $supp_id,null);
+            espion3("suppression","etudiant", $supp_id,null);
         }
 }
 
@@ -467,7 +467,7 @@ function supprime_utilisateur ($supp_id) {
 		// suppression de l'utilisateur
 		delete_records("utilisateurs","login='" . addslashes($supp_id) . "'");  // rev 984
 		//tracking :
-		espion3("suppression","personnel",$supp_id,null);
+		espion3("suppression","utilisateur",$supp_id,null);
 }
 
 /**
@@ -498,7 +498,7 @@ function cree_utilisateur ($ligne, $ide=false,$espion=true) {
 
     //tracking :
     if ($espion) 
-        espion3("ajout","personnel", $ligne->login,$ligne); //rev 883
+        espion3("ajout","utilisateur", $ligne->login,$ligne); //rev 883
     return insert_record("utilisateurs",$ligne,'',false,false);// pas e fatale si echec
 
 }
@@ -507,7 +507,7 @@ function update_utilisateur ($ligne,$espion=true) {
     if (empty($ligne->login)) return false;
     $ligne->ts_datemodification=time();
     if ($espion)
-        espion3("modification","personnel", $ligne->login,$ligne); //rev 883
+        espion3("modification","utilisateur", $ligne->login,$ligne); //rev 883
     update_record("utilisateurs",$ligne,'login',false,true);  //pas trop grave si ca echoue
 }
 

@@ -242,6 +242,12 @@ function make_timestamp($year, $month=1, $day=1, $hour=0, $minute=0, $second=0, 
          if (!$totalsecs) return "";
 
     if (!$str) {  // Create the str structure the slow way
+        $str = new StdClass(); // fix un PHP warning 24/04/2014
+        /*
+[Thu Apr 24 14:50:54 2014] [error] [client 80.14.92.232] PHP Warning:  Creating default object from empty value in /web/c2isrv.univ-r
+ennes1.fr/https/pfv3/commun/lib_dates.php on line 245, referer: https://c2i.education.fr/pfv3/codes/qcm/passage.php?idq=28&ide=1&c2iv
+3=pd3i0oo281qn5nt9gcecf1co94
+         */
         $str->day   = traduction('jour');
         $str->days  = traduction('jours');
         $str->hour  = traduction('heure');
