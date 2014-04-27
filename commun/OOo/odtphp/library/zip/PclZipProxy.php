@@ -71,7 +71,7 @@ class PclZipProxy implements ZipInterface
 	 */
 	public function open($filename)
 	{
-        global $CFG;
+
 		if (true === $this->openned) {
 			$this->close();
 		}
@@ -80,11 +80,7 @@ class PclZipProxy implements ZipInterface
 		}
 		$this->filename = $filename;
 		
-		if ($CFG->pclzip_trace) {
-        	$fn=$CFG->chemin_ressources."/tmp/pclzip-trace_".time().".txt";
-            //print ("pcltrace on : $fn");
-            PclTraceOn($p_level=5, $p_mode="log", $p_filename=$fn);
-		}
+
 		$this->pclzip = new PclZip($this->filename);
 		$this->openned = true;
 		return true;

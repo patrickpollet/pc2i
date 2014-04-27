@@ -43,6 +43,8 @@ class Odf
      */
     public function __construct($filename, $config = array())
     {
+    	global  $CFG;
+    	
     	if (! is_array($config)) {
     		throw new OdfException('Configuration data must be provided as array');
     	}
@@ -56,6 +58,13 @@ class Odf
         }
         $zipHandler = $this->config['ZIP_PROXY'];
         $this->file = new $zipHandler();
+        
+        if ($CFG->pclzip_trace) {
+        	$fn=$CFG->chemin_ressources."/tmp/pclzip-trace_".time().".txt";
+        	//print ("pcltrace on : $fn");
+        	PclTraceOn($p_level=5, $p_mode="log", $p_filename=$fn);
+        }
+        
         if ($this->file->open($filename) !== true) {
             throw new OdfException("Error while Opening the file '$filename' - Check your odt file");
         }
