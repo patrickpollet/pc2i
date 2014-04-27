@@ -157,6 +157,9 @@ class Segment implements IteratorAggregate, Countable
         $filename = strtok(strrchr($value, '/'), '/.');
         $file = substr(strrchr($value, '/'), 1);
         $size = @getimagesize($value);
+        
+        //error_log ("odtphp key=$key value=$value filename=$filename file=$file size=$size");
+        
         if ($size === false) {
             throw new OdfException("Invalid image");
         }

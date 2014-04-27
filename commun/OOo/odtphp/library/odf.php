@@ -103,6 +103,8 @@ class Odf
         $filename = strtok(strrchr($value, '/'), '/.');
         $file = substr(strrchr($value, '/'), 1);
         $size = @getimagesize($value);
+        
+       
         if ($size === false) {
             throw new OdfException("Invalid image");
         }
@@ -261,7 +263,7 @@ IMG;
         if (!empty($CFG->odtphp_bug_content))
         	$target ='ccontent.xml';
         //END PP
-        if (! $this->file->addFromString($tar, $this->contentXml)) {
+        if (! $this->file->addFromString($target, $this->contentXml)) {
             throw new OdfException('Error during file export');
         }
         foreach ($this->images as $imageKey => $imageValue) {
@@ -319,7 +321,7 @@ IMG;
      */
     public function __destruct() {
           if (file_exists($this->tmpfile)) {
-        	//unlink($this->tmpfile);
+        	unlink($this->tmpfile);
         }
     }
 }
