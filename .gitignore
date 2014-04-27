@@ -10,6 +10,8 @@
 # See gitignore(5) man page for more details
 #
 /config.php
+/codes/nationale/config.php
+/codes/locale/config.php
 /commun/constantes.php
 /ws/clients/auth.php
 /ressources
