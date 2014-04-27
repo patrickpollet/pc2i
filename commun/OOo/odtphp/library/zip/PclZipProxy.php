@@ -79,11 +79,12 @@ class PclZipProxy implements ZipInterface
 			mkdir(TMP_DIR);
 		}
 		$this->filename = $filename;
-        /**
-        $fn=$CFG->chemin_ressources."/tmp/pclzip-trace_".time().".txt";
+		
+		if ($CFG->pclzip_trace) {
+        	$fn=$CFG->chemin_ressources."/tmp/pclzip-trace_".time().".txt";
             //print ("pcltrace on : $fn");
             PclTraceOn($p_level=5, $p_mode="log", $p_filename=$fn);
-        **/
+		}
 		$this->pclzip = new PclZip($this->filename);
 		$this->openned = true;
 		return true;
