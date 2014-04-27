@@ -31,8 +31,14 @@ $filtre_univ = optional_param("filtre_univ", '', PARAM_INT);
 
 //par défaut seulement les validées en certif
 
-if ($USER->type_plateforme == 'certification')
-    $filtre_valid = optional_param("filtre_valid",QUESTION_VALIDEE, PARAM_INT);
+if ($USER->type_plateforme == 'certification') {
+    // $filtre_valid = optional_param("filtre_valid",QUESTION_VALIDEE, PARAM_INT);
+    // v 2 seuls les experts validateurs peuvent voir les non validées
+    if (a_capacite("qv") || empty($CFG->seulement_validees_liste)) {
+    	$filtre_valid = optional_param("filtre_valid",QUESTION_VALIDEE, PARAM_INT);
+    } else 
+    	$filtre_valid = QUESTION_VALIDEE ; //valeur forcée
+}
 else 
     $filtre_valid = optional_param("filtre_valid",QUESTION_TOUTE, PARAM_INT);
 
@@ -513,15 +519,13 @@ foreach ($lignes as $ligne) {
 	$tpl->newBlock("question");
 	$tpl->setCouleurLigne($compteur_ligne);
 
-	if ($ligne->est_filtree)$tpl->assign("barree","barree");
-	else  $tpl->assign("barree","");
 
 	$tpl->assign("id", $idnat);
 	$tpl->assign("title_id", nom_univ($ligne->id_etab)); // ajout SB
 	
 	// rev 2.0 édition inline des libellés
 	if ($peutModifier) {
-		if (($nb == 0 && !est_validee($ligne)) || is_super_admin()) { //jamais une valid�e
+		if (($nb == 0 && !est_validee($ligne)) || is_super_admin()) { //jamais une validée
 			if ($droitLocal || ($CFG->universite_serveur == 1 && a_capacite("qv", 1))) //rev 818 un expert peut modifier une question sur la nationale ...
 			{
 				$tpl->newBlock('editable');
@@ -533,6 +537,10 @@ foreach ($lignes as $ligne) {
 	} else $tpl->newBlock('non_editable');
 		
 	$tpl->assign("titre", affiche_texte_question($ligne->titre));	
+	if ($ligne->est_filtree)$tpl->assign("barree","barree");
+	else  $tpl->assign("barree","");
+	
+	
 	$tpl->gotoBlock('question'); //important
 	
 	
@@ -738,6 +746,7 @@ if (a_capacite("qa")) {
 $items[] = get_menu_item_criteres();
 if ($chaine_critere_recherche)
 	$items[] = get_menu_item_tout_afficher("clear_criteres_questions();");
+
 if (a_capacite("qa")) {
 	$items[] = new icone_action( 'import', "doMiniPopup('import_questions.php?')",'import_questions');
 }

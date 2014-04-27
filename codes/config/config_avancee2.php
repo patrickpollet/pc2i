@@ -6,6 +6,9 @@
  * @package c2ipf
  */
 
+
+//ini_set('error_reporting',0);
+
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
 $chemin_images = $chemin."/images";
@@ -85,7 +88,7 @@ add_javascript($tpl,$CFG->chemin_commun."/pear//HTML_TreeMenu/TreeMenu.js");
 $tpl->traduit("_ROOT.titre_popup","configuration_avancee" );
 
 $menu=config_en_menu();
-$treeMenu = &new HTML_TreeMenu_DHTML($menu, array('images' =>$CFG->chemin_theme . "/images/treemenu",
+$treeMenu = & new HTML_TreeMenu_DHTML($menu, array('images' =>$CFG->chemin_theme . "/images/treemenu",
  'defaultClass' => 'treeMenuDefault'));
 
  $tpl->assign("ici",$treeMenu->toHTML());

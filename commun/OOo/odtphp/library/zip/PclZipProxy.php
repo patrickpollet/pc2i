@@ -1,7 +1,7 @@
 <?php
 /**
- * adapté PP avec pclzip deja installé
- * et definition de PCLZIP_TEMPORARY_DIR forcée sinon pb de droits !
+ * adaptï¿½ PP avec pclzip deja installï¿½
+ * et definition de PCLZIP_TEMPORARY_DIR forcï¿½e sinon pb de droits !
  */
 //require_once 'pclzip/pclzip.lib.php';
 //require_once '../../../pclzip-2-7/pcltrace.lib.php';
@@ -48,14 +48,14 @@ class PclZipProxy implements ZipInterface
         $dir .= time();
         cree_dossier_si_absent($dir);
 
-       //attention ce constructeur peut être appelé plusieurs fois
+       //attention ce constructeur peut ï¿½tre appelï¿½ plusieurs fois
 
        if (!defined('TMP_DIR')) define ('TMP_DIR',$dir);
 
         if(!defined ('PCLZIP_TEMPORARY_DIR'))
             define( 'PCLZIP_TEMPORARY_DIR', $dir  ); //important
 
-       //a faire après le define de PCLZIP_TEMPORARY_DIR
+       //a faire aprï¿½s le define de PCLZIP_TEMPORARY_DIR
        require_once($CFG->chemin_commun."/pclzip-2-7/pcltrace.lib.php");
        require_once($CFG->chemin_commun."/pclzip-2-7/pclzip-trace.lib.php");
         if (! class_exists('PclZip')) {

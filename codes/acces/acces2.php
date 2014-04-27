@@ -10,18 +10,18 @@
 
 ////////////////////////////////
 //
-//	Page d'accueil des accès
+//	Page d'accueil des accï¿½s
 //
 ////////////////////////////////
 /**
- * rev 1.5 les suppressions de profils et de composantes sont gérés ici
+ * rev 1.5 les suppressions de profils et de composantes sont gï¿½rï¿½s ici
  * plus de scripts de type supprime.php qui reviennent ici
  */
 
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
 $chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 require_login('P'); //PP
 
 //$supp_idp = optional_param("supp_idp", "", PARAM_INT);
@@ -31,7 +31,7 @@ require_login('P'); //PP
 $action=optional_param('action','',PARAM_ALPHA);
 if ($action) {
 	//print_r($_POST);
-	$id_action=required_param('id_action',PARAM_INT); // un simple id numérique
+	$id_action=required_param('id_action',PARAM_INT); // un simple id numï¿½rique
 }
 
 if (!a_capacite("etl") && !a_capacite("ul")) // au moins une des 2
@@ -72,9 +72,9 @@ $page =<<<EOP
 
 EOP;
 
-$tpl = new C2IPrincipale(); //créer une instance
+$tpl = new C2IPrincipale(); //crï¿½er une instance
 //inclure d'autre block de templates
-$tpl->assignInclude("corps", $page, T_BYVAR); // le template gérant les universités et profils
+$tpl->assignInclude("corps", $page, T_BYVAR); // le template gï¿½rant les universitï¿½s et profils
 $tpl->prepare($chemin);
 
 add_javascript($tpl, $CFG->chemin_commun . "/pear//HTML_TreeMenu/TreeMenu.js");
@@ -85,8 +85,8 @@ add_javascript($tpl, $CFG->chemin_commun . "/pear//HTML_TreeMenu/TreeMenu.js");
 print_menu_haut($tpl, "a");
 
 $tpl->gotoBlock("_ROOT");
-// rev 981 form pour les actions js avec retour ici (et pas liste.php ajouté par défaut par le moetur de tpltes
-// important de le faire ici (avant la création des deux blocks)
+// rev 981 form pour les actions js avec retour ici (et pas liste.php ajoutï¿½ par dï¿½faut par le moetur de tpltes
+// important de le faire ici (avant la crï¿½ation des deux blocks)
 
 print_form_actions ($tpl,'form_actions','','acces2.php');
 
@@ -156,7 +156,7 @@ if (teste_droit("ul")) {
 
 }
 
-// si droit de gérer les etablissements (à gérer)
+// si droit de gï¿½rer les etablissements (ï¿½ gï¿½rer)
 
 if (teste_droit("etl")) {
 	$tpl->newBlock("etablissements");
@@ -199,7 +199,7 @@ if (teste_droit("etl")) {
 		$html .=" <ul class='menu_niveau2'>";
 		$html .=print_menu_item2(false,false,new icone_action('consulter',"consulterEtab({$etab->id_etab})"));
 
-		// si droit de modification // à gérer
+		// si droit de modification // ï¿½ gï¿½rer
 		if (is_super_admin() || is_admin($USER->id_user, $etab->id_etab)) {
 			$html .=print_menu_item2(false,false,new icone_action('modifier',"modifierEtab({$etab->id_etab})"));
 		}

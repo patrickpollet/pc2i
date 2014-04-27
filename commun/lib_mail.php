@@ -271,12 +271,12 @@ function email_to_user($user, $from, $subject, $messagetext,
 
 if (0) {
 //passer p�r phpmailer
- $CFG->smtphosts="smtp.insa-lyon.fr";
+$CFG->smtphosts="smtp.free.fr";
  $CFG->smtp_debugging=1;
- send_mail("ppollet","test phpmailer","<html><body>ca roule ma poule �����  ???</body><html>","ca roule ma poule ������� ???");
+ send_mail("pollet","test phpmailer","<html><body>ca roule ma poule éçà  ???</body><html>","ca roule ma poule çççççççç ???");
  //passer par la fonction mail de php
  $CFG->smtphosts="";
-send_mail("ppollet","test mail php","<html><body>ca roule ma poule ???</body><html>");
+//send_mail("pollet","test mail php","<html><body>ca roule ma poule ???</body><html>");
 
 
 }

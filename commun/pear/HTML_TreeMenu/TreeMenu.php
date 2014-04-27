@@ -61,6 +61,11 @@
 * @package HTML_TreeMenu
 */
 
+
+// PP supprime les warning PHP scrict
+
+ini_set('error_reporting',0);
+
 class HTML_TreeMenu
 {
     /**

@@ -13,11 +13,13 @@ if (is_admin()) {   //utilisateur courant uniquement
 	maj_bd_ressources();
 }
 
-
-$CFG->url_ressources_nationales='http://c2i.education.fr/ressources/';
+// doit être dans la config de la PF et pas en dur
+//$CFG->url_ressources_nationales='http://c2i.education.fr/ressources/';
 
 function maj_bd_ressources () {
 	  global $CFG,$USER;
+	  add_config('pfc2i','url_ressources_nationales',"http://c2i.education.fr/ressources/","http://c2i.education.fr/ressources/",
+	  		'URL de base des ressources nationales',1);
 }
 
 

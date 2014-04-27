@@ -98,7 +98,7 @@
 			ob_end_clean();
 			return $this->error($msg);
 		}
-		ob_end_clean();
+		//ob_end_clean();
         //$this->debug_output( "SEND".print_r($result, true));
 		return $this->serialize($result);
 	}

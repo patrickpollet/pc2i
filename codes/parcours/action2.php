@@ -79,7 +79,7 @@ if ($id == -1) { // ajout de l'item
 
 $ligne_np=new StdClass(); //partie comune
 $ligne_np->id_parcours=$id;
-$ligne_np->ts_datecreation=$ligne_n->ts_datemodification=time();
+$ligne_np->ts_datecreation=$ligne_np->ts_datemodification=time();
 $nb=0;
 foreach($notion as $n) {
       //$ligne_np->id_notion=$n;
@@ -88,7 +88,6 @@ foreach($notion as $n) {
       insert_record("ressourcesparcours",$ligne_np,false,false);
       $nb++;
 }
-
 
 if ($CFG->montrer_fiche_apres_modification)
     redirect("fiche.php?id=".$id."&ide=".$ide,"liste.php",$url_retour);

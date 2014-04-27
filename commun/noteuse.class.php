@@ -543,11 +543,13 @@ class noteuseAMC extends noteuse {
     }
 
     /**
-     * @param $etudiant un record estrait de la BD
+     * @param $etudiant un record extrait de la BD
      * @param $scoreAMC le score envoy� par AMC (=somme des scores, peut �tre <0)
      * @param $notes : un tableau des notes obtenues � chaque question (relu dans un CSV)
+     * nom changé de note_etudiant en renote_etudiant pour oter un php strict warning sur 
+     * les parametres differents
      */
-    function note_etudiant ($etudiant,$scoreAMC, $notes) {
+    function renote_etudiant ($etudiant,$scoreAMC, $notes) {
 
          global $CFG;
         $ret=new resultat($etudiant);

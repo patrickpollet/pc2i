@@ -187,7 +187,7 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 (117, 'pfc2i', 'utiliser_inlinemod_js', '0', '0', 'drapeau interne pour javascript supplementaire', 0, 'required', 1),
 (118, 'ldap', 'nbre_reponses_ldap', '100', '100', 'nombre de réponses en recherche LDAP', 1, 'required', 1),
 (119, 'ldap', 'champs_synchro_ldap', 'login,nom,prenom,mail,numetudiant', 'login,nom,prenom,mail,numetudiant', 'champs BD synchronisables en LDAP', 1, 'required', 1),
-(120, 'pfc2i', 'smtphosts', 'smtp.insa-lyon.fr', '', 'adresse hote SMTP ((si vide on passe par la fonction mail de php)', 1, 'saisie', 1),
+(120, 'pfc2i', 'smtphosts', '', '', 'adresse hote SMTP ((si vide on passe par la fonction mail de php)', 1, 'saisie', 1),
 (121, 'pfc2i', 'smtpuser', '', '', 'login éventuel sur l''hote SMTP', 1, 'required', 1),
 (122, 'pfc2i', 'smtppass', '', '', 'mot de passe éventuel sur l''hote SMTP', 1, 'required', 1),
 (123, 'pfc2i', 'noreplyaddress', 'nepasrepondre@education.gouv.fr', 'nepasrepondre@education.gouv.fr', '', 1, 'required', 1),
@@ -221,7 +221,7 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 (151, 'moodle', 'qtype_moodle', 'multichoice', 'multichoice', ' type de question à exporter en HTML Moodle (expérimental)', 1, 'required', 1),
 (152, 'resultats', 'export_ods', '1', '1', ' export au format OpenOffice document ODS  (expérimental)', 1, 'required', 1),
 (153, 'question', 'utiliser_editeur_html', '0', '0', ' éditeur HTMl en saisie de questions (expérimental)', 1, 'required', 1),
-(154, 'pfc2i', 'pclzip_trace', '0', '0', 'créer un fichier de trace de pclzip dans /web/c2isrv.univ-rennes1.fr/https/plate-forme/ressources/tmp', 1, 'required', 1),
+(154, 'pfc2i', 'pclzip_trace', '0', '0', 'créer un fichier de trace de pclzip dans le dossier tmp du dossier des ressources', 1, 'required', 1),
 (157, 'pfc2i', 'W3C_strict', '1', '1', 'compatibilité W3C experimental', 1, 'required', 1),
 (158, 'examen', 'numerotation_reponses', '1', '1', 'numérotation des réponses 1=1,2,3... 2=A,B,C...', 1, 'required', 1),
 (159, 'examen', 'export_AMC', '1', '0', 'exportation au format auto multiple choice', 1, 'required', 1),
@@ -275,6 +275,10 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `description`, `modifiable`, `validation`, `drapeau`) VALUES
 (211, 'pfc2i', 'info_maintenance', 'Remise en route prévue<b> ce soir 18h</b>', '', 'Message de l''administrateur lors de la mise en maintenance de la PF', 0, 'required', 1),
 (212, 'pfc2i', 'mode_maintenance', '0', '1', '', 1, 'required', 1);
+
+
+INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `description`, `modifiable`, `validation`, `drapeau`) VALUES
+(213, 'pfc2i', 'url_ressources_nationales', 'http://c2i.education.fr/ressources/', 'http://c2i.education.fr/ressources/', 'URL de base des ressources nationales', 1, 'required', 1);
 
 -- --------------------------------------------------------
 

@@ -22,6 +22,7 @@
 v 1.1 : PP 17/10/2006
            ajout des trois attributs LDAP pour les membres d'un groupe et l'id unique
 -----------------------------------------------*/
+ini_set('error_reporting',0);
 
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";

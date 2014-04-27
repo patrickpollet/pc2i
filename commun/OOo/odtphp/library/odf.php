@@ -247,9 +247,21 @@ IMG;
      */
     private function _save()
     {
+    	/**
+    	 * PP bizarrement dans certains cas le 'content.xml' est remis dans le odt comme 'ontent.xml'
+    	 * en particulier sur les nationales ... pas trouvé pourquoi
+    	 * donc on ajoute un 'c' devant dans ce cas 
+    	 * version 2.0 d'avril 2014
+    	 */
+    	global $CFG; 
     	$this->file->open($this->tmpfile);
         $this->_parse();
-        if (! $this->file->addFromString('content.xml', $this->contentXml)) {
+        //PP
+        $target ='content.xml';
+        if (!empty($CFG->odtphp_bug_content))
+        	$target ='ccontent.xml';
+        //END PP
+        if (! $this->file->addFromString($tar, $this->contentXml)) {
             throw new OdfException('Error during file export');
         }
         foreach ($this->images as $imageKey => $imageValue) {
@@ -307,7 +319,7 @@ IMG;
      */
     public function __destruct() {
           if (file_exists($this->tmpfile)) {
-        	unlink($this->tmpfile);
+        	//unlink($this->tmpfile);
         }
     }
 }

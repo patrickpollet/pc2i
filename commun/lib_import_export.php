@@ -1164,8 +1164,8 @@ function resultats_lecture_optique_AMC_normal($examen, $fichier){
 		$noteuse= new noteuseAMC($idq,$ide);
 
 	    // v�rification calcul AMC
-	    if ($CFG->AMC_verif_score)
-        	$noteuseVerif = new noteuse($idq, $ide);
+	    //if ($CFG->AMC_verif_score)
+        //	$noteuseVerif = new noteuse($idq, $ide);
 
 		while (!feof($handle))  {
 			$ligne = vire_guillemets(trim(fgets ($handle))); // rev 975 on ne sait jamais
@@ -1227,7 +1227,7 @@ function resultats_lecture_optique_AMC_normal($examen, $fichier){
 				else $scores[$idpoint]=0;
 			}
             //repartition des scores par domaine
-			$res= $noteuse->note_etudiant($cpt,$score,$scores);
+			$res= $noteuse->renote_etudiant($cpt,$score,$scores);
            // print_r($res);
             enregistre_resultats($idq,$ide,$cpt->login,$res);
             $score=sprintf("%.{$arrondi}f",$res->score_global)." %";
@@ -1235,7 +1235,7 @@ function resultats_lecture_optique_AMC_normal($examen, $fichier){
 
             // verification calculs par AMC identiques a nous
             if($CFG->AMC_verif_score) {
-            	  $resVerif = $noteuseVerif->note_etudiant($cpt);
+            	  $resVerif = $noteuse->note_etudiant($cpt); //utilise la méthode heritée de noteuse
             	  if (meme_resultats($res,$resVerif))
             	  	set_ok(traduction("info_scores_identiques",false,$cpt->login,'pf','amc'),$resultats);
             	  else
@@ -1319,8 +1319,8 @@ function resultats_lecture_optique_AMC_pool($examen, $fichier){
         // juste ventiler les notes d�ja calcul�es par domaine
         $noteuse= new noteuseAMC($idq,$ide);
     	// v�rification calcul AMC
-	    if ($CFG->AMC_verif_score)
-        	$noteuseVerif = new noteuse($idq, $ide);
+	    //if ($CFG->AMC_verif_score)
+        //	$noteuseVerif = new noteuse($idq, $ide);
         $tags='inscription import AMC pool '.$cle_examen.' '. time();
 
         while (!feof($handle))  {
@@ -1382,7 +1382,7 @@ function resultats_lecture_optique_AMC_pool($examen, $fichier){
                 else $scores[$idpoint]=0;
             }
             //repartition des scores par domaine
-            $res= $noteuse->note_etudiant($cpt,$score,$scores);
+            $res= $noteuse->renote_etudiant($cpt,$score,$scores);
             //print_r($res);
            enregistre_resultats($idq,$ide,$cpt->login,$res);
             $score=sprintf("%.{$arrondi}f",$res->score_global)." %";
@@ -1391,7 +1391,7 @@ function resultats_lecture_optique_AMC_pool($examen, $fichier){
 
              // verification calculs par AMC identiques a nous
             if($CFG->AMC_verif_score) {
-            	  $resVerif = $noteuseVerif->note_etudiant($cpt);
+            	  $resVerif = $noteuse->note_etudiant($cpt); //utilise la méthode de la classe noteuse
             	  if (meme_resultats($res,$resVerif))
             	  	set_ok(traduction("info_scores_identiques",false,$cpt->login,'pf','amc'),$resultats);
             	  else
