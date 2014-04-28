@@ -43,7 +43,10 @@ class PclZipProxy implements ZipInterface
 	{
         //PP adaptation a la plate-forme
         global $CFG;
-        $dir = $CFG->chemin_ressources.'/tmp/odt/';
+        //gros pb si $dir contient alors  un double slash dedans car il y en aurait un a la fin de cfg->chemin_ressources
+        //la bibliotheque pclzip supprime alors le 1er caractere des noms de fichiers dans le zip
+        //voir en mode debug pclzip-trace.lib.php lignes 3264 et 3267
+        $dir = add_slash_url($CFG->chemin_ressources).'tmp/odt/';
         cree_dossier_si_absent($dir);
         $dir .= time();
         cree_dossier_si_absent($dir);
