@@ -459,6 +459,18 @@ function add_slash_url($url){
 	return substr($url, -1, 1)=='/'?$url:$url.'/';
 }
 
+
+/** enleve un slash au bout d'une url s'il n'y en a pas  et q'url n'est pas vide
+* @version 2.0
+* @param unknown_type $url
+* @return string*/
+
+function remove_slash_url($url){
+    $url = trim($url);
+    if ($url=="") return $url;
+    return substr($url, -1, 1)=='/'?substr($url,0,strlen($url)-1):$url;
+}
+
 /**
  * ne doit pas �chouer :
  */

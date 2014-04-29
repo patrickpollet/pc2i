@@ -161,7 +161,14 @@ $CFG->utiliser_form_actions=1;  // rev 981 simplification forte des liens openPo
 //seulement sur les nationales
 $CFG->utiliser_commentaires_reponses=$CFG->universite_serveur==1; 
 
+//version 2.0 éviter un double slash dans ce chemin absolu
+$CFG->chemin_ressources = remove_slash_url($CFG->chemin_ressources);
+//echo "pp".$CFG->chemin_ressources;
+
+
 }
+
+
 
 /**
  * renvoie la valeur d'une clé 
