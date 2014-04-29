@@ -263,14 +263,15 @@ IMG;
     	 * en particulier sur les nationales ... pas trouvé pourquoi
     	 * donc on ajoute un 'c' devant dans ce cas 
     	 * version 2.0 d'avril 2014
+    	 * annulé 24/04/2014 ca venait d'un slash doublé dans cfg->chemin_ressources
     	 */
     	global $CFG; 
     	$this->file->open($this->tmpfile);
         $this->_parse();
         //PP
         $target ='content.xml';
-        if (!empty($CFG->odtphp_bug_content))
-        	$target ='ccontent.xml';
+        //if (!empty($CFG->odtphp_bug_content))
+        //	$target ='ccontent.xml';
         //END PP
         if (! $this->file->addFromString($target, $this->contentXml)) {
             throw new OdfException('Error during file export');
