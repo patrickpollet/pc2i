@@ -140,6 +140,14 @@ Veuillez régler les problèmes signalés en rouge avant de continuer l'installa
 <input type='hidden' name='tester' value='1'/>
 </form>
 
+<!-- START BLOCK : pas_continuer -->
+<script type="text/javascript">
+//<![CDATA[
+
+document.getElementById('bouton_continuer').disabled=true;
+//]]>
+</script>
+<!-- END BLOCK : pas_continuer -->
 EOT;
 
 
@@ -160,20 +168,19 @@ $tpl->gotoBlock("_ROOT");
 
 $tpl->traduit ("titre_popup","installation1");
 
-
+$nbErr = 0;
 ob_start();
 if (!$tester) {
-	test_config($dataroot,$chemin_commun);
+	$nbErr = test_config($dataroot,$chemin_commun);
 }else {
 
     // creation du fichier constantes.php
-    test_config($dataroot,$chemin_commun);
+    $nbErr = test_config($dataroot,$chemin_commun);
     
     $modele="constantes_dist_v2.php";   
     $tmptpl= new subTemplatePower($chemin_commun."/".$modele);
     $tmptpl->prepare($chemin);
     
-   
     $tmptpl->assign("serveur_bdd",$serveur_bdd);
     $tmptpl->assign("nom_bdd",$nom_bdd);
     $tmptpl->assign("user_bdd",$user_bdd);
@@ -182,7 +189,6 @@ if (!$tester) {
     $tmptpl->assign("locale_url_univ",$wwwroot);
     $tmptpl->assign("prefix",$prefix);
     $tmptpl->assign("c2i",$c2i);
-    
     
     $cible=realpath($chemin_commun."/constantes.php");
     //$cible=realpath("/tmp/constantes.php");
@@ -193,9 +199,9 @@ if (!$tester) {
         fwrite ($fp,$tmptpl->getOutputContent());
         fclose ($fp);
         succesTests( "");
-    }else echecTests("erreur écriture ");
+    }else $nbErr += echecTests("erreur écriture ");
     
-    test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd);
+    $nbErr += test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd);
     
 }
 $content = ob_get_contents();
@@ -218,6 +224,10 @@ print_bouton($tpl,"bouton_tester","tester","javascript:document.forms[0].action=
 
 print_bouton($tpl,"bouton_continuer","continuer","","","submit" );
 
+if ($nbErr) {
+	$tpl->newBlock('pas_continuer'); 
+	$tpl->gotoBlock("_ROOT");//important
+}
 //selection du c2i visé depuis les c2i connus au niveau nationale
 $resultats=array();
 $refs=c2i_get_referentiels($resultats);
