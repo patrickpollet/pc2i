@@ -392,9 +392,9 @@ if ($filtre_univ) {
 if ($filtre_valid != QUESTION_TOUTE) {
 	$filtre = "etat=" . $filtre_valid;
 	$critere_recherche = concatAvecSeparateur($critere_recherche, $filtre, " and ");
-	$chaine_critere_recherche = concatAvecSeparateur($chaine_critere_recherche, "validation=" . get_etat_validation($filtre_valid), "&amp;");
+	$chaine_critere_recherche = concatAvecSeparateur($chaine_critere_recherche, "filtre_valid=" . $filtre_valid, "&amp;");
 } else
-	$chaine_critere_recherche = concatAvecSeparateur($chaine_critere_recherche, "validation=" . get_etat_validation(QUESTION_TOUTE), "&amp;");
+	$chaine_critere_recherche = concatAvecSeparateur($chaine_critere_recherche, "filtre_valid=" . QUESTION_TOUTE, "&amp;");
 
 
 $url = "liste.php?";
