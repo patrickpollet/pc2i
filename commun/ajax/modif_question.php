@@ -24,7 +24,7 @@ $valeur=optional_param("valeur","",PARAM_RAW);
 if (!$id  || !$champ)
       die (traduction ("err_param_requis"));
 
-if (!  a_capacite("qms")) die (traduction ("err_acces"));
+if (!  a_capacite("qm")) die (traduction ("err_acces"));
 
 
 
