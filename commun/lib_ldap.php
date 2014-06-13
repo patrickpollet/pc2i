@@ -23,16 +23,10 @@
 
   function maj_bd_ldap () {
       global $CFG,$USER;
-
-
-
+      add_config('ldap','filtre_groupes_ldap', '*', '*', 'Filtre personnalisable de la liste des groupes',1);
+      add_config('ldap', 'numetudiant_prefixes_ldap', '', '', "Liste des préfixes dans le numéro d'étudiant (séparé par des virgules)", 1);
   }
 
-function ldap_maj_config() {
-
-   add_config('ldap','filtre_groupes_ldap', '*', '*', 'Filtre personnalisable de la liste des groupes',1);
-   add_config('ldap', 'numetudiant_prefixes_ldap', '', '', "Liste des préfixes dans le numéro d'étudiant (séparé par des virgules)", 1);
-}
 
 /**
  * conversion ligne csv selon format en une liste de login
