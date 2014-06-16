@@ -174,6 +174,11 @@ function __tirage_questions_V1 ($id,$id_etab) {
                 } else {
                     // pas de doublon de famille
                     $chwherefamille = "and id_famille_validee!=0 group by id_famille_validee";
+                    //bug decouvert 2014 avec nouvelle version MySQL ?
+                    // le group by ci-dessus casse desormais l'aléatoire et on obtient les memes
+                    //questions en certification et meme toujours les 60 premieres sur une PF
+                    //fraichement installée
+                    $chwherefamille = "and id_famille_validee!=0 ";
                 }
                 // tirage al�atoire avec au plus une question par famille d'un m�me r�f�rentiel
                 $requete =<<<EOR
@@ -631,6 +636,11 @@ function __tirage_questions_V2 ($id,$id_etab) {
                     } else {
                         // pas de doublon de famille
                         $chwherefamille = "and id_famille_validee!=0 group by id_famille_validee";
+                        //bug decouvert 2014 avec nouvelle version MySQL ? 
+                        // le group by ci-dessus casse l'aléatoire et on obtient les memes
+                        //questions en certification et meme toujours les 60 premieres sur une PF 
+                        //fraichement installée
+                        $chwherefamille = "and id_famille_validee!=0 ";
                     }
                     // tirage al�atoire avec au plus une question par famille d'un m�me r�f�rentiel
                     $requete =<<<EOR
