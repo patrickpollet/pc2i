@@ -161,8 +161,14 @@ $CFG->utiliser_form_actions=1;  // rev 981 simplification forte des liens openPo
 //seulement sur les nationales
 $CFG->utiliser_commentaires_reponses=$CFG->universite_serveur==1; 
 
-//version 2.0 éviter un double slash dans ce chemin absolu
+//version 2.0 éviter un double slash dans ces chemins absolus
+// donc ajouter systématiquement un '/' dans les concanténations  
+// verifié le 27/04/2014 par 
+//  grep -Rin  chemin_ressources * |grep CFG   (98 occurences)
+// grep -Rin  wwwroot * | grep CFG (383 occurences)
+
 $CFG->chemin_ressources = remove_slash_url($CFG->chemin_ressources);
+$CFG->wwwroot = remove_slash_url($CFG->wwwroot);
 //echo "pp".$CFG->chemin_ressources;
 
 

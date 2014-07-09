@@ -143,11 +143,11 @@ function __tirage_questions_V1 ($id,$id_etab) {
         //print("on recommence tout");
     }
 
-    $liste_q = "1";
+    $liste_q = "1"; 
 
-    foreach ($questions as $q)
+    foreach ($questions as $q) {
         $liste_q .= " and (id_etab!=" . $q->id_etab . " or id!=" . $q->id . ")";
-
+    }
 
 
     if (count($questions) < $nbq_aleatoire) {
@@ -170,19 +170,24 @@ function __tirage_questions_V1 ($id,$id_etab) {
             if ($typepf == "certification") {
                 if ($est_pool == 1) {
                     // doublon de famille possible pour avoir assez de question dans le pool
-                    $chwherefamille = "and id_famille_validee!=0";
+                    $chwherefamille = "id_famille_validee!=0";
                 } else {
-                    // pas de doublon de famille
-                    $chwherefamille = "and id_famille_validee!=0 group by id_famille_validee";
+                    // pas de doublon de famille 
+                    //$chwherefamille = "id_famille_validee!=0 group by id_famille_validee";
+                    //abandon  bug decouvert 2014 avec nouvelle version MySQL ?
+                    // le group by ci-dessus casse desormais l'aléatoire et on obtient les memes
+                    //questions en certification et meme toujours les 60 premieres sur une PF
+                    //fraichement installée
+                    $chwherefamille = "id_famille_validee!=0 ";    
                 }
-                // tirage al�atoire avec au plus une question par famille d'un m�me r�f�rentiel
+                // tirage aléatoire avec au plus une question par famille d'un meme referentiel
                 $requete =<<<EOR
                  SELECT id_famille_validee , id, id_etab
                  FROM {$CFG->prefix}questions
                  WHERE $criteres_examen $typepf ='oui' $validation
                  and $nomref='$ligner->referentielc2i'
                  and ( $liste_q )
-                 $chwherefamille
+                 and $chwherefamille
                 order by RAND($rnd) limit 0,$nbqa
 EOR;
             } else {
@@ -201,7 +206,7 @@ EOR;
             if (count($resultat) < $nbqa){
                 //que fait on si nous n'avons pas assez de questions ?
             }
-
+            //print " ".count($resultat)."<br>";
 
             foreach($resultat as $ligne) {
                 // ajout
@@ -630,7 +635,12 @@ function __tirage_questions_V2 ($id,$id_etab) {
                         $chwherefamille = "and id_famille_validee!=0";
                     } else {
                         // pas de doublon de famille
-                        $chwherefamille = "and id_famille_validee!=0 group by id_famille_validee";
+                        $chwherefamille = "id_famille_validee!=0 group by id_famille_validee";
+                        //bug decouvert 2014 avec nouvelle version MySQL ? 
+                        // le group by ci-dessus casse l'aléatoire et on obtient les memes
+                        //questions en certification et meme toujours les 60 premieres sur une PF 
+                        //fraichement installée
+                        $chwherefamille = "id_famille_validee!=0 ";
                     }
                     // tirage al�atoire avec au plus une question par famille d'un m�me r�f�rentiel
                     $requete =<<<EOR
@@ -639,7 +649,7 @@ function __tirage_questions_V2 ($id,$id_etab) {
                         WHERE $criteres_examen $typepf ='oui' $validation
                             and $critere_competence
                             and ( $liste_q )
-                        $chwherefamille
+                            and $chwherefamille
                         order by RAND($rnd) limit 0,$nombre
 EOR;
                 } else {

@@ -33,12 +33,14 @@ require_once("lib_install.php");
 require_once ($chemin_commun."/lib_bd.php");
 require_once ($chemin_commun."/lib_acces.php");
 
-$wwwroot=required_param("wwwroot",PARAM_RAW);
 
-$wwwroot= add_slash_url($wwwroot);
+// v 2.0 ne pas stocker le slash de fin pour éviter les doubles slashes
+// a nouveau controlé dans lib_config.php pour chaque page 
+$wwwroot=required_param("wwwroot",PARAM_RAW);
+$wwwroot= remove_slash_url($wwwroot);
 
 $dataroot=required_param("dataroot",PARAM_RAW);
-$dataroot = add_slash_url($dataroot);
+$dataroot = remove_slash_url($dataroot);
 
 $c2i=required_param("c2i",PARAM_RAW);
 $prefix=required_param("prefix",PARAM_RAW);

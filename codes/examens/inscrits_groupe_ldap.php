@@ -10,7 +10,7 @@ $chemin = '../..';
 $chemin_commun = $chemin."/commun";
 $chemin_images = $chemin."/images";
 
-require_once($chemin_commun."/c2i_params.php");                 //fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");                 //fichier de paramï¿½tres
 
 require_login("P"); //PP
 
@@ -19,18 +19,18 @@ require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion 
 require_once($chemin_commun."/lib_ldap.php");
 
 
-$idq=required_param("idq",PARAM_INT);   // -1 en création
-$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //étab de l'examen, défaut = ici '
+$idq=required_param("idq",PARAM_INT);   // -1 en crï¿½ation
+$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //ï¿½tab de l'examen, dï¿½faut = ici '
 $retour_fiche=optional_param("retour_fiche","0",PARAM_INT);
 
 $liste=optional_param("liste","",PARAM_RAW);
 $groupes=optional_param("groupes","",PARAM_RAW);
 $format_fic=optional_param("format_fic","",PARAM_ALPHANUM);
 
-//important après avoir lu $ide !!!
+//important aprï¿½s avoir lu $ide !!!
 v_d_o_d("em");
 
-$tpl = new C2IPopup(  ); //créer une instance
+$tpl = new C2IPopup(  ); //crï¿½er une instance
 //inclure d'autre block de templates
 
 $forme=<<<EOL
@@ -108,7 +108,7 @@ if ($liste || $groupes || isset($_FILES["fichier_upl"] )) {
     if (isset($_FILES["fichier_upl"]) && !empty ($_FILES["fichier_upl"]["name"]))  {  //important le 2eme test ///
         //garder ce fichier soit dans csv soit dans apogee
         $dir=$CFG->chemin_ressources."/csv";
-        //récupere le en verifiant taille et type mime ...
+        //rï¿½cupere le en verifiant taille et type mime ...
         $fichier_garde=upload_file('fichier_upl',$dir, $CFG->max_taille_fichiers_uploades,array());
         //, array('text/plain')); pb avec les mac qui n'envoient pas ce type mime
 
@@ -139,7 +139,7 @@ print_select_from_table($tpl,"select_format_fic",$table,"format_fic",false,false
 // rev 1022 afficher les groupes ldap possibles
 if (!empty($CFG->chercher_groupes_ldap)) {
 	$tpl->newBlock ('gldap2');
-	$groups=auth_ldap_get_grouplist();
+	$groups=auth_ldap_get_grouplist($CFG->filtre_groupes_ldap);
 	sort($groups);
 	$table=array();
 	foreach($groups as $group) {

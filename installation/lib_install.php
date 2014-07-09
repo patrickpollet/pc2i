@@ -134,6 +134,7 @@ function intituleTests($var){
 function succesTests($var=''){
     echo "<span class='vert'>&nbsp;".traduction("succes")." " .$var."</span>" ;
     echo '<br/>';
+    return 0;
 }
 
 function echecTests($var=''){
@@ -141,27 +142,34 @@ function echecTests($var=''){
     echo "<span class='rouge'>&nbsp;".traduction ("echec")." ".$var.'</span>';
     $configuration_est_ok = 0;
     echo '<br/>';
+    return 1;
 }
 
 function moyenTests($var){
 echo "<span class='orange'>&nbsp;".traduction("non_critique")."  ".$var."</span>" ;
 echo '<br/>';
+return 0;
 }
 
 
 
 
+/**
+ * v 2 retourne le nombre d'erreur pour MAJ ddu bouton 'continuer'
+ * @param unknown_type $dataroot
+ * @param unknown_type $chemin_commun
+ */
 
 function test_config($dataroot,$chemin_commun) {
 
     global $CFG;
-
+    $nbErr = 0; 
     enteteTests("test de la version php");
     intituleTests("vous utilisez php version ");echo (phpversion ());
     if (phpversion() >=5)
         succesTests();
     else
-        moyenTests('vous devriez envisager de migrer en php 5');
+        $nbErr += moyenTests('vous devriez envisager de migrer en php 5');
 
     // test des librairies n�cessaires
     enteteTests("test des librairies php");
@@ -170,14 +178,14 @@ function test_config($dataroot,$chemin_commun) {
     if (function_exists('mysql_query')){
         succesTests();
     } else {
-        echecTests();
+        $nbErr += echecTests();
     }
     
     intituleTests("Test de la librairie curl");
     if(extension_loaded('curl')) {
         succesTests();
     } else {
-        echecTests();
+        $nbErr += echecTests();
     }
 
 
@@ -185,20 +193,20 @@ function test_config($dataroot,$chemin_commun) {
     if (function_exists('gzread')){
         succesTests();
     } else {
-        echecTests();
+        $nbErr += echecTests();
     }
 
     intituleTests("Test de la librairie mb_string (sera requise en V 1.6 pour le support UTF8");
     if (function_exists('mb_check_encoding')){
         succesTests();
     } else {
-        moyenTests("cette fonctionnalité sera requise en version 1.6 (utf8)");
+        $nbErr += moyenTests("cette fonctionnalité sera requise en version 1.6 (utf8)");
     }
     intituleTests("Test de la librairie phpsoap (requise pour utiliser les web services)");
     if (class_exists('SoapServer')){
         succesTests();
     } else {
-        echecTests("vous ne pourrez pas utiliser les WebServices");
+        $nbErr += echecTests("vous ne pourrez pas utiliser les WebServices");
     }
 
 
@@ -206,7 +214,7 @@ function test_config($dataroot,$chemin_commun) {
     if (function_exists('ldap_bind')){
         succesTests();
     } else {
-        moyenTests('Echec (si vous n\'utilisez pas d\'annuaire LDAP ce n\'est pas important)');
+        $nbErr += moyenTests('Echec (si vous n\'utilisez pas d\'annuaire LDAP ce n\'est pas important)');
     }
 
     // test des encodages de caract�res:
@@ -230,7 +238,7 @@ client."
      $res=exec ("which zip");
      echo  $res ;
      if (strstr($res,"/zip")) succesTests();
-      else moyenTests ("vous devriez spécifier dans la table c2iconfig le chemin vers la commande zip");
+      else $nbErr += moyenTests ("vous devriez spécifier dans la table c2iconfig le chemin vers la commande zip");
 
 
     // test des droits d'�criture sur les dossiers :
@@ -244,7 +252,7 @@ client."
         if (is_writable($dossier)) {
             succesTests();
         } else {
-            echecTests();
+            $nbErr += echecTests();
         }
     }
     enteteTests("test des droits d'écriture sur les fichiers");
@@ -258,21 +266,29 @@ client."
         if (is_writable($fichier)) {
             succesTests();
         } else {
-            echecTests();
+            $nbErr += echecTests();
         }
     }
+    return $nbErr; 
 
 }
 
+
+/**
+ * v 2 retourne le nombre d'erreur pour MAJ ddu bouton 'continuer'
+ * @param unknown_type $dataroot
+ * @param unknown_type $chemin_commun
+ */
 function test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd) {
 	global $CFG;
-
+	$nbErr = 0;
+	
 	enteteTests("test de la connexion à la base de données");
 	if ($serveur_bdd &&  $user_bdd && $pass_bdd) {
 		intituleTests("Test de connexion au serveur ".$user_bdd."@".$serveur_bdd );
 		$connexion = @mysql_connect($serveur_bdd, $user_bdd, $pass_bdd);
 		if (!$connexion) {
-			echecTests(mysql_error());
+			$nbErr += echecTests(mysql_error());
 		}
 		else  {
 			succesTests( "");
@@ -283,7 +299,7 @@ function test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd) {
 				succesTests( "");
 				intituleTests("Test des droits d'accès à la base ".$nom_bdd);
 				if (!@mysql_select_db($nom_bdd, $connexion)) {
-					echecTests(mysql_error($connexion));
+					$nbErr += echecTests(mysql_error($connexion));
 				}else {
 					succesTests( "");
 					intituleTests("Test du droit 'CREATE TABLE " );
@@ -295,15 +311,16 @@ function test_bd($serveur_bdd,$nom_bdd,$user_bdd,$pass_bdd) {
 						if ( @mysql_query($sql,$connexion))
 							succesTests( "");
 					}
-					else  echecTests( mysql_error($connexion));
+					else  $nbErr += echecTests( mysql_error($connexion));
 				}
 
 			} else {
-				echecTests("base de donnée $nom_bdd inconnue");
+				$nbErr += echecTests("base de donnée $nom_bdd inconnue");
 			}
 		}
 	}else {
-		echecTests("Paramétres d'accès à la base de données incorrects");
+		$nbErr += echecTests("Paramétres d'accès à la base de données incorrects");
 	}    
+	return $nbErr; 
 
 }

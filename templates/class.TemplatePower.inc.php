@@ -1224,7 +1224,7 @@ class TemplatePower extends TemplatePower304 {
 
 
 
-			if ($CFG->utiliser_infobulle_js) {
+			if (@$CFG->utiliser_infobulle_js) {
 				$this->extra_js[] = $this->chemin_commun . "/js/infobulle.js";
 				$this->newBlock("info_bulle");
 				//plante le naviagteur !

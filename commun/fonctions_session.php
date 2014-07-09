@@ -124,7 +124,7 @@ function form_session(&$tpl, $bloc="id_session"){
 
 
 //PP v�rifie qu'une variable est dans la session uniquement !
-function var_get_session ($var) {
+function var_get_session ($var, $default='') {
 	global $session_nom;
     session_name($session_nom);
 
@@ -133,7 +133,7 @@ function var_get_session ($var) {
 		return  $_SESSION[$var];
 	else if (isset($HTTP_SESSION_VARS) && isset($HTTP_SESSION_VARS[$var]))
 			return $HTTP_SESSION_VARS[$var];
-	return '';
+	return $default;
 }
 
 //PP v�rifie qu'une variable est dans la session uniquement !

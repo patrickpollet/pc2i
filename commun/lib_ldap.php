@@ -23,11 +23,9 @@
 
   function maj_bd_ldap () {
       global $CFG,$USER;
-
-
-
+      add_config('ldap','filtre_groupes_ldap', '*', '*', 'Filtre personnalisable de la liste des groupes',1);
+      add_config('ldap', 'numetudiant_prefixes_ldap', '', '', "Liste des préfixes dans le numéro d'étudiant (séparé par des virgules)", 1);
   }
-
 
 
 /**
@@ -881,6 +879,10 @@ function auth_get_userinfo($username,$getMulti=false){
                 }
             }
             if (!is_null($ldapval)) {
+            	if ($key=='numetudiant'){
+			$prefixe=explode(",",$CFG->numetudiant_prefixes_ldap);
+            		$ldapval=str_replace($prefixe,"",$ldapval);
+            	}
                 $result[$key] = $ldapval;
             }
         }

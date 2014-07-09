@@ -1758,7 +1758,7 @@ $textes_langues["sync_2"]="mettre à jour la liste des thèmes :";
 $textes_langues["sync_3"]="mettre à jour la liste des ressources :";
 $textes_langues["sync_4"]="recevoir la liste des nouvelles questions :";
 $textes_langues["sync_5"]="mettre à jour l'invalidation des questions :";
-$textes_langues["sync_6"]="mettre à jour le réferentiel version 2 ";
+$textes_langues["sync_6"]="mettre à jour le réferentiel ";
 
 
 $textes_langues["info_connecte_nationale"]="connecté à la plateforme nationale : %s %s@%s";

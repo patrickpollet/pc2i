@@ -280,6 +280,9 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `description`, `modifiable`, `validation`, `drapeau`) VALUES
 (213, 'pfc2i', 'url_ressources_nationales', 'http://c2i.education.fr/ressources/', 'http://c2i.education.fr/ressources/', 'URL de base des ressources nationales', 1, 'required', 1);
 
+INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `description`, `modifiable`, `validation`, `drapeau`) VALUES
+(214, 'ldap', 'filtre_groupes_ldap', '*', '*', 'Filtre personnalisable de la liste des groupes', 1, 'required', 1),
+(215, 'ldap', 'numetudiant_prefixes_ldap', '', '', 'Liste des préfixes dans le numéro d''étudiant (séparé par des virgules)', 1, 'required', 1);
 -- --------------------------------------------------------
 
 --

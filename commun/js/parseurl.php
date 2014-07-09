@@ -10,8 +10,8 @@
 		
 $js=<<<EOJ
 
-var chemin_images={$CFG->chemin_images};
-var chemin_serveur={$CFG->wwwroot};
+var chemin_images=\"{$CFG->chemin_images}\";
+var chemin_serveur=\"{$CFG->wwwroot}\";
 
 EOJ;
 
