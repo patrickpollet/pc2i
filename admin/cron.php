@@ -36,8 +36,10 @@
     require_once ($chemin_commun . "/lib_ldap.php");
     require_once ($chemin_commun . "/lib_mail.php");
     require_once ($chemin_commun . "/lib_cron.php");
-   // require_login('P'); //PP
-   // v_d_o_d("config");
+
+//TODO uniquement si appel par le web ou wget 
+//    require_login('P'); //PP
+//    v_d_o_d("config");
 
     define ('LOCK_FILE','/cronrunning');
 

@@ -27,7 +27,7 @@ require_once ($CFG->chemin_commun."/lib_ldap.php");
 function compte_candidats_non_inscrits($ide){
     global $CFG;
 
-    if (!is_admin()) v_d_o_d("config");
+    //if (!is_admin()) v_d_o_d("config");
     $requete = "select count(login) as NB FROM {$CFG->prefix}inscrits WHERE etablissement='$ide' and login not in (select distinct login from {$CFG->prefix}qcm)";
     if ($res=get_record_sql($requete,false))
         return  $res->NB;
