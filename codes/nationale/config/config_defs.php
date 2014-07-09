@@ -49,12 +49,13 @@
 		global $CFG;
 		$node->addItem(cree_item_lien(traduction('gestion_etablissements'),
 		               $CFG->chemin . "/codes/nationale/etablissements/liste.php?"));
-		$node->addItem(cree_item_lien(traduction('gestion_familles'),
-		               $CFG->chemin . "/codes/nationale/familles/liste.php?"));
 		$node->addItem(cree_item_lien(traduction('gestion_referentiels'),
 		               $CFG->chemin . "/codes/nationale/referentiels/liste.php?"));
 		$node->addItem(cree_item_lien(traduction('gestion_alineas'),
 		               $CFG->chemin . "/codes/nationale/alineas/liste.php?"));
+                $node->addItem(cree_item_lien(traduction('gestion_familles'),
+                               $CFG->chemin . "/codes/nationale/familles/liste.php?"));
+
 
 	}
 
