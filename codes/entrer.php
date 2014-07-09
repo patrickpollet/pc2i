@@ -164,8 +164,9 @@ if ( $verif == "bdd" || $verif=="ent" || $verif=="anonyme"){
 			// V2 voir si la PF est en mode maintenance 
 			if (!empty($CFG->mode_maintenance)) {
 			    if (!is_admin()) {
-			        detruire_session();
+			        //detruire_session();
 			        header ("location:{$CFG->chemin}/codes/maintenance.php");
+                                die();
 			    }    
 			}
 			
