@@ -81,9 +81,9 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     set_config("pfc2i","adresse_feedback_questions","qcm-{$c2i}@education.gouv.fr/",0);
     
     if ($c2i=='c2i1')
-        set_config("pfc2i","algo_tirage",3,true);  //par famille
+        set_config("pfc2i","algo_tirage",3,true);  //par famille/thème
     else 
-        set_config("pfc2i","algo_tirage",1,true);      // par domaine
+        set_config("pfc2i","algo_tirage",2,true);      // par compétence
     
     //créér un compte admin
     $pwd= mot_de_passe_a($CFG->longueur_mot_de_passe_aleatoire);
