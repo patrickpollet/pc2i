@@ -26,6 +26,7 @@
 <div id="contenu_principale">
         <div id="forme_login">
         <a href="index.php"><img src="{chemin_images}/logos/logo_{CFG:c2i}.png" alt="{logo_c2i}"/></a>
+         <img src="{chemin_images}/logos/certificat_{CFG:c2i}.png" alt="Test"/>
         <div style="float:right;">
            <img src="{chemin_images}/test02{type_p}.png" width="385" height="54" alt="{alt_type_p}"/>
         </div>
