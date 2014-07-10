@@ -28,15 +28,15 @@ $page=<<<EOP
     <br/><br/>
     <span class="taille2">{texte_choix_pf}</span>
 <!-- START BLOCK : CERT -->
-	<p><a href="certification.php"><img src="{chemin_images}/test02c.gif"   title="{plc}" alt="{plc}" /></a></p>
+	<p><a href="certification.php"><img src="{chemin_images}/test02c.png"   title="{plc}" alt="{plc}" /></a></p>
 
 <!-- END BLOCK : CERT -->
 <!-- START BLOCK : POS -->
-	<p><a href="positionnement.php"><img src="{chemin_images}/test02.gif"   title="{plp}" alt="{plp}"/></a></p>
+	<p><a href="positionnement.php"><img src="{chemin_images}/test02.png"   title="{plp}" alt="{plp}"/></a></p>
 
 <!-- END BLOCK : POS -->
 <!-- START BLOCK : ANONYME -->
-     <p> <a href="anonyme.php"><img src="{chemin_images}/test02a.gif"  title="{pla}" alt="{pla}"/></a></p>
+     <p> <a href="anonyme.php"><img src="{chemin_images}/test02a.png"  title="{pla}" alt="{pla}"/></a></p>
 <!-- END BLOCK : ANONYME -->
 
 </div>

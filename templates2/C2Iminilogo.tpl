@@ -18,7 +18,7 @@
 
             <div id="logo">
                 <div>
-                    <img src="{chemin_images}/logos/logo02_{CFG:c2i}.gif" alt="{logo_c2i}"/><img src="{chemin_images}/logos/certificat_{CFG:c2i}.gif" alt="{c2i}"/>
+                    <img src="{chemin_images}/logos/logo_{CFG:c2i}.png" alt="{logo_c2i}"/><img src="{chemin_images}/logos/certificat_{CFG:c2i}.png" alt="{c2i}"/>
                 </div>
                 <div id="arc386">
                 </div>

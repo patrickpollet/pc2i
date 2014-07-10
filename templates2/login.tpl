@@ -25,9 +25,9 @@
 
 <div id="contenu_principale">
         <div id="forme_login">
-        <a href="index.php"><img src="{chemin_images}/logos/logo01_{CFG:c2i}.gif" width="193" height="54" alt="{logo_c2i}"/></a>
+        <a href="index.php"><img src="{chemin_images}/logos/logo_{CFG:c2i}.png" alt="{logo_c2i}"/></a>
         <div style="float:right;">
-           <img src="{chemin_images}/test01{type_p}.gif" width="385" height="54" alt="{alt_type_p}"/>
+           <img src="{chemin_images}/test02{type_p}.png" width="385" height="54" alt="{alt_type_p}"/>
         </div>
         </div>
 

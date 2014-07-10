@@ -5,7 +5,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package c2ipf
  *
- * le meta X-UA-Compatible et pour l'émaultion IE de Google Chrome
+ * le meta X-UA-Compatible et pour l'ï¿½maultion IE de Google Chrome
  * le meta viewport et pour une optimsation de l'affichage sur un mobile
  * voir http://e-sarrion.developpez.com/cours/dev-web-mobile/bases-html/
 <!-- END COMMENT -->
@@ -16,7 +16,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{bodydir}" lang="{lang}" xml:lang="{lang}">
 <head>
 <title>{c2i_niveau}</title>
-<link rel="shortcut icon" href="{chemin_theme}/favicon.ico" />
+<link rel="shortcut icon" href="{chemin_theme}/images/logos/favicon_{CFG:c2i}.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset={encodage}"/>
 <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
 <meta name="viewport" content="user-scalable=no,width=device-width" />
