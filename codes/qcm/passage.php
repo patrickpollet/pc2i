@@ -31,7 +31,7 @@ if (!is_utilisateur_anonyme())   //l'anonyme a le type_user =A il peut aller ici
 $idq=required_param("idq",PARAM_INT);
 $ide=required_param("ide",PARAM_INT);
 $entree_mdp=optional_param("entree_mdp","",PARAM_CLEAN); //retour formulaire saisie MDP
-$url_retour=optional_param("url_retour","",PARAM_PATH);
+$url_retour=optional_param("url_retour","",PARAM_CLEAN);
 
 // v�rification du fait que l'examen se d�roule bien maintenant
 //fait plus tard a cause des pools ????

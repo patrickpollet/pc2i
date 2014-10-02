@@ -229,12 +229,6 @@ if (($ligne->type_tirage == EXAMEN_TIRAGE_ALEATOIRE)  && ($pool_pere == 0)) {
     //die();
 }
 
-
-
-// url de la fiche de l'item
-
-$url_retour=optional_param("url_retour","",PARAM_CLEAN);
-
 if ($CFG->montrer_fiche_apres_modification)
     redirect("fiche.php?idq=".$id."&ide=".$ide,"liste.php",$url_retour);
 else

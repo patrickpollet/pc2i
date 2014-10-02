@@ -36,7 +36,7 @@ if ($id=optional_param('id','',PARAM_CLEAN)) {  //attention pas CLE_C2I
 }
 
 
-$url_retour=optional_param("url_retour","",PARAM_PATH);
+$url_retour=optional_param("url_retour","",PARAM_CLEAN);
 
 
 

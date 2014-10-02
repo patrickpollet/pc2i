@@ -85,7 +85,7 @@ EOF;
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
 $chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
  if (!$CFG->utiliser_notions_parcours)
     erreur_fatale("err_pas_de_notions_parcours_ici");
@@ -94,13 +94,13 @@ require_login('P'); //PP
 
 $id=optional_param("id",-1,PARAM_INT);
 $dup_id=optional_param("dup_id",0,PARAM_INT);
-$url_retour=optional_param("url_retour","",PARAM_PATH);
+$url_retour=optional_param("url_retour","",PARAM_CLEAN);
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 
-$tpl->assignInclude("corps", $fiche,T_BYVAR); // le template gérant la liste des questions
+$tpl->assignInclude("corps", $fiche,T_BYVAR); // le template gï¿½rant la liste des questions
 $tpl->prepare($chemin);
 
 
@@ -159,13 +159,13 @@ if ($lien->URL) {
     $tpl->assign('url',$lien->URL);
 } 
 
-$tpl->gotoBlock("_ROOT"); // V 1.41 important on était dans le block id_session !
+$tpl->gotoBlock("_ROOT"); // V 1.41 important on ï¿½tait dans le block id_session !
 
-// génération des listes déroulantes
+// gï¿½nï¿½ration des listes dï¿½roulantes
 $attrs_ref= "style='width:450px;'   title=\"".traduction("js_referentiel_manquant")."\"";
 $attrs_alinea="style='width:450px;' title=\"".traduction("js_alinea_manquant")."\"";
 
-// rev 977 valeurs par défaut
+// rev 977 valeurs par dï¿½faut
 
     $ref=$ligne->domaine;
     $al=$ligne->competence;

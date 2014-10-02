@@ -74,6 +74,16 @@ function etab($login, $conn=false,$die=0){
     else return 0;
 }
 
+function pp_debug_output($output) {
+	global $CFG;	
+	$fp = fopen($CFG->chemin_ressources . '/pp_debug.out', 'a');
+	fwrite($fp, "[" . time() . "] $output\n");
+	fflush($fp);
+	fclose($fp);
+}
+
+
+
 /**
  * fonction de d�bug
  * @param string titre texte a mettre avant la valeur

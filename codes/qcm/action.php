@@ -23,7 +23,7 @@ $mode=required_param("mode",PARAM_INT); // mode de passage (voir lib_examens.php
 $nbquestions=required_param("nbquestions",PARAM_INT);
 $nbreponses=required_param("nbreponses",PARAM_INT);
 $reponses=optional_param("r",array(),PARAM_RAW);  //pb si rien de coch� !
-$url_retour=optional_param("url_retour","",PARAM_PATH);
+$url_retour=optional_param("url_retour","",PARAM_CLEAN);
 
 // r�vision 981 si c'est le chrono qui a forc� l'envoi il FAUT quand m�me corriger ...
 // pb avec beaucoup de candidats certains ne sont alors pas not�s

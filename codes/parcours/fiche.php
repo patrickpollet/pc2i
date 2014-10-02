@@ -7,15 +7,15 @@
  * @package c2ipf
  */
 
- /* une liste de notions associés a un parcours
-  * très proche de la liste des notions a l'idp près'
+ /* une liste de notions associï¿½s a un parcours
+  * trï¿½s proche de la liste des notions a l'idp prï¿½s'
   */
 
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
 $chemin_images = $chemin."/images";
 
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 require_once($CFG->chemin_commun."/pear/HTML_TreeMenu/TreeMenu.php");
 
  if (!$CFG->utiliser_notions_parcours)
@@ -24,14 +24,12 @@ require_once($CFG->chemin_commun."/pear/HTML_TreeMenu/TreeMenu.php");
 require_login("E"); //PP
 $idp=required_param("id",PARAM_INT);
 
-$url_retour=optional_param("url_retour","",PARAM_PATH);
-
 
 $parcours=get_parcours($idp);
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");	//inclusion de moteur de templates
 
-$tpl = new C2IPopup(  );	//créer une instance
+$tpl = new C2IPopup(  );	//crï¿½er une instance
 //inclure d'autre block de templates
 
 $liste=<<<EOL
@@ -101,7 +99,7 @@ $treeMenu = &new HTML_TreeMenu_DHTML($menu, array('images' => $CFG->chemin_theme
 
  $tpl->assign("ici",$treeMenu->toHTML());
 
- //consulté par un admin""
+ //consultï¿½ par un admin""
  if ($parcours->login !=$USER->id_user || teste_droit("etl") || teste_droit("ul")) {
 	 $tpl->newBlock("candidat");
 	 if ($cpt=get_compte($parcours->login,false)) {

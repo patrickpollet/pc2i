@@ -405,6 +405,9 @@ function redirect ($toUrl,$opener=false,$urlRetour=false,$psession=true) {
 		if (!empty($urlRetour)) {
             $sep=(strpos($opener,"?")>0) ? "&":"?";
 			$action=$cible.".location.href='" .p_session($opener.$sep.urldecode($urlRetour),1)."';" ;
+			
+			//pp_debug_output("urlretour=".$urlRetour);
+			//pp_debug_output ("action=".$action);
         }
 		else
 			$action=$cible.".location.href='" .p_session($opener,1)."';" ;

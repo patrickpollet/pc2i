@@ -47,7 +47,7 @@ if ($dup_id=optional_param('dup_id','',PARAM_CLE_C2I)) {
     $copie_ide=optional_param("copie_ide",0,PARAM_INT);
 }
 
-$url_retour=optional_param("url_retour","",PARAM_PATH);
+$url_retour=optional_param("url_retour","",PARAM_CLEAN);
 
 
 

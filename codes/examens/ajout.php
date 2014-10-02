@@ -55,7 +55,7 @@ if ($dup_id=optional_param('dup_id','',PARAM_CLE_C2I)) {
 //$copie_id=optional_param("copie_id",0,PARAM_INT); //duplication ?
 //$copie_ide=optional_param("copie_ide",0,PARAM_INT);
 
-$url_retour=optional_param("url_retour","",PARAM_PATH);
+$url_retour=optional_param("url_retour","",PARAM_CLEAN);
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 $tpl = new C2IPopup(); //cr�er une instance

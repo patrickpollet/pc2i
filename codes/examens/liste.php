@@ -36,7 +36,7 @@ v_d_o_d("el"); //PP
 $id_rech=optional_param("id_rech","",PARAM_CLE_C2I);
 $titre_rech=optional_param("titre_rech","",PARAM_CLEAN);
 $filtre_voir_ex_nat=optional_param("filtre_voir_ex_nat","0",PARAM_INT); //fini v 1.5
-$filtre_univ=optional_param("filtre_univ","",PARAM_CLEAN);
+$filtre_univ=optional_param("filtre_univ","",PARAM_INT);
 
 //$indice_deb=optional_param("indice_deb",0,PARAM_INT);
 // affichage par d�faut des �v�nements les plus r�cents

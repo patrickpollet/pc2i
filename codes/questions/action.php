@@ -8,7 +8,7 @@
  */
 
 ////////////////////////////////
-//
+//url_
 //	Action (ins�rer / mettre � jour l'item / attacher un document)
 //	� la sortie, si un document est attach� on retourne � l'ajout (en mode modification)
 //	sinon on affiche la fiche de l'item et la page appelante (liste d'items) est recharg�e
@@ -247,9 +247,6 @@ if ($CFG->generer_xml_qti) {
 }
 /////////////////////////////////////////////
 
-// url de la fiche de l'item
-
-$url_retour=optional_param("url_retour","",PARAM_CLEAN);
 
 if ($CFG->montrer_fiche_apres_modification)
     redirect("fiche.php?idq=".$id."&ide=".$ide,"liste.php",$url_retour);

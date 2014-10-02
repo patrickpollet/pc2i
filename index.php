@@ -65,6 +65,7 @@ if ($etab = get_etablissement($CFG->universite_serveur,false)) {
 
 //print_r($etab); die();
 $ano=get_examen_anonyme();
+
 if ($etab->certification ==0 && !$ano ) // //ca suffit  comme test
         redirect("$chemin/positionnement.php",false,false,false);
 

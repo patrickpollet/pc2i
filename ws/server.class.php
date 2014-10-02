@@ -16,7 +16,7 @@
 $chemin = "../";
 
 define('ACCES_WEBSERVICE', 1);
- define('DEBUG_WS', 1);
+ define('DEBUG_WS', 0);
 if (!defined ('NO_HEADERS'))  //rev 889 une notice de moins ...
     define('NO_HEADERS',1); // pas d'entete par c2i_params !
 /*
