@@ -53,7 +53,7 @@ if (empty($cas_version)) $cas_version='2.0';
 
     require_once('CAS/CAS.php');
     // mode proxy CAS
-    if ( !is_object($PHPCAS_CLIENT) ) {
+   // if ( !is_object($PHPCAS_CLIENT) ) {
         // Make sure phpCAS doesn't try to start a new PHP session when connecting to the CAS server.
         if  ($cas_proxycas) {  // nouveau rev 978
             phpCAS::proxy($cas_version, $cas_url, (int) $cas_port, $cas_service, false);
@@ -62,7 +62,7 @@ if (empty($cas_version)) $cas_version='2.0';
         else {
             phpCAS::client($cas_version, $cas_url, (int) $cas_port, $cas_service, false);
         }
-    }
+   // }
 
 
 // cr�e une trace dans /tmp/phpcas.log
