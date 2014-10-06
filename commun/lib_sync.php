@@ -1000,8 +1000,8 @@ function c2i_http_request($config, $quiet=false,$id_objet='') {
             $quiet = in_array($result->errno, $dontcare);
         }
         if (!$quiet) {
-            // log_warn('Curl error: ' . $result->errno . ': ' . $result->error);
-            espion3('erreur', 'curl', 'synchro nationale',$id_objet, $result);
+            echo('Curl error: ' . $result->errno . ': ' . $result->error);
+            espion3('erreur', 'curl', 'synchro nationale',$id_objet, $result); //donne une erreur fatale en installation OK
         }
     }
 

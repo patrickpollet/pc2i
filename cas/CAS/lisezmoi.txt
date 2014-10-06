@@ -1,7 +1,0 @@
-ce dossier contient la derniere version du client CAS  '1.1.3' 
-tel qu'il est utilisé dans Moodle 2.0
-
-ajouté  à la PF c2i depuis la révision 978 pour lutter contre
-les pbs de sécurité du client originel '0.4.16-2' qui est (était)
-dans commun/CAS et ne doit plus étre utilisé... 
-
