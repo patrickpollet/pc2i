@@ -16,7 +16,9 @@
 $chemin = "../";
 
 define('ACCES_WEBSERVICE', 1);
- define('DEBUG_WS', 0);
+// Oct 2014 decommenter temporairement pour tracer les WS
+// ne pas garder en production !!!!
+// define('DEBUG_WS', 1);
 if (!defined ('NO_HEADERS'))  //rev 889 une notice de moins ...
     define('NO_HEADERS',1); // pas d'entete par c2i_params !
 /*
@@ -191,6 +193,7 @@ EOS;
 		global $CFG;
         if (!defined('DEBUG_WS'))
 			return;
+        
 		$fp = fopen($CFG->chemin_ressources . '/debug1.out', 'a');
 		fwrite($fp, "[" . time() . "] $output\n");
 		fflush($fp);

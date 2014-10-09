@@ -8,7 +8,7 @@
 
  /**
   * valeurs suffisantes pour l'installeur fonctionne sans passer par c2i_params
-  * qui v�rifie trop de choses ...
+  * qui vérifie trop de choses ... et eliminer un maxi de notices php
   */
 
 
@@ -92,6 +92,7 @@ $CFG->tsv_separateur=' ' ;
 $CFG->utiliser_infobulle_js='1' ;
 
 $CFG->utiliser_notions_parcours='1' ;
+$CFG->pool_en_positionnement='1';
 $CFG->version='2.0 ' ;
 
 $CFG->version_release='20130715' ;
