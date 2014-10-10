@@ -16,9 +16,7 @@
 $chemin = "../";
 
 define('ACCES_WEBSERVICE', 1);
-// Oct 2014 decommenter temporairement pour tracer les WS
-// ne pas garder en production !!!!
-// define('DEBUG_WS', 1);
+
 if (!defined ('NO_HEADERS'))  //rev 889 une notice de moins ...
     define('NO_HEADERS',1); // pas d'entete par c2i_params !
 /*
@@ -75,10 +73,11 @@ class server {
 			$CFG->ws_logerrors = 0;
 		if (!isset ($CFG->ws_logdetailedoperations))
 			$CFG->ws_logdetailledoperations = 0;
-		if (!isset ($CFG->ws_debug))
-			$CFG->ws_debug = 0;
         if (!isset ($CFG->ws_enforceipcheck))
             $CFG->ws_enforceipcheck = 1;
+        //oct 2014 ce drapeau doit être dans la confg. avancée comme les autres ci-dessus
+        if (!isset ($CFG->ws_debug))
+        	set_config('webservice', 'ws_debug', '0', '1');    
         $this->version=$CFG->version; // rev 957
 
 	}
@@ -191,9 +190,9 @@ EOS;
 	*/
 	protected function debug_output($output) {
 		global $CFG;
-        if (!defined('DEBUG_WS'))
-			return;
-        
+        // octobre 2014 passé dans la configuration avancée
+        if (empty($CFG->ws_debug))
+        	return;
 		$fp = fopen($CFG->chemin_ressources . '/debug1.out', 'a');
 		fwrite($fp, "[" . time() . "] $output\n");
 		fflush($fp);

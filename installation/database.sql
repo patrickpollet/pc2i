@@ -283,10 +283,13 @@ INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `descript
 INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `description`, `modifiable`, `validation`, `drapeau`) VALUES
 (214, 'ldap', 'filtre_groupes_ldap', '*', '*', 'Filtre personnalisable de la liste des groupes', 1, 'required', 1),
 (215, 'ldap', 'numetudiant_prefixes_ldap', '', '', 'Liste des préfixes dans le numéro d''étudiant (séparé par des virgules)', 1, 'required', 1);
+
+INSERT INTO `c2iconfig` (`id`, `categorie`, `cle`, `valeur`, `defaut`, `description`, `modifiable`, `validation`, `drapeau`) VALUES
+(216, 'webservice', 'ws_debug', '0', '0', 'deboggage des webservices dans ressources/debug1.out', 1, 'required', 1);
 -- --------------------------------------------------------
 
 --
--- Structure de la table `c2idroits`
+-- Structure de la table `c2idroits`v
 --
 
 CREATE TABLE IF NOT EXISTS `c2idroits` (
