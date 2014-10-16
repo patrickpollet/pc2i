@@ -643,9 +643,13 @@ EOS;
 /**
  * rev 968 ajout parametre timestart pour filtrage
  * voir get_passages_recents
+ * V 2.0 renommée en __get_notes_examen pour éviter un warning strict de PHP
+ * Declaration of c2i_baseserver::get_notes_examen() should be compatible with 
+ * server::get_notes_examen($client, $sesskey, $id_examen, $timestart = 0) 
+ * in <b>/var/www/c2i/V2/ws/c2i_baseserver.class.php</b> on line <b>22</b><br />
  */
 
-	function get_notes_examen($client, $sesskey, $id_examen,$timestart=0) {
+	function __get_notes_examen($client, $sesskey, $id_examen,$timestart=0) {
 		if (!$this->validate_client($client, $sesskey,__FUNCTION__,$id_examen))
 			return $this->error(traduction('ws_invalidclient'));
 		if (!$this->verifie_droits($client, "c2i/resultat:consulter"))
@@ -988,7 +992,7 @@ EOS;
 
 
     function cree_examen ($client,$sesskey,$examen,$id_etab) {
-    	 global $USER,$CFG;
+    	 global $USER,$CFG,$connexion;
     	 if (!$this->validate_client($client, $sesskey,__FUNCTION__,$examen->nom_examen))
             return $this->error(traduction('ws_invalidclient'));
 
@@ -1028,7 +1032,7 @@ EOS;
             }
        	 	return filter_examen($client, $examen);
          }
-       	 else return $this->error(traduction ('ws_sqlerror',false,__FUNCTION__).  mysqli_error());
+       	 else return $this->error(traduction ('ws_sqlerror',false,__FUNCTION__).  mysqli_error($connexion));
         }
 
 
@@ -1037,7 +1041,7 @@ EOS;
      * rev 930 pour appel depuis Moodle
      */
     function modifie_examen ($client,$sesskey,$id_examen,$examen) {
-	    global $USER,$CFG;
+	    global $USER,$CFG,$connexion;
 	    if (!$this->validate_client($client, $sesskey,__FUNCTION__,$id_examen))
 		    return $this->error(traduction('ws_invalidclient'));
            //TODO verifier les droits sur l'�tablissement de cl'eaxmen � modifier !!!
@@ -1073,11 +1077,11 @@ EOS;
 		    espion3("modification","examen", $ide . "." . $idq,$examen);
 		    $ret=get_examen($idq,$ide); //relecture
 		    return $ret;
-	    } else return $this->error(traduction ('ws_sqlerror',false, __FUNCTION__));
+	    } else return $this->error(traduction ('ws_sqlerror',false, __FUNCTION__).mysqli_error($connexion));
     }
 
     function cree_candidat ($client,$sesskey,$candidat) {
-	    global $USER,$CFG;
+	    global $USER,$CFG,$connexion;
 	    if (!$this->validate_client($client, $sesskey,__FUNCTION__,$candidat->login))
 		    return $this->error(traduction('ws_invalidclient'));
             //TODO verifier les droits sur l'�tablissement du candidat � cr�er !!!
@@ -1118,8 +1122,8 @@ EOS;
 	    if (cree_candidat($candidat,$candidat->etablissement)){ //gere les valeurs manquantes
 	    	return filter_inscrit($client,get_inscrit($candidat->login,false));
 	    }else {
-	    	$this->debug_output( mysqli_error());
-	    	return $this->error(traduction ('ws_sqlerror',false, __FUNCTION__));
+	    	$this->debug_output( mysqli_error($connexion));
+	    	return $this->error(traduction ('ws_sqlerror',false, __FUNCTION__).mysqli_error($connexion));
 	    }
 
     }
@@ -1137,7 +1141,7 @@ EOS;
 
 
 	function cree_personnel ($client,$sesskey,$personnel) {
-		 global $USER,$CFG;
+		 global $USER,$CFG,$connexion;
 		 if (!$this->validate_client($client, $sesskey,__FUNCTION__,$personnel->login))
             return $this->error(traduction('ws_invalidclient'));
         if (!$this->verifie_droits($client, "c2i/personnel:ajouter"))
@@ -1175,7 +1179,7 @@ EOS;
 
 	    if (cree_utilisateur($personnel,$personnel->etablissement)){
 	    	return filter_utilisateur($client,get_utilisateur($personnel->login,false));
-	    }else return $this->error(traduction ('ws_sqlerror',false, __FUNCTION__));
+	    }else return $this->error(traduction ('ws_sqlerror',false, __FUNCTION__).mysqli_error($connexion));
 
 
         }
@@ -1254,7 +1258,7 @@ EOS;
      * partie recpetion sur la nationale
      */
     function envoi_questions ($client,$sesskey,$questions) {
-        global $USER,$CFG;
+        global $USER,$CFG,$connexion;
 
         if ($CFG->universite_serveur !=1)
             return $this->error(traduction ('ws_paslocallocal'));
@@ -1359,7 +1363,7 @@ EOS;
                 $connue->error="";
                 $rets[]=filter_question($client,$connue);
             }else {
-                $question->error=traduction ('ws_sqlerror',false, __FUNCTION__);
+                $question->error=traduction ('ws_sqlerror',false, __FUNCTION__).mysqli_error($connexion);
                 $this->debug_output("erreur ". print_r($question,true));
 
                 $rets[]=filter_question($client,$question);
@@ -1619,8 +1623,8 @@ EOS;
  * ajout� revision 969 pour appel par Moodle
  */
     function get_passages_recents($client,$sesskey,$id_examen,$timestart) {
-        //attention    server:: et pas $this-> qui remet $timestart � 0 !
-       return server::get_notes_examen($client,$sesskey,$id_examen,$timestart);
+        //attention    server:: et pas $this-> qui remet $timestart à 0 !
+       return server::__get_notes_examen($client,$sesskey,$id_examen,$timestart);
     }
 
 

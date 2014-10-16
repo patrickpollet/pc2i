@@ -590,7 +590,7 @@
  */
      public function get_notes_examen($client, $sesskey, $id_examen) {
                 return $this->send($this->to_array(
-                        parent::get_notes_examen($client, $sesskey,$id_examen),
+                        parent::__get_notes_examen($client, $sesskey,$id_examen,0),
                         'noteRecord',
                         "examen $id_examen non trouvé ou pas d'inscription ou pas de notes"));
         }
