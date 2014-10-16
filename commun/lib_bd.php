@@ -7,26 +7,31 @@
  * @package c2ipf
  */
 /*
- * bibliotheque d'acces � la BD
+ * bibliotheque d'acces à la BD
  * a inclure AVANT les autres (voir c2i_params)
- * tr�s fortement inspir�e de la biblioth�que datalib de Moodle
- * mais simplifi�e ( chaque op�ration n'a qu'un crit�re � cr��r par l'appelant
+ * trés fortement inspirée de la bibliothèque datalib de Moodle
+ * mais simplifiée ( chaque opération n'a qu'un critère & créér par l'appelant
  * NE PAS FAIRE DE MAJ BD ICI !
+ * 
+ * 
+ * OCTOBRE 2014 réécrite en utilisant la bibliothèque mysqli de PHP puisque mysql est desormais décpréciée
+ * à partir de PHP 5.5
  */
 /**
- * globale utilis�e partout
+ * globale utilisée partout
  */
+
 $connexion = Connexion($base_utilisateur, $base_mdp, $ines_base, $adresse_serveur,$mysql_names);
 /**
  * fonction "interne"
  */
 function __envoi_erreur_fatale($errMsg1, $errMsg2, $sql = "") {
-    global $CFG;
+    global $CFG,$connexion;
     //print("sql=".$sql);
 
     if (empty ($CFG->err_mysql_sans_mysqlerror)) // rev 896
         if ($errMsg1 == "" || $errMsg1 == "err_mysql") {
-            $errMsg1 = mysql_error();
+            $errMsg1 = mysqli_error($connexion);
         }
     if (!empty ($CFG->err_mysql_avec_requete)) //rev 896   empty n'est pas pariel que isset !
         $errMsg1 .= "<br/>" . $sql;
@@ -34,7 +39,7 @@ function __envoi_erreur_fatale($errMsg1, $errMsg2, $sql = "") {
     if (isset ($CFG->log_erreur_fatale))
         if (function_exists('espion2')) // erreur fatale durant maj bd ...
             espion2("erreur_fatale", $errMsg1, $errMsg2);
-    error_log("SQL " . mysql_error() . " STATEMENT: " . $sql);
+    error_log("SQL " . mysqli_error($connexion) . " STATEMENT: " . $sql);
     if (class_exists('TemplatePower'))
         erreur_fatale($errMsg1, $errMsg2);
     else
@@ -42,14 +47,25 @@ function __envoi_erreur_fatale($errMsg1, $errMsg2, $sql = "") {
 }
 // Fonction Connexion: connexion � MySQL
 
+/**
+ * 
+ * @param unknown_type $pNom
+ * @param unknown_type $pMotPasse
+ * @param unknown_type $pBase
+ * @param unknown_type $pServeur
+ * @param unknown_type $pNames
+ * @param unknown_type $newLink  NON SUPPORTE avec MySQLi
+ */
 function Connexion($pNom, $pMotPasse, $pBase, $pServeur, $pNames='',$newLink=false) { // Connexion au serveur
-    $connexion = mysql_connect($pServeur, $pNom, $pMotPasse,$newLink);
+    //$connexion = mysql_connect($pServeur, $pNom, $pMotPasse,$newLink);
+	$connexion = mysqli_connect($pServeur, $pNom, $pMotPasse);
     if (!$connexion) {
-        __envoi_erreur_fatale("err_mysql_serveur", $pServeur);
+        __envoi_erreur_fatale(mysqli_connect_error(), $pServeur);
     }
     // Connexion � la base
-    if (!mysql_select_db($pBase, $connexion)) {
-        __envoi_erreur_fatale("", "err_mysql_bd", mysql_error($connexion));
+   // if (!mysql_select_db($pBase, $connexion)) {
+    if (!mysqli_select_db($connexion, $pBase)) {
+        __envoi_erreur_fatale("", "err_mysql_bd", mysqli_error($connexion));
     }
     //ExecRequete("set names latin1",$connexion);
     //ExecRequete("set names utf8",$connexion);
@@ -71,7 +87,8 @@ function ExecRequete($requete, $conn = false, $erreur = true) {
     global $connexion;
     if (!$conn)
         $conn = $connexion;
-    $resultat = mysql_query($requete, $conn);
+    //$resultat = mysql_query($requete, $conn);
+    $resultat = mysqli_query($conn, $requete);
     if ($resultat) {
         return $resultat;
     } else {
@@ -82,13 +99,13 @@ function ExecRequete($requete, $conn = false, $erreur = true) {
 }
 // Recherche de la ligne suivante
 function LigneSuivante($resultat) {
-    return mysql_fetch_object($resultat);
+    return mysqli_fetch_object($resultat);
 }
 function NombreLignes($resultat) {
-    return mysql_num_rows($resultat);
+    return mysqli_num_rows($resultat);
 }
 function RechercheDonnee($resultat, $ligne) {
-    return mysql_data_seek($resultat, $ligne);
+    return mysqli_data_seek($resultat, $ligne);
 }
 
 /**
@@ -209,7 +226,7 @@ function delete_records($table, $critere = "", $die = 0, $errMsg1 = "", $errMsg2
 * @param string $primarykey The primary key of the table we are inserting into (almost always "id")
 */
 function insert_record($table, $dataobject, $returnid = true, $primarykey = 'id', $die = 1, $errMsg1 = "", $errMsg2 = "") {
-    global $CFG;
+    global $CFG, $connexion;
     if (!$dataobject || (!is_object($dataobject) && !is_array($dataobject)))
         __envoi_erreur_fatale("DEV : tentative d'ins�rer un non objet dans ", "$table", print_r($dataobject, true));
     /// In Moodle we always use auto-numbering fields for the primary key
@@ -238,7 +255,7 @@ function insert_record($table, $dataobject, $returnid = true, $primarykey = 'id'
     /// This only gets triggered with MySQL and MSQL databases
     /// however we have some postgres fallback in case we failed
     /// to find the sequence.
-    $id = mysql_insert_id();
+    $id = mysqli_insert_id($connexion);
     return $id;
 }
 

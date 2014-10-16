@@ -23,6 +23,7 @@ if (is_admin()) {   //utilisateur courant uniquement
 
 function maj_bd_resultats () {
 	global $CFG,$USER;
+	/*************************************************************************************************
  //rev 1025 date d�but passage = date 1ere fois qu'il a coch� un truc (peut pas mieux)
 	$update=! mysql_column_exists("date_debut","resultatsexamens");
 	if ($update) {
@@ -40,6 +41,7 @@ EOS;
 				update_record("resultatsexamens",$ligne,'login','examen',1);
 			}
 	}
+	*************************************************************************************************/
 }
 
 

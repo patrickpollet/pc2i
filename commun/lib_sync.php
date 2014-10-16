@@ -701,7 +701,7 @@ function envoi_mes_questions ($c2i,$lr,$ide,$test,$mes_questions) {
 	if (!$ide) $ide=$USER->id_etab_perso;
 	$resultats=array(); //�tats des op�rations
 	espion2("debut_envoi_questions_locales","",$ide);
-	set_ok (traduction ("info_connecte_nationale",false,$lr->getClient(),$lr->getSessionKey()),$resultats);
+	set_ok (traduction ("info_connecte_nationale",false,$CFG->adresse_pl_nationale,$lr->getClient(),$lr->getSessionKey()),$resultats);
 
 	$quoi=traduction("questions");
 	set_ok (traduction("nb_items_a_envoyer",false,count($mes_questions),$quoi),$resultats);
@@ -770,7 +770,7 @@ function envoi_mes_examens ($c2i,$lr,$ide,$test,$mes_examens) {
 	if (!$ide) $ide=$USER->id_etab_perso;
 	$resultats=array(); //�tats des op�rations
 	espion2("debut_envoi_examens_locaux","",$ide);
-	set_ok (traduction ("info_connecte_nationale",false,$lr->getClient(),$lr->getSessionKey()),$resultats);
+	set_ok (traduction ("info_connecte_nationale",false,$CFG->adresse_pl_nationale,$lr->getClient(),$lr->getSessionKey()),$resultats);
 
 	$quoi=traduction("examens");
 	set_ok (traduction("nb_items_a_envoyer",false,count($mes_examens),$quoi),$resultats);

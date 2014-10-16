@@ -9,15 +9,15 @@
 
 ////////////////////////////////
 //
-//	Affichage des r�sultats d'examen (complets => par �tudiant : score global  + score par question + score par r�f�rentiel c2i)
+//	Affichage des résultats d'examen (complets => par étudiant : score global  + score par question + score par référentiel c2i)
 //
 ////////////////////////////////
 
 /*----------------REVISIONS----------------------
 v 1.1 : PP 16/10/2006 ajout de
       - tests divisions par 0
-      - lien CSV remplac� par un appel � commun/send_csv.php?idf=... (s�curit�)
-      - �criture dans le fichier ligne � ligne et plus tout d'un coup � la fin
+      - lien CSV remplacé par un appel à commun/send_csv.php?idf=... (sécurité)
+      - écriture dans le fichier ligne à ligne et plus tout d'un coup à la fin
       (bug Laurence avec plusieurs centaines de lignes ?)
 
 V 1.5 utilise la classe noteuse
@@ -212,7 +212,7 @@ else {
 		   $nbOk++;
 		}
 		else {
-		  $resultats .="KO \n".  mysql_error($connexion2)."\n";
+		  $resultats .="KO \n".  mysqli_error($connexion2)."\n";
 		  $nbKo++;
 		}
       }

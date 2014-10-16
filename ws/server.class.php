@@ -1028,7 +1028,7 @@ EOS;
             }
        	 	return filter_examen($client, $examen);
          }
-       	 else return $this->error(traduction ('ws_sqlerror',false,__FUNCTION__).  mysql_error());
+       	 else return $this->error(traduction ('ws_sqlerror',false,__FUNCTION__).  mysqli_error());
         }
 
 
@@ -1118,7 +1118,7 @@ EOS;
 	    if (cree_candidat($candidat,$candidat->etablissement)){ //gere les valeurs manquantes
 	    	return filter_inscrit($client,get_inscrit($candidat->login,false));
 	    }else {
-	    	$this->debug_output( mysql_error());
+	    	$this->debug_output( mysqli_error());
 	    	return $this->error(traduction ('ws_sqlerror',false, __FUNCTION__));
 	    }
 

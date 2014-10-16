@@ -131,7 +131,7 @@ if ($login_nat && $pass_nat) {
         $tpl->prepare($chemin);
         $resultats=envoi_mes_examens($c2i,$lr,$ide,$test,$a_envoyer);
         $c2i->logout($lr->getClient(),$lr->getSessionKey());
-        set_ok(traduction("info_deconnecte_nationale"),$resultats);
+        set_ok(traduction("info_deconnecte_nationale",false,$CFG->adresse_pl_nationale),$resultats);
         if (count($resultats))
         $tpl->assign("resultats_op",print_details($resultats));
         else $tpl->assign("resultats_op","");

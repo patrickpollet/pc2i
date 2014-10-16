@@ -148,13 +148,12 @@ function doImport() {
 	// on force le name space latin ET une nouvelle connexion
 	// voir http://fr.php.net/mysql_connect#82040 (important si meme login/passe
 	// sur les 2 BD)
+	// Oct 2014 ce pb n'existerait plus avec MySQLi ?
 	// notez que mysql_error() DOIT ici connaitre LA connexion utilisée
 
 
 	$oldConnexion =Connexion($user_bdd, $pass_bdd, $nom_bdd, $serveur_bdd,'latin1',true);
 	set_ok ("Connexion établie avec l'ancienne base de données $nom_bdd",$resultats);
-	 
-	 
 
 	if ($ligne = get_old_record('config', "cle='c2i'", $oldConnexion)) {
 		if ($ligne->valeur === $CFG->c2i)
@@ -164,7 +163,7 @@ function doImport() {
 			return $resultats;
 		}
 	} else {
-		set_erreur (mysql_error($oldConnexion),$resultats);
+		set_erreur (mysqli_error($oldConnexion),$resultats);
 		return $resultats;
 	}
 
@@ -176,7 +175,7 @@ function doImport() {
 			return $resultats;
 		}
 	} else {
-		set_erreur (mysql_error($oldConnexion),$resultats);
+		set_erreur (mysqli_error($oldConnexion),$resultats);
 		return $resultats;
 	}
 	
@@ -189,7 +188,7 @@ function doImport() {
 				return $resultats;
 			}
 		} else {
-			set_erreur (mysql_error($oldConnexion),$resultats);
+			set_erreur (mysqli_error($oldConnexion),$resultats);
 			return $resultats;
 		}
 	}
@@ -319,7 +318,7 @@ function doImport() {
 							set_erreur ("---------",$resultats);
 							$enteteErreur=true;
 						}
-						set_erreur (mysql_error($connexion),$resultats);
+						set_erreur (mysqli_error($connexion),$resultats);
 						$nbErreurs ++ ;
 						//return $resultats;  non fatale (violation d'index on continue
 					}
@@ -329,7 +328,7 @@ function doImport() {
 				unset($oldRecords);
 				 
 			} else { //erreur fatale
-				set_erreur (mysql_error($oldConnexion),$resultats);
+				set_erreur (mysqli_error($oldConnexion),$resultats);
 				return $resultats;
 			}
 			
