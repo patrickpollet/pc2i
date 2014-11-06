@@ -74,7 +74,7 @@ NB: le div  DOIT avoir un id=tabs
 
 <div id="footer">
     <div class= "taille1">
-            <a href="http://c2i.education.fr/wikipfc2i-X/index.php/Svn_log_1.5" target="_blank">
+            <a href="https://github.com/mines-mesr/pfc2i/commits/master" target="_blank">
             <span class="rouge1">version {CFG:version}</span>
             </a> - {copyright}
             &nbsp;&nbsp;
