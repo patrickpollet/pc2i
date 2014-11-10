@@ -43,7 +43,6 @@ rev v2
 
 //******** Pour chaque page $chemin repr�sente le path(chemin) de script dans le site (� la racine)
 //******** ---------------- $chemin_commun repr�sente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images repr�sente le path des images
 $chemin = '../..';
 
 require_once ($chemin. "/commun/c2i_params.php"); //fichier de param�tres

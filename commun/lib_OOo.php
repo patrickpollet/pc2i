@@ -201,7 +201,8 @@ function listeemargement_OOo($idq, $ide) {
  */
 
 function liste_inscrits_to_OOo($idq, $ide, $type) {
-
+    global $CFG;
+    require_once($CFG->chemin_commun .'/lib_resultats.php');
     // 1ere ligne csv a traduire
     $entete_csv = array (
         "t_examen",
@@ -335,6 +336,97 @@ function resultats_complets_to_OOo ($idq,$ide) {
              "{$CFG->chemin_ressources}/tmp/ods/".$filename.'.ods',
              "{$CFG->chemin_ressources}/csv/".$filename.'.csv');
 
+}
+
+
+
+/**
+ * archive un examen comme un zip (questions, corrigé, resultats ...)
+ * @author ppollet
+ * @param $ligne : un record de la table c2iexamen
+ * @return nom du fichier créé dans chemin_ressources/archives
+ *
+ */
+function archiver_examen ($ligne) {
+    
+    global $CFG; 
+    
+    $ide = $ligne->id_etab;
+    $idq = $ligne->id_examen;
+    
+    
+    $dir = $CFG->chemin_ressources . '/tmp/';
+    cree_dossier_si_absent($dir);
+    
+    $dir .= time();
+    cree_dossier_si_absent($dir);
+    
+    
+    if ($ligne->est_pool == 1) {
+        //pas le choix
+        $groupes = liste_groupe_pool($idq, $ide);
+        // TODO envoyer dans le CSV plus d'info en cas de pool ($ide, $idq ,$indice?)
+        foreach ($groupes as $groupe) {
+            $odf = examen_to_OOo($groupe->id_examen, $groupe->id_etab, QCM_PREVISUALISATION);
+            $odf->saveToDisk($dir . "/examen_{$groupe->id_etab}_{$groupe->id_examen}.odt");
+    
+            $odf = examen_to_OOo($groupe->id_examen, $groupe->id_etab, QCM_CORRIGE);
+            $odf->saveToDisk($dir . "/corrige_examen_{$groupe->id_etab}_{$groupe->id_examen}.odt");
+        }
+    } else {
+        $odf = examen_to_OOo($idq, $ide, QCM_PREVISUALISATION);
+        $odf->saveToDisk($dir . "/examen_{$ide}_{$idq}.odt");
+    
+        $odf = examen_to_OOo($idq, $ide, QCM_CORRIGE);
+        $odf->saveToDisk($dir . "/corrige_examen_{$ide}_{$idq}.odt");
+    }
+    
+   // print 1;
+    
+    $filename = liste_inscrits_to_OOo($idq, $ide, 0);
+    copy($filename, $dir . '/' . basename($filename));
+    unlink($filename);
+    //print 2;
+    $filename = liste_inscrits_to_OOo($idq, $ide, 1);
+    copy($filename, $dir . '/' . basename($filename));
+    unlink($filename);
+    //print 3;
+    list ($filename_ods, $filename_csv) = resultats_synthetiques_to_OOo($idq, $ide);
+    copy($filename_ods, $dir . '/' . basename($filename_ods));
+    unlink($filename_ods);
+    copy($filename_csv, $dir . '/' . basename($filename_csv));
+    unlink($filename_csv);
+    //print 4;
+    if ($ligne->est_pool == 1) {
+        //pas le choix
+        $groupes = liste_groupe_pool($idq, $ide);
+        // TODO envoyer dans le CSV plus d'info en cas de pool ($ide, $idq ,$indice?)
+        foreach ($groupes as $groupe) {
+            list ($filename_ods, $filename_csv) = resultats_complets_to_OOo($groupe->id_examen, $groupe->id_etab);
+            copy($filename_ods, $dir . '/' . basename($filename_ods));
+            unlink($filename_ods);
+            copy($filename_csv, $dir . '/' . basename($filename_csv));
+            unlink($filename_csv);
+        }
+    } else {
+        list ($filename_ods, $filename_csv) = resultats_complets_to_OOo($idq, $ide);
+        copy($filename_ods, $dir . '/' . basename($filename_ods));
+        unlink($filename_ods);
+        copy($filename_csv, $dir . '/' . basename($filename_csv));
+        unlink($filename_csv);
+    }
+    //print 5;
+    // fichier zip final
+    $filename = "archive_{$ide}_{$idq}.zip";
+    //supprimer eventuel ancien
+    if (file_exists($CFG->chemin_ressources . '/archives/'.$filename))
+    unlink ($CFG->chemin_ressources . '/archives/'.$filename);
+    
+    zip_dossier($dir, '.', "../../archives/" . $filename);
+    supprimer_dossier($dir); // cleanup the temp directory
+    
+    espion2("archivage", "examen", $ide . "." . $idq);
+    return $filename;
 }
 
 

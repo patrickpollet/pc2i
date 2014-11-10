@@ -12,12 +12,11 @@
 //
 //	variables :
 //	$ide = identifiant examen
-///	$idq = identifiant établissement examen
+///	$idq = identifiant ï¿½tablissement examen
 ////////////////////////////////
 
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
 require_once($chemin_commun."/c2i_params.php");
 require_once($chemin_commun."/lib_ajax.php");
 
@@ -49,7 +48,7 @@ if (!$ligne->est_pool)
 
 
 
-$fils= generer_groupes($idq,$ide);  // générer et récuperation de la liste
+$fils= generer_groupes($idq,$ide);  // gï¿½nï¿½rer et rï¿½cuperation de la liste
 //envoi comme une liste de liens HTML
 echo traduction ("form_liste_groupes");
 echo "<ul>";

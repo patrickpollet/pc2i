@@ -8,18 +8,17 @@
  */
  /**
   * rev 948 Pp
-  *   fckeditor deplacé dans commun/editeurs en préparation usage autres éditeurs
-  *   bouton annuler supprimé  fermait la fiche examen ...
+  *   fckeditor deplacï¿½ dans commun/editeurs en prï¿½paration usage autres ï¿½diteurs
+  *   bouton annuler supprimï¿½  fermait la fiche examen ...
   *   FCKConfig.AutoDetectLanguage	= false ; pour forcer le frncais (autodetection capricieuse)
   *
   */
 $chemin = '../..';
 
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
 require_once($chemin_commun."/c2i_params.php");
 require_once($chemin_commun."/lib_examens.php");
-require_once ($chemin_commun . "/lib_resultats.php"); //n'est pas chargé par c2i_params
+require_once ($chemin_commun . "/lib_resultats.php"); //n'est pas chargï¿½ par c2i_params
 
 
 require_login('P'); //PP
@@ -31,15 +30,15 @@ $ide=required_param("ide",PARAM_INT,"");
 // rev 1.41 type de liste_inscrits  0 tous 1 absents 2 presents
 $type=optional_param("type",0,PARAM_INT);
 $retour_fiche=optional_param("retour_fiche",0,PARAM_INT);
-$texte_resultats=optional_param("texte_resultats","",PARAM_RAW);  // ne rien filtrer il y a de l'HTML et mettre "" si pas trouvé
-$tester = optional_param("tester", "", PARAM_RAW);  //-- filtrer les caracteres non num et mettre 0 si non trouvé
+$texte_resultats=optional_param("texte_resultats","",PARAM_RAW);  // ne rien filtrer il y a de l'HTML et mettre "" si pas trouvï¿½
+$tester = optional_param("tester", "", PARAM_RAW);  //-- filtrer les caracteres non num et mettre 0 si non trouvï¿½
 $score_global=optional_param("score_global",50,PARAM_INT);
 
-//important après avoir lu $ide !!!
+//important aprï¿½s avoir lu $ide !!!
 v_d_o_d("etl"); // droits
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 
 
 $ligne=get_examen($idq,$ide);
@@ -51,7 +50,7 @@ if ($texte_resultats) {
 	//tracking :
 	espion2("modification_template", "examen", $ide.".".$idq);
 	//
-	// Si on a demandé a teste, on affiche un div contenant le template resultat
+	// Si on a demandï¿½ a teste, on affiche un div contenant le template resultat
 	//
 	if ($tester){
 		$res=new resultat(false); // sinon notices  php
@@ -73,7 +72,7 @@ else{
 		$texte_resultats = generate_modele_template($tpl);
 	}
 }
-// rev 948 editeur deplacé dans commun/editeurs
+// rev 948 editeur deplacï¿½ dans commun/editeurs
 
 /**
 $editeur_path=$CFG->chemin_commun.'/editeurs/fckeditor/';

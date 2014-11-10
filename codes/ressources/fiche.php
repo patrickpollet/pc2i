@@ -121,8 +121,7 @@ EOF;
 
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 require_login("E"); //PP 07/02/2009 consultable aussi par un candidat !
 
  if (!$CFG->utiliser_notions_parcours)
@@ -136,7 +135,7 @@ $url_retour = optional_param("url_retour", "",PARAM_INT);  //retour parcours (no
 $ligne = get_ressource($id);
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 $tpl->assignInclude("corps", $fiche, T_BYVAR);
 
@@ -152,7 +151,7 @@ if( !$ref=get_referentiel($ligne->domaine,false)) {
     $ref->domaine='???';
 }
 
-// rev 872 sur la nationale 36 questions invalidées anciennes avaient un alineas à -1 !
+// rev 872 sur la nationale 36 questions invalidï¿½es anciennes avaient un alineas ï¿½ -1 !
 
 if (!$al=get_alinea($ligne->competence,$ligne->domaine,false)) {
     $al=new StdClass();
@@ -195,7 +194,7 @@ foreach($usages as $rowd) {
 	$tpl->newBlock("fonction_s");
 	$tpl->assign("fonction_s.fonc", $rowd->id_parcours);
 	switch ($rowd->type) {
-		case "création":  $type=$rowd->type ." ".$rowd->login." : ".$rowd->titre ; break;
+		case "crï¿½ation":  $type=$rowd->type ." ".$rowd->login." : ".$rowd->titre ; break;
         case  "examen" :   $type=$rowd->type ." ".$rowd->examen; break;
         case  "croisement creation/examen":$type=$rowd->type ." ".$rowd->examen."/".$rowd->login;  break;
          default:
@@ -208,7 +207,7 @@ foreach($usages as $rowd) {
 
 
 
-//selon qu'elle est appelée par la liste ds notions ou un parcours c'est different !
+//selon qu'elle est appelï¿½e par la liste ds notions ou un parcours c'est different !
 // $CFG->boutons_retour_fermer_haut=0;
 $tpl->print_boutons_fermeture($url_retour);
 

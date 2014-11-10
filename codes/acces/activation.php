@@ -8,27 +8,26 @@
  */
 ////////////////////////////////
 //
-//	vérification de l'identifiant / mèl
+//	vï¿½rification de l'identifiant / mï¿½l
 //  envoi d'un nouveau mot de passe
 //  l'utilisateur devra l'activer
 //
 ////////////////////////////////
 
 
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
+
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 
-//clé d'activation  unique parametre requis
+//clï¿½ d'activation  unique parametre requis
 $act=required_param("act",PARAM_CLEAN);
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
 
-$tpl = new C2IMiniPopup( );    //créer une instance
+$tpl = new C2IMiniPopup( );    //crï¿½er une instance
 
 //reponse
 $info=<<<EOF
@@ -39,7 +38,7 @@ $info=<<<EOF
  </div>
 EOF;
 
-$tpl->assignInclude("contenu",$info,T_BYVAR);  // le template gérant la configuration
+$tpl->assignInclude("contenu",$info,T_BYVAR);  // le template gï¿½rant la configuration
 $tpl->prepare($chemin);
 $tpl->assign("elt","");
 $info=traduction("err_mdp_active");
@@ -52,7 +51,7 @@ if (strlen($act)==32) {
         update_record("utilisateurs",$ligne,"login");
         $info=traduction("mdp_active");
     } else espion2("activation_mot_de_passe","utilisateur inconnu",$act);
-} else espion2("activation_mot_de_passe","clé d'activation inconnue",$act);
+} else espion2("activation_mot_de_passe","clï¿½ d'activation inconnue",$act);
 $tpl->assign("infos",$info);
 $tpl->traduit ("titre_popup","mdp_active");
 $tpl->printToScreen();

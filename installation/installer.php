@@ -12,7 +12,6 @@ header("Pragma:no-cache");
 
 $chemin = '..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
 
 //print_r($_POST); die();
 

@@ -9,9 +9,7 @@
 
 $chemin = '../../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-
-require_once($chemin_commun."/c2i_params.php");                 //fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");                 //fichier de paramï¿½tres
 
 
 $eid = required_param("eid", PARAM_CLE_C2I);
@@ -33,15 +31,15 @@ $filename='export_examen_'.$ide.'_'.$idq.'_'.time().'.txt';
 
 
 $questions=get_questions($idq,$ide,false,false);
-//tableau des ids des questions associées
+//tableau des ids des questions associï¿½es
 $questionsmap=array();
 foreach($questions as $question)
     $questionsmap []=$question->id_etab.'.'.$question->id;
 
-//on ne peut pas l'exporter comme un membre car le pere n'est probablemnt pas déja exporté
+//on ne peut pas l'exporter comme un membre car le pere n'est probablemnt pas dï¿½ja exportï¿½
 if ($ligne->pool_pere) {
 	$ligne->pool_pere=0;
-	$ligne->type_tirage='aléatoire';
+	$ligne->type_tirage='alï¿½atoire';
 }
 
 //ajoute la liste des questions
@@ -61,7 +59,7 @@ fclose($fp);
 espion2("exportation","examen",$ide.".".$idq);
 
 //TODO pas la peine de faire un fichier. Bricoler les entetes et imprimer ...
-// envoi du fichier avec une entete mime adaptée et donc téléchargement
+// envoi du fichier avec une entete mime adaptï¿½e et donc tï¿½lï¿½chargement
 header("Location:".$CFG->chemin_commun."/send_csv.php?idf=".$filename."&dir=tmp");
 
 

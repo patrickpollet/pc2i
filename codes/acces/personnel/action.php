@@ -9,16 +9,14 @@
 
 ////////////////////////////////
 //
-//	Action (insérer / mettre à jour l'item)
+//	Action (insï¿½rer / mettre ï¿½ jour l'item)
 //
 ////////////////////////////////
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
 $chemin = '../../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 require_login('P'); //PP
 
 
@@ -80,7 +78,7 @@ if ($id == "-1") { // ajout de l'item
 } else { // modification de l'item
     v_d_o_d("um");
 
-    //si le mot de passe a changé (on a envoyé le md5 dans la fiche d'ajout)
+    //si le mot de passe a changï¿½ (on a envoyï¿½ le md5 dans la fiche d'ajout)
     if ($ligne->password != $old_mdp)
          $ligne->password = md5($ligne->password);
     else unset($ligne->password); // pas de mise a jour
@@ -91,11 +89,11 @@ if ($id == "-1") { // ajout de l'item
     //tracking :
     espion3("modification","utilisateur", $id,$ligne);
 
-    // désaffecter les profils existants pour cet utilisateur
+    // dï¿½saffecter les profils existants pour cet utilisateur
     delete_records("droits","login='".addslashes($id)."'");  // rev 984
 }
 
-// affecter les nouveaux profils à la personne
+// affecter les nouveaux profils ï¿½ la personne
 $hf = explode("*", $hidden_profils);
 $prof=new StdClass();
 $prof->login=$id;
@@ -108,7 +106,7 @@ foreach ($hf as $fval) {
 if ($env_mail) {
     // envoyer un mail
     require_once ($CFG->chemin_commun . "/lib_mail.php");
-    $ligne->password=$mdp; // non encodé md5 !!!
+    $ligne->password=$mdp; // non encodï¿½ md5 !!!
     list($bidon,$text_to_send)=substitue("",$texte_mail,false,$ligne);
     $ret=send_mail($ligne->login,traduction("compte_cree"),"",$text_to_send);
    // print("sm =".$ret); print($text_to_send);die();

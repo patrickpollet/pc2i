@@ -13,9 +13,9 @@
 ////////////////////////////////
 
 /*----------------REVISIONS----------------------
-v 1.1 : SB 17/10/2006 tri par défaut sur la date desc
-V 1.5 : le critére de recherche par utilisateur ne présentait pas
-           les étudiants (C2iinscrits))
+v 1.1 : SB 17/10/2006 tri par dï¿½faut sur la date desc
+V 1.5 : le critï¿½re de recherche par utilisateur ne prï¿½sentait pas
+           les ï¿½tudiants (C2iinscrits))
        : troncature de l'objet a 40 (les logs des erreurs SQL rendant le select trop large)
        : ajout de la plateforme au tracking (voir lib_tracking) et a la liste
        '
@@ -24,8 +24,7 @@ V 1.5 : le critére de recherche par utilisateur ne présentait pas
 
 $chemin = '../../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramétres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 require_login('P'); //PP
 v_d_o_d("at");
 
@@ -38,13 +37,13 @@ $pf=optional_param("pf","",PARAM_CLEAN);
 $indice_deb=optional_param("indice_deb",0,PARAM_INT);
 
 
-// affichage par défaut des événements les plus récents
+// affichage par dï¿½faut des ï¿½vï¿½nements les plus rï¿½cents
 $tri=optional_param("tri","",PARAM_INT);
 
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");	//inclusion de moteur de templates
 
-$tpl = new C2IPopup(  );	//créer une instance
+$tpl = new C2IPopup(  );	//crï¿½er une instance
 //inclure d'autre block de templates
 
 $liste=<<<EOL
@@ -125,12 +124,12 @@ set_time_limit(0);
 
 $colspan=9;
 
-// sélection du nom de l'établissement
+// sï¿½lection du nom de l'ï¿½tablissement
 $tpl->traduit("_ROOT.titre_popup","tracking");
 
 
 /**
- * table pour accelerer les recherches des noms d'établissement'
+ * table pour accelerer les recherches des noms d'ï¿½tablissement'
  */
 $etabli = array();
 $res=get_etablissements();
@@ -140,7 +139,7 @@ foreach($res as $rowe){
 
 require_once ($CFG->chemin_commun . "/trieuse.class.php");
 ////////////////////////////////////////////////////
-// critéres de recherche
+// critï¿½res de recherche
 ////////////////////////////////////////////////////
 //$autre_table=",c2iutilisateurs";
 $autre_table="";
@@ -173,7 +172,7 @@ if ($pf){
         $chaine_critere_recherche =concatAvecSeparateur($chaine_critere_recherche,"pf=".$pf,"&amp;");
 }
 /////////////////////////////////////////////
-// critéres de tri
+// critï¿½res de tri
 /////////////////////////////////////////////
 $url = "liste.php?";
 $url = concatAvecSeparateur($url, $chaine_critere_recherche, "");
@@ -195,7 +194,7 @@ $trieuse->printToScreen();  //entetes
 /////////////////////////////////////////
 // gestion de la multipagination
 /////////////////////////////////////////
-//$indice_ecart est trouvé dans c2i_params//lien de mp : les deux (recherche et tri)
+//$indice_ecart est trouvï¿½ dans c2i_params//lien de mp : les deux (recherche et tri)
 $url_multipagination = concatAvecSeparateur($url, $trieuse->getParametreTri(), "&amp;");
 
 
@@ -205,7 +204,7 @@ if (isset($num_page)){
 	}
 }
 
-// variables utilisées dans le code de multipagination
+// variables utilisï¿½es dans le code de multipagination
 
 $indice_fin=$indice_deb + $indice_ecart - 1; // indice de fin d'affichage
 
@@ -219,7 +218,7 @@ $nbTotal=count_records("tracking");
 $tpl->assign("_ROOT.nb_items",$chaine_critere_recherche."<br/>".$indice_max."/".$nbTotal);
 
 ////////////////////////////////////////////////////
-// requete de sélection des examens é afficher
+// requete de sï¿½lection des examens ï¿½ afficher
 ////////////////////////////////////////////////////
 
 
@@ -243,7 +242,7 @@ foreach($res as $ligne){
 	} else {
 		$tpl->assign("etab","????");
 		$tpl->traduit("etabnom","etablissement_supprime");
-		$tpl->assign("consulter_fiche_etab","<li class=\"menu_niveau2_item\"></li>"); //W3C ul ne peut être vide
+		$tpl->assign("consulter_fiche_etab","<li class=\"menu_niveau2_item\"></li>"); //W3C ul ne peut ï¿½tre vide
 
 	}
 
@@ -269,7 +268,7 @@ foreach($res as $ligne){
     $tpl->assign("plateforme",$ligne->plateforme);
 
 
-	// passage é la ligne suivante
+	// passage ï¿½ la ligne suivante
 	$compteur_ligne ++;
 }
 
@@ -279,16 +278,16 @@ if ($compteur_ligne==0){
 }
 ///////////////////////////////////
 //
-//	gestions de l'affichage des critéres de recherche
+//	gestions de l'affichage des critï¿½res de recherche
 //
 ///////////////////////////////////
-// génération des listes déroulantes
+// gï¿½nï¿½ration des listes dï¿½roulantes
 
 $tpl->gotoBlock("_ROOT");
 print_boutons_criteres($tpl);
 
-// rev 940 ajout N° etablissement
-//liste déroulante des universités
+// rev 940 ajout Nï¿½ etablissement
+//liste dï¿½roulante des universitï¿½s
 $ets=get_etablissements('nom_etab');
 foreach ($ets as $et) {
     $et->nom_etab=sprintf("%s (%s)",$et->nom_etab,$et->id_etab);

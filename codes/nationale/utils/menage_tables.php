@@ -4,8 +4,7 @@
 set_time_limit(0);
 $chemin = '../../../';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");                 //fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");                 //fichier de paramï¿½tres
 require_login('P'); //PP
 if (!is_admin(false,$CFG->universite_serveur)) die("pas admin");
 
@@ -97,7 +96,7 @@ foreach($res as $ligne){
     }
 }
 
-print "resultats après migration V1.5 : $nb"."/".count($res)."<br/>";
+print "resultats aprï¿½s migration V1.5 : $nb"."/".count($res)."<br/>";
 
 
 //reponses sans questions
@@ -163,7 +162,7 @@ questions inconnues dans des examens : 20
 1 1612
 1 1620
 resultats d'examens inconnus : 145/189
-resultats aprés migration V1.5 : 0/42
+resultats aprï¿½s migration V1.5 : 0/42
 reponses sans questions : 10
 1_348 1227
 1_348 1228

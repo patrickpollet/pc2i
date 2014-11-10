@@ -12,16 +12,14 @@
 //
 ////////////////////////////////
 /*
-* Pour la description des différentes méthodes de la classe TemplatePower,
-* il faut se reférer à http://templatepower.codocad.com/
+* Pour la description des diffï¿½rentes mï¿½thodes de la classe TemplatePower,
+* il faut se refï¿½rer ï¿½ http://templatepower.codocad.com/
 */
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
 require_login('P');
 v_d_o_d("config");
@@ -29,7 +27,7 @@ v_d_o_d("config");
 $idq=optional_param("idq","-1",PARAM_INT); // nouveau ou modif
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 
 $rangees=profil_en_inputs();
@@ -71,7 +69,7 @@ EOF;
 
 $CFG->utiliser_validation_js=1;
 
-$tpl->assignInclude("corps", $fiche,T_BYVAR); // le template gérant un profil
+$tpl->assignInclude("corps", $fiche,T_BYVAR); // le template gï¿½rant un profil
 
 $tpl->prepare($chemin);
 

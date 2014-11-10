@@ -12,8 +12,6 @@
 
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-
 require_once($chemin_commun."/c2i_params.php");					//fichier de param�tres
 
 require_login("P"); //PP

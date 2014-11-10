@@ -15,8 +15,7 @@
 set_time_limit(0);
 $chemin = '../../../';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");                 //fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");                 //fichier de paramï¿½tres
 require_once($chemin_commun."/lib_sync.php");
 
 //if ($CFG->universite_serveur !=1) die("pas nationale");
@@ -60,7 +59,7 @@ if ($res->errno==0) {
             $ressource->modifiable=0;
             $ressource->ts_datemodification=time();
 
-            // gros pb avec l'ordre mal renvoyé par la nationale 'domaine,competence,ordre'
+            // gros pb avec l'ordre mal renvoyï¿½ par la nationale 'domaine,competence,ordre'
             // et elles ne sont pas dans l'ordre D1,D2 ....' ...
             if ($old=get_record('ressources','id='.$ressource->id.' and id_etab=1',false)) {
                 print ("maj ".$ressource->id); //avant
@@ -74,7 +73,7 @@ if ($res->errno==0) {
             }
         }
     } else {
-        //message d'erreur renvoyé par CURL ( not found) ou par le WS
+        //message d'erreur renvoyï¿½ par CURL ( not found) ou par le WS
         print_r($res->data);
     }
 
@@ -91,7 +90,7 @@ else {
 /**
  * 
  * excute une requete HTTP en mode REST via curl
- * pour l'instant utilisée seulement vers https://c2i.education.fr/c2iws/service.php
+ * pour l'instant utilisï¿½e seulement vers https://c2i.education.fr/c2iws/service.php
  * pour obtenir les ressources 
  * @param array $config
  * @param boolean $quiet
@@ -106,7 +105,7 @@ function c2i_http_request($config, $quiet=false,$id_objet='') {
         if ($quiet)
             return false;
         else 
-            die ('extension php curl non installée');
+            die ('extension php curl non installï¿½e');
     }
     
     

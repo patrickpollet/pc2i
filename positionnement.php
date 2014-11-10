@@ -3,7 +3,7 @@
 This file is part of "Plate-forme de certification et positionnement pour le C2i niveau 1"
 Copyright (C) 2004-2009 :
 Copyright (C) 2004-2009 :
-MEN- MESR-SG-SDTICE Rachid EL BOUSSARGHINI - Stéphane BAUDOUX -Patrick POLLET
+MEN- MESR-SG-SDTICE Rachid EL BOUSSARGHINI - Stï¿½phane BAUDOUX -Patrick POLLET
 This program is free software; you can redistribute it and/or modify it under the terms
  of the GNU General Public licence as published by the Free Software Foundation;
  either version 2 of the License, or any later version.
@@ -19,10 +19,10 @@ This program is free software; you can redistribute it and/or modify it under th
  */
 
 
-//PP test immédiat si CAS requis
+//PP test immï¿½diat si CAS requis
 require_once("commun/constantes.php");
 
-//rev 978 accès direct à un examen
+//rev 978 accï¿½s direct ï¿½ un examen
 // a faire avant une eventuelle redirection CAS
 $id_examen=!empty($_GET['id_examen'])?$_GET['id_examen']:0;
 $id_etab=!empty($_GET['id_etab'])?$_GET['id_etab']:0;
@@ -93,7 +93,6 @@ EOL;
 
 $chemin='.';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
 
 require_once($chemin_commun."/c2i_params.php");
 

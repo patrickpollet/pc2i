@@ -10,8 +10,7 @@
 
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");                 //fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");                 //fichier de paramï¿½tres
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
 
@@ -19,7 +18,7 @@ require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion 
 if (!empty($CFG->pas_de_motdepasse_oublie)) // rev 897
    erreur_fatale("err_acces");
 
-$tpl = new C2IMiniPopup( );    //créer une instance
+$tpl = new C2IMiniPopup( );    //crï¿½er une instance
 
 
 
@@ -51,20 +50,20 @@ $mel=optional_param("mel","",PARAM_RAW);
 
 if ($mel) {
 
-    $tpl->assignInclude("contenu",$info,T_BYVAR);  // le template gérant la configuration
+    $tpl->assignInclude("contenu",$info,T_BYVAR);  // le template gï¿½rant la configuration
 
 	$tpl->prepare($chemin);
 
     $CFG->utiliser_infobulle_js=0; // pas besoin
     $CFG->err_mysql_avec_requete=0; //ne pas afficher l'erreur mysql aux hackers !  rev 897
     $CFG->err_mysql_sans_mysqlerror=1;
-    // on passe AUSSI un errMsg1 non vide pour ne pas dévoiler l'erreur MySql !  rev 897
+    // on passe AUSSI un errMsg1 non vide pour ne pas dï¿½voiler l'erreur MySql !  rev 897
 	$ligne=get_record ("utilisateurs","login='" . addslashes($mel) . "' or email='" . $mel . "'",true,"err_droits");  // rev 984
 	if (!$ligne || empty($ligne->email)) {
 		$tpl->assign ("infos",traduction("err_pas_de_mail"));
 	}  else
-		//if (is_admin($ligne->login,$ligne->etablissement)) {NON ! $USER pas renseigné !
-        // rev 894-896 on n'envoie pas le passe d'un admin meme à lui !
+		//if (is_admin($ligne->login,$ligne->etablissement)) {NON ! $USER pas renseignï¿½ !
+        // rev 894-896 on n'envoie pas le passe d'un admin meme ï¿½ lui !
         if ($ligne->est_admin_univ=="O" || $ligne->est_superadmin=="O") {
             // rev 977 personnalisation du message
             if ($CFG->universite_serveur==1)
@@ -73,8 +72,8 @@ if ($mel) {
                 $tpl->assign ("infos",traduction("err_pas_envoi_mdp_admin_local"));
             espion2('envoi_mail_refuse','perte_mot_de_passe', $ligne->login);
 		} else {
-			$nouveau_passe = mot_de_passe_a(7); // génére un nouveau mot de passe de 7 caractères
-			$futur_verif = md5(uniqid(rand())); // clé de vérification
+			$nouveau_passe = mot_de_passe_a(7); // gï¿½nï¿½re un nouveau mot de passe de 7 caractï¿½res
+			$futur_verif = md5(uniqid(rand())); // clï¿½ de vï¿½rification
 			$rec=new StdClass();
 			$rec->login=$ligne->login;
 			$rec->futur_mdp=md5($nouveau_passe);
@@ -98,7 +97,7 @@ if ($mel) {
 			}
 		}
 } else {
-	$tpl->assignInclude("contenu",$forme,T_BYVAR);  // le template gérant la configuration
+	$tpl->assignInclude("contenu",$forme,T_BYVAR);  // le template gï¿½rant la configuration
 
 	$tpl->prepare($chemin);
    $CFG->utiliser_validation_js=1;

@@ -98,9 +98,8 @@ EOF;
 
 $chemin = '../../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
-require_once ($chemin_commun . "/lib_resultats.php"); //n'est pas chargé par c2i_params
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
+require_once ($chemin_commun . "/lib_resultats.php"); //n'est pas chargï¿½ par c2i_params
 
 $ide=required_param("ide",PARAM_INT);
 $idq=required_param("idq",PARAM_INT);
@@ -120,12 +119,12 @@ v_d_o_d("el");
 
 $ligne=get_examen($idq,$ide);
 // attention
-// si on a changé d'etudiant' id_repasser = le login de l'ancien étudiant
+// si on a changï¿½ d'etudiant' id_repasser = le login de l'ancien ï¿½tudiant
 // il faut donc le comparer au nouvel (id_us) sinon vire les notes du nouveau !!!!
 
 	if ($id_repasser && ( $id_repasser==$id_us) && $CFG->permettre_repasser_examen) {
-		//print"$id_us autorisé a repasser son examen<br/>";
-		//attention si pool ce peut être un examen different du 'père'
+		//print"$id_us autorisï¿½ a repasser son examen<br/>";
+		//attention si pool ce peut ï¿½tre un examen different du 'pï¿½re'
 		$idex=required_param("idq_repasser",PARAM_INT);
 		$idexe=required_param("ide_repasser",PARAM_INT);
 		purge_resultats_inscrit($idex,$idexe,$id_us);
@@ -133,8 +132,8 @@ $ligne=get_examen($idq,$ide);
 
 
 	if ($id_renoter && ( $id_renoter==$id_us)) {
-		//print"$id_us renoté<br/>";
-		//attention si pool ce peut être un examen different du 'père'
+		//print"$id_us renotï¿½<br/>";
+		//attention si pool ce peut ï¿½tre un examen different du 'pï¿½re'
 		$idex=required_param("idq_renoter",PARAM_INT);
 		$idexe=required_param("ide_renoter",PARAM_INT);
 		note_examen($idex,$idexe,QCM_NORMAL,$id_us,false,false,false,false);
@@ -142,7 +141,7 @@ $ligne=get_examen($idq,$ide);
 
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 $tpl->assignInclude("corps", $fiche,T_BYVAR); //
 $tpl->prepare($chemin);
@@ -151,7 +150,7 @@ $CFG->utiliser_fabtabulous_js=1;
 
 $tpl->assign("_ROOT.titre_popup", nom_complet_examen($ligne));
 
-// liste des PASSAGES à l'examen
+// liste des PASSAGES ï¿½ l'examen
 // attention avec un pool
 $inscrits=get_passages($idq,$ide);
 
@@ -162,8 +161,8 @@ $tpl->assign("ide", $ide);
 $tpl->assign("idq", $idq);
 $tpl->assign("retour_fiche", $retour_fiche);
 
-//pb avec l'anonyme. Ses résultats ne sont pas stockés ...
-//maj info affichées dans le select
+//pb avec l'anonyme. Ses rï¿½sultats ne sont pas stockï¿½s ...
+//maj info affichï¿½es dans le select
 foreach ($inscrits as $inscrit) {
     $inscrit->nom_complet=_regle_nom_prenom($inscrit->nom,$inscrit->prenom)." ".$inscrit->numetudiant;
 }
@@ -191,13 +190,13 @@ if ($id_us) {
 		if (!$ligne->est_pool)
             $ret=imprime_examen($idq,$ide,false,false,false,$montre_ref=true,$mode=QCM_CORRIGE);
          else
-            $ret=array(traduction("info_pas_corrige_pool"),"");   //pas de corrigé disponible
+            $ret=array(traduction("info_pas_corrige_pool"),"");   //pas de corrigï¿½ disponible
 		$tpl->assign("infos.correction", $ret[0]);
 	} else {
 		$res=get_resultats($idq,$ide,$id_us,false);  //relire depuis la BD  ou renoter
 
-		if ($res->score_global ==-1) {  // a des réponses mais pas de notes ...
-           //N° reel examen renvoyé par get_historique !!!
+		if ($res->score_global ==-1) {  // a des rï¿½ponses mais pas de notes ...
+           //Nï¿½ reel examen renvoyï¿½ par get_historique !!!
          //print_r($res);
          list($idexe,$idex)=explode(".",$histo[0]->examen);
 
@@ -211,7 +210,7 @@ if ($id_us) {
             $tpl->assign ("infos.liste_liens","");
             }
 		} else {
-         //N° reel examen renvoyé par get_resultats
+         //Nï¿½ reel examen renvoyï¿½ par get_resultats
          //print_r($res);
          list($idexe,$idex)=explode(".",$res->examen);
 			$tpl->assignGlobal("scoreg",sprintf("%.{$CFG->nombre_decimales_score}f",$res->score_global)." %");
@@ -221,7 +220,7 @@ if ($id_us) {
                $CFG->permettre_repasser_examen && ! is_utilisateur_anonyme($id_us)) {
 				if ($res->origine !='amc') {  // rev 1020 amc envoie des notes , pas des cases donc on ne peut pas
 					$tpl->newBlock ("repasser");
-					$tpl->assign("id_repasser",$id_us);  //important ne le faire au submit que si c'est le même candidat '
+					$tpl->assign("id_repasser",$id_us);  //important ne le faire au submit que si c'est le mï¿½me candidat '
 					$tpl->assign("ide_repasser",$idexe);  //important id reel en cas de pool
 					$tpl->assign("idq_repasser",$idex);
 

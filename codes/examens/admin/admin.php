@@ -13,8 +13,7 @@
 
 $chemin = '../../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 require_once($chemin_commun."/lib_cron.php");
 require_once($chemin_commun."/lib_resultats.php");
 
@@ -30,7 +29,7 @@ $ligne=get_examen_byidnat($eid);
 $ide=$ligne->id_etab;
 $idq=$ligne->id_examen;
 
-$nbPassages=compte_passages($idq,$ide); //inclus les résultats non enregistrés
+$nbPassages=compte_passages($idq,$ide); //inclus les rï¿½sultats non enregistrï¿½s
 $nbInscrits=compte_inscrits($idq,$ide);
 $nbInscritsNP=$nbInscrits-$nbPassages;
 
@@ -45,11 +44,11 @@ if ($doit) {
         break;
 
 		case 'sim' :
-			simule_passage($idq,$ide); //pools gérés dans cette fonction
+			simule_passage($idq,$ide); //pools gï¿½rï¿½s dans cette fonction
 			 espion3("simulation_passage","examen",$ide.".".$idq,$ligne);
 		break;
 		case 'asim' :
-			annule_simulation($idq,$ide); //pools gérés dans cette fonction
+			annule_simulation($idq,$ide); //pools gï¿½rï¿½s dans cette fonction
 			 espion3("annulation_simulation_passage","examen",$ide.".".$idq,$ligne);
 		break;
 
@@ -81,7 +80,7 @@ if ($doit) {
 
 			break;
 		case 'si' :
-            //d'abord les résultats
+            //d'abord les rï¿½sultats
 			purge_resultats_examen($idq,$ide); // 4 tables
 			delete_records("resultats","examen='" . $ide . "." . $idq . "'"  ); // et ajax
 			$critere=" id_examen=$idq and id_etab=$ide";
@@ -107,10 +106,10 @@ if ($doit) {
     		$critere=" id_examen=$idq and id_etab=$ide";
     		foreach ($inscrits as $i) {
             		if (compte_passages($idq, $ide, $i->login)==0) {
-                		//pas de résultats normalement
+                		//pas de rï¿½sultats normalement
                 		purge_resultats_inscrit($idq,$ide,$i->login,true);
                 		delete_records("qcm",$critere." and login='".addslashes($i->login)."' ",false);  //  pas fatal // slashes rev 984
-                        // rev 978 ménage des anonymes ne l'ayant pas terminés
+                        // rev 978 mï¿½nage des anonymes ne l'ayant pas terminï¿½s
                         if (is_utilisateur_anonyme($i->login)) {
                             supprime_candidat($i->login);
             		    }
@@ -131,7 +130,7 @@ if ($doit) {
 }
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 
 switch ($action) {
 	case 'sim' :

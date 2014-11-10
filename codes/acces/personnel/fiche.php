@@ -144,8 +144,7 @@ EOF;
 
 $chemin = '../../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
 $id=required_param("id",PARAM_CLEAN);
 $ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT);
@@ -166,7 +165,7 @@ v_d_o_d("ul");
 $ligne=get_utilisateur($id);
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 $tpl->assignInclude("corps",$fiche,T_BYVAR);
 $tpl->prepare($chemin);
@@ -185,7 +184,7 @@ if ($et) {
 $tpl->setConditionalValue($ligne->est_admin_univ == "O","_ROOT.ch_a_e", "1","0");
 $tpl->setConditionalValue($ligne->limite_positionnement == "1","_ROOT.ch_a_p", "1","0");
 
-// profils à indiquer
+// profils ï¿½ indiquer
 
 $profiles=get_profils_utilisateur($ligne->login,"intitule");
     foreach ($profiles as $p) {
@@ -195,7 +194,7 @@ $profiles=get_profils_utilisateur($ligne->login,"intitule");
 
     }
 
-//questions qu'il a créé
+//questions qu'il a crï¿½ï¿½
 
 if ($liste=get_questions_auteur ($ligne->email)) {
    // print_r($liste);
@@ -208,7 +207,7 @@ if ($liste=get_questions_auteur ($ligne->email)) {
     }
 }
 
-//examen qu'il a créé
+//examen qu'il a crï¿½ï¿½
 
 if ($liste=get_examens_auteur ($ligne->email)) {
    // print_r($liste);
@@ -227,7 +226,7 @@ if ($CFG->activer_tags_utilisateur) {
 }
 
 /**
- * essai d'ajouter d'un bouton modifier à la fiche
+ * essai d'ajouter d'un bouton modifier ï¿½ la fiche
  * pb au retour de ajout avec l'opener qui n''est plus liste ...
 $tpl->gotoBlock("_ROOT");
 if (teste_droit("um")) {

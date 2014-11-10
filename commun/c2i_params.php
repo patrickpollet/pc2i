@@ -121,11 +121,10 @@ while ($CFG->abspath !='/' && ! file_exists($CFG->abspath."/commun/constantes.ph
  * attention : chemin est aussi utilis� pour les chemins www (relatifs)
  */
 
-// $chemin correspond au chemin � parcourir pour aller de la page appelante � la racine d'ines
-// cette variable doit �tre d�finie dans chaque page principale
+// $chemin correspond au chemin à parcourir pour aller de la page appelante à la racine d'ines
+// cette variable doit être definie dans chaque page principale
 if (!isset($chemin)) $chemin = "..";
 if (!isset($chemin_commun)) $chemin_commun = $chemin."/commun";
-if (!isset($chemin_images)) $chemin_images = $chemin."/images";
 require_once ($chemin_commun."/constantes.php");
 
 

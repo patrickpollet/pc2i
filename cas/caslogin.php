@@ -15,7 +15,6 @@
 if (!isset($chemin))
     $chemin = '..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
 
 
 if (!isset($type_p)) {  // caslogin n' pas inclus (cas non forc�)  mais appel� comme action d'un formulaire

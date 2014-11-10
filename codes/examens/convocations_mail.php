@@ -8,16 +8,14 @@
 
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 require_once($chemin_commun."/lib_mail.php");
 require_login("P"); //PP
 
 
 
-$idq=required_param("idq",PARAM_INT);   // -1 en création
-$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //étab de l'examen, défaut = ici '
+$idq=required_param("idq",PARAM_INT);   // -1 en crï¿½ation
+$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //ï¿½tab de l'examen, dï¿½faut = ici '
 $retour_fiche=optional_param("retour_fiche","0",PARAM_INT);
 
 $liste=optional_param("removeselect","",PARAM_RAW);  //liste des comptes retenus comme le nom ne l'indique pas ...
@@ -47,7 +45,7 @@ if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
 }
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
-$tpl = new C2IPopup(  );	//créer une instance
+$tpl = new C2IPopup(  );	//crï¿½er une instance
 //inclure d'autre block de templates
 
 $forme=<<<EOL
@@ -164,7 +162,7 @@ $forme=<<<EOL
 EOL;
 
 
-$CFG->utiliser_prototype_js=1;  //forcé
+$CFG->utiliser_prototype_js=1;  //forcï¿½
 $CFG->utiliser_validation_js=1;
 
 add_javascript($tpl,$CFG->chemin_commun."/js/listes.js");
@@ -191,7 +189,7 @@ if ($bouton_envoyer && $liste && count($liste>0))  { // enregistrer
             set_ok (traduction ("mail_copie_envoye",true,$mapomme->email),$resultats);
         else
             set_erreur (traduction("err_mail_copie_envoye",true,$mapomme->email),$resultats);
-        //suggestion P.Gillois copie aussi à l'auteur  de l'examen  rev 978
+        //suggestion P.Gillois copie aussi ï¿½ l'auteur  de l'examen  rev 978
         if (!empty($CFG->convoque_mail_copie_auteur)) {
             if ($ligne->auteur_mail != get_mail($mapomme->login)) {
                 if ($auteur=get_compte_byemail($ligne->auteur_mail))

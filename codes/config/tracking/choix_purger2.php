@@ -16,14 +16,13 @@
 ////////////////////////////////
 /*----------------REVISIONS----------------------
 v 1.5 : PP 24/02/2009
-  template et action.php rappatrié ici
+  template et action.php rappatriï¿½ ici
 
 -----------------------------------------------*/
 
 $chemin = '../../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 
 require_login('P'); //PP
 $ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT);
@@ -37,7 +36,7 @@ $doit=optional_param("doit","",PARAM_INT);  //(validation ?)
 
 //validation  (ancien code de action.php)
 if (!empty($doit)) {
-    //problème avec les valeurs vides ....
+    //problï¿½me avec les valeurs vides ....
     $valeur=required_param("date_debut",PARAM_CLEAN);  //valeur de l'item
 
     $debut=mon_strtotime($valeur);
@@ -57,7 +56,7 @@ else
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");	//inclusion de moteur de templates
 
-$tpl = new C2IMiniPopup( );	//créer une instance
+$tpl = new C2IMiniPopup( );	//crï¿½er une instance
 
 //inclure d'autre block de templates
 $fiche=<<<EOF
@@ -117,7 +116,7 @@ EOF;
 $tpl->assignInclude("contenu",$fiche,T_BYVAR);
 $tpl->prepare($chemin);
 
-$CFG->utiliser_js_calendar=1;   //forcé (est à 0 dans config pour accelerer les pages)
+$CFG->utiliser_js_calendar=1;   //forcï¿½ (est ï¿½ 0 dans config pour accelerer les pages)
 
 $tpl->traduit("titre_popup" ,"purger_tracking");
 

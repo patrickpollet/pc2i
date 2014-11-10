@@ -1,12 +1,11 @@
 <?php
 ////////////////////////////////
-// purge des candidats qui ne sont plus inscrits à un examen
+// purge des candidats qui ne sont plus inscrits ï¿½ un examen
 ////////////////////////////////
 
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 require_once($chemin_commun."/lib_cron.php");
 require_login('P'); //PP
 if (! is_admin())
@@ -24,7 +23,7 @@ if ($supp) {
 }
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 
 $corps=<<<EOL
 <form action="effacer_candidats.php" method="post" name="monform" id="monform">

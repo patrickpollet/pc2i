@@ -8,18 +8,16 @@
 
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 require_once($chemin_commun."/lib_ldap.php");
 
 require_login("P"); //PP
 
 
 
-$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //étab de l'examen, défaut = ici '
+$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT); //ï¿½tab de l'examen, dï¿½faut = ici '
 $champs=get_champs_recherche_ldap($ide);
-//important après avoir lu $ide !!!
+//important aprï¿½s avoir lu $ide !!!
 v_d_o_d("em");
 
 //ajax
@@ -44,7 +42,7 @@ EOF;
    die();
 }
 
-$idq=required_param("idq",PARAM_INT);   // -1 en création
+$idq=required_param("idq",PARAM_INT);   // -1 en crï¿½ation
 
 $retour_fiche=optional_param("retour_fiche","0",PARAM_INT);
 
@@ -53,7 +51,7 @@ $liste=optional_param("removeselect","",PARAM_RAW);  //liste des comptes retenus
 
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");    //inclusion de moteur de templates
-$tpl = new C2IPopup(  );	//créer une instance
+$tpl = new C2IPopup(  );	//crï¿½er une instance
 //inclure d'autre block de templates
 
 $forme=<<<EOL
@@ -114,7 +112,7 @@ $forme=<<<EOL
 <fieldset>
 <legend>{criteres_ldap}</legend>
 <div class="commentaire1">{vos_criteres}
-<span id="spinner" style="display: none;"><img src="{chemin_images}/spinner.gif" alt="Requête en cours "/></span>
+<span id="spinner" style="display: none;"><img src="{chemin_images}/spinner.gif" alt="Requï¿½te en cours "/></span>
 
 </div>
 <input name="idq" type="hidden" value="{idq}"/>
@@ -183,7 +181,7 @@ function cherche (input) {
 EOL;
 
 
-$CFG->utiliser_prototype_js=1;  //forcé
+$CFG->utiliser_prototype_js=1;  //forcï¿½
 
 add_javascript($tpl,$CFG->chemin_commun."/js/listes.js");
 

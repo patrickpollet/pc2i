@@ -7,20 +7,18 @@
  */
 ////////////////////////////////
 //
-//	Action (insérer / mettre à jour l'item)
+//	Action (insï¿½rer / mettre ï¿½ jour l'item)
 //
 ////////////////////////////////
 /*
  * rev 1.5 ajout droit etudiant_modifier
  */
 
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
 $chemin = '../../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 
 require_login('P'); //PP
 

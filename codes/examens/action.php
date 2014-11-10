@@ -22,10 +22,8 @@ v 1.1 : PP 17/10/2006
 // CNB 2/06/2007 54-57, 62-65
 //******** Pour chaque page $chemin repr�sente le path(chemin) de script dans le site (� la racine)
 //******** ---------------- $chemin_commun repr�sente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images repr�sente le path des images
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
 require_once ($chemin_commun . "/c2i_params.php"); //fichier de param�tres
 
 

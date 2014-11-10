@@ -9,17 +9,16 @@
 
 ////////////////////////////////
 // options d'adminstrtaion sur un examen'
-// test de la qualité de l'algorithme de tirage des questions'
+// test de la qualitï¿½ de l'algorithme de tirage des questions'
 ////////////////////////////////
 
 $chemin = '../../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");                 //fichier de paramètres
-require_once($chemin_commun."/lib_tests.php");                 //fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");                 //fichier de paramï¿½tres
+require_once($chemin_commun."/lib_tests.php");                 //fichier de paramï¿½tres
 
 
-require_once($chemin_commun."/ProgressBar.class.php");                 //fichier de paramètres
+require_once($chemin_commun."/ProgressBar.class.php");                 //fichier de paramï¿½tres
 
 
 set_time_limit(0);
@@ -44,14 +43,14 @@ $bar->increase(); //call for first element
 
 $qusage=array();
 
-$examen=cree_examen_test("test tirage aléatoire",false,"aléatoire");
+$examen=cree_examen_test("test tirage alï¿½atoire",false,"alï¿½atoire");
 
 $idq=$examen->id_examen;
 $ide=$examen->id_etab;
 $critere=" id_examen=$idq and id_examen_etab=$ide";
 $nb=0;
 
-//effectue 1000 tirages aléatoires
+//effectue 1000 tirages alï¿½atoires
 while ($nb <$nbmax) {
     $questions=get_questions($idq,$ide,false,false);
     foreach ($questions as $question) {
@@ -66,14 +65,14 @@ while ($nb <$nbmax) {
     $bar->increase();       
    
 }   
-// non on n'est pas authentifié
-//pas grave car cree_examen_test ne le créé pas deux fois ;-) '
+// non on n'est pas authentifiï¿½
+//pas grave car cree_examen_test ne le crï¿½ï¿½ pas deux fois ;-) '
 //supprime_examen($idq,$ide); 
 ksort($qusage);
 
 echo ("<br/>---------------------<br/>");
 echo "nombre de tirages = ".$nbmax."<br/>";
-echo "nombre de questions tirées = ".count($qusage)."<br/>";
+echo "nombre de questions tirï¿½es = ".count($qusage)."<br/>";
 
 $total=0;
 

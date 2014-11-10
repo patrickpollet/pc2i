@@ -97,7 +97,6 @@ EOF;
 
 $chemin = '../../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
 require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
 
@@ -114,7 +113,7 @@ if ($url_retour)  //garde adresse de rafraichissement de la liste des examens
 $ligne=get_inscrit($id);
 
 require_login('P'); //PP
-v_d_o_d("etl"); // droits de regarder un étudiant
+v_d_o_d("etl"); // droits de regarder un ï¿½tudiant
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
 $tpl = new C2IPopup(); //crï¿½er une instance
@@ -141,7 +140,7 @@ if ($et) {
     print_menu_item($tpl,"consulter_fiche",get_menu_item_consulter("../etablissement/fiche.php?idq=".$et->id_etab));
 }
 
-// examens à indiquer
+// examens ï¿½ indiquer
 $res=get_examens_inscrits($id,'id');
 foreach($res as $rowd) {
 	$tpl->newBlock("fonction_s");

@@ -7,16 +7,15 @@
  */
 ////////////////////////////////
 //
-//	Action (insérer / mettre à jour l'item)
-//	à la sortie on affiche la fiche de l'item et la page appelante (liste d'items) est rechargée
-//TODO réécrire avec insert_record !!!!!
+//	Action (insï¿½rer / mettre ï¿½ jour l'item)
+//	ï¿½ la sortie on affiche la fiche de l'item et la page appelante (liste d'items) est rechargï¿½e
+//TODO rï¿½ï¿½crire avec insert_record !!!!!
 ////////////////////////////////
 
 
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 require_login('P'); //PP
 v_d_o_d("config");
 

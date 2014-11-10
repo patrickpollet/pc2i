@@ -17,16 +17,14 @@
 
 
 /*
-* Pour la description des différentes méthodes de la classe TemplatePower,
-* il faut se reférer à http://templatepower.codocad.com/
+* Pour la description des diffï¿½rentes mï¿½thodes de la classe TemplatePower,
+* il faut se refï¿½rer ï¿½ http://templatepower.codocad.com/
 */
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 require_once($chemin_commun."/lib_ldap.php");
 
 
@@ -40,7 +38,7 @@ $champs=optional_param("champs",array(),PARAM_RAW);
 
 $id_etab =$USER->id_etab_perso;
 
-//la validation est traitée ici (plus de script action.php)
+//la validation est traitï¿½e ici (plus de script action.php)
 if ($doit) {
 	if ($elt == 'ldap_champs_recherche'){  //pas d'autre cas
 		print_r($noms);
@@ -71,7 +69,7 @@ if ($doit) {
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");	//inclusion de moteur de templates
 
-$tpl = new C2IMiniPopup( );	//créer une instance
+$tpl = new C2IMiniPopup( );	//crï¿½er une instance
 //inclure d'autre block de templates
 
 //TRES IMPORTANT
@@ -148,7 +146,7 @@ EOF;
 if ($elt=='ldap_champs_recherche')
 $tpl->assignInclude("contenu",$fiche,T_BYVAR);
 else
-//$tpl->assignInclude("contenu",$chemin."/templates/config_m.html");	// le template gérant la configuration
+//$tpl->assignInclude("contenu",$chemin."/templates/config_m.html");	// le template gï¿½rant la configuration
    erreur_fatale ("err_config_ldap_item",$elt);
 
 $tpl->prepare($chemin);

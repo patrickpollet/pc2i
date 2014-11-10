@@ -28,8 +28,6 @@ if (!isset($chemin)) {
 	$chemin = '..';
 }
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-
 require_once($chemin_commun."/c2i_params.php");
 
 //rev 978  soit dans le formulaire (qui est en post) soit d�ja defini si inclusion par caslogin.php

@@ -13,26 +13,24 @@
 //
 ////////////////////////////////
 
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
 $chemin = '../../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
 require_login('P'); //PP
 
 
 $idq=optional_param("idq","-1",PARAM_INT);
-$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT);  // id du pére
+$ide=optional_param("ide",$USER->id_etab_perso,PARAM_INT);  // id du pï¿½re
 
 $url_retour=optional_param("url_retour","",PARAM_LOCALURL);
 
 v_d_o_d("config");
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 
 
@@ -73,7 +71,7 @@ $fiche=<<<EOF
             <td><input type="checkbox" value="1" name="nat" {ch_n} /></td>
           </tr>
 <!-- END BLOCK : OUT -->
-<!--  rev 928 viré
+<!--  rev 928 virï¿½
           <tr>
             <th>{form_nbqar}</th>
             <td><input type="text" name="nb_quest_recup" size="5" class="required validate-digits"
@@ -114,12 +112,12 @@ EOF;
 
 $CFG->utiliser_validation_js=1;
 
-$tpl->assignInclude("corps",$fiche,T_BYVAR); // le template gérant un établissement
+$tpl->assignInclude("corps",$fiche,T_BYVAR); // le template gï¿½rant un ï¿½tablissement
 
 $tpl->prepare($chemin);
 
 $tpl->assign("id", $idq);  //nouvel ou modif
-$tpl->assign("ide", $ide);  // id de l'établissement pere'
+$tpl->assign("ide", $ide);  // id de l'ï¿½tablissement pere'
 
 if ($idq!=-1) { // modification de la question
 	$ligne=get_etablissement($idq);
@@ -134,7 +132,7 @@ if ($idq!=-1) { // modification de la question
         $tpl->assign("titre_popup", traduction("nouvelle_composante"));
         $tpl->newBlock ('infos');
     }
-	$ligne=get_etablissement($ide); // par défaut on prend les infos du père
+	$ligne=get_etablissement($ide); // par dï¿½faut on prend les infos du pï¿½re
 	$ligne->nom_etab="";
 }
 

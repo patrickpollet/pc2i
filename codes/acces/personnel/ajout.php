@@ -16,8 +16,7 @@
 
 $chemin = '../../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 require_login('P'); //PP
 
 
@@ -29,7 +28,7 @@ v_d_o_d("ua");
 
 
 //ajax rev 936  consultation annuaire
-// rev 962 la fonction json_encode de PHP >=5.2  ne fonctionne pas avec des caractères latins
+// rev 962 la fonction json_encode de PHP >=5.2  ne fonctionne pas avec des caractï¿½res latins
 // donc j'utilise toujpours le mien !
 if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     $qui=optional_param("login","inconnu",PARAM_RAW);
@@ -56,7 +55,7 @@ $fiche=<<<EOF
 
 function verif_form1(){
     document.monform.hidden_profils.value="";
-    // gestion de l'envoi des listes déroulantes dans des champs récupérables
+    // gestion de l'envoi des listes dï¿½roulantes dans des champs rï¿½cupï¿½rables
     for (i=0;i<document.monform.fonctions_s.options.length;i++) {
         if (i>0) document.monform.hidden_profils.value += "*";
         document.monform.hidden_profils.value += document.monform.fonctions_s.options[i].value;
@@ -69,7 +68,7 @@ function inverse(l1,l2) {
         l2.options[l2.options.length]=o;
         l1.options[l1.options.selectedIndex]=null;
     }else{
-        alert("Aucun item sélectionné");
+        alert("Aucun item sï¿½lectionnï¿½");
     }
 }
 
@@ -273,13 +272,13 @@ EOF;
 
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
-$tpl->assignInclude("corps", $fiche,T_BYVAR); // le template gérant le personnel
+$tpl->assignInclude("corps", $fiche,T_BYVAR); // le template gï¿½rant le personnel
 $tpl->assignInclude("table_profil",profil_en_table(),T_BYVAR); //table des droits d'un profil'
 $tpl->prepare($chemin);
 
-$CFG->utiliser_prototype_js=1;  //forcé
+$CFG->utiliser_prototype_js=1;  //forcï¿½
 $CFG->utiliser_validation_js=1;
 $CFG->utiliser_fabtabulous_js=1;
 
@@ -303,9 +302,9 @@ if ($id !=-1) { // modification de la personne
 
 
     $tpl->assign("readonly", " readonly=\"readonly\"");
-        $tab = array (); // tableau contenant les profils à indiquer; permet de gérer les doublons avec la liste restante
+        $tab = array (); // tableau contenant les profils ï¿½ indiquer; permet de gï¿½rer les doublons avec la liste restante
 
-    // profils à indiquer
+    // profils ï¿½ indiquer
     $profils_attr=get_profils_utilisateur ($id,$tri='intitule');
   foreach($profils_attr as $profil) {
         $tpl->newBlock("fonction_s");

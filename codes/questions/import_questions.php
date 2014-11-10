@@ -12,25 +12,24 @@
 //	import de questions au format qcmdirect  avec referentiel
 ////////////////////////////////
 // v 1.3 et v  1.4
-//	Fonction d'import de QCM à partir d'un fichier
+//	Fonction d'import de QCM ï¿½ partir d'un fichier
 // Structure:
-//		1. (competence,alinéa) intitulé première question
-//		A. intitulé première réponse
-//		B. intitulé deuxième réponse	V
-//		C. intitulé troisième réponse
+//		1. (competence,alinï¿½a) intitulï¿½ premiï¿½re question
+//		A. intitulï¿½ premiï¿½re rï¿½ponse
+//		B. intitulï¿½ deuxiï¿½me rï¿½ponse	V
+//		C. intitulï¿½ troisiï¿½me rï¿½ponse
 //	Pierre Raynaud
 //	pierre.raynaud@u-clermont1.fr
 //
 ////////////////////////////////
 /**
- * v 1.5 Les deux scripts import_questions.php et import.php (l'action du formulaire on été
- * regroupé ici en un seul et l'affichage du succès de lopération a donc été amélioré... )
+ * v 1.5 Les deux scripts import_questions.php et import.php (l'action du formulaire on ï¿½tï¿½
+ * regroupï¿½ ici en un seul et l'affichage du succï¿½s de lopï¿½ration a donc ï¿½tï¿½ amï¿½liorï¿½... )
  */
 
 $chemin = '../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 
 require_login('P'); //PP
 v_d_o_d("qa");
@@ -43,7 +42,7 @@ $url_retour=optional_param("url_retour","",PARAM_CLEAN);
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");	//inclusion de moteur de templates
 
-$tpl = new C2IMiniPopup( );	//créer une instance
+$tpl = new C2IMiniPopup( );	//crï¿½er une instance
 //inclure d'autre block de templates
 
 
@@ -100,7 +99,7 @@ $fiche_saisie=<<<EOF
 EOF;
 
 
-//template d'affichage du résultat de l'opération
+//template d'affichage du rï¿½sultat de l'opï¿½ration
 $fiche_reponse=<<<EOF
 {resultats_op}
 <div class="centre">
@@ -147,7 +146,7 @@ else  {
 	print_menu($tpl,"_ROOT.menu_niveau2",array(get_menu_item_legende("import")));
 	print_menu($tpl,"_ROOT.menu_niveau3",array(get_menu_item_legende("import_xml")));
     //print_menu($tpl,"_ROOT.menu_niveau4",array(get_menu_item_legende("import_xml_moodle")));
-	$tpl->assign("_ROOT.etiquette" , traduction( "fichier au format d'import défini"));
+	$tpl->assign("_ROOT.etiquette" , traduction( "fichier au format d'import dï¿½fini"));
 	$tpl->assign("url_retour",$url_retour);
 }
 

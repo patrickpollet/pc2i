@@ -14,8 +14,7 @@
 
 $chemin = '../..';
 $chemin_commun = $chemin . "/commun";
-$chemin_images = $chemin . "/images";
-require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramètres
+require_once ($chemin_commun . "/c2i_params.php"); //fichier de paramï¿½tres
 
 //rev 981 simplification avec le parametre id complet
 if ($id=optional_param('id','',PARAM_CLE_C2I)) {
@@ -32,7 +31,7 @@ require_login("P"); //PP
 v_d_o_d("ql");
 
 require_once ($chemin . "/templates/class.TemplatePower.inc.php"); //inclusion de moteur de templates
-$tpl = new C2IPopup(); //créer une instance
+$tpl = new C2IPopup(); //crï¿½er une instance
 //inclure d'autre block de templates
 
 $fiche=<<<EOF

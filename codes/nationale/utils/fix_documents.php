@@ -15,8 +15,7 @@
  set_time_limit(0);
 $chemin = '../../../';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");                 //fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");                 //fichier de paramï¿½tres
 require_login('P'); //PP
 if (!is_admin(false,$CFG->universite_serveur)) die("pas admin");
 
@@ -67,7 +66,7 @@ ppollet@ppollet-laptop:/work/c2iv15/questions$ find -name *.png
 ./_1981/documents/1.png
 ./28_2385/documents/2.png
 
-après 
+aprï¿½s 
 ppollet@ppollet-laptop:/work/c2iv15/questions$ find -name *.png
 ./1_419/documents/1.png
 ./28_2382/documents/1.png
@@ -77,7 +76,7 @@ ppollet@ppollet-laptop:/work/c2iv15/questions$ find -name *.png
 ./28_2385/documents/2.png
 ./1_1389/documents/1.png
 
-et bd mise à jour
+et bd mise ï¿½ jour
  
  */
 

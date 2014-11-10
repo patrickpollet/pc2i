@@ -12,29 +12,27 @@
 //	Ajout et modification d'item
 //	et duplication (ajout par recopie)
 //
-//   ce script n'est PAS utilisé poour créer un compte ????
+//   ce script n'est PAS utilisï¿½ poour crï¿½er un compte ????
 ////////////////////////////////
 
 
 /*
-* Pour la description des différentes méthodes de la classe TemplatePower,
-* il faut se reférer à http://templatepower.codocad.com/
+* Pour la description des diffï¿½rentes mï¿½thodes de la classe TemplatePower,
+* il faut se refï¿½rer ï¿½ http://templatepower.codocad.com/
 */
-//******** Pour chaque page $chemin représente le path(chemin) de script dans le site (à la racine)
-//******** ---------------- $chemin_commun représente le path des utilitaires dont on aura besoin
-//******** ---------------- $chemin_images représente le path des images
+//******** Pour chaque page $chemin reprï¿½sente le path(chemin) de script dans le site (ï¿½ la racine)
+//******** ---------------- $chemin_commun reprï¿½sente le path des utilitaires dont on aura besoin
 $chemin = '../../..';
 $chemin_commun = $chemin."/commun";
-$chemin_images = $chemin."/images";
-require_once($chemin_commun."/c2i_params.php");					//fichier de paramètres
+require_once($chemin_commun."/c2i_params.php");					//fichier de paramï¿½tres
 
 require_login('P'); //PP
 $ide=required_param("ide",PARAM_INT);
-v_d_o_d("eta");   // droits de(ajout étudiants)
+v_d_o_d("eta");   // droits de(ajout ï¿½tudiants)
 
 
 //ajax rev 936  consultation annuaire
-// rev 962 la fonction json_encode de PHP >=5.2  ne fonctionne pas avec des caractères latins
+// rev 962 la fonction json_encode de PHP >=5.2  ne fonctionne pas avec des caractï¿½res latins
 // donc j'utilise toujpours le mien !
 if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
     $qui=optional_param("login","inconnu",PARAM_RAW);
@@ -61,7 +59,7 @@ $url_retour=optional_param("url_retour","",PARAM_CLEAN);
 
 require_once( $chemin."/templates/class.TemplatePower.inc.php");	//inclusion de moteur de templates
 
-$tpl = new C2IPopup(  );	//créer une instance
+$tpl = new C2IPopup(  );	//crï¿½er une instance
 //inclure d'autre block de templates
 
 
@@ -189,14 +187,14 @@ function maj_mdp() {
 EOF;
 
 
-$tpl->assignInclude("corps",$fiche,T_BYVAR);	// le template gérant le etudiant
+$tpl->assignInclude("corps",$fiche,T_BYVAR);	// le template gï¿½rant le etudiant
 
 $tpl->prepare($chemin);
 
 $tpl->assign("_ROOT.id",$id);
 $tpl->assign("_ROOT.url_retour",$url_retour);
 
-$CFG->utiliser_prototype_js=1;  //forcé
+$CFG->utiliser_prototype_js=1;  //forcï¿½
 $CFG->utiliser_validation_js=1;
 
 
