@@ -19,7 +19,7 @@
              <a href="{url_accueil}" title="{alt_accueil}">
                 <img src="{chemin_images}/logos/logo_{CFG:c2i}.png" alt="{logo_c2i}"/>
              </a>
-             <img src="{chemin_images}/logos/certificat_{CFG:c2i}.png" /><img src="{chemin_images}/test02{image_c}.png" alt="Test"/>
+             <img src="{chemin_images}/logos/certificat_{CFG:c2i}.png" title="{CFG:c2i}" alt="{CFG:c2i}"/><img src="{chemin_images}/test02{image_c}.png" alt="Test"/>
            </div>
            <div id="arc770">
            </div>

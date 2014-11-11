@@ -5,6 +5,9 @@
 // renseigne la variable globale js chemin_images selon le thème courant
 // cette varaible est ensuite utilisée partout
 // version bien plus simple qu'avaec la V1.5
+ * 
+ * NON UTILISE 
+ * ces deux valeurs sont directement injcetées dans le Footer des pages
 */		
 		
 		
