@@ -420,7 +420,7 @@ function archiver_examen ($ligne) {
     $filename = "archive_{$ide}_{$idq}.zip";
     //supprimer eventuel ancien
     if (file_exists($CFG->chemin_ressources . '/archives/'.$filename))
-    unlink ($CFG->chemin_ressources . '/archives/'.$filename);
+    	unlink ($CFG->chemin_ressources . '/archives/'.$filename);
     
     zip_dossier($dir, '.', "../../archives/" . $filename);
     supprimer_dossier($dir); // cleanup the temp directory

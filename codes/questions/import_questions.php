@@ -57,7 +57,7 @@ $fiche_saisie=<<<EOF
         <td width="19" class="gauche"  ><img
             src="{chemin_images}/ii_config.gif"  alt="configuration"
             name="c4" width="19" height="19" id="et2" /></td>
-        <td class="gauche"  >{etiquette}</td>
+        <td class="gauche"  ></td>
         <td class="gauche"  ><input type="file" class="saisie" name="fichier" /> <br />
     </td>
     </tr>
@@ -146,7 +146,7 @@ else  {
 	print_menu($tpl,"_ROOT.menu_niveau2",array(get_menu_item_legende("import")));
 	print_menu($tpl,"_ROOT.menu_niveau3",array(get_menu_item_legende("import_xml")));
     //print_menu($tpl,"_ROOT.menu_niveau4",array(get_menu_item_legende("import_xml_moodle")));
-	$tpl->assign("_ROOT.etiquette" , traduction( "fichier au format d'import d�fini"));
+	//$tpl->assign("_ROOT.etiquette" , traduction( "fichier au format d'import défini"));
 	$tpl->assign("url_retour",$url_retour);
 }
 

@@ -44,7 +44,7 @@ if ($doit) {
     }
 
     $ligne_e = new StdClass();
-    $ligne_e->id_examen = $ligne_e->id_etab = $ligne->type_tirage = ""; // bidon pour imprime_question
+    $ligne_e->id_examen = $ligne_e->id_etab = $ligne_e->type_tirage = ""; // bidon pour imprime_question
     // CM ajout type_p = 'oui' pour bilan certification OU positionnement
     $critere = $USER->type_plateforme . "='oui'";
     $oooname = 'questions_' . $USER->type_plateforme;

@@ -207,6 +207,8 @@ function construit_menu($ligne, $noderef) {
 		// on ne purge que les siens !!!donc Ok pour une composante
 		$node->addItem(cree_item_lien(traduction('purger_candidats'), "effacer_candidats.php?"));
 
+		
+		$node->addItem(cree_item_lien(traduction('archiver_examens'), "archiver_examens.php?"));
 	}
 
 	//admin de cet etablissement pas d'une composante
