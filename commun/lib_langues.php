@@ -24,7 +24,7 @@
 *********************************************************************************/
 //fichier commun a toutes les plate-formes
 if (!isset($fichier_langue_defaut))
-	$fichier_langue_defaut="fr.php";
+	$fichier_langue_defaut="fr_utf8.php";
 
  // rev 978 fichier sp�cifique � la pf c2in1, c2i2mead ...
  if (!isset($fichier_langue_plateforme))
@@ -59,12 +59,16 @@ if (is_file("./langues/".$fichier_langue)) {
 
 // on ne peut pas encore tester si la pf est locale ou non (config non lue)
 // d'ou ce test...
+/************************
+ * CODE DEPLACE DANS c2i_params après lecture de CFG 
+ * car en V2 il y a toujours un fichier codes/nationale/fr_utf8.php !!!
 if (is_file($chemin."/codes/nationale/".$fichier_langue)) {
     @include_once ($chemin."/codes/nationale/".$fichier_langue);
 }
 elseif (is_file($chemin."/codes/locale/".$fichier_langue)) {
     @include_once ($chemin."/codes/locale/".$fichier_langue);
 }
+************************/
 
 function ucFirstConditionnel ($chaine, $ouiNon) {
     return ($ouiNon ? ucfirst($chaine):$chaine);

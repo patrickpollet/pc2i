@@ -590,6 +590,7 @@ question est négatif il est ramené à 0. Ne rien cocher vaut 0.',
 	"telechargement_bdd" => "Synchroniser ma plateforme avec la plateforme nationale ",
 	"remontee_questions"=>"Soumettre mes questions à la plate-forme nationale",
 	"remontee_examens"=>"Remonter mes statistiques d'examens vers la plate-forme nationale",
+	"archiver_examens"=>"Archiver mes examens",
     "export_xml_moodle"=>"Exporter les questions de positionnement au format XML Moodle 1.9",
     "export_xml_moodle_20"=>"Exporter les questions de positionnement au format XML Moodle 2.0",
     "export_xml_moodle_21"=>"Exporter les questions de positionnement au format XML Moodle 2.1",
@@ -1122,6 +1123,7 @@ question est négatif il est ramené à 0. Ne rien cocher vaut 0.',
 	"t_consult" => "consult.",
     "t_passer" => "passer",
     "t_envoyer"=>"soumettre",
+    "t_archiver"=>"archiver",
     "t_filtrer"=>"filtrer",
 
 
@@ -1568,6 +1570,7 @@ question est négatif il est ramené à 0. Ne rien cocher vaut 0.',
 	'strftimerecent' => '%d %b, %H:%M',
 	'strftimerecentfull' => '%a %d %b %Y, %H:%M',
 	'strftimetime' => '%H:%M',
+	'strbuilddatetime' =>'%Y%m%d_%H_%M',  //for0amt aaaammdd_hh_mm
 
 	//format entrée sortie vers jscalendar
 	"jscalendar_if" => "%A %d/%m/%Y %H:%M",
@@ -1616,7 +1619,9 @@ question est négatif il est ramené à 0. Ne rien cocher vaut 0.',
 
 
 'commentaires_reponses'=>'Entrez un éventuel commentaire pour cette réponse',
-
+'creation_archive'=>'création de l\'archive %s',
+'creation_archive_globale'=>'création de l\'archive globale %s',
+'telecharger_archive'=>'télécharger l\'archive',
 
 );
 
@@ -1739,6 +1744,19 @@ par les experts, feront partir de la base de questions nationale du C2I.
 Vous aurez besoin de vos identifiants de correspondant C2i sur la plate-forme nationale (ceux que vous avez utilisé pour télécharger le code).
 EOT;
 
+$textes_langues["info_archiver_examens"]=<<<EOT
+Avec cette option vous allez pouvoir récupérer une archive zip contenant pour chaque examen selectionné une archive zip nommée archive_idexamen.zip avec 
+
+<ul>
+<li>le sujet et le corrigé au format OpenOffice Writer.
+<li>la liste des inscrits et des absents au format Openoffice Calc.
+<li>les résultats synthétiques et complets au format OpenOffice Calc et csv.
+</ul>
+Vous pourrez télécharger cette archive immédiatement ou la récupérer plus tard dans la zone des ressources (%s/archives) de votre plateforme.
+
+
+EOT;
+
 
 $textes_langues["info_export_questions"]=<<<EOT
 Avec cette option vous allez pouvoir exporter dans un format XML simplifié les questions de votre établissement,
@@ -1776,6 +1794,8 @@ $textes_langues["nb_items_ajoutes"]="%s élements ajoutés";
 $textes_langues["nb_items_supprimes"]="%s élements supprimés";
 
 $textes_langues["nb_items_a_envoyer"]="%s %s à envoyer";
+$textes_langues["nb_items_a_archiver"]="%s %s à archiver";
+
 
 $textes_langues["maj_item"]="mise à jour de %s : %s %s";
 $textes_langues["maj_item_etat"]="mise à jour seulement de l'état de %s : %s %s";

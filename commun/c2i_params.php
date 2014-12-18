@@ -222,6 +222,13 @@ else
 if (file_exists($file))
     require_once($file);
 
+// lecture d'un fichier de langue locale si il existe
+if ($CFG->universite_serveur ==1 &&(is_file($chemin."/codes/nationale/".$fichier_langue))) {
+	@include_once ($chemin."/codes/nationale/".$fichier_langue);
+}
+elseif (is_file($chemin."/codes/locale/".$fichier_langue)) {
+	@include_once ($chemin."/codes/locale/".$fichier_langue);
+}
 
 require_once ($chemin_commun."/lib_auth.php");
 require_once ($chemin_commun."/lib_fichiers.php");
