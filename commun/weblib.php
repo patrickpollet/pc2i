@@ -210,8 +210,9 @@ function determineIP() {
     
     if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         foreach (explode(",",$_SERVER["HTTP_X_FORWARDED_FOR"]) as $ip) {
+            //attention aux espaces (null), 134.214.152.108 !!!!!!
             if (checkIP(trim($ip))) {
-                return $ip;
+                return trim($ip);
             }
         }
     }    

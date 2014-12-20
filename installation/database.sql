@@ -996,7 +996,7 @@ CREATE TABLE IF NOT EXISTS `c2itracking` (
   `type_utilisateur` enum('E','P') NOT NULL DEFAULT 'P',
   `etat` enum('echec','succes') NOT NULL DEFAULT 'succes',
   `objet` varchar(255) DEFAULT NULL,
-  `ip` varchar(15) DEFAULT NULL,
+  `ip` varchar(20) DEFAULT NULL,
   `date` int(10) DEFAULT NULL,
   `plateforme` varchar(20) NOT NULL DEFAULT '',
   `etablissement` int(10) NOT NULL DEFAULT '0',
