@@ -1544,6 +1544,10 @@ question est négatif il est ramené à 0. Ne rien cocher vaut 0.',
     
 	"err_restrictions_ip"=>"Vous devez activer les restrictions IP dans la configuration avancée",
 	// strings utilisés par lib_date a la moodle
+	
+
+    "err_date_examen"=>'erreur, ce n\'est pas la période prévue pour passer cet examen',
+    "err_groupe_pool"=>'pas de groupe pour ce créneau horaire',
 
 	'locale' => 'fr_FR.UTF8', // For France. If you live in Switzerland, use fr_CH.UTF-8
 	'localewin' => 'French_France.1252',

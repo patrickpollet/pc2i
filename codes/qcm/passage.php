@@ -45,7 +45,7 @@ $tpl = new C2IPopup(); //cr�er une instance
 if ($ligne->est_pool == 1) {
 	$ligne = affecte_groupe_pool($idq, $ide,$USER->id_user);
 	if (!$ligne)
-		erreur_fatale("pas de groupe pour ce cr�neau horaire");
+		erreur_fatale("err_groupe_pool");
 	$idq = $ligne->id_examen;
 	$ide = $ligne->id_etab;
 }
@@ -53,7 +53,7 @@ if ($ligne->est_pool == 1) {
 if (! examen_en_cours($ligne)) {
 	if (is_utilisateur_anonyme($USER->id_user))
 	   detruire_session();
-	erreur_fatale("erreur, ce n'est pas la p�riode pr�vue pour passer cet examen");
+	erreur_fatale("err_date_examen");
 }
 
 // rev 986
