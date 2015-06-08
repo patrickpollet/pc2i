@@ -632,7 +632,8 @@ function __tirage_questions_V2 ($id,$id_etab) {
                 if ($typepf == "certification") {
                     if ($est_pool == 1) {
                         // doublon de famille possible pour avoir assez de question dans le pool
-                        $chwherefamille = "and id_famille_validee!=0";
+                       // $chwherefamille = "and id_famille_validee!=0"; => double and
+                        $chwherefamille = " id_famille_validee!=0";
                     } else {
                         // pas de doublon de famille
                         $chwherefamille = "id_famille_validee!=0 group by id_famille_validee";
